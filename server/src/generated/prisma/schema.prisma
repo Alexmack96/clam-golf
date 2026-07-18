@@ -25,14 +25,20 @@ enum Owner {
   Joint
 }
 
-enum TabDirection {
-  IOwe
-  TheyOwe
+enum ClubType {
+  Driver
+  Wood
+  Hybrid
+  Iron
+  Wedge
+  Putter
 }
 
-enum TabStatus {
-  Open
-  Settled
+enum SwingLength {
+  Full
+  Shoulder
+  Chest
+  Hip
 }
 
 model User {
@@ -50,25 +56,11 @@ model User {
 }
 
 model Category {
-  id            String         @id @default(cuid())
-  name          String         @unique
-  color         String
-  savingType    SavingType     @default(Fun)
-  transactions  Transaction[]
-  categoryRules CategoryRule[]
-}
-
-// Auto-categorize rule: a description pattern (optionally scoped to a bank)
-// that maps to a category. Applied during /process and backfilled on create.
-model CategoryRule {
-  id         String   @id @default(cuid())
-  pattern    String
-  bank       String?
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
-
-  @@unique([pattern, bank])
+  id           String        @id @default(cuid())
+  name         String        @unique
+  color        String
+  savingType   SavingType    @default(Fun)
+  transactions Transaction[]
 }
 
 model Transaction {
@@ -90,172 +82,29 @@ model Transaction {
   originalCurrency   String?
 }
 
-// One staging model per bank — each preserves that bank's raw CSV schema exactly.
-// The process step normalises all of them into the shared Transaction model.
+model Club {
+  id        String     @id @default(cuid())
+  name      String     @unique // "Driver", "5 Wood", "Hybrid", "4 Iron", ..., "52°", "56°", "60°", "Putter"
+  type      ClubType
+  sortOrder Int        @default(0)
+  distances Distance[]
 
-// Monzo: synced directly from the Monzo Developer API, covering both the
-// uk_retail (debit) and uk_monzo_flex (Flex credit card) accounts.
-// Fields mirror the API response — no CSV quirks.
-model MonzoApiTransaction {
-  id                String    @id @default(cuid())
-  monzoId           String    @unique // tx_xxx from the API
-  created           DateTime
-  settled           DateTime?
-  amountPence       Int // pence; negative = expense
-  currency          String
-  localAmountPence  Int
-  localCurrency     String
-  description       String // Monzo raw description field
-  notes             String?
-  monzoCategory     String // raw slug e.g. "eating_out"
-  merchantName      String?
-  merchantEmoji     String?
-  merchantAddress   String?
-  scheme            String?
-  includeInSpending Boolean
-  accountId         String
-  importedAt        DateTime  @default(now())
-  status            String    @default("pending")
-
-  @@map("monzo_api_transaction")
+  @@map("club")
 }
 
-model PlaidItem {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  accessToken String
-  itemId      String   @unique
-  cursor      String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+// A club's carry yardage at a given swing length. Full-swing clubs (irons,
+// woods, driver) only ever have a "Full" row; wedges also get partial-swing
+// rows (Shoulder/Chest/Hip) for the gapping matrix.
+model Distance {
+  id        String      @id @default(cuid())
+  clubId    String
+  club      Club        @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  swing     SwingLength @default(Full)
+  yards     Int
+  updatedAt DateTime    @updatedAt
 
-  @@map("plaid_item")
-}
-
-model PlaidTransaction {
-  id            String   @id @default(cuid())
-  transactionId String   @unique
-  date          String
-  description   String
-  amount        Float
-  currency      String
-  merchantName  String?
-  owner         String   @default("Alex")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("plaid_transaction")
-}
-
-model MonzoCredential {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  accessToken  String
-  refreshToken String
-  expiresAt    DateTime
-  accountId    String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@map("monzo_credential")
-}
-
-model AmexTransaction {
-  transactionId   String   @id
-  transactionDate String
-  processDate     String
-  description     String
-  amount          String
-  isCredit        Boolean  @default(false)
-  foreignCurrency String?
-  foreignAmount   String?
-  statementDate   String
-  owner           String   @default("Alex")
-  importedAt      DateTime @default(now())
-  status          String   @default("pending")
-
-  @@map("amex_transaction")
-}
-
-model BarclaysTransaction {
-  id            Int      @id @default(autoincrement())
-  transactionId String?  @unique
-  date          String
-  description   String
-  amount        String
-  isCredit      Boolean  @default(false)
-  statementDate String
-  owner         String   @default("Alex")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("barclays_transaction")
-}
-
-model SantanderTransaction {
-  id            Int      @id @default(autoincrement())
-  transactionId String?  @unique
-  date          String
-  description   String
-  moneyIn       String?
-  moneyOut      String?
-  balance       String
-  statementDate String
-  owner         String   @default("Alex")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("santander_transaction")
-}
-
-model HsbcTransaction {
-  id            Int      @id @default(autoincrement())
-  transactionId String   @unique
-  date          String
-  paymentType   String
-  description   String
-  moneyOut      String?
-  moneyIn       String?
-  balance       String?
-  statementDate String
-  owner         String   @default("Joint")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("hsbc_transaction")
-}
-
-model ChaseTransaction {
-  id            Int      @id @default(autoincrement())
-  transactionId String   @unique
-  date          String
-  description   String
-  amount        String
-  isCredit      Boolean  @default(false)
-  statementDate String
-  owner         String   @default("Casey")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("chase_transaction")
-}
-
-model SofiTransaction {
-  id            Int      @id @default(autoincrement())
-  transactionId String   @unique
-  date          String
-  type          String
-  description   String
-  amount        String
-  isCredit      Boolean  @default(false)
-  balance       String?
-  accountType   String   @default("Checking")
-  statementDate String
-  owner         String   @default("Casey")
-  importedAt    DateTime @default(now())
-  status        String   @default("pending")
-
-  @@map("sofi_transaction")
+  @@unique([clubId, swing])
+  @@map("distance")
 }
 
 model Session {
@@ -292,63 +141,6 @@ model Account {
 
   @@index([userId])
   @@map("account")
-}
-
-model Note {
-  id        String   @id @default(cuid())
-  title     String
-  body      String?
-  pinned    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("note")
-}
-
-model Tab {
-  id          String       @id @default(cuid())
-  person      String
-  description String
-  amount      Decimal
-  direction   TabDirection
-  status      TabStatus    @default(Open)
-  dueDate     DateTime?
-  settledAt   DateTime?
-  note        String?
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-
-  @@map("tab")
-}
-
-model InvestmentAccount {
-  id        String   @id @default(cuid())
-  name      String
-  category  String // pension | crypto | equity | cash | commodity | debt
-  owner     Owner    @default(Alex)
-  rate      Float?
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  snapshots InvestmentSnapshot[]
-
-  @@unique([owner, name])
-  @@map("investment_account")
-}
-
-model InvestmentSnapshot {
-  id        String   @id @default(cuid())
-  accountId String
-  date      DateTime
-  value     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  account InvestmentAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
-
-  @@unique([accountId, date])
-  @@map("investment_snapshot")
 }
 
 model Verification {

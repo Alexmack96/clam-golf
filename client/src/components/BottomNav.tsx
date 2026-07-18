@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home } from "lucide-react";
+import { Home, Ruler } from "lucide-react";
 
-const mainTabs = [{ to: "/dashboard", label: "Home", Icon: Home }] as const;
+const mainTabs = [
+  { to: "/dashboard", label: "Home", Icon: Home },
+  { to: "/distances", label: "Distances", Icon: Ruler },
+] as const;
 
 export function BottomNav() {
   return (

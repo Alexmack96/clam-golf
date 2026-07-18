@@ -4,6 +4,7 @@ import { Layout } from "./components/Layout.js";
 import { LoginPage } from "./pages/LoginPage.js";
 import { LoggedOutPage } from "./pages/LoggedOutPage.js";
 import { AnalyticsPage } from "./pages/AnalyticsPage.js";
+import { DistancesPage } from "./pages/DistancesPage.js";
 
 export function App() {
   return (
@@ -14,6 +15,7 @@ export function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<AnalyticsPage />} />
+          <Route path="/distances" element={<DistancesPage />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Route>
       </Route>

@@ -12,19 +12,10 @@ import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { requireAuth } from "./middleware/auth.js";
 import { initSystemCategories } from "./routes/admin.js";
-import { rescueSofiChaseFx } from "./migrations/rescueSofiChaseFx.js";
 import { usersRouter } from "./routes/users.js";
-import { importRouter } from "./routes/import.js";
 import { categoriesRouter } from "./routes/categories.js";
-import { categoryRulesRouter } from "./routes/categoryRules.js";
-import { transactionsRouter } from "./routes/transactions.js";
 import { dashboardRouter } from "./routes/dashboard.js";
-import { utilitiesRouter } from "./routes/utilities.js";
-import { investmentsRouter } from "./routes/investments.js";
-import { tabsRouter } from "./routes/tabs.js";
-import { notesRouter } from "./routes/notes.js";
-import { monzoRouter } from "./routes/monzo.js";
-import { plaidRouter } from "./routes/plaid.js";
+import { distancesRouter } from "./routes/distances.js";
 
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
 
@@ -65,17 +56,9 @@ app.get("/api/me", requireAuth, (req, res) => {
 });
 
 app.use("/api/admin/users", requireAuth, usersRouter);
-app.use("/api/admin", requireAuth, importRouter);
 app.use("/api/categories", requireAuth, categoriesRouter);
-app.use("/api/category-rules", requireAuth, categoryRulesRouter);
-app.use("/api/transactions", requireAuth, transactionsRouter);
 app.use("/api/dashboard", requireAuth, dashboardRouter);
-app.use("/api/utilities", requireAuth, utilitiesRouter);
-app.use("/api/investments", requireAuth, investmentsRouter);
-app.use("/api/tabs", requireAuth, tabsRouter);
-app.use("/api/notes", requireAuth, notesRouter);
-app.use("/api/admin/monzo", monzoRouter);
-app.use("/api/admin/plaid", plaidRouter);
+app.use("/api/distances", requireAuth, distancesRouter);
 
 if (env.NODE_ENV === "production") {
   const clientDist = join(import.meta.dirname, "../../client/dist");
@@ -93,9 +76,4 @@ app.use(errorHandler);
 app.listen(env.PORT, async () => {
   console.log(`Backend running on port ${env.PORT}`);
   await initSystemCategories();
-  try {
-    await rescueSofiChaseFx();
-  } catch (err) {
-    console.error("[rescueSofiChaseFx] failed:", err);
-  }
 });

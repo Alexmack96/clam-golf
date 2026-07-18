@@ -134,14 +134,6 @@ exports.Prisma.CategoryScalarFieldEnum = {
   savingType: 'savingType'
 };
 
-exports.Prisma.CategoryRuleScalarFieldEnum = {
-  id: 'id',
-  pattern: 'pattern',
-  bank: 'bank',
-  categoryId: 'categoryId',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.TransactionScalarFieldEnum = {
   id: 'id',
   description: 'description',
@@ -160,146 +152,19 @@ exports.Prisma.TransactionScalarFieldEnum = {
   originalCurrency: 'originalCurrency'
 };
 
-exports.Prisma.MonzoApiTransactionScalarFieldEnum = {
+exports.Prisma.ClubScalarFieldEnum = {
   id: 'id',
-  monzoId: 'monzoId',
-  created: 'created',
-  settled: 'settled',
-  amountPence: 'amountPence',
-  currency: 'currency',
-  localAmountPence: 'localAmountPence',
-  localCurrency: 'localCurrency',
-  description: 'description',
-  notes: 'notes',
-  monzoCategory: 'monzoCategory',
-  merchantName: 'merchantName',
-  merchantEmoji: 'merchantEmoji',
-  merchantAddress: 'merchantAddress',
-  scheme: 'scheme',
-  includeInSpending: 'includeInSpending',
-  accountId: 'accountId',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.PlaidItemScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  accessToken: 'accessToken',
-  itemId: 'itemId',
-  cursor: 'cursor',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PlaidTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
-  description: 'description',
-  amount: 'amount',
-  currency: 'currency',
-  merchantName: 'merchantName',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.MonzoCredentialScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
-  expiresAt: 'expiresAt',
-  accountId: 'accountId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AmexTransactionScalarFieldEnum = {
-  transactionId: 'transactionId',
-  transactionDate: 'transactionDate',
-  processDate: 'processDate',
-  description: 'description',
-  amount: 'amount',
-  isCredit: 'isCredit',
-  foreignCurrency: 'foreignCurrency',
-  foreignAmount: 'foreignAmount',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.BarclaysTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
-  description: 'description',
-  amount: 'amount',
-  isCredit: 'isCredit',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.SantanderTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
-  description: 'description',
-  moneyIn: 'moneyIn',
-  moneyOut: 'moneyOut',
-  balance: 'balance',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.HsbcTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
-  paymentType: 'paymentType',
-  description: 'description',
-  moneyOut: 'moneyOut',
-  moneyIn: 'moneyIn',
-  balance: 'balance',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.ChaseTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
-  description: 'description',
-  amount: 'amount',
-  isCredit: 'isCredit',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
-};
-
-exports.Prisma.SofiTransactionScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  date: 'date',
+  name: 'name',
   type: 'type',
-  description: 'description',
-  amount: 'amount',
-  isCredit: 'isCredit',
-  balance: 'balance',
-  accountType: 'accountType',
-  statementDate: 'statementDate',
-  owner: 'owner',
-  importedAt: 'importedAt',
-  status: 'status'
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.DistanceScalarFieldEnum = {
+  id: 'id',
+  clubId: 'clubId',
+  swing: 'swing',
+  yards: 'yards',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -325,49 +190,6 @@ exports.Prisma.AccountScalarFieldEnum = {
   refreshTokenExpiresAt: 'refreshTokenExpiresAt',
   scope: 'scope',
   password: 'password',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.NoteScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  body: 'body',
-  pinned: 'pinned',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.TabScalarFieldEnum = {
-  id: 'id',
-  person: 'person',
-  description: 'description',
-  amount: 'amount',
-  direction: 'direction',
-  status: 'status',
-  dueDate: 'dueDate',
-  settledAt: 'settledAt',
-  note: 'note',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.InvestmentAccountScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  category: 'category',
-  owner: 'owner',
-  rate: 'rate',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.InvestmentSnapshotScalarFieldEnum = {
-  id: 'id',
-  accountId: 'accountId',
-  date: 'date',
-  value: 'value',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -407,37 +229,30 @@ exports.TransactionType = exports.$Enums.TransactionType = {
   Expense: 'Expense'
 };
 
-exports.TabDirection = exports.$Enums.TabDirection = {
-  IOwe: 'IOwe',
-  TheyOwe: 'TheyOwe'
+exports.ClubType = exports.$Enums.ClubType = {
+  Driver: 'Driver',
+  Wood: 'Wood',
+  Hybrid: 'Hybrid',
+  Iron: 'Iron',
+  Wedge: 'Wedge',
+  Putter: 'Putter'
 };
 
-exports.TabStatus = exports.$Enums.TabStatus = {
-  Open: 'Open',
-  Settled: 'Settled'
+exports.SwingLength = exports.$Enums.SwingLength = {
+  Full: 'Full',
+  Shoulder: 'Shoulder',
+  Chest: 'Chest',
+  Hip: 'Hip'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
   Category: 'Category',
-  CategoryRule: 'CategoryRule',
   Transaction: 'Transaction',
-  MonzoApiTransaction: 'MonzoApiTransaction',
-  PlaidItem: 'PlaidItem',
-  PlaidTransaction: 'PlaidTransaction',
-  MonzoCredential: 'MonzoCredential',
-  AmexTransaction: 'AmexTransaction',
-  BarclaysTransaction: 'BarclaysTransaction',
-  SantanderTransaction: 'SantanderTransaction',
-  HsbcTransaction: 'HsbcTransaction',
-  ChaseTransaction: 'ChaseTransaction',
-  SofiTransaction: 'SofiTransaction',
+  Club: 'Club',
+  Distance: 'Distance',
   Session: 'Session',
   Account: 'Account',
-  Note: 'Note',
-  Tab: 'Tab',
-  InvestmentAccount: 'InvestmentAccount',
-  InvestmentSnapshot: 'InvestmentSnapshot',
   Verification: 'Verification'
 };
 

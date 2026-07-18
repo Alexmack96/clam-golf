@@ -4,7 +4,10 @@ import { Sun, Moon, LogOut } from "lucide-react";
 import { useTheme } from "../context/ThemeContext.js";
 import { Button } from "./ui/button.js";
 
-const links = [{ to: "/dashboard", label: "Dashboard" }] as const;
+const links = [
+  { to: "/dashboard", label: "Dashboard" },
+  { to: "/distances", label: "Distances" },
+] as const;
 
 export function Navbar({ onSignOut }: { onSignOut: () => void }) {
   const { data: session } = useSession();
