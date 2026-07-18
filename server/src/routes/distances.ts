@@ -4,14 +4,6 @@ import { SwingLength } from "../generated/prisma/index.js";
 
 export const distancesRouter = Router();
 
-distancesRouter.get("/", async (_req, res) => {
-  const clubs = await db.club.findMany({
-    include: { distances: true },
-    orderBy: { sortOrder: "asc" },
-  });
-  res.json(clubs);
-});
-
 distancesRouter.patch("/:clubId/:swing", async (req, res) => {
   const { clubId, swing } = req.params;
   if (!Object.values(SwingLength).includes(swing as SwingLength)) {

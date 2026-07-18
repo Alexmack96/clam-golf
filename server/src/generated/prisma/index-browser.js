@@ -130,7 +130,8 @@ exports.Prisma.ClubScalarFieldEnum = {
   id: 'id',
   name: 'name',
   type: 'type',
-  sortOrder: 'sortOrder'
+  sortOrder: 'sortOrder',
+  isActive: 'isActive'
 };
 
 exports.Prisma.DistanceScalarFieldEnum = {

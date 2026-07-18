@@ -23,6 +23,13 @@ RUN mkdir -p core/node_modules && \
       cp -r node_modules/zod core/node_modules/zod; \
     fi
 RUN cd server && DATABASE_URL=file:./prisma/dev.db bunx prisma generate
+# Vite inlines VITE_* vars at build time, so they must be passed as build args
+# (Railway forwards service variables declared with ARG) rather than left as
+# plain runtime env vars, which vite build would never see.
+ARG VITE_SENTRY_DSN
+ARG VITE_SENTRY_ENVIRONMENT
+ENV VITE_SENTRY_DSN=$VITE_SENTRY_DSN
+ENV VITE_SENTRY_ENVIRONMENT=$VITE_SENTRY_ENVIRONMENT
 RUN cd client && bunx vite build
 
 # Stage 3: Production — lean runtime image with only what's needed to run the server
@@ -37,5 +44,5 @@ COPY --from=build /app/core ./core
 COPY package.json ./
 ENV NODE_ENV=production
 EXPOSE 3000
-CMD ["sh", "-c", "cd server && bunx prisma migrate deploy && bun src/db/seed.ts && bun src/scripts/cleanup-and-backfill.ts && cd /app && bun run --cwd server src/index.ts"]
+CMD ["sh", "-c", "cd server && bunx prisma migrate deploy && bun src/db/seed.ts && bun src/db/seedClubs.ts && cd /app && bun run --cwd server src/index.ts"]
  

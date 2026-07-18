@@ -2565,6 +2565,7 @@ export namespace Prisma {
     name: string | null
     type: $Enums.ClubType | null
     sortOrder: number | null
+    isActive: boolean | null
   }
 
   export type ClubMaxAggregateOutputType = {
@@ -2572,6 +2573,7 @@ export namespace Prisma {
     name: string | null
     type: $Enums.ClubType | null
     sortOrder: number | null
+    isActive: boolean | null
   }
 
   export type ClubCountAggregateOutputType = {
@@ -2579,6 +2581,7 @@ export namespace Prisma {
     name: number
     type: number
     sortOrder: number
+    isActive: number
     _all: number
   }
 
@@ -2596,6 +2599,7 @@ export namespace Prisma {
     name?: true
     type?: true
     sortOrder?: true
+    isActive?: true
   }
 
   export type ClubMaxAggregateInputType = {
@@ -2603,6 +2607,7 @@ export namespace Prisma {
     name?: true
     type?: true
     sortOrder?: true
+    isActive?: true
   }
 
   export type ClubCountAggregateInputType = {
@@ -2610,6 +2615,7 @@ export namespace Prisma {
     name?: true
     type?: true
     sortOrder?: true
+    isActive?: true
     _all?: true
   }
 
@@ -2704,6 +2710,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder: number
+    isActive: boolean
     _count: ClubCountAggregateOutputType | null
     _avg: ClubAvgAggregateOutputType | null
     _sum: ClubSumAggregateOutputType | null
@@ -2730,6 +2737,7 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     sortOrder?: boolean
+    isActive?: boolean
     distances?: boolean | Club$distancesArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["club"]>
@@ -2739,6 +2747,7 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     sortOrder?: boolean
+    isActive?: boolean
   }, ExtArgs["result"]["club"]>
 
   export type ClubSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2746,6 +2755,7 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     sortOrder?: boolean
+    isActive?: boolean
   }, ExtArgs["result"]["club"]>
 
   export type ClubSelectScalar = {
@@ -2753,9 +2763,10 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     sortOrder?: boolean
+    isActive?: boolean
   }
 
-  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "sortOrder", ExtArgs["result"]["club"]>
+  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "sortOrder" | "isActive", ExtArgs["result"]["club"]>
   export type ClubInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     distances?: boolean | Club$distancesArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
@@ -2773,6 +2784,7 @@ export namespace Prisma {
       name: string
       type: $Enums.ClubType
       sortOrder: number
+      isActive: boolean
     }, ExtArgs["result"]["club"]>
     composites: {}
   }
@@ -3201,6 +3213,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Club", 'String'>
     readonly type: FieldRef<"Club", 'ClubType'>
     readonly sortOrder: FieldRef<"Club", 'Int'>
+    readonly isActive: FieldRef<"Club", 'Boolean'>
   }
     
 
@@ -8032,7 +8045,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     type: 'type',
-    sortOrder: 'sortOrder'
+    sortOrder: 'sortOrder',
+    isActive: 'isActive'
   };
 
   export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
@@ -8144,6 +8158,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'SwingLength'
    */
   export type EnumSwingLengthFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SwingLength'>
@@ -8231,6 +8252,7 @@ export namespace Prisma {
     name?: StringFilter<"Club"> | string
     type?: EnumClubTypeFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntFilter<"Club"> | number
+    isActive?: BoolFilter<"Club"> | boolean
     distances?: DistanceListRelationFilter
   }
 
@@ -8239,6 +8261,7 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     sortOrder?: SortOrder
+    isActive?: SortOrder
     distances?: DistanceOrderByRelationAggregateInput
   }
 
@@ -8250,6 +8273,7 @@ export namespace Prisma {
     NOT?: ClubWhereInput | ClubWhereInput[]
     type?: EnumClubTypeFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntFilter<"Club"> | number
+    isActive?: BoolFilter<"Club"> | boolean
     distances?: DistanceListRelationFilter
   }, "id" | "name">
 
@@ -8258,6 +8282,7 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     sortOrder?: SortOrder
+    isActive?: SortOrder
     _count?: ClubCountOrderByAggregateInput
     _avg?: ClubAvgOrderByAggregateInput
     _max?: ClubMaxOrderByAggregateInput
@@ -8273,6 +8298,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Club"> | string
     type?: EnumClubTypeWithAggregatesFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntWithAggregatesFilter<"Club"> | number
+    isActive?: BoolWithAggregatesFilter<"Club"> | boolean
   }
 
   export type DistanceWhereInput = {
@@ -8631,6 +8657,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder?: number
+    isActive?: boolean
     distances?: DistanceCreateNestedManyWithoutClubInput
   }
 
@@ -8639,6 +8666,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder?: number
+    isActive?: boolean
     distances?: DistanceUncheckedCreateNestedManyWithoutClubInput
   }
 
@@ -8647,6 +8675,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     distances?: DistanceUpdateManyWithoutClubNestedInput
   }
 
@@ -8655,6 +8684,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     distances?: DistanceUncheckedUpdateManyWithoutClubNestedInput
   }
 
@@ -8663,6 +8693,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder?: number
+    isActive?: boolean
   }
 
   export type ClubUpdateManyMutationInput = {
@@ -8670,6 +8701,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClubUncheckedUpdateManyInput = {
@@ -8677,6 +8709,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DistanceCreateInput = {
@@ -9141,6 +9174,11 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DistanceListRelationFilter = {
     every?: DistanceWhereInput
     some?: DistanceWhereInput
@@ -9156,6 +9194,7 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     sortOrder?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClubAvgOrderByAggregateInput = {
@@ -9167,6 +9206,7 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     sortOrder?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClubMinOrderByAggregateInput = {
@@ -9174,6 +9214,7 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     sortOrder?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClubSumOrderByAggregateInput = {
@@ -9204,6 +9245,14 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumSwingLengthFilter<$PrismaModel = never> = {
@@ -9525,6 +9574,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type DistanceUpdateManyWithoutClubNestedInput = {
     create?: XOR<DistanceCreateWithoutClubInput, DistanceUncheckedCreateWithoutClubInput> | DistanceCreateWithoutClubInput[] | DistanceUncheckedCreateWithoutClubInput[]
     connectOrCreate?: DistanceCreateOrConnectWithoutClubInput | DistanceCreateOrConnectWithoutClubInput[]
@@ -9719,6 +9772,11 @@ export namespace Prisma {
     not?: NestedEnumClubTypeFilter<$PrismaModel> | $Enums.ClubType
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumClubTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ClubType | EnumClubTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ClubType[]
@@ -9754,6 +9812,14 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumSwingLengthFilter<$PrismaModel = never> = {
@@ -9986,6 +10052,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder?: number
+    isActive?: boolean
   }
 
   export type ClubUncheckedCreateWithoutDistancesInput = {
@@ -9993,6 +10060,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ClubType
     sortOrder?: number
+    isActive?: boolean
   }
 
   export type ClubCreateOrConnectWithoutDistancesInput = {
@@ -10016,6 +10084,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClubUncheckedUpdateWithoutDistancesInput = {
@@ -10023,6 +10092,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserCreateWithoutSessionsInput = {

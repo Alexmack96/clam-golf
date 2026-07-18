@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { Ruler } from "lucide-react";
+import { Ruler, Calculator, Settings2 } from "lucide-react";
 
-const mainTabs = [{ to: "/distances", label: "Distances", Icon: Ruler }] as const;
+const mainTabs = [
+  { to: "/distances", label: "Distances", Icon: Ruler },
+  { to: "/shot-calculator", label: "Calculator", Icon: Calculator },
+  { to: "/clubs", label: "Clubs", Icon: Settings2 },
+] as const;
 
 export function BottomNav() {
   return (

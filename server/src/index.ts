@@ -13,6 +13,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import { requireAuth } from "./middleware/auth.js";
 import { usersRouter } from "./routes/users.js";
 import { distancesRouter } from "./routes/distances.js";
+import { clubsRouter } from "./routes/clubs.js";
 
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
 
@@ -54,6 +55,7 @@ app.get("/api/me", requireAuth, (req, res) => {
 
 app.use("/api/admin/users", requireAuth, usersRouter);
 app.use("/api/distances", requireAuth, distancesRouter);
+app.use("/api/clubs", requireAuth, clubsRouter);
 
 if (env.NODE_ENV === "production") {
   const clientDist = join(import.meta.dirname, "../../client/dist");

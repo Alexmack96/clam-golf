@@ -42,6 +42,10 @@ model Club {
   name      String     @unique // "Driver", "5 Wood", "Hybrid", "4 Iron", ..., "52°", "56°", "60°", "Putter"
   type      ClubType
   sortOrder Int        @default(0)
+  // Whether this club is currently in the 14-club bag vs. benched. Clubs are
+  // never hard-deleted — swapping a club out just flips this to false so its
+  // distance history is kept for whenever it comes back in.
+  isActive  Boolean    @default(true)
   distances Distance[]
 
   @@map("clubs")
