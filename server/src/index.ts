@@ -11,10 +11,7 @@ import { auth } from "./lib/auth.js";
 import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { requireAuth } from "./middleware/auth.js";
-import { initSystemCategories } from "./routes/admin.js";
 import { usersRouter } from "./routes/users.js";
-import { categoriesRouter } from "./routes/categories.js";
-import { dashboardRouter } from "./routes/dashboard.js";
 import { distancesRouter } from "./routes/distances.js";
 
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
@@ -56,8 +53,6 @@ app.get("/api/me", requireAuth, (req, res) => {
 });
 
 app.use("/api/admin/users", requireAuth, usersRouter);
-app.use("/api/categories", requireAuth, categoriesRouter);
-app.use("/api/dashboard", requireAuth, dashboardRouter);
 app.use("/api/distances", requireAuth, distancesRouter);
 
 if (env.NODE_ENV === "production") {
@@ -73,7 +68,6 @@ if (env.NODE_ENV === "production") {
 Sentry.setupExpressErrorHandler(app);
 app.use(errorHandler);
 
-app.listen(env.PORT, async () => {
+app.listen(env.PORT, () => {
   console.log(`Backend running on port ${env.PORT}`);
-  await initSystemCategories();
 });

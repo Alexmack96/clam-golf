@@ -121,35 +121,9 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
-  owner: 'owner',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   image: 'image'
-};
-
-exports.Prisma.CategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  color: 'color',
-  savingType: 'savingType'
-};
-
-exports.Prisma.TransactionScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  amount: 'amount',
-  type: 'type',
-  date: 'date',
-  createdAt: 'createdAt',
-  categoryId: 'categoryId',
-  externalId: 'externalId',
-  note: 'note',
-  owner: 'owner',
-  reviewed: 'reviewed',
-  excludeFromSavings: 'excludeFromSavings',
-  savingType: 'savingType',
-  originalAmount: 'originalAmount',
-  originalCurrency: 'originalCurrency'
 };
 
 exports.Prisma.ClubScalarFieldEnum = {
@@ -212,23 +186,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Owner = exports.$Enums.Owner = {
-  Alex: 'Alex',
-  Casey: 'Casey',
-  Joint: 'Joint'
-};
-
-exports.SavingType = exports.$Enums.SavingType = {
-  Fixed: 'Fixed',
-  Fun: 'Fun',
-  Saving: 'Saving'
-};
-
-exports.TransactionType = exports.$Enums.TransactionType = {
-  Income: 'Income',
-  Expense: 'Expense'
-};
-
 exports.ClubType = exports.$Enums.ClubType = {
   Driver: 'Driver',
   Wood: 'Wood',
@@ -247,8 +204,6 @@ exports.SwingLength = exports.$Enums.SwingLength = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Category: 'Category',
-  Transaction: 'Transaction',
   Club: 'Club',
   Distance: 'Distance',
   Session: 'Session',

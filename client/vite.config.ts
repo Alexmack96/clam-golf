@@ -28,7 +28,7 @@ export default defineConfig({
         theme_color: "#0f1a13",
         background_color: "#0f1a13",
         display: "standalone",
-        start_url: "/dashboard",
+        start_url: "/distances",
         orientation: "portrait",
         icons: [
           { src: "pwa-64x64.png",           sizes: "64x64",   type: "image/png" },

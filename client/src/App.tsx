@@ -3,7 +3,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute.js";
 import { Layout } from "./components/Layout.js";
 import { LoginPage } from "./pages/LoginPage.js";
 import { LoggedOutPage } from "./pages/LoggedOutPage.js";
-import { AnalyticsPage } from "./pages/AnalyticsPage.js";
 import { DistancesPage } from "./pages/DistancesPage.js";
 
 export function App() {
@@ -13,10 +12,9 @@ export function App() {
       <Route path="/logged-out" element={<LoggedOutPage />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<AnalyticsPage />} />
+          <Route path="/" element={<Navigate to="/distances" replace />} />
           <Route path="/distances" element={<DistancesPage />} />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/distances" replace />} />
         </Route>
       </Route>
     </Routes>

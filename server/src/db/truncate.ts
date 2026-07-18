@@ -5,8 +5,8 @@ if (env.NODE_ENV !== "test") {
   throw new Error("truncate only allowed in test environment");
 }
 
-await db.$executeRawUnsafe(`DELETE FROM "Transaction"`);
-await db.$executeRawUnsafe(`DELETE FROM "Category"`);
+await db.$executeRawUnsafe(`DELETE FROM "distances"`);
+await db.$executeRawUnsafe(`DELETE FROM "clubs"`);
 await db.$executeRawUnsafe(`DELETE FROM session`);
 await db.$executeRawUnsafe(`DELETE FROM account`);
 await db.$executeRawUnsafe(`DELETE FROM verification`);

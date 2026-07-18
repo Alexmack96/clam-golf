@@ -26,7 +26,7 @@ export function LoginPage() {
   } = useForm<LoginFormValues>({ resolver: zodResolver(schema) });
 
   if (session) {
-    navigate("/dashboard", { replace: true });
+    navigate("/distances", { replace: true });
     return null;
   }
 
@@ -35,7 +35,7 @@ export function LoginPage() {
     if (error) {
       setError("root.serverError", { message: "Invalid email or password" });
     } else {
-      navigate("/dashboard");
+      navigate("/distances");
     }
   }
 

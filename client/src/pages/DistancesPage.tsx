@@ -99,10 +99,10 @@ function GappingWheel({ clubs }: { clubs: ClubRow[] }) {
     const anchor = x > cx + 2 ? "start" : x < cx - 2 ? "end" : "middle";
     return (
       <g key={`label-${index}`}>
-        <text x={x} y={y - 6} textAnchor={anchor} className="fill-foreground text-[11px] font-medium">
+        <text x={x} y={y - 7} textAnchor={anchor} className="fill-foreground text-[13px] font-semibold">
           {name}
         </text>
-        <text x={x} y={y + 8} textAnchor={anchor} className="fill-muted-foreground text-[10px]">
+        <text x={x} y={y + 9} textAnchor={anchor} className="fill-muted-foreground text-[11px]">
           {value}y
         </text>
       </g>
@@ -110,8 +110,8 @@ function GappingWheel({ clubs }: { clubs: ClubRow[] }) {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <PieChart margin={{ top: 10, right: 40, bottom: 0, left: 40 }}>
+    <ResponsiveContainer width="100%" height={440}>
+      <PieChart margin={{ top: 10, right: 50, bottom: 0, left: 50 }}>
         <Pie
           data={data}
           dataKey="yards"
@@ -120,8 +120,8 @@ function GappingWheel({ clubs }: { clubs: ClubRow[] }) {
           cy="92%"
           startAngle={180}
           endAngle={0}
-          innerRadius="38%"
-          outerRadius="88%"
+          innerRadius="42%"
+          outerRadius="92%"
           paddingAngle={2}
           stroke="var(--card)"
           strokeWidth={2}
@@ -338,21 +338,19 @@ export function DistancesPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      <div>
+    <div className="max-w-5xl mx-auto space-y-8">
+      <div className="text-center">
         <h1 className="text-3xl font-bold text-foreground">Distances</h1>
         <p className="text-sm text-muted-foreground uppercase tracking-wide mt-1">Know your numbers</p>
       </div>
 
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
-            Gapping Wheel
-          </CardTitle>
+      <Card className="border-primary/20 bg-gradient-to-b from-primary/[0.06] to-transparent shadow-lg shadow-primary/5">
+        <CardHeader className="text-center pb-0">
+          <CardTitle className="text-2xl font-bold text-foreground">Gapping Wheel</CardTitle>
           <CardDescription>Full-swing carry, bag order — 60° through driver</CardDescription>
         </CardHeader>
-        <CardContent>
-          {isPending ? <Skeleton className="w-full h-[320px] rounded-md" /> : <GappingWheel clubs={data!} />}
+        <CardContent className="pt-2">
+          {isPending ? <Skeleton className="w-full h-[440px] rounded-md" /> : <GappingWheel clubs={data!} />}
         </CardContent>
       </Card>
 
@@ -362,8 +360,9 @@ export function DistancesPage() {
             <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
               The Bag
             </CardTitle>
+            <CardDescription>Full carry, and partial-swing yardages by club-face position</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
             {isPending ? (
               <div className="space-y-2">
                 {Array.from({ length: 8 }).map((_, i) => (
@@ -371,7 +370,15 @@ export function DistancesPage() {
                 ))}
               </div>
             ) : (
-              <BagList clubs={data!} />
+              <>
+                <BagList clubs={data!} />
+                <div>
+                  <h3 className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">
+                    Wedge Matrix
+                  </h3>
+                  <WedgeMatrix clubs={data!} />
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
@@ -379,37 +386,24 @@ export function DistancesPage() {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
-              Wedge Matrix
-            </CardTitle>
-            <CardDescription>Partial-swing yardages by club-face position</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isPending ? <Skeleton className="w-full h-[220px] rounded-md" /> : <WedgeMatrix clubs={data!} />}
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
-              Wind Reduction
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <WindTable />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
-              Plays-Like Calculator
+              On Course
             </CardTitle>
             <CardDescription>Distance + elevation + wind → the number you actually play</CardDescription>
           </CardHeader>
-          <CardContent>
-            {isPending ? <Skeleton className="w-full h-[220px] rounded-md" /> : <Calculator clubs={data!} />}
+          <CardContent className="space-y-6">
+            {isPending ? (
+              <Skeleton className="w-full h-[220px] rounded-md" />
+            ) : (
+              <>
+                <Calculator clubs={data!} />
+                <div>
+                  <h3 className="text-[11px] uppercase tracking-wide text-muted-foreground mb-2">
+                    Wind Reduction
+                  </h3>
+                  <WindTable />
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

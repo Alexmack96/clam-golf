@@ -1,10 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { Home, Ruler } from "lucide-react";
+import { Ruler } from "lucide-react";
 
-const mainTabs = [
-  { to: "/dashboard", label: "Home", Icon: Home },
-  { to: "/distances", label: "Distances", Icon: Ruler },
-] as const;
+const mainTabs = [{ to: "/distances", label: "Distances", Icon: Ruler }] as const;
 
 export function BottomNav() {
   return (
@@ -17,7 +14,7 @@ export function BottomNav() {
           <NavLink
             key={to}
             to={to}
-            end={to === "/dashboard"}
+            end={to === "/distances"}
             className={({ isActive }) =>
               `flex-1 flex flex-col items-center justify-center gap-0.5 transition-all active:scale-[0.92] active:opacity-70 ${
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"

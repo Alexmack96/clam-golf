@@ -4,10 +4,7 @@ import { Sun, Moon, LogOut } from "lucide-react";
 import { useTheme } from "../context/ThemeContext.js";
 import { Button } from "./ui/button.js";
 
-const links = [
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/distances", label: "Distances" },
-] as const;
+const links = [{ to: "/distances", label: "Distances" }] as const;
 
 export function Navbar({ onSignOut }: { onSignOut: () => void }) {
   const { data: session } = useSession();
@@ -23,7 +20,7 @@ export function Navbar({ onSignOut }: { onSignOut: () => void }) {
     <header className="glass-pane shrink-0 z-40 ios-safe-top app-chrome">
       <nav className="mx-auto max-w-[1400px] px-6 h-14 flex items-center gap-8">
         {/* Wordmark */}
-        <Link to="/dashboard" className="flex items-center gap-2 group shrink-0">
+        <Link to="/distances" className="flex items-center gap-2 group shrink-0">
           <img
             src="/clam-app-logo.png"
             alt=""
@@ -44,7 +41,7 @@ export function Navbar({ onSignOut }: { onSignOut: () => void }) {
             <NavLink
               key={l.to}
               to={l.to}
-              end={l.to === "/dashboard"}
+              end={l.to === "/distances"}
               className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
             >
               {({ isActive }) => (

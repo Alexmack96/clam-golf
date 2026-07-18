@@ -9,23 +9,6 @@ datasource db {
   provider = "sqlite"
 }
 
-enum TransactionType {
-  Income
-  Expense
-}
-
-enum SavingType {
-  Fixed
-  Fun
-  Saving
-}
-
-enum Owner {
-  Alex
-  Casey
-  Joint
-}
-
 enum ClubType {
   Driver
   Wood
@@ -46,7 +29,6 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   name          String
-  owner         Owner?    // which person (Alex/Casey) this login represents
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   image         String?
@@ -56,33 +38,6 @@ model User {
   @@map("user")
 }
 
-model Category {
-  id             String        @id @default(cuid())
-  name           String        @unique
-  color          String
-  savingType     SavingType    @default(Fun)
-  transactions   Transaction[]
-}
-
-model Transaction {
-  id               String          @id @default(cuid())
-  description      String
-  amount           Decimal
-  type             TransactionType
-  date             DateTime        @default(now())
-  createdAt        DateTime        @default(now())
-  categoryId       String
-  category         Category        @relation(fields: [categoryId], references: [id])
-  externalId       String?         @unique
-  note             String?
-  owner            Owner           @default(Joint)
-  reviewed         Boolean         @default(false)
-  excludeFromSavings Boolean       @default(false)
-  savingType       SavingType?     // per-transaction override; null = inherit from category
-  originalAmount   Decimal?
-  originalCurrency String?
-}
-
 model Club {
   id        String     @id @default(cuid())
   name      String     @unique // "Driver", "5 Wood", "Hybrid", "4 Iron", ..., "52°", "56°", "60°", "Putter"
@@ -90,7 +45,7 @@ model Club {
   sortOrder Int        @default(0)
   distances Distance[]
 
-  @@map("club")
+  @@map("clubs")
 }
 
 // A club's carry yardage at a given swing length. Full-swing clubs (irons,
@@ -105,7 +60,7 @@ model Distance {
   updatedAt DateTime    @updatedAt
 
   @@unique([clubId, swing])
-  @@map("distance")
+  @@map("distances")
 }
 
 model Session {
