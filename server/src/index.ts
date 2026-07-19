@@ -2,7 +2,6 @@ import { config } from "dotenv";
 config({ path: import.meta.dirname + "/../../.env" });
 import * as Sentry from "@sentry/node";
 import express from "express";
-import { join } from "path";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
@@ -18,6 +17,13 @@ import { clubsRouter } from "./routes/clubs.js";
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
 
 const app = express();
+
+// Two proxies sit in front in production: the Railway edge, then the client
+// service's nginx. Without this the rate limiter keys every request to the
+// proxy's IP and throttles all users as one.
+if (env.NODE_ENV === "production") {
+  app.set("trust proxy", 2);
+}
 
 const trustedOrigins = env.TRUSTED_ORIGINS.split(",").map((o) => o.trim());
 
@@ -56,16 +62,6 @@ app.get("/api/me", requireAuth, (req, res) => {
 app.use("/api/admin/users", requireAuth, usersRouter);
 app.use("/api/distances", requireAuth, distancesRouter);
 app.use("/api/clubs", requireAuth, clubsRouter);
-
-if (env.NODE_ENV === "production") {
-  const clientDist = join(import.meta.dirname, "../../client/dist");
-  app.use(express.static(clientDist));
-
-  // SPA fallback: serve index.html for any non API route
-  app.get("/*path", (_req, res) => {
-    res.sendFile(join(clientDist, "index.html"));
-  });
-}
 
 Sentry.setupExpressErrorHandler(app);
 app.use(errorHandler);

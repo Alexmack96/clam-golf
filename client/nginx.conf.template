@@ -1,0 +1,39 @@
+server {
+    listen ${PORT} default_server;
+    listen [::]:${PORT} default_server;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Proxy the API to the server service over Railway's private network. The
+    # browser therefore only ever sees this one origin, which keeps the auth
+    # cookie first-party — iOS Safari blocks the cross-site alternative.
+    # Assigning to a variable forces nginx to resolve the upstream lazily, so a
+    # cold or restarting server service cannot stop nginx from booting.
+    location /api/ {
+        set $upstream ${API_UPSTREAM};
+        proxy_pass $upstream$request_uri;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # The service worker must never be cached, or clients pin themselves to an
+    # old build and stop picking up deploys.
+    location = /sw.js {
+        add_header Cache-Control "no-cache";
+    }
+
+    # Vite emits content-hashed filenames under /assets, so they are immutable.
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

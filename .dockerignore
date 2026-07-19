@@ -4,6 +4,8 @@ client/dist/
 server/prisma/dev.db
 server/prisma/dev.db-shm
 server/prisma/dev.db-wal
+server/dev.db
+server/test.db
 .env
 .env.*
 playwright-report/
