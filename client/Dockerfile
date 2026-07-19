@@ -12,18 +12,16 @@ RUN bun install
 # Stage 2: Build the React bundle
 FROM oven/bun:1 AS build
 WORKDIR /app
-COPY --from=install /app/node_modules ./node_modules
-COPY --from=install /app/client/node_modules ./client/node_modules
 COPY package.json ./
 COPY core ./core
 COPY client ./client
-# Ensure zod is resolvable from core/ (peer dep not hoisted to root)
-RUN mkdir -p core/node_modules && \
-    if [ -d client/node_modules/zod ]; then \
-      cp -r client/node_modules/zod core/node_modules/zod; \
-    elif [ -d node_modules/zod ]; then \
-      cp -r node_modules/zod core/node_modules/zod; \
-    fi
+# Source is copied first, then dependencies — .dockerignore strips */node_modules
+# from the build context, so every workspace's deps must come from the install
+# stage. core/node_modules matters as much as client's: bun installs per
+# workspace rather than hoisting to the root, so core's zod lives only there.
+COPY --from=install /app/node_modules ./node_modules
+COPY --from=install /app/client/node_modules ./client/node_modules
+COPY --from=install /app/core/node_modules ./core/node_modules
 # Vite inlines VITE_* vars at build time, so they must arrive as build args
 # (Railway forwards service variables declared with ARG) rather than as plain
 # runtime env vars, which vite build would never see.

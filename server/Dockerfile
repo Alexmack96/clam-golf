@@ -13,14 +13,16 @@ RUN bun install
 # Stage 2: Build — generate the Prisma client
 FROM oven/bun:1 AS build
 WORKDIR /app
-COPY --from=install /app/node_modules ./node_modules
-COPY --from=install /app/server/node_modules ./server/node_modules
 COPY package.json ./
 COPY core ./core
 COPY server ./server
-# Ensure zod is resolvable from core/ (peer dep not hoisted to root)
-RUN mkdir -p core/node_modules && \
-    if [ -d node_modules/zod ]; then cp -r node_modules/zod core/node_modules/zod; fi
+# Source is copied first, then dependencies — .dockerignore strips */node_modules
+# from the build context, so every workspace's deps must come from the install
+# stage. core/node_modules matters as much as server's: bun installs per
+# workspace rather than hoisting to the root, so core's zod lives only there.
+COPY --from=install /app/node_modules ./node_modules
+COPY --from=install /app/server/node_modules ./server/node_modules
+COPY --from=install /app/core/node_modules ./core/node_modules
 RUN cd server && DATABASE_URL=file:./prisma/dev.db bunx prisma generate
 
 # Stage 3: Production — server source plus the generated Prisma client only
@@ -37,7 +39,7 @@ ENV NODE_ENV=production
 # and migrations/, and migrate deploy would fail on first boot.
 RUN mkdir -p /app/data
 EXPOSE 3000
-# seedClubs is NOT run here: it rewrites distances to hardcoded defaults on every
-# boot, which would wipe real data now that the volume persists it. Run it by
-# hand once on a fresh database instead — bun run db:seed:clubs
-CMD ["sh", "-c", "cd server && bunx prisma migrate deploy && bun src/db/seed.ts && bun src/index.ts"]
+# Both seeds are fill-only and safe to re-run on every boot: seed.ts returns
+# early once the admin exists, seedClubs.ts creates missing rows without
+# touching existing ones.
+CMD ["sh", "-c", "cd server && bunx prisma migrate deploy && bun src/db/seed.ts && bun src/db/seedClubs.ts && bun src/index.ts"]

@@ -2,9 +2,12 @@
  * Seeds the bag: one Club per club plus its Distance row(s).
  * Run with: bun run db:seed:clubs
  *
- * Safe to re-run — upserts by club name / (clubId, swing). Distance rows for
- * swings no longer listed for a club are removed, so trimming a club's
- * partials here also cleans up stale rows in the DB.
+ * Runs on every container boot, so it only ever fills in what is missing —
+ * existing clubs and distances are left exactly as they are. Yardages are the
+ * data the app exists to record, and re-seeding must never overwrite them.
+ *
+ * Consequence: editing the numbers below will not update a database that
+ * already has those rows. Change them in the app, or delete the row first.
  */
 import "dotenv/config";
 import { db } from "./client.js";
@@ -51,7 +54,7 @@ async function main() {
     const club = await db.club.upsert({
       where: { name: c.name },
       create: { name: c.name, type: c.type, sortOrder: c.sortOrder },
-      update: { type: c.type, sortOrder: c.sortOrder },
+      update: {},
     });
 
     const swings = Object.entries(c.distances) as [SwingLength, number][];
@@ -59,13 +62,9 @@ async function main() {
       await db.distance.upsert({
         where: { clubId_swing: { clubId: club.id, swing } },
         create: { clubId: club.id, swing, yards },
-        update: { yards },
+        update: {},
       });
     }
-
-    await db.distance.deleteMany({
-      where: { clubId: club.id, swing: { notIn: swings.map(([s]) => s) } },
-    });
   }
 
   console.log(`Seeded ${CLUBS.length} clubs.`);
