@@ -45,7 +45,7 @@ async function makeIcon(out: string, size: number, keep: number) {
  */
 async function makeSplash() {
   const SIZE = 512;
-  const PURPLE = "#7c3aed";
+  const MASTERS_GREEN = "#00563B";
 
   GlobalFonts.registerFromPath(FONT_FILE, "Fraunces");
 
@@ -76,15 +76,15 @@ async function makeSplash() {
   const logoImg = await loadImage(logoBuffer);
   ctx.drawImage(logoImg, logoX, logoY, LOGO_SIZE, LOGO_SIZE);
 
-  // "Clam Finance" — vertically centred in the remaining space below the logo
+  // "Clam Golf" — vertically centred in the remaining space below the logo
   const FONT_SIZE = 50;
-  ctx.fillStyle = PURPLE;
+  ctx.fillStyle = MASTERS_GREEN;
   ctx.font = `600 ${FONT_SIZE}px Fraunces`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   const belowLogo = logoY + LOGO_SIZE;
   const textY = belowLogo + Math.round((SIZE - belowLogo) / 2);
-  ctx.fillText("Clam Finance", SIZE / 2, textY);
+  ctx.fillText("Clam Golf", SIZE / 2, textY);
 
   const buf = canvas.toBuffer("image/png");
   await Bun.write(path.join(PUBLIC, "pwa-512x512.png"), buf);

@@ -1,8 +1,11 @@
 import { useMemo, useState } from "react";
+import { Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card.js";
 import { Skeleton } from "../components/ui/skeleton.js";
 import { Input } from "../components/ui/input.js";
 import { Label } from "../components/ui/label.js";
+import { Button } from "../components/ui/button.js";
+import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover.js";
 import {
   Select,
   SelectContent,
@@ -120,9 +123,27 @@ function Calculator({ clubs }: { clubs: ClubRow[] }) {
           <Input id="elev" type="number" value={elevation} onChange={(e) => setElevation(e.target.value)} />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="wind" className="text-xs text-muted-foreground">
-            Wind (mph)
-          </Label>
+          <div className="flex items-center gap-1">
+            <Label htmlFor="wind" className="text-xs text-muted-foreground">
+              Wind (mph)
+            </Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-xs"
+                  className="text-muted-foreground hover:text-primary"
+                  aria-label="Wind reduction chart"
+                >
+                  <Info className="size-3.5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-72">
+                <WindTable />
+              </PopoverContent>
+            </Popover>
+          </div>
           <Input id="wind" type="number" value={windMph} onChange={(e) => setWindMph(e.target.value)} />
         </div>
         <div className="space-y-1.5">
@@ -178,17 +199,6 @@ export function ShotCalculatorPage() {
         </CardHeader>
         <CardContent>
           {isPending ? <Skeleton className="w-full h-[220px] rounded-md" /> : <Calculator clubs={data!} />}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-xs uppercase tracking-wide text-muted-foreground">
-            Wind Reduction
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <WindTable />
         </CardContent>
       </Card>
     </div>

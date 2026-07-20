@@ -87,8 +87,9 @@
   --card-foreground: oklch(0.96 0.012 150);
   --popover: oklch(0.24 0.045 155);
   --popover-foreground: oklch(0.96 0.012 150);
-  --primary: oklch(0.7 0.15 150);
-  --primary-foreground: oklch(0.14 0.03 155);
+  /* Masters green jacket (#00563B) — deeper, more muted than the old bright mint */
+  --primary: oklch(0.401 0.086 163.7);
+  --primary-foreground: oklch(0.96 0.012 150);
   --secondary: oklch(0.27 0.045 155);
   --secondary-foreground: oklch(0.96 0.012 150);
   --muted: oklch(0.27 0.04 155);
@@ -98,7 +99,7 @@
   --destructive: oklch(0.7 0.2 22);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 8%);
-  --ring: oklch(0.7 0.15 150);
+  --ring: oklch(0.401 0.086 163.7);
 
   /* Sharp electric lime — high-signal accent on dark canvas */
   --signal: oklch(0.86 0.21 135);
