@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Pencil, Check, X, Download, Crosshair } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   centroid,
   distanceYards,
@@ -28,6 +28,8 @@ import {
   type HoleRow,
 } from "../hooks/useCourses.js";
 import { useGeolocation } from "../hooks/useGeolocation.js";
+import { useActiveRound } from "../hooks/useActiveRound.js";
+import { ScoreEntry } from "../components/gps/ScoreEntry.js";
 import { bagOptions, nearestClub, longestCarry, fullSwingYardages } from "../lib/clubSuggestion.js";
 import { downloadCourseTiles, type TileProgress } from "../lib/tilePrefetch.js";
 import geometry from "../data/richmond-park-geometry.json";
@@ -56,7 +58,12 @@ export function GpsPage() {
 
   const [courseName, setCourseName] = useStickyState("gps.course", "Duke's");
   const [teeColour, setTeeColour] = useStickyState("gps.tee", "Yellow");
-  const [holeNumber, setHoleNumber] = useState(1);
+  // The scorecard links here to fix a hole, so honour ?hole= on first render.
+  const [params] = useSearchParams();
+  const [holeNumber, setHoleNumber] = useState(() => {
+    const n = Number(params.get("hole"));
+    return Number.isInteger(n) && n >= 1 && n <= 18 ? n : 1;
+  });
   const [measure, setMeasure] = useState<LatLng | null>(null);
   const [editing, setEditing] = useState(false);
   const [dismissedHint, setDismissedHint] = useState<number | null>(null);
@@ -64,6 +71,7 @@ export function GpsPage() {
 
   const assignGreen = useAssignGreen();
   const setAimPoint = useSetAimPoint();
+  const { round, syncState, setScore } = useActiveRound();
 
   const course: CourseRow | undefined =
     courses?.find((c) => c.name === courseName) ?? courses?.[0];
@@ -194,6 +202,13 @@ export function GpsPage() {
     setDismissedHint(null);
   }
 
+  const holeScore = round?.scores.find((s) => s.holeId === hole?.id) ?? null;
+
+  function handleScoreChange(strokes: number | null, putts: number | null) {
+    if (!hole || !course || !teeSet) return;
+    setScore(hole.id, strokes, putts, course.id, teeSet.id);
+  }
+
   async function handleDownload() {
     setTileProgress({ done: 0, total: 0 });
     await downloadCourseTiles(setTileProgress);
@@ -292,6 +307,20 @@ export function GpsPage() {
             />
           </span>
         </button>
+      )}
+
+      {/* Scoring sits right under the hole switcher: you are already on this
+          hole with its par in front of you, so the score is one tap away and
+          "Next" walks you to the following tee. */}
+      {!editing && holeTee && (
+        <ScoreEntry
+          par={holeTee.par}
+          strokes={holeScore?.strokes ?? null}
+          putts={holeScore?.putts ?? null}
+          syncState={syncState}
+          onChange={handleScoreChange}
+          onAdvance={() => step(1)}
+        />
       )}
 
       {editing ? (

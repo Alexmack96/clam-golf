@@ -117,6 +117,7 @@ Express + TypeScript. Entry: `src/index.ts`.
 - `routes/clubs.ts` — the bag, including the 14-club swap rule
 - `routes/distances.ts` — measured yardages
 - `routes/courses.ts` — courses, green assignment, aim points, tee positions
+- `routes/rounds.ts` — scorecards; `PUT /:id` replaces a whole round
 
 ### Client (`client/src/`)
 
@@ -128,6 +129,7 @@ React 18 + React Router v6 + Tailwind v4 + shadcn/ui.
 - `pages/ShotCalculatorPage.tsx` — plays-like distance; accepts `?distance=` from /gps
 - `pages/ClubsPage.tsx` — bag management
 - `pages/GpsPage.tsx` — the rangefinder
+- `pages/ScorecardPage.tsx` — the card in progress, plus past rounds
 
 Query keys are descriptive noun arrays: `["clubs"]`, `["courses"]`.
 
@@ -221,3 +223,35 @@ same events a finger does, so the fit flags itself while running.
 
 Markers are `divIcon` circles, never Leaflet's default pin — the default icon is a PNG
 on a relative path that bundlers rewrite and then fail to resolve.
+
+## Scorecards
+
+A `Round` (course + tee set + day) holds a `HoleScore` per hole: gross strokes, and
+putts when you bothered. **No handicap is applied anywhere** — nothing computes nett
+or stableford. Green in regulation is derived from strokes minus putts, never stored,
+so it cannot disagree with the score beside it.
+
+Entry is a stepper on `/gps` under the hole switcher, because that is where you
+already are with the par in front of you. `/scorecard` is the full card plus history.
+
+### Why the round is local-first
+
+`useActiveRound` keeps the round in progress in **localStorage**, and that is the
+source of truth while you play. Entering a score is a synchronous local write that
+cannot fail — a dead spot on the course must never lose a hole you have walked past.
+A debounced `PUT /api/rounds/:id` then replaces the server's copy of the whole card.
+
+Consequences worth knowing before changing any of it:
+
+- **The id is minted on the phone** (`crypto.randomUUID`), so `rounds.id` has no
+  database default. The round exists before the server has heard of it, which is what
+  makes the push a retryable upsert rather than create-then-update.
+- **The push is a whole-document replace**, not a patch. One player, one device, so
+  there is nothing to merge and a dropped request needs no queue — the next edit
+  sends everything again. `PUT` deletes and recreates the round's scores.
+- **Finishing does not clear the local copy until the push succeeds.** You often
+  finish in a car park with no signal. Until it lands the card reads "waiting for
+  signal", and the `online` listener retries.
+- The store is **module-level with `useSyncExternalStore`**, not `useState`. Three
+  components read the round at once, and per-hook state let them drift apart the
+  moment one of them finished or discarded it.

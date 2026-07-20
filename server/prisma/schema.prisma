@@ -105,6 +105,7 @@ model Course {
   sortOrder Int      @default(0)
   holes     Hole[]
   teeSets   TeeSet[]
+  rounds    Round[]
 
   @@map("courses")
 }
@@ -130,7 +131,8 @@ model Hole {
   aimLat Float?
   aimLng Float?
 
-  tees HoleTee[]
+  tees   HoleTee[]
+  scores HoleScore[]
 
   @@unique([courseId, number])
   @@map("holes")
@@ -145,6 +147,7 @@ model TeeSet {
   colour   TeeColour
   name     String // "Men's Yellow"
   holes    HoleTee[]
+  rounds   Round[]
 
   @@unique([courseId, colour])
   @@map("tee_sets")
@@ -167,6 +170,42 @@ model HoleTee {
 
   @@unique([holeId, teeSetId])
   @@map("hole_tees")
+}
+
+// One trip round a course from one set of tees. The id is minted on the phone,
+// not here: the round is played offline in localStorage and pushed up whole, so
+// it needs an identity before the server has ever heard of it.
+model Round {
+  id          String      @id
+  courseId    String
+  course      Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  teeSetId    String
+  teeSet      TeeSet      @relation(fields: [teeSetId], references: [id], onDelete: Cascade)
+  playedOn    DateTime    @default(now())
+  // Null while the round is still in play. An abandoned nine stays a round.
+  completedAt DateTime?
+  scores      HoleScore[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([playedOn])
+  @@map("rounds")
+}
+
+// What one hole cost in one round. Strokes are gross — no handicap is applied
+// anywhere in this app. Putts are optional, and are what make green-in-regulation
+// derivable rather than another thing to tap.
+model HoleScore {
+  id      String @id @default(cuid())
+  roundId String
+  round   Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  holeId  String
+  hole    Hole   @relation(fields: [holeId], references: [id], onDelete: Cascade)
+  strokes Int
+  putts   Int?
+
+  @@unique([roundId, holeId])
+  @@map("hole_scores")
 }
 
 model Session {

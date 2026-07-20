@@ -14,6 +14,7 @@ import { usersRouter } from "./routes/users.js";
 import { distancesRouter } from "./routes/distances.js";
 import { clubsRouter } from "./routes/clubs.js";
 import { coursesRouter } from "./routes/courses.js";
+import { roundsRouter } from "./routes/rounds.js";
 
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
 
@@ -64,6 +65,7 @@ app.use("/api/admin/users", requireAuth, usersRouter);
 app.use("/api/distances", requireAuth, distancesRouter);
 app.use("/api/clubs", requireAuth, clubsRouter);
 app.use("/api/courses", requireAuth, coursesRouter);
+app.use("/api/rounds", requireAuth, roundsRouter);
 
 Sentry.setupExpressErrorHandler(app);
 app.use(errorHandler);

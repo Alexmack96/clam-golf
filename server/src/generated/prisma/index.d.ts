@@ -54,6 +54,16 @@ export type TeeSet = $Result.DefaultSelection<Prisma.$TeeSetPayload>
  */
 export type HoleTee = $Result.DefaultSelection<Prisma.$HoleTeePayload>
 /**
+ * Model Round
+ * 
+ */
+export type Round = $Result.DefaultSelection<Prisma.$RoundPayload>
+/**
+ * Model HoleScore
+ * 
+ */
+export type HoleScore = $Result.DefaultSelection<Prisma.$HoleScorePayload>
+/**
  * Model Session
  * 
  */
@@ -330,6 +340,26 @@ export class PrismaClient<
     * ```
     */
   get holeTee(): Prisma.HoleTeeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.round`: Exposes CRUD operations for the **Round** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rounds
+    * const rounds = await prisma.round.findMany()
+    * ```
+    */
+  get round(): Prisma.RoundDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.holeScore`: Exposes CRUD operations for the **HoleScore** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HoleScores
+    * const holeScores = await prisma.holeScore.findMany()
+    * ```
+    */
+  get holeScore(): Prisma.HoleScoreDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -802,6 +832,8 @@ export namespace Prisma {
     Hole: 'Hole',
     TeeSet: 'TeeSet',
     HoleTee: 'HoleTee',
+    Round: 'Round',
+    HoleScore: 'HoleScore',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -820,7 +852,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "session" | "account" | "verification"
+      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "round" | "holeScore" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1416,6 +1448,154 @@ export namespace Prisma {
           }
         }
       }
+      Round: {
+        payload: Prisma.$RoundPayload<ExtArgs>
+        fields: Prisma.RoundFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoundFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoundFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          findFirst: {
+            args: Prisma.RoundFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoundFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          findMany: {
+            args: Prisma.RoundFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>[]
+          }
+          create: {
+            args: Prisma.RoundCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          createMany: {
+            args: Prisma.RoundCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RoundCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>[]
+          }
+          delete: {
+            args: Prisma.RoundDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          update: {
+            args: Prisma.RoundUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoundDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoundUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RoundUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>[]
+          }
+          upsert: {
+            args: Prisma.RoundUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundPayload>
+          }
+          aggregate: {
+            args: Prisma.RoundAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRound>
+          }
+          groupBy: {
+            args: Prisma.RoundGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoundGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoundCountArgs<ExtArgs>
+            result: $Utils.Optional<RoundCountAggregateOutputType> | number
+          }
+        }
+      }
+      HoleScore: {
+        payload: Prisma.$HoleScorePayload<ExtArgs>
+        fields: Prisma.HoleScoreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HoleScoreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HoleScoreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          findFirst: {
+            args: Prisma.HoleScoreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HoleScoreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          findMany: {
+            args: Prisma.HoleScoreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>[]
+          }
+          create: {
+            args: Prisma.HoleScoreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          createMany: {
+            args: Prisma.HoleScoreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HoleScoreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>[]
+          }
+          delete: {
+            args: Prisma.HoleScoreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          update: {
+            args: Prisma.HoleScoreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          deleteMany: {
+            args: Prisma.HoleScoreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HoleScoreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HoleScoreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>[]
+          }
+          upsert: {
+            args: Prisma.HoleScoreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleScorePayload>
+          }
+          aggregate: {
+            args: Prisma.HoleScoreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHoleScore>
+          }
+          groupBy: {
+            args: Prisma.HoleScoreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HoleScoreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HoleScoreCountArgs<ExtArgs>
+            result: $Utils.Optional<HoleScoreCountAggregateOutputType> | number
+          }
+        }
+      }
       Session: {
         payload: Prisma.$SessionPayload<ExtArgs>
         fields: Prisma.SessionFieldRefs
@@ -1754,6 +1934,8 @@ export namespace Prisma {
     hole?: HoleOmit
     teeSet?: TeeSetOmit
     holeTee?: HoleTeeOmit
+    round?: RoundOmit
+    holeScore?: HoleScoreOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1910,11 +2092,13 @@ export namespace Prisma {
   export type CourseCountOutputType = {
     holes: number
     teeSets: number
+    rounds: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     holes?: boolean | CourseCountOutputTypeCountHolesArgs
     teeSets?: boolean | CourseCountOutputTypeCountTeeSetsArgs
+    rounds?: boolean | CourseCountOutputTypeCountRoundsArgs
   }
 
   // Custom InputTypes
@@ -1942,6 +2126,13 @@ export namespace Prisma {
     where?: TeeSetWhereInput
   }
 
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountRoundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoundWhereInput
+  }
+
 
   /**
    * Count Type HoleCountOutputType
@@ -1949,10 +2140,12 @@ export namespace Prisma {
 
   export type HoleCountOutputType = {
     tees: number
+    scores: number
   }
 
   export type HoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tees?: boolean | HoleCountOutputTypeCountTeesArgs
+    scores?: boolean | HoleCountOutputTypeCountScoresArgs
   }
 
   // Custom InputTypes
@@ -1973,6 +2166,13 @@ export namespace Prisma {
     where?: HoleTeeWhereInput
   }
 
+  /**
+   * HoleCountOutputType without action
+   */
+  export type HoleCountOutputTypeCountScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleScoreWhereInput
+  }
+
 
   /**
    * Count Type TeeSetCountOutputType
@@ -1980,10 +2180,12 @@ export namespace Prisma {
 
   export type TeeSetCountOutputType = {
     holes: number
+    rounds: number
   }
 
   export type TeeSetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     holes?: boolean | TeeSetCountOutputTypeCountHolesArgs
+    rounds?: boolean | TeeSetCountOutputTypeCountRoundsArgs
   }
 
   // Custom InputTypes
@@ -2002,6 +2204,44 @@ export namespace Prisma {
    */
   export type TeeSetCountOutputTypeCountHolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HoleTeeWhereInput
+  }
+
+  /**
+   * TeeSetCountOutputType without action
+   */
+  export type TeeSetCountOutputTypeCountRoundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoundWhereInput
+  }
+
+
+  /**
+   * Count Type RoundCountOutputType
+   */
+
+  export type RoundCountOutputType = {
+    scores: number
+  }
+
+  export type RoundCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    scores?: boolean | RoundCountOutputTypeCountScoresArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RoundCountOutputType without action
+   */
+  export type RoundCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundCountOutputType
+     */
+    select?: RoundCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RoundCountOutputType without action
+   */
+  export type RoundCountOutputTypeCountScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleScoreWhereInput
   }
 
 
@@ -6584,6 +6824,7 @@ export namespace Prisma {
     sortOrder?: boolean
     holes?: boolean | Course$holesArgs<ExtArgs>
     teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
+    rounds?: boolean | Course$roundsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -6609,6 +6850,7 @@ export namespace Prisma {
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     holes?: boolean | Course$holesArgs<ExtArgs>
     teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
+    rounds?: boolean | Course$roundsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6619,6 +6861,7 @@ export namespace Prisma {
     objects: {
       holes: Prisma.$HolePayload<ExtArgs>[]
       teeSets: Prisma.$TeeSetPayload<ExtArgs>[]
+      rounds: Prisma.$RoundPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7020,6 +7263,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     holes<T extends Course$holesArgs<ExtArgs> = {}>(args?: Subset<T, Course$holesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     teeSets<T extends Course$teeSetsArgs<ExtArgs> = {}>(args?: Subset<T, Course$teeSetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rounds<T extends Course$roundsArgs<ExtArgs> = {}>(args?: Subset<T, Course$roundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7491,6 +7735,30 @@ export namespace Prisma {
   }
 
   /**
+   * Course.rounds
+   */
+  export type Course$roundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    where?: RoundWhereInput
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    cursor?: RoundWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
+  }
+
+  /**
    * Course without action
    */
   export type CourseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7749,6 +8017,7 @@ export namespace Prisma {
     aimLng?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
     tees?: boolean | Hole$teesArgs<ExtArgs>
+    scores?: boolean | Hole$scoresArgs<ExtArgs>
     _count?: boolean | HoleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hole"]>
 
@@ -7791,6 +8060,7 @@ export namespace Prisma {
   export type HoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     tees?: boolean | Hole$teesArgs<ExtArgs>
+    scores?: boolean | Hole$scoresArgs<ExtArgs>
     _count?: boolean | HoleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type HoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7805,6 +8075,7 @@ export namespace Prisma {
     objects: {
       course: Prisma.$CoursePayload<ExtArgs>
       tees: Prisma.$HoleTeePayload<ExtArgs>[]
+      scores: Prisma.$HoleScorePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8211,6 +8482,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tees<T extends Hole$teesArgs<ExtArgs> = {}>(args?: Subset<T, Hole$teesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    scores<T extends Hole$scoresArgs<ExtArgs> = {}>(args?: Subset<T, Hole$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8671,6 +8943,30 @@ export namespace Prisma {
   }
 
   /**
+   * Hole.scores
+   */
+  export type Hole$scoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    where?: HoleScoreWhereInput
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    cursor?: HoleScoreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HoleScoreScalarFieldEnum | HoleScoreScalarFieldEnum[]
+  }
+
+  /**
    * Hole without action
    */
   export type HoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8847,6 +9143,7 @@ export namespace Prisma {
     name?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
     holes?: boolean | TeeSet$holesArgs<ExtArgs>
+    rounds?: boolean | TeeSet$roundsArgs<ExtArgs>
     _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teeSet"]>
 
@@ -8877,6 +9174,7 @@ export namespace Prisma {
   export type TeeSetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     holes?: boolean | TeeSet$holesArgs<ExtArgs>
+    rounds?: boolean | TeeSet$roundsArgs<ExtArgs>
     _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeeSetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8891,6 +9189,7 @@ export namespace Prisma {
     objects: {
       course: Prisma.$CoursePayload<ExtArgs>
       holes: Prisma.$HoleTeePayload<ExtArgs>[]
+      rounds: Prisma.$RoundPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9293,6 +9592,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     holes<T extends TeeSet$holesArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$holesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rounds<T extends TeeSet$roundsArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$roundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9746,6 +10046,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * TeeSet.rounds
+   */
+  export type TeeSet$roundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    where?: RoundWhereInput
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    cursor?: RoundWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
   }
 
   /**
@@ -10922,6 +11246,2238 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: HoleTeeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Round
+   */
+
+  export type AggregateRound = {
+    _count: RoundCountAggregateOutputType | null
+    _min: RoundMinAggregateOutputType | null
+    _max: RoundMaxAggregateOutputType | null
+  }
+
+  export type RoundMinAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    teeSetId: string | null
+    playedOn: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoundMaxAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    teeSetId: string | null
+    playedOn: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoundCountAggregateOutputType = {
+    id: number
+    courseId: number
+    teeSetId: number
+    playedOn: number
+    completedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RoundMinAggregateInputType = {
+    id?: true
+    courseId?: true
+    teeSetId?: true
+    playedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoundMaxAggregateInputType = {
+    id?: true
+    courseId?: true
+    teeSetId?: true
+    playedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoundCountAggregateInputType = {
+    id?: true
+    courseId?: true
+    teeSetId?: true
+    playedOn?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RoundAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Round to aggregate.
+     */
+    where?: RoundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rounds to fetch.
+     */
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rounds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rounds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Rounds
+    **/
+    _count?: true | RoundCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoundMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoundMaxAggregateInputType
+  }
+
+  export type GetRoundAggregateType<T extends RoundAggregateArgs> = {
+        [P in keyof T & keyof AggregateRound]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRound[P]>
+      : GetScalarType<T[P], AggregateRound[P]>
+  }
+
+
+
+
+  export type RoundGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoundWhereInput
+    orderBy?: RoundOrderByWithAggregationInput | RoundOrderByWithAggregationInput[]
+    by: RoundScalarFieldEnum[] | RoundScalarFieldEnum
+    having?: RoundScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoundCountAggregateInputType | true
+    _min?: RoundMinAggregateInputType
+    _max?: RoundMaxAggregateInputType
+  }
+
+  export type RoundGroupByOutputType = {
+    id: string
+    courseId: string
+    teeSetId: string
+    playedOn: Date
+    completedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RoundCountAggregateOutputType | null
+    _min: RoundMinAggregateOutputType | null
+    _max: RoundMaxAggregateOutputType | null
+  }
+
+  type GetRoundGroupByPayload<T extends RoundGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoundGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoundGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoundGroupByOutputType[P]>
+            : GetScalarType<T[P], RoundGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    teeSetId?: boolean
+    playedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+    scores?: boolean | Round$scoresArgs<ExtArgs>
+    _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["round"]>
+
+  export type RoundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    teeSetId?: boolean
+    playedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["round"]>
+
+  export type RoundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    teeSetId?: boolean
+    playedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["round"]>
+
+  export type RoundSelectScalar = {
+    id?: boolean
+    courseId?: boolean
+    teeSetId?: boolean
+    playedOn?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RoundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "teeSetId" | "playedOn" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["round"]>
+  export type RoundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+    scores?: boolean | Round$scoresArgs<ExtArgs>
+    _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RoundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+  export type RoundIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+
+  export type $RoundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Round"
+    objects: {
+      course: Prisma.$CoursePayload<ExtArgs>
+      teeSet: Prisma.$TeeSetPayload<ExtArgs>
+      scores: Prisma.$HoleScorePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      courseId: string
+      teeSetId: string
+      playedOn: Date
+      completedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["round"]>
+    composites: {}
+  }
+
+  type RoundGetPayload<S extends boolean | null | undefined | RoundDefaultArgs> = $Result.GetResult<Prisma.$RoundPayload, S>
+
+  type RoundCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoundFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoundCountAggregateInputType | true
+    }
+
+  export interface RoundDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Round'], meta: { name: 'Round' } }
+    /**
+     * Find zero or one Round that matches the filter.
+     * @param {RoundFindUniqueArgs} args - Arguments to find a Round
+     * @example
+     * // Get one Round
+     * const round = await prisma.round.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoundFindUniqueArgs>(args: SelectSubset<T, RoundFindUniqueArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Round that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoundFindUniqueOrThrowArgs} args - Arguments to find a Round
+     * @example
+     * // Get one Round
+     * const round = await prisma.round.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoundFindUniqueOrThrowArgs>(args: SelectSubset<T, RoundFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Round that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundFindFirstArgs} args - Arguments to find a Round
+     * @example
+     * // Get one Round
+     * const round = await prisma.round.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoundFindFirstArgs>(args?: SelectSubset<T, RoundFindFirstArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Round that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundFindFirstOrThrowArgs} args - Arguments to find a Round
+     * @example
+     * // Get one Round
+     * const round = await prisma.round.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoundFindFirstOrThrowArgs>(args?: SelectSubset<T, RoundFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Rounds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Rounds
+     * const rounds = await prisma.round.findMany()
+     * 
+     * // Get first 10 Rounds
+     * const rounds = await prisma.round.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roundWithIdOnly = await prisma.round.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoundFindManyArgs>(args?: SelectSubset<T, RoundFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Round.
+     * @param {RoundCreateArgs} args - Arguments to create a Round.
+     * @example
+     * // Create one Round
+     * const Round = await prisma.round.create({
+     *   data: {
+     *     // ... data to create a Round
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoundCreateArgs>(args: SelectSubset<T, RoundCreateArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Rounds.
+     * @param {RoundCreateManyArgs} args - Arguments to create many Rounds.
+     * @example
+     * // Create many Rounds
+     * const round = await prisma.round.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoundCreateManyArgs>(args?: SelectSubset<T, RoundCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Rounds and returns the data saved in the database.
+     * @param {RoundCreateManyAndReturnArgs} args - Arguments to create many Rounds.
+     * @example
+     * // Create many Rounds
+     * const round = await prisma.round.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Rounds and only return the `id`
+     * const roundWithIdOnly = await prisma.round.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RoundCreateManyAndReturnArgs>(args?: SelectSubset<T, RoundCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Round.
+     * @param {RoundDeleteArgs} args - Arguments to delete one Round.
+     * @example
+     * // Delete one Round
+     * const Round = await prisma.round.delete({
+     *   where: {
+     *     // ... filter to delete one Round
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoundDeleteArgs>(args: SelectSubset<T, RoundDeleteArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Round.
+     * @param {RoundUpdateArgs} args - Arguments to update one Round.
+     * @example
+     * // Update one Round
+     * const round = await prisma.round.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoundUpdateArgs>(args: SelectSubset<T, RoundUpdateArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Rounds.
+     * @param {RoundDeleteManyArgs} args - Arguments to filter Rounds to delete.
+     * @example
+     * // Delete a few Rounds
+     * const { count } = await prisma.round.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoundDeleteManyArgs>(args?: SelectSubset<T, RoundDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rounds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Rounds
+     * const round = await prisma.round.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoundUpdateManyArgs>(args: SelectSubset<T, RoundUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Rounds and returns the data updated in the database.
+     * @param {RoundUpdateManyAndReturnArgs} args - Arguments to update many Rounds.
+     * @example
+     * // Update many Rounds
+     * const round = await prisma.round.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Rounds and only return the `id`
+     * const roundWithIdOnly = await prisma.round.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RoundUpdateManyAndReturnArgs>(args: SelectSubset<T, RoundUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Round.
+     * @param {RoundUpsertArgs} args - Arguments to update or create a Round.
+     * @example
+     * // Update or create a Round
+     * const round = await prisma.round.upsert({
+     *   create: {
+     *     // ... data to create a Round
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Round we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoundUpsertArgs>(args: SelectSubset<T, RoundUpsertArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Rounds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundCountArgs} args - Arguments to filter Rounds to count.
+     * @example
+     * // Count the number of Rounds
+     * const count = await prisma.round.count({
+     *   where: {
+     *     // ... the filter for the Rounds we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoundCountArgs>(
+      args?: Subset<T, RoundCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoundCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Round.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoundAggregateArgs>(args: Subset<T, RoundAggregateArgs>): Prisma.PrismaPromise<GetRoundAggregateType<T>>
+
+    /**
+     * Group by Round.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoundGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoundGroupByArgs['orderBy'] }
+        : { orderBy?: RoundGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoundGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoundGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Round model
+   */
+  readonly fields: RoundFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Round.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teeSet<T extends TeeSetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeeSetDefaultArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    scores<T extends Round$scoresArgs<ExtArgs> = {}>(args?: Subset<T, Round$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Round model
+   */
+  interface RoundFieldRefs {
+    readonly id: FieldRef<"Round", 'String'>
+    readonly courseId: FieldRef<"Round", 'String'>
+    readonly teeSetId: FieldRef<"Round", 'String'>
+    readonly playedOn: FieldRef<"Round", 'DateTime'>
+    readonly completedAt: FieldRef<"Round", 'DateTime'>
+    readonly createdAt: FieldRef<"Round", 'DateTime'>
+    readonly updatedAt: FieldRef<"Round", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Round findUnique
+   */
+  export type RoundFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter, which Round to fetch.
+     */
+    where: RoundWhereUniqueInput
+  }
+
+  /**
+   * Round findUniqueOrThrow
+   */
+  export type RoundFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter, which Round to fetch.
+     */
+    where: RoundWhereUniqueInput
+  }
+
+  /**
+   * Round findFirst
+   */
+  export type RoundFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter, which Round to fetch.
+     */
+    where?: RoundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rounds to fetch.
+     */
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rounds.
+     */
+    cursor?: RoundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rounds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rounds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rounds.
+     */
+    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
+  }
+
+  /**
+   * Round findFirstOrThrow
+   */
+  export type RoundFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter, which Round to fetch.
+     */
+    where?: RoundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rounds to fetch.
+     */
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Rounds.
+     */
+    cursor?: RoundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rounds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rounds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rounds.
+     */
+    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
+  }
+
+  /**
+   * Round findMany
+   */
+  export type RoundFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter, which Rounds to fetch.
+     */
+    where?: RoundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Rounds to fetch.
+     */
+    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Rounds.
+     */
+    cursor?: RoundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Rounds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Rounds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Rounds.
+     */
+    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
+  }
+
+  /**
+   * Round create
+   */
+  export type RoundCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Round.
+     */
+    data: XOR<RoundCreateInput, RoundUncheckedCreateInput>
+  }
+
+  /**
+   * Round createMany
+   */
+  export type RoundCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Rounds.
+     */
+    data: RoundCreateManyInput | RoundCreateManyInput[]
+  }
+
+  /**
+   * Round createManyAndReturn
+   */
+  export type RoundCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * The data used to create many Rounds.
+     */
+    data: RoundCreateManyInput | RoundCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Round update
+   */
+  export type RoundUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Round.
+     */
+    data: XOR<RoundUpdateInput, RoundUncheckedUpdateInput>
+    /**
+     * Choose, which Round to update.
+     */
+    where: RoundWhereUniqueInput
+  }
+
+  /**
+   * Round updateMany
+   */
+  export type RoundUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Rounds.
+     */
+    data: XOR<RoundUpdateManyMutationInput, RoundUncheckedUpdateManyInput>
+    /**
+     * Filter which Rounds to update
+     */
+    where?: RoundWhereInput
+    /**
+     * Limit how many Rounds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Round updateManyAndReturn
+   */
+  export type RoundUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * The data used to update Rounds.
+     */
+    data: XOR<RoundUpdateManyMutationInput, RoundUncheckedUpdateManyInput>
+    /**
+     * Filter which Rounds to update
+     */
+    where?: RoundWhereInput
+    /**
+     * Limit how many Rounds to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Round upsert
+   */
+  export type RoundUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Round to update in case it exists.
+     */
+    where: RoundWhereUniqueInput
+    /**
+     * In case the Round found by the `where` argument doesn't exist, create a new Round with this data.
+     */
+    create: XOR<RoundCreateInput, RoundUncheckedCreateInput>
+    /**
+     * In case the Round was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoundUpdateInput, RoundUncheckedUpdateInput>
+  }
+
+  /**
+   * Round delete
+   */
+  export type RoundDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+    /**
+     * Filter which Round to delete.
+     */
+    where: RoundWhereUniqueInput
+  }
+
+  /**
+   * Round deleteMany
+   */
+  export type RoundDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Rounds to delete
+     */
+    where?: RoundWhereInput
+    /**
+     * Limit how many Rounds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Round.scores
+   */
+  export type Round$scoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    where?: HoleScoreWhereInput
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    cursor?: HoleScoreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HoleScoreScalarFieldEnum | HoleScoreScalarFieldEnum[]
+  }
+
+  /**
+   * Round without action
+   */
+  export type RoundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HoleScore
+   */
+
+  export type AggregateHoleScore = {
+    _count: HoleScoreCountAggregateOutputType | null
+    _avg: HoleScoreAvgAggregateOutputType | null
+    _sum: HoleScoreSumAggregateOutputType | null
+    _min: HoleScoreMinAggregateOutputType | null
+    _max: HoleScoreMaxAggregateOutputType | null
+  }
+
+  export type HoleScoreAvgAggregateOutputType = {
+    strokes: number | null
+    putts: number | null
+  }
+
+  export type HoleScoreSumAggregateOutputType = {
+    strokes: number | null
+    putts: number | null
+  }
+
+  export type HoleScoreMinAggregateOutputType = {
+    id: string | null
+    roundId: string | null
+    holeId: string | null
+    strokes: number | null
+    putts: number | null
+  }
+
+  export type HoleScoreMaxAggregateOutputType = {
+    id: string | null
+    roundId: string | null
+    holeId: string | null
+    strokes: number | null
+    putts: number | null
+  }
+
+  export type HoleScoreCountAggregateOutputType = {
+    id: number
+    roundId: number
+    holeId: number
+    strokes: number
+    putts: number
+    _all: number
+  }
+
+
+  export type HoleScoreAvgAggregateInputType = {
+    strokes?: true
+    putts?: true
+  }
+
+  export type HoleScoreSumAggregateInputType = {
+    strokes?: true
+    putts?: true
+  }
+
+  export type HoleScoreMinAggregateInputType = {
+    id?: true
+    roundId?: true
+    holeId?: true
+    strokes?: true
+    putts?: true
+  }
+
+  export type HoleScoreMaxAggregateInputType = {
+    id?: true
+    roundId?: true
+    holeId?: true
+    strokes?: true
+    putts?: true
+  }
+
+  export type HoleScoreCountAggregateInputType = {
+    id?: true
+    roundId?: true
+    holeId?: true
+    strokes?: true
+    putts?: true
+    _all?: true
+  }
+
+  export type HoleScoreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HoleScore to aggregate.
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleScores to fetch.
+     */
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HoleScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HoleScores
+    **/
+    _count?: true | HoleScoreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HoleScoreAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HoleScoreSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HoleScoreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HoleScoreMaxAggregateInputType
+  }
+
+  export type GetHoleScoreAggregateType<T extends HoleScoreAggregateArgs> = {
+        [P in keyof T & keyof AggregateHoleScore]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHoleScore[P]>
+      : GetScalarType<T[P], AggregateHoleScore[P]>
+  }
+
+
+
+
+  export type HoleScoreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleScoreWhereInput
+    orderBy?: HoleScoreOrderByWithAggregationInput | HoleScoreOrderByWithAggregationInput[]
+    by: HoleScoreScalarFieldEnum[] | HoleScoreScalarFieldEnum
+    having?: HoleScoreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HoleScoreCountAggregateInputType | true
+    _avg?: HoleScoreAvgAggregateInputType
+    _sum?: HoleScoreSumAggregateInputType
+    _min?: HoleScoreMinAggregateInputType
+    _max?: HoleScoreMaxAggregateInputType
+  }
+
+  export type HoleScoreGroupByOutputType = {
+    id: string
+    roundId: string
+    holeId: string
+    strokes: number
+    putts: number | null
+    _count: HoleScoreCountAggregateOutputType | null
+    _avg: HoleScoreAvgAggregateOutputType | null
+    _sum: HoleScoreSumAggregateOutputType | null
+    _min: HoleScoreMinAggregateOutputType | null
+    _max: HoleScoreMaxAggregateOutputType | null
+  }
+
+  type GetHoleScoreGroupByPayload<T extends HoleScoreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HoleScoreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HoleScoreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HoleScoreGroupByOutputType[P]>
+            : GetScalarType<T[P], HoleScoreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HoleScoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    holeId?: boolean
+    strokes?: boolean
+    putts?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeScore"]>
+
+  export type HoleScoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    holeId?: boolean
+    strokes?: boolean
+    putts?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeScore"]>
+
+  export type HoleScoreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    holeId?: boolean
+    strokes?: boolean
+    putts?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeScore"]>
+
+  export type HoleScoreSelectScalar = {
+    id?: boolean
+    roundId?: boolean
+    holeId?: boolean
+    strokes?: boolean
+    putts?: boolean
+  }
+
+  export type HoleScoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roundId" | "holeId" | "strokes" | "putts", ExtArgs["result"]["holeScore"]>
+  export type HoleScoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }
+  export type HoleScoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }
+  export type HoleScoreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+  }
+
+  export type $HoleScorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HoleScore"
+    objects: {
+      round: Prisma.$RoundPayload<ExtArgs>
+      hole: Prisma.$HolePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roundId: string
+      holeId: string
+      strokes: number
+      putts: number | null
+    }, ExtArgs["result"]["holeScore"]>
+    composites: {}
+  }
+
+  type HoleScoreGetPayload<S extends boolean | null | undefined | HoleScoreDefaultArgs> = $Result.GetResult<Prisma.$HoleScorePayload, S>
+
+  type HoleScoreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HoleScoreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HoleScoreCountAggregateInputType | true
+    }
+
+  export interface HoleScoreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HoleScore'], meta: { name: 'HoleScore' } }
+    /**
+     * Find zero or one HoleScore that matches the filter.
+     * @param {HoleScoreFindUniqueArgs} args - Arguments to find a HoleScore
+     * @example
+     * // Get one HoleScore
+     * const holeScore = await prisma.holeScore.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HoleScoreFindUniqueArgs>(args: SelectSubset<T, HoleScoreFindUniqueArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HoleScore that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HoleScoreFindUniqueOrThrowArgs} args - Arguments to find a HoleScore
+     * @example
+     * // Get one HoleScore
+     * const holeScore = await prisma.holeScore.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HoleScoreFindUniqueOrThrowArgs>(args: SelectSubset<T, HoleScoreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HoleScore that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreFindFirstArgs} args - Arguments to find a HoleScore
+     * @example
+     * // Get one HoleScore
+     * const holeScore = await prisma.holeScore.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HoleScoreFindFirstArgs>(args?: SelectSubset<T, HoleScoreFindFirstArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HoleScore that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreFindFirstOrThrowArgs} args - Arguments to find a HoleScore
+     * @example
+     * // Get one HoleScore
+     * const holeScore = await prisma.holeScore.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HoleScoreFindFirstOrThrowArgs>(args?: SelectSubset<T, HoleScoreFindFirstOrThrowArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HoleScores that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HoleScores
+     * const holeScores = await prisma.holeScore.findMany()
+     * 
+     * // Get first 10 HoleScores
+     * const holeScores = await prisma.holeScore.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holeScoreWithIdOnly = await prisma.holeScore.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HoleScoreFindManyArgs>(args?: SelectSubset<T, HoleScoreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HoleScore.
+     * @param {HoleScoreCreateArgs} args - Arguments to create a HoleScore.
+     * @example
+     * // Create one HoleScore
+     * const HoleScore = await prisma.holeScore.create({
+     *   data: {
+     *     // ... data to create a HoleScore
+     *   }
+     * })
+     * 
+     */
+    create<T extends HoleScoreCreateArgs>(args: SelectSubset<T, HoleScoreCreateArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HoleScores.
+     * @param {HoleScoreCreateManyArgs} args - Arguments to create many HoleScores.
+     * @example
+     * // Create many HoleScores
+     * const holeScore = await prisma.holeScore.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HoleScoreCreateManyArgs>(args?: SelectSubset<T, HoleScoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HoleScores and returns the data saved in the database.
+     * @param {HoleScoreCreateManyAndReturnArgs} args - Arguments to create many HoleScores.
+     * @example
+     * // Create many HoleScores
+     * const holeScore = await prisma.holeScore.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HoleScores and only return the `id`
+     * const holeScoreWithIdOnly = await prisma.holeScore.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HoleScoreCreateManyAndReturnArgs>(args?: SelectSubset<T, HoleScoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HoleScore.
+     * @param {HoleScoreDeleteArgs} args - Arguments to delete one HoleScore.
+     * @example
+     * // Delete one HoleScore
+     * const HoleScore = await prisma.holeScore.delete({
+     *   where: {
+     *     // ... filter to delete one HoleScore
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HoleScoreDeleteArgs>(args: SelectSubset<T, HoleScoreDeleteArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HoleScore.
+     * @param {HoleScoreUpdateArgs} args - Arguments to update one HoleScore.
+     * @example
+     * // Update one HoleScore
+     * const holeScore = await prisma.holeScore.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HoleScoreUpdateArgs>(args: SelectSubset<T, HoleScoreUpdateArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HoleScores.
+     * @param {HoleScoreDeleteManyArgs} args - Arguments to filter HoleScores to delete.
+     * @example
+     * // Delete a few HoleScores
+     * const { count } = await prisma.holeScore.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HoleScoreDeleteManyArgs>(args?: SelectSubset<T, HoleScoreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HoleScores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HoleScores
+     * const holeScore = await prisma.holeScore.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HoleScoreUpdateManyArgs>(args: SelectSubset<T, HoleScoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HoleScores and returns the data updated in the database.
+     * @param {HoleScoreUpdateManyAndReturnArgs} args - Arguments to update many HoleScores.
+     * @example
+     * // Update many HoleScores
+     * const holeScore = await prisma.holeScore.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HoleScores and only return the `id`
+     * const holeScoreWithIdOnly = await prisma.holeScore.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HoleScoreUpdateManyAndReturnArgs>(args: SelectSubset<T, HoleScoreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HoleScore.
+     * @param {HoleScoreUpsertArgs} args - Arguments to update or create a HoleScore.
+     * @example
+     * // Update or create a HoleScore
+     * const holeScore = await prisma.holeScore.upsert({
+     *   create: {
+     *     // ... data to create a HoleScore
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HoleScore we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HoleScoreUpsertArgs>(args: SelectSubset<T, HoleScoreUpsertArgs<ExtArgs>>): Prisma__HoleScoreClient<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HoleScores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreCountArgs} args - Arguments to filter HoleScores to count.
+     * @example
+     * // Count the number of HoleScores
+     * const count = await prisma.holeScore.count({
+     *   where: {
+     *     // ... the filter for the HoleScores we want to count
+     *   }
+     * })
+    **/
+    count<T extends HoleScoreCountArgs>(
+      args?: Subset<T, HoleScoreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HoleScoreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HoleScore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HoleScoreAggregateArgs>(args: Subset<T, HoleScoreAggregateArgs>): Prisma.PrismaPromise<GetHoleScoreAggregateType<T>>
+
+    /**
+     * Group by HoleScore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleScoreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HoleScoreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HoleScoreGroupByArgs['orderBy'] }
+        : { orderBy?: HoleScoreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HoleScoreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoleScoreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HoleScore model
+   */
+  readonly fields: HoleScoreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HoleScore.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HoleScoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    round<T extends RoundDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoundDefaultArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    hole<T extends HoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HoleDefaultArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HoleScore model
+   */
+  interface HoleScoreFieldRefs {
+    readonly id: FieldRef<"HoleScore", 'String'>
+    readonly roundId: FieldRef<"HoleScore", 'String'>
+    readonly holeId: FieldRef<"HoleScore", 'String'>
+    readonly strokes: FieldRef<"HoleScore", 'Int'>
+    readonly putts: FieldRef<"HoleScore", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HoleScore findUnique
+   */
+  export type HoleScoreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleScore to fetch.
+     */
+    where: HoleScoreWhereUniqueInput
+  }
+
+  /**
+   * HoleScore findUniqueOrThrow
+   */
+  export type HoleScoreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleScore to fetch.
+     */
+    where: HoleScoreWhereUniqueInput
+  }
+
+  /**
+   * HoleScore findFirst
+   */
+  export type HoleScoreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleScore to fetch.
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleScores to fetch.
+     */
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HoleScores.
+     */
+    cursor?: HoleScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleScores.
+     */
+    distinct?: HoleScoreScalarFieldEnum | HoleScoreScalarFieldEnum[]
+  }
+
+  /**
+   * HoleScore findFirstOrThrow
+   */
+  export type HoleScoreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleScore to fetch.
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleScores to fetch.
+     */
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HoleScores.
+     */
+    cursor?: HoleScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleScores.
+     */
+    distinct?: HoleScoreScalarFieldEnum | HoleScoreScalarFieldEnum[]
+  }
+
+  /**
+   * HoleScore findMany
+   */
+  export type HoleScoreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleScores to fetch.
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleScores to fetch.
+     */
+    orderBy?: HoleScoreOrderByWithRelationInput | HoleScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HoleScores.
+     */
+    cursor?: HoleScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleScores.
+     */
+    distinct?: HoleScoreScalarFieldEnum | HoleScoreScalarFieldEnum[]
+  }
+
+  /**
+   * HoleScore create
+   */
+  export type HoleScoreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HoleScore.
+     */
+    data: XOR<HoleScoreCreateInput, HoleScoreUncheckedCreateInput>
+  }
+
+  /**
+   * HoleScore createMany
+   */
+  export type HoleScoreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HoleScores.
+     */
+    data: HoleScoreCreateManyInput | HoleScoreCreateManyInput[]
+  }
+
+  /**
+   * HoleScore createManyAndReturn
+   */
+  export type HoleScoreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * The data used to create many HoleScores.
+     */
+    data: HoleScoreCreateManyInput | HoleScoreCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HoleScore update
+   */
+  export type HoleScoreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HoleScore.
+     */
+    data: XOR<HoleScoreUpdateInput, HoleScoreUncheckedUpdateInput>
+    /**
+     * Choose, which HoleScore to update.
+     */
+    where: HoleScoreWhereUniqueInput
+  }
+
+  /**
+   * HoleScore updateMany
+   */
+  export type HoleScoreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HoleScores.
+     */
+    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyInput>
+    /**
+     * Filter which HoleScores to update
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * Limit how many HoleScores to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HoleScore updateManyAndReturn
+   */
+  export type HoleScoreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * The data used to update HoleScores.
+     */
+    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyInput>
+    /**
+     * Filter which HoleScores to update
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * Limit how many HoleScores to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HoleScore upsert
+   */
+  export type HoleScoreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HoleScore to update in case it exists.
+     */
+    where: HoleScoreWhereUniqueInput
+    /**
+     * In case the HoleScore found by the `where` argument doesn't exist, create a new HoleScore with this data.
+     */
+    create: XOR<HoleScoreCreateInput, HoleScoreUncheckedCreateInput>
+    /**
+     * In case the HoleScore was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HoleScoreUpdateInput, HoleScoreUncheckedUpdateInput>
+  }
+
+  /**
+   * HoleScore delete
+   */
+  export type HoleScoreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
+    /**
+     * Filter which HoleScore to delete.
+     */
+    where: HoleScoreWhereUniqueInput
+  }
+
+  /**
+   * HoleScore deleteMany
+   */
+  export type HoleScoreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HoleScores to delete
+     */
+    where?: HoleScoreWhereInput
+    /**
+     * Limit how many HoleScores to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HoleScore without action
+   */
+  export type HoleScoreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleScore
+     */
+    select?: HoleScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleScore
+     */
+    omit?: HoleScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleScoreInclude<ExtArgs> | null
   }
 
 
@@ -14307,6 +16863,30 @@ export namespace Prisma {
   export type HoleTeeScalarFieldEnum = (typeof HoleTeeScalarFieldEnum)[keyof typeof HoleTeeScalarFieldEnum]
 
 
+  export const RoundScalarFieldEnum: {
+    id: 'id',
+    courseId: 'courseId',
+    teeSetId: 'teeSetId',
+    playedOn: 'playedOn',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RoundScalarFieldEnum = (typeof RoundScalarFieldEnum)[keyof typeof RoundScalarFieldEnum]
+
+
+  export const HoleScoreScalarFieldEnum: {
+    id: 'id',
+    roundId: 'roundId',
+    holeId: 'holeId',
+    strokes: 'strokes',
+    putts: 'putts'
+  };
+
+  export type HoleScoreScalarFieldEnum = (typeof HoleScoreScalarFieldEnum)[keyof typeof HoleScoreScalarFieldEnum]
+
+
   export const SessionScalarFieldEnum: {
     id: 'id',
     expiresAt: 'expiresAt',
@@ -14695,6 +17275,7 @@ export namespace Prisma {
     sortOrder?: IntFilter<"Course"> | number
     holes?: HoleListRelationFilter
     teeSets?: TeeSetListRelationFilter
+    rounds?: RoundListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
@@ -14703,6 +17284,7 @@ export namespace Prisma {
     sortOrder?: SortOrder
     holes?: HoleOrderByRelationAggregateInput
     teeSets?: TeeSetOrderByRelationAggregateInput
+    rounds?: RoundOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -14714,6 +17296,7 @@ export namespace Prisma {
     sortOrder?: IntFilter<"Course"> | number
     holes?: HoleListRelationFilter
     teeSets?: TeeSetListRelationFilter
+    rounds?: RoundListRelationFilter
   }, "id" | "name">
 
   export type CourseOrderByWithAggregationInput = {
@@ -14750,6 +17333,7 @@ export namespace Prisma {
     aimLng?: FloatNullableFilter<"Hole"> | number | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     tees?: HoleTeeListRelationFilter
+    scores?: HoleScoreListRelationFilter
   }
 
   export type HoleOrderByWithRelationInput = {
@@ -14763,6 +17347,7 @@ export namespace Prisma {
     aimLng?: SortOrderInput | SortOrder
     course?: CourseOrderByWithRelationInput
     tees?: HoleTeeOrderByRelationAggregateInput
+    scores?: HoleScoreOrderByRelationAggregateInput
   }
 
   export type HoleWhereUniqueInput = Prisma.AtLeast<{
@@ -14780,6 +17365,7 @@ export namespace Prisma {
     aimLng?: FloatNullableFilter<"Hole"> | number | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     tees?: HoleTeeListRelationFilter
+    scores?: HoleScoreListRelationFilter
   }, "id" | "courseId_number">
 
   export type HoleOrderByWithAggregationInput = {
@@ -14822,6 +17408,7 @@ export namespace Prisma {
     name?: StringFilter<"TeeSet"> | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     holes?: HoleTeeListRelationFilter
+    rounds?: RoundListRelationFilter
   }
 
   export type TeeSetOrderByWithRelationInput = {
@@ -14831,6 +17418,7 @@ export namespace Prisma {
     name?: SortOrder
     course?: CourseOrderByWithRelationInput
     holes?: HoleTeeOrderByRelationAggregateInput
+    rounds?: RoundOrderByRelationAggregateInput
   }
 
   export type TeeSetWhereUniqueInput = Prisma.AtLeast<{
@@ -14844,6 +17432,7 @@ export namespace Prisma {
     name?: StringFilter<"TeeSet"> | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     holes?: HoleTeeListRelationFilter
+    rounds?: RoundListRelationFilter
   }, "id" | "courseId_colour">
 
   export type TeeSetOrderByWithAggregationInput = {
@@ -14940,6 +17529,138 @@ export namespace Prisma {
     strokeIndex?: IntWithAggregatesFilter<"HoleTee"> | number
     teeLat?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
     teeLng?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
+  }
+
+  export type RoundWhereInput = {
+    AND?: RoundWhereInput | RoundWhereInput[]
+    OR?: RoundWhereInput[]
+    NOT?: RoundWhereInput | RoundWhereInput[]
+    id?: StringFilter<"Round"> | string
+    courseId?: StringFilter<"Round"> | string
+    teeSetId?: StringFilter<"Round"> | string
+    playedOn?: DateTimeFilter<"Round"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    createdAt?: DateTimeFilter<"Round"> | Date | string
+    updatedAt?: DateTimeFilter<"Round"> | Date | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+    scores?: HoleScoreListRelationFilter
+  }
+
+  export type RoundOrderByWithRelationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    teeSetId?: SortOrder
+    playedOn?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    course?: CourseOrderByWithRelationInput
+    teeSet?: TeeSetOrderByWithRelationInput
+    scores?: HoleScoreOrderByRelationAggregateInput
+  }
+
+  export type RoundWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RoundWhereInput | RoundWhereInput[]
+    OR?: RoundWhereInput[]
+    NOT?: RoundWhereInput | RoundWhereInput[]
+    courseId?: StringFilter<"Round"> | string
+    teeSetId?: StringFilter<"Round"> | string
+    playedOn?: DateTimeFilter<"Round"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    createdAt?: DateTimeFilter<"Round"> | Date | string
+    updatedAt?: DateTimeFilter<"Round"> | Date | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+    scores?: HoleScoreListRelationFilter
+  }, "id">
+
+  export type RoundOrderByWithAggregationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    teeSetId?: SortOrder
+    playedOn?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RoundCountOrderByAggregateInput
+    _max?: RoundMaxOrderByAggregateInput
+    _min?: RoundMinOrderByAggregateInput
+  }
+
+  export type RoundScalarWhereWithAggregatesInput = {
+    AND?: RoundScalarWhereWithAggregatesInput | RoundScalarWhereWithAggregatesInput[]
+    OR?: RoundScalarWhereWithAggregatesInput[]
+    NOT?: RoundScalarWhereWithAggregatesInput | RoundScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Round"> | string
+    courseId?: StringWithAggregatesFilter<"Round"> | string
+    teeSetId?: StringWithAggregatesFilter<"Round"> | string
+    playedOn?: DateTimeWithAggregatesFilter<"Round"> | Date | string
+    completedAt?: DateTimeNullableWithAggregatesFilter<"Round"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Round"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Round"> | Date | string
+  }
+
+  export type HoleScoreWhereInput = {
+    AND?: HoleScoreWhereInput | HoleScoreWhereInput[]
+    OR?: HoleScoreWhereInput[]
+    NOT?: HoleScoreWhereInput | HoleScoreWhereInput[]
+    id?: StringFilter<"HoleScore"> | string
+    roundId?: StringFilter<"HoleScore"> | string
+    holeId?: StringFilter<"HoleScore"> | string
+    strokes?: IntFilter<"HoleScore"> | number
+    putts?: IntNullableFilter<"HoleScore"> | number | null
+    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
+  }
+
+  export type HoleScoreOrderByWithRelationInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    holeId?: SortOrder
+    strokes?: SortOrder
+    putts?: SortOrderInput | SortOrder
+    round?: RoundOrderByWithRelationInput
+    hole?: HoleOrderByWithRelationInput
+  }
+
+  export type HoleScoreWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    roundId_holeId?: HoleScoreRoundIdHoleIdCompoundUniqueInput
+    AND?: HoleScoreWhereInput | HoleScoreWhereInput[]
+    OR?: HoleScoreWhereInput[]
+    NOT?: HoleScoreWhereInput | HoleScoreWhereInput[]
+    roundId?: StringFilter<"HoleScore"> | string
+    holeId?: StringFilter<"HoleScore"> | string
+    strokes?: IntFilter<"HoleScore"> | number
+    putts?: IntNullableFilter<"HoleScore"> | number | null
+    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
+  }, "id" | "roundId_holeId">
+
+  export type HoleScoreOrderByWithAggregationInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    holeId?: SortOrder
+    strokes?: SortOrder
+    putts?: SortOrderInput | SortOrder
+    _count?: HoleScoreCountOrderByAggregateInput
+    _avg?: HoleScoreAvgOrderByAggregateInput
+    _max?: HoleScoreMaxOrderByAggregateInput
+    _min?: HoleScoreMinOrderByAggregateInput
+    _sum?: HoleScoreSumOrderByAggregateInput
+  }
+
+  export type HoleScoreScalarWhereWithAggregatesInput = {
+    AND?: HoleScoreScalarWhereWithAggregatesInput | HoleScoreScalarWhereWithAggregatesInput[]
+    OR?: HoleScoreScalarWhereWithAggregatesInput[]
+    NOT?: HoleScoreScalarWhereWithAggregatesInput | HoleScoreScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HoleScore"> | string
+    roundId?: StringWithAggregatesFilter<"HoleScore"> | string
+    holeId?: StringWithAggregatesFilter<"HoleScore"> | string
+    strokes?: IntWithAggregatesFilter<"HoleScore"> | number
+    putts?: IntNullableWithAggregatesFilter<"HoleScore"> | number | null
   }
 
   export type SessionWhereInput = {
@@ -15430,6 +18151,7 @@ export namespace Prisma {
     sortOrder?: number
     holes?: HoleCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetCreateNestedManyWithoutCourseInput
+    rounds?: RoundCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
@@ -15438,6 +18160,7 @@ export namespace Prisma {
     sortOrder?: number
     holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
+    rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
@@ -15446,6 +18169,7 @@ export namespace Prisma {
     sortOrder?: IntFieldUpdateOperationsInput | number
     holes?: HoleUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
@@ -15454,6 +18178,7 @@ export namespace Prisma {
     sortOrder?: IntFieldUpdateOperationsInput | number
     holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
@@ -15484,6 +18209,7 @@ export namespace Prisma {
     aimLng?: number | null
     course: CourseCreateNestedOneWithoutHolesInput
     tees?: HoleTeeCreateNestedManyWithoutHoleInput
+    scores?: HoleScoreCreateNestedManyWithoutHoleInput
   }
 
   export type HoleUncheckedCreateInput = {
@@ -15496,6 +18222,7 @@ export namespace Prisma {
     aimLat?: number | null
     aimLng?: number | null
     tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
 
   export type HoleUpdateInput = {
@@ -15508,6 +18235,7 @@ export namespace Prisma {
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
     course?: CourseUpdateOneRequiredWithoutHolesNestedInput
     tees?: HoleTeeUpdateManyWithoutHoleNestedInput
+    scores?: HoleScoreUpdateManyWithoutHoleNestedInput
   }
 
   export type HoleUncheckedUpdateInput = {
@@ -15520,6 +18248,7 @@ export namespace Prisma {
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
     tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
+    scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
 
   export type HoleCreateManyInput = {
@@ -15560,6 +18289,7 @@ export namespace Prisma {
     name: string
     course: CourseCreateNestedOneWithoutTeeSetsInput
     holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+    rounds?: RoundCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateInput = {
@@ -15568,6 +18298,7 @@ export namespace Prisma {
     colour: $Enums.TeeColour
     name: string
     holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUpdateInput = {
@@ -15576,6 +18307,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
     holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
+    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateInput = {
@@ -15584,6 +18316,7 @@ export namespace Prisma {
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
     holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
+    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetCreateManyInput = {
@@ -15679,6 +18412,132 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type RoundCreateInput = {
+    id: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutRoundsInput
+    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
+    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundUncheckedCreateInput = {
+    id: string
+    courseId: string
+    teeSetId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
+    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
+    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundCreateManyInput = {
+    id: string
+    courseId: string
+    teeSetId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoundUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoundUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HoleScoreCreateInput = {
+    id?: string
+    strokes: number
+    putts?: number | null
+    round: RoundCreateNestedOneWithoutScoresInput
+    hole: HoleCreateNestedOneWithoutScoresInput
+  }
+
+  export type HoleScoreUncheckedCreateInput = {
+    id?: string
+    roundId: string
+    holeId: string
+    strokes: number
+    putts?: number | null
+  }
+
+  export type HoleScoreUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+    round?: RoundUpdateOneRequiredWithoutScoresNestedInput
+    hole?: HoleUpdateOneRequiredWithoutScoresNestedInput
+  }
+
+  export type HoleScoreUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleScoreCreateManyInput = {
+    id?: string
+    roundId: string
+    holeId: string
+    strokes: number
+    putts?: number | null
+  }
+
+  export type HoleScoreUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleScoreUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SessionCreateInput = {
@@ -16300,11 +19159,21 @@ export namespace Prisma {
     none?: TeeSetWhereInput
   }
 
+  export type RoundListRelationFilter = {
+    every?: RoundWhereInput
+    some?: RoundWhereInput
+    none?: RoundWhereInput
+  }
+
   export type HoleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type TeeSetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RoundOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16356,7 +19225,17 @@ export namespace Prisma {
     none?: HoleTeeWhereInput
   }
 
+  export type HoleScoreListRelationFilter = {
+    every?: HoleScoreWhereInput
+    some?: HoleScoreWhereInput
+    none?: HoleScoreWhereInput
+  }
+
   export type HoleTeeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HoleScoreOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16537,6 +19416,132 @@ export namespace Prisma {
     teeLng?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type RoundCountOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    teeSetId?: SortOrder
+    playedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoundMaxOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    teeSetId?: SortOrder
+    playedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoundMinOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    teeSetId?: SortOrder
+    playedOn?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type RoundScalarRelationFilter = {
+    is?: RoundWhereInput
+    isNot?: RoundWhereInput
+  }
+
+  export type HoleScoreRoundIdHoleIdCompoundUniqueInput = {
+    roundId: string
+    holeId: string
+  }
+
+  export type HoleScoreCountOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    holeId?: SortOrder
+    strokes?: SortOrder
+    putts?: SortOrder
+  }
+
+  export type HoleScoreAvgOrderByAggregateInput = {
+    strokes?: SortOrder
+    putts?: SortOrder
+  }
+
+  export type HoleScoreMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    holeId?: SortOrder
+    strokes?: SortOrder
+    putts?: SortOrder
+  }
+
+  export type HoleScoreMinOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    holeId?: SortOrder
+    strokes?: SortOrder
+    putts?: SortOrder
+  }
+
+  export type HoleScoreSumOrderByAggregateInput = {
+    strokes?: SortOrder
+    putts?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -16573,17 +19578,6 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     userId?: SortOrder
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type AccountCountOrderByAggregateInput = {
@@ -16632,20 +19626,6 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type VerificationCountOrderByAggregateInput = {
@@ -16865,6 +19845,13 @@ export namespace Prisma {
     connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
   }
 
+  export type RoundCreateNestedManyWithoutCourseInput = {
+    create?: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput> | RoundCreateWithoutCourseInput[] | RoundUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutCourseInput | RoundCreateOrConnectWithoutCourseInput[]
+    createMany?: RoundCreateManyCourseInputEnvelope
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+  }
+
   export type HoleUncheckedCreateNestedManyWithoutCourseInput = {
     create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
@@ -16877,6 +19864,13 @@ export namespace Prisma {
     connectOrCreate?: TeeSetCreateOrConnectWithoutCourseInput | TeeSetCreateOrConnectWithoutCourseInput[]
     createMany?: TeeSetCreateManyCourseInputEnvelope
     connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+  }
+
+  export type RoundUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput> | RoundCreateWithoutCourseInput[] | RoundUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutCourseInput | RoundCreateOrConnectWithoutCourseInput[]
+    createMany?: RoundCreateManyCourseInputEnvelope
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
   }
 
   export type HoleUpdateManyWithoutCourseNestedInput = {
@@ -16907,6 +19901,20 @@ export namespace Prisma {
     deleteMany?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
   }
 
+  export type RoundUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput> | RoundCreateWithoutCourseInput[] | RoundUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutCourseInput | RoundCreateOrConnectWithoutCourseInput[]
+    upsert?: RoundUpsertWithWhereUniqueWithoutCourseInput | RoundUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: RoundCreateManyCourseInputEnvelope
+    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    update?: RoundUpdateWithWhereUniqueWithoutCourseInput | RoundUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: RoundUpdateManyWithWhereWithoutCourseInput | RoundUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
+  }
+
   export type HoleUncheckedUpdateManyWithoutCourseNestedInput = {
     create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
@@ -16935,6 +19943,20 @@ export namespace Prisma {
     deleteMany?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
   }
 
+  export type RoundUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput> | RoundCreateWithoutCourseInput[] | RoundUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutCourseInput | RoundCreateOrConnectWithoutCourseInput[]
+    upsert?: RoundUpsertWithWhereUniqueWithoutCourseInput | RoundUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: RoundCreateManyCourseInputEnvelope
+    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    update?: RoundUpdateWithWhereUniqueWithoutCourseInput | RoundUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: RoundUpdateManyWithWhereWithoutCourseInput | RoundUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
+  }
+
   export type CourseCreateNestedOneWithoutHolesInput = {
     create?: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
     connectOrCreate?: CourseCreateOrConnectWithoutHolesInput
@@ -16948,11 +19970,25 @@ export namespace Prisma {
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
   }
 
+  export type HoleScoreCreateNestedManyWithoutHoleInput = {
+    create?: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput> | HoleScoreCreateWithoutHoleInput[] | HoleScoreUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutHoleInput | HoleScoreCreateOrConnectWithoutHoleInput[]
+    createMany?: HoleScoreCreateManyHoleInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  }
+
   export type HoleTeeUncheckedCreateNestedManyWithoutHoleInput = {
     create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
     connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
     createMany?: HoleTeeCreateManyHoleInputEnvelope
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type HoleScoreUncheckedCreateNestedManyWithoutHoleInput = {
+    create?: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput> | HoleScoreCreateWithoutHoleInput[] | HoleScoreUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutHoleInput | HoleScoreCreateOrConnectWithoutHoleInput[]
+    createMany?: HoleScoreCreateManyHoleInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
@@ -16985,6 +20021,20 @@ export namespace Prisma {
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
   }
 
+  export type HoleScoreUpdateManyWithoutHoleNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput> | HoleScoreCreateWithoutHoleInput[] | HoleScoreUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutHoleInput | HoleScoreCreateOrConnectWithoutHoleInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutHoleInput | HoleScoreUpsertWithWhereUniqueWithoutHoleInput[]
+    createMany?: HoleScoreCreateManyHoleInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutHoleInput | HoleScoreUpdateWithWhereUniqueWithoutHoleInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutHoleInput | HoleScoreUpdateManyWithWhereWithoutHoleInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  }
+
   export type HoleTeeUncheckedUpdateManyWithoutHoleNestedInput = {
     create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
     connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
@@ -16997,6 +20047,20 @@ export namespace Prisma {
     update?: HoleTeeUpdateWithWhereUniqueWithoutHoleInput | HoleTeeUpdateWithWhereUniqueWithoutHoleInput[]
     updateMany?: HoleTeeUpdateManyWithWhereWithoutHoleInput | HoleTeeUpdateManyWithWhereWithoutHoleInput[]
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type HoleScoreUncheckedUpdateManyWithoutHoleNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput> | HoleScoreCreateWithoutHoleInput[] | HoleScoreUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutHoleInput | HoleScoreCreateOrConnectWithoutHoleInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutHoleInput | HoleScoreUpsertWithWhereUniqueWithoutHoleInput[]
+    createMany?: HoleScoreCreateManyHoleInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutHoleInput | HoleScoreUpdateWithWhereUniqueWithoutHoleInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutHoleInput | HoleScoreUpdateManyWithWhereWithoutHoleInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
   }
 
   export type CourseCreateNestedOneWithoutTeeSetsInput = {
@@ -17012,11 +20076,25 @@ export namespace Prisma {
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
   }
 
+  export type RoundCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
+    createMany?: RoundCreateManyTeeSetInputEnvelope
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+  }
+
   export type HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput = {
     create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
     connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
     createMany?: HoleTeeCreateManyTeeSetInputEnvelope
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type RoundUncheckedCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
+    createMany?: RoundCreateManyTeeSetInputEnvelope
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
   }
 
   export type EnumTeeColourFieldUpdateOperationsInput = {
@@ -17045,6 +20123,20 @@ export namespace Prisma {
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
   }
 
+  export type RoundUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
+    upsert?: RoundUpsertWithWhereUniqueWithoutTeeSetInput | RoundUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: RoundCreateManyTeeSetInputEnvelope
+    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    update?: RoundUpdateWithWhereUniqueWithoutTeeSetInput | RoundUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: RoundUpdateManyWithWhereWithoutTeeSetInput | RoundUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
+  }
+
   export type HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput = {
     create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
     connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
@@ -17057,6 +20149,20 @@ export namespace Prisma {
     update?: HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput | HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput[]
     updateMany?: HoleTeeUpdateManyWithWhereWithoutTeeSetInput | HoleTeeUpdateManyWithWhereWithoutTeeSetInput[]
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type RoundUncheckedUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
+    upsert?: RoundUpsertWithWhereUniqueWithoutTeeSetInput | RoundUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: RoundCreateManyTeeSetInputEnvelope
+    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+    update?: RoundUpdateWithWhereUniqueWithoutTeeSetInput | RoundUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: RoundUpdateManyWithWhereWithoutTeeSetInput | RoundUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
   }
 
   export type HoleCreateNestedOneWithoutTeesInput = {
@@ -17087,6 +20193,116 @@ export namespace Prisma {
     update?: XOR<XOR<TeeSetUpdateToOneWithWhereWithoutHolesInput, TeeSetUpdateWithoutHolesInput>, TeeSetUncheckedUpdateWithoutHolesInput>
   }
 
+  export type CourseCreateNestedOneWithoutRoundsInput = {
+    create?: XOR<CourseCreateWithoutRoundsInput, CourseUncheckedCreateWithoutRoundsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutRoundsInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type TeeSetCreateNestedOneWithoutRoundsInput = {
+    create?: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutRoundsInput
+    connect?: TeeSetWhereUniqueInput
+  }
+
+  export type HoleScoreCreateNestedManyWithoutRoundInput = {
+    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
+    createMany?: HoleScoreCreateManyRoundInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  }
+
+  export type HoleScoreUncheckedCreateNestedManyWithoutRoundInput = {
+    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
+    createMany?: HoleScoreCreateManyRoundInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type CourseUpdateOneRequiredWithoutRoundsNestedInput = {
+    create?: XOR<CourseCreateWithoutRoundsInput, CourseUncheckedCreateWithoutRoundsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutRoundsInput
+    upsert?: CourseUpsertWithoutRoundsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutRoundsInput, CourseUpdateWithoutRoundsInput>, CourseUncheckedUpdateWithoutRoundsInput>
+  }
+
+  export type TeeSetUpdateOneRequiredWithoutRoundsNestedInput = {
+    create?: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutRoundsInput
+    upsert?: TeeSetUpsertWithoutRoundsInput
+    connect?: TeeSetWhereUniqueInput
+    update?: XOR<XOR<TeeSetUpdateToOneWithWhereWithoutRoundsInput, TeeSetUpdateWithoutRoundsInput>, TeeSetUncheckedUpdateWithoutRoundsInput>
+  }
+
+  export type HoleScoreUpdateManyWithoutRoundNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutRoundInput | HoleScoreUpsertWithWhereUniqueWithoutRoundInput[]
+    createMany?: HoleScoreCreateManyRoundInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutRoundInput | HoleScoreUpdateWithWhereUniqueWithoutRoundInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutRoundInput | HoleScoreUpdateManyWithWhereWithoutRoundInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  }
+
+  export type HoleScoreUncheckedUpdateManyWithoutRoundNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutRoundInput | HoleScoreUpsertWithWhereUniqueWithoutRoundInput[]
+    createMany?: HoleScoreCreateManyRoundInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutRoundInput | HoleScoreUpdateWithWhereUniqueWithoutRoundInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutRoundInput | HoleScoreUpdateManyWithWhereWithoutRoundInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  }
+
+  export type RoundCreateNestedOneWithoutScoresInput = {
+    create?: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: RoundCreateOrConnectWithoutScoresInput
+    connect?: RoundWhereUniqueInput
+  }
+
+  export type HoleCreateNestedOneWithoutScoresInput = {
+    create?: XOR<HoleCreateWithoutScoresInput, HoleUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: HoleCreateOrConnectWithoutScoresInput
+    connect?: HoleWhereUniqueInput
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type RoundUpdateOneRequiredWithoutScoresNestedInput = {
+    create?: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: RoundCreateOrConnectWithoutScoresInput
+    upsert?: RoundUpsertWithoutScoresInput
+    connect?: RoundWhereUniqueInput
+    update?: XOR<XOR<RoundUpdateToOneWithWhereWithoutScoresInput, RoundUpdateWithoutScoresInput>, RoundUncheckedUpdateWithoutScoresInput>
+  }
+
+  export type HoleUpdateOneRequiredWithoutScoresNestedInput = {
+    create?: XOR<HoleCreateWithoutScoresInput, HoleUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: HoleCreateOrConnectWithoutScoresInput
+    upsert?: HoleUpsertWithoutScoresInput
+    connect?: HoleWhereUniqueInput
+    update?: XOR<XOR<HoleUpdateToOneWithWhereWithoutScoresInput, HoleUpdateWithoutScoresInput>, HoleUncheckedUpdateWithoutScoresInput>
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -17105,10 +20321,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
@@ -17388,6 +20600,22 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type SessionCreateWithoutUserInput = {
     id: string
     expiresAt: Date | string
@@ -17634,6 +20862,7 @@ export namespace Prisma {
     aimLat?: number | null
     aimLng?: number | null
     tees?: HoleTeeCreateNestedManyWithoutHoleInput
+    scores?: HoleScoreCreateNestedManyWithoutHoleInput
   }
 
   export type HoleUncheckedCreateWithoutCourseInput = {
@@ -17645,6 +20874,7 @@ export namespace Prisma {
     aimLat?: number | null
     aimLng?: number | null
     tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
 
   export type HoleCreateOrConnectWithoutCourseInput = {
@@ -17661,6 +20891,7 @@ export namespace Prisma {
     colour: $Enums.TeeColour
     name: string
     holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+    rounds?: RoundCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateWithoutCourseInput = {
@@ -17668,6 +20899,7 @@ export namespace Prisma {
     colour: $Enums.TeeColour
     name: string
     holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetCreateOrConnectWithoutCourseInput = {
@@ -17677,6 +20909,35 @@ export namespace Prisma {
 
   export type TeeSetCreateManyCourseInputEnvelope = {
     data: TeeSetCreateManyCourseInput | TeeSetCreateManyCourseInput[]
+  }
+
+  export type RoundCreateWithoutCourseInput = {
+    id: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
+    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundUncheckedCreateWithoutCourseInput = {
+    id: string
+    teeSetId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundCreateOrConnectWithoutCourseInput = {
+    where: RoundWhereUniqueInput
+    create: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput>
+  }
+
+  export type RoundCreateManyCourseInputEnvelope = {
+    data: RoundCreateManyCourseInput | RoundCreateManyCourseInput[]
   }
 
   export type HoleUpsertWithWhereUniqueWithoutCourseInput = {
@@ -17735,11 +20996,41 @@ export namespace Prisma {
     name?: StringFilter<"TeeSet"> | string
   }
 
+  export type RoundUpsertWithWhereUniqueWithoutCourseInput = {
+    where: RoundWhereUniqueInput
+    update: XOR<RoundUpdateWithoutCourseInput, RoundUncheckedUpdateWithoutCourseInput>
+    create: XOR<RoundCreateWithoutCourseInput, RoundUncheckedCreateWithoutCourseInput>
+  }
+
+  export type RoundUpdateWithWhereUniqueWithoutCourseInput = {
+    where: RoundWhereUniqueInput
+    data: XOR<RoundUpdateWithoutCourseInput, RoundUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type RoundUpdateManyWithWhereWithoutCourseInput = {
+    where: RoundScalarWhereInput
+    data: XOR<RoundUpdateManyMutationInput, RoundUncheckedUpdateManyWithoutCourseInput>
+  }
+
+  export type RoundScalarWhereInput = {
+    AND?: RoundScalarWhereInput | RoundScalarWhereInput[]
+    OR?: RoundScalarWhereInput[]
+    NOT?: RoundScalarWhereInput | RoundScalarWhereInput[]
+    id?: StringFilter<"Round"> | string
+    courseId?: StringFilter<"Round"> | string
+    teeSetId?: StringFilter<"Round"> | string
+    playedOn?: DateTimeFilter<"Round"> | Date | string
+    completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    createdAt?: DateTimeFilter<"Round"> | Date | string
+    updatedAt?: DateTimeFilter<"Round"> | Date | string
+  }
+
   export type CourseCreateWithoutHolesInput = {
     id?: string
     name: string
     sortOrder?: number
     teeSets?: TeeSetCreateNestedManyWithoutCourseInput
+    rounds?: RoundCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutHolesInput = {
@@ -17747,6 +21038,7 @@ export namespace Prisma {
     name: string
     sortOrder?: number
     teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
+    rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutHolesInput = {
@@ -17783,6 +21075,29 @@ export namespace Prisma {
     data: HoleTeeCreateManyHoleInput | HoleTeeCreateManyHoleInput[]
   }
 
+  export type HoleScoreCreateWithoutHoleInput = {
+    id?: string
+    strokes: number
+    putts?: number | null
+    round: RoundCreateNestedOneWithoutScoresInput
+  }
+
+  export type HoleScoreUncheckedCreateWithoutHoleInput = {
+    id?: string
+    roundId: string
+    strokes: number
+    putts?: number | null
+  }
+
+  export type HoleScoreCreateOrConnectWithoutHoleInput = {
+    where: HoleScoreWhereUniqueInput
+    create: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput>
+  }
+
+  export type HoleScoreCreateManyHoleInputEnvelope = {
+    data: HoleScoreCreateManyHoleInput | HoleScoreCreateManyHoleInput[]
+  }
+
   export type CourseUpsertWithoutHolesInput = {
     update: XOR<CourseUpdateWithoutHolesInput, CourseUncheckedUpdateWithoutHolesInput>
     create: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
@@ -17799,6 +21114,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutHolesInput = {
@@ -17806,6 +21122,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type HoleTeeUpsertWithWhereUniqueWithoutHoleInput = {
@@ -17838,11 +21155,39 @@ export namespace Prisma {
     teeLng?: FloatNullableFilter<"HoleTee"> | number | null
   }
 
+  export type HoleScoreUpsertWithWhereUniqueWithoutHoleInput = {
+    where: HoleScoreWhereUniqueInput
+    update: XOR<HoleScoreUpdateWithoutHoleInput, HoleScoreUncheckedUpdateWithoutHoleInput>
+    create: XOR<HoleScoreCreateWithoutHoleInput, HoleScoreUncheckedCreateWithoutHoleInput>
+  }
+
+  export type HoleScoreUpdateWithWhereUniqueWithoutHoleInput = {
+    where: HoleScoreWhereUniqueInput
+    data: XOR<HoleScoreUpdateWithoutHoleInput, HoleScoreUncheckedUpdateWithoutHoleInput>
+  }
+
+  export type HoleScoreUpdateManyWithWhereWithoutHoleInput = {
+    where: HoleScoreScalarWhereInput
+    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyWithoutHoleInput>
+  }
+
+  export type HoleScoreScalarWhereInput = {
+    AND?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+    OR?: HoleScoreScalarWhereInput[]
+    NOT?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+    id?: StringFilter<"HoleScore"> | string
+    roundId?: StringFilter<"HoleScore"> | string
+    holeId?: StringFilter<"HoleScore"> | string
+    strokes?: IntFilter<"HoleScore"> | number
+    putts?: IntNullableFilter<"HoleScore"> | number | null
+  }
+
   export type CourseCreateWithoutTeeSetsInput = {
     id?: string
     name: string
     sortOrder?: number
     holes?: HoleCreateNestedManyWithoutCourseInput
+    rounds?: RoundCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutTeeSetsInput = {
@@ -17850,6 +21195,7 @@ export namespace Prisma {
     name: string
     sortOrder?: number
     holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
+    rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutTeeSetsInput = {
@@ -17886,6 +21232,35 @@ export namespace Prisma {
     data: HoleTeeCreateManyTeeSetInput | HoleTeeCreateManyTeeSetInput[]
   }
 
+  export type RoundCreateWithoutTeeSetInput = {
+    id: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutRoundsInput
+    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundUncheckedCreateWithoutTeeSetInput = {
+    id: string
+    courseId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+  }
+
+  export type RoundCreateOrConnectWithoutTeeSetInput = {
+    where: RoundWhereUniqueInput
+    create: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput>
+  }
+
+  export type RoundCreateManyTeeSetInputEnvelope = {
+    data: RoundCreateManyTeeSetInput | RoundCreateManyTeeSetInput[]
+  }
+
   export type CourseUpsertWithoutTeeSetsInput = {
     update: XOR<CourseUpdateWithoutTeeSetsInput, CourseUncheckedUpdateWithoutTeeSetsInput>
     create: XOR<CourseCreateWithoutTeeSetsInput, CourseUncheckedCreateWithoutTeeSetsInput>
@@ -17902,6 +21277,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     holes?: HoleUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutTeeSetsInput = {
@@ -17909,6 +21285,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
     holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
+    rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput = {
@@ -17927,6 +21304,22 @@ export namespace Prisma {
     data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyWithoutTeeSetInput>
   }
 
+  export type RoundUpsertWithWhereUniqueWithoutTeeSetInput = {
+    where: RoundWhereUniqueInput
+    update: XOR<RoundUpdateWithoutTeeSetInput, RoundUncheckedUpdateWithoutTeeSetInput>
+    create: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput>
+  }
+
+  export type RoundUpdateWithWhereUniqueWithoutTeeSetInput = {
+    where: RoundWhereUniqueInput
+    data: XOR<RoundUpdateWithoutTeeSetInput, RoundUncheckedUpdateWithoutTeeSetInput>
+  }
+
+  export type RoundUpdateManyWithWhereWithoutTeeSetInput = {
+    where: RoundScalarWhereInput
+    data: XOR<RoundUpdateManyMutationInput, RoundUncheckedUpdateManyWithoutTeeSetInput>
+  }
+
   export type HoleCreateWithoutTeesInput = {
     id?: string
     number: number
@@ -17936,6 +21329,7 @@ export namespace Prisma {
     aimLat?: number | null
     aimLng?: number | null
     course: CourseCreateNestedOneWithoutHolesInput
+    scores?: HoleScoreCreateNestedManyWithoutHoleInput
   }
 
   export type HoleUncheckedCreateWithoutTeesInput = {
@@ -17947,6 +21341,7 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
 
   export type HoleCreateOrConnectWithoutTeesInput = {
@@ -17959,6 +21354,7 @@ export namespace Prisma {
     colour: $Enums.TeeColour
     name: string
     course: CourseCreateNestedOneWithoutTeeSetsInput
+    rounds?: RoundCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateWithoutHolesInput = {
@@ -17966,6 +21362,7 @@ export namespace Prisma {
     courseId: string
     colour: $Enums.TeeColour
     name: string
+    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetCreateOrConnectWithoutHolesInput = {
@@ -17993,6 +21390,7 @@ export namespace Prisma {
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
     course?: CourseUpdateOneRequiredWithoutHolesNestedInput
+    scores?: HoleScoreUpdateManyWithoutHoleNestedInput
   }
 
   export type HoleUncheckedUpdateWithoutTeesInput = {
@@ -18004,6 +21402,7 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
 
   export type TeeSetUpsertWithoutHolesInput = {
@@ -18022,6 +21421,7 @@ export namespace Prisma {
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
     course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
+    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateWithoutHolesInput = {
@@ -18029,6 +21429,262 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type CourseCreateWithoutRoundsInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleCreateNestedManyWithoutCourseInput
+    teeSets?: TeeSetCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutRoundsInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
+    teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutRoundsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutRoundsInput, CourseUncheckedCreateWithoutRoundsInput>
+  }
+
+  export type TeeSetCreateWithoutRoundsInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    course: CourseCreateNestedOneWithoutTeeSetsInput
+    holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetUncheckedCreateWithoutRoundsInput = {
+    id?: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+    holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetCreateOrConnectWithoutRoundsInput = {
+    where: TeeSetWhereUniqueInput
+    create: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+  }
+
+  export type HoleScoreCreateWithoutRoundInput = {
+    id?: string
+    strokes: number
+    putts?: number | null
+    hole: HoleCreateNestedOneWithoutScoresInput
+  }
+
+  export type HoleScoreUncheckedCreateWithoutRoundInput = {
+    id?: string
+    holeId: string
+    strokes: number
+    putts?: number | null
+  }
+
+  export type HoleScoreCreateOrConnectWithoutRoundInput = {
+    where: HoleScoreWhereUniqueInput
+    create: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput>
+  }
+
+  export type HoleScoreCreateManyRoundInputEnvelope = {
+    data: HoleScoreCreateManyRoundInput | HoleScoreCreateManyRoundInput[]
+  }
+
+  export type CourseUpsertWithoutRoundsInput = {
+    update: XOR<CourseUpdateWithoutRoundsInput, CourseUncheckedUpdateWithoutRoundsInput>
+    create: XOR<CourseCreateWithoutRoundsInput, CourseUncheckedCreateWithoutRoundsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutRoundsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutRoundsInput, CourseUncheckedUpdateWithoutRoundsInput>
+  }
+
+  export type CourseUpdateWithoutRoundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUpdateManyWithoutCourseNestedInput
+    teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutRoundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
+    teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type TeeSetUpsertWithoutRoundsInput = {
+    update: XOR<TeeSetUpdateWithoutRoundsInput, TeeSetUncheckedUpdateWithoutRoundsInput>
+    create: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+    where?: TeeSetWhereInput
+  }
+
+  export type TeeSetUpdateToOneWithWhereWithoutRoundsInput = {
+    where?: TeeSetWhereInput
+    data: XOR<TeeSetUpdateWithoutRoundsInput, TeeSetUncheckedUpdateWithoutRoundsInput>
+  }
+
+  export type TeeSetUpdateWithoutRoundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
+    holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type TeeSetUncheckedUpdateWithoutRoundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type HoleScoreUpsertWithWhereUniqueWithoutRoundInput = {
+    where: HoleScoreWhereUniqueInput
+    update: XOR<HoleScoreUpdateWithoutRoundInput, HoleScoreUncheckedUpdateWithoutRoundInput>
+    create: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput>
+  }
+
+  export type HoleScoreUpdateWithWhereUniqueWithoutRoundInput = {
+    where: HoleScoreWhereUniqueInput
+    data: XOR<HoleScoreUpdateWithoutRoundInput, HoleScoreUncheckedUpdateWithoutRoundInput>
+  }
+
+  export type HoleScoreUpdateManyWithWhereWithoutRoundInput = {
+    where: HoleScoreScalarWhereInput
+    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyWithoutRoundInput>
+  }
+
+  export type RoundCreateWithoutScoresInput = {
+    id: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutRoundsInput
+    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
+  }
+
+  export type RoundUncheckedCreateWithoutScoresInput = {
+    id: string
+    courseId: string
+    teeSetId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoundCreateOrConnectWithoutScoresInput = {
+    where: RoundWhereUniqueInput
+    create: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
+  }
+
+  export type HoleCreateWithoutScoresInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    course: CourseCreateNestedOneWithoutHolesInput
+    tees?: HoleTeeCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleUncheckedCreateWithoutScoresInput = {
+    id?: string
+    courseId: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleCreateOrConnectWithoutScoresInput = {
+    where: HoleWhereUniqueInput
+    create: XOR<HoleCreateWithoutScoresInput, HoleUncheckedCreateWithoutScoresInput>
+  }
+
+  export type RoundUpsertWithoutScoresInput = {
+    update: XOR<RoundUpdateWithoutScoresInput, RoundUncheckedUpdateWithoutScoresInput>
+    create: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
+    where?: RoundWhereInput
+  }
+
+  export type RoundUpdateToOneWithWhereWithoutScoresInput = {
+    where?: RoundWhereInput
+    data: XOR<RoundUpdateWithoutScoresInput, RoundUncheckedUpdateWithoutScoresInput>
+  }
+
+  export type RoundUpdateWithoutScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
+    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
+  }
+
+  export type RoundUncheckedUpdateWithoutScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HoleUpsertWithoutScoresInput = {
+    update: XOR<HoleUpdateWithoutScoresInput, HoleUncheckedUpdateWithoutScoresInput>
+    create: XOR<HoleCreateWithoutScoresInput, HoleUncheckedCreateWithoutScoresInput>
+    where?: HoleWhereInput
+  }
+
+  export type HoleUpdateToOneWithWhereWithoutScoresInput = {
+    where?: HoleWhereInput
+    data: XOR<HoleUpdateWithoutScoresInput, HoleUncheckedUpdateWithoutScoresInput>
+  }
+
+  export type HoleUpdateWithoutScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    course?: CourseUpdateOneRequiredWithoutHolesNestedInput
+    tees?: HoleTeeUpdateManyWithoutHoleNestedInput
+  }
+
+  export type HoleUncheckedUpdateWithoutScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -18295,6 +21951,15 @@ export namespace Prisma {
     name: string
   }
 
+  export type RoundCreateManyCourseInput = {
+    id: string
+    teeSetId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type HoleUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     number?: IntFieldUpdateOperationsInput | number
@@ -18304,6 +21969,7 @@ export namespace Prisma {
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
     tees?: HoleTeeUpdateManyWithoutHoleNestedInput
+    scores?: HoleScoreUpdateManyWithoutHoleNestedInput
   }
 
   export type HoleUncheckedUpdateWithoutCourseInput = {
@@ -18315,6 +21981,7 @@ export namespace Prisma {
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
     tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
+    scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
 
   export type HoleUncheckedUpdateManyWithoutCourseInput = {
@@ -18332,6 +21999,7 @@ export namespace Prisma {
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
     holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
+    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateWithoutCourseInput = {
@@ -18339,12 +22007,42 @@ export namespace Prisma {
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
     holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
+    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateManyWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RoundUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
+    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HoleTeeCreateManyHoleInput = {
@@ -18355,6 +22053,13 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+  }
+
+  export type HoleScoreCreateManyHoleInput = {
+    id?: string
+    roundId: string
+    strokes: number
+    putts?: number | null
   }
 
   export type HoleTeeUpdateWithoutHoleInput = {
@@ -18387,6 +22092,27 @@ export namespace Prisma {
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
+  export type HoleScoreUpdateWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+    round?: RoundUpdateOneRequiredWithoutScoresNestedInput
+  }
+
+  export type HoleScoreUncheckedUpdateWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleScoreUncheckedUpdateManyWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type HoleTeeCreateManyTeeSetInput = {
     id?: string
     holeId: string
@@ -18395,6 +22121,15 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+  }
+
+  export type RoundCreateManyTeeSetInput = {
+    id: string
+    courseId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type HoleTeeUpdateWithoutTeeSetInput = {
@@ -18425,6 +22160,63 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type RoundUpdateWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
+    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundUncheckedUpdateWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+  }
+
+  export type RoundUncheckedUpdateManyWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HoleScoreCreateManyRoundInput = {
+    id?: string
+    holeId: string
+    strokes: number
+    putts?: number | null
+  }
+
+  export type HoleScoreUpdateWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+    hole?: HoleUpdateOneRequiredWithoutScoresNestedInput
+  }
+
+  export type HoleScoreUncheckedUpdateWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleScoreUncheckedUpdateManyWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    strokes?: IntFieldUpdateOperationsInput | number
+    putts?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

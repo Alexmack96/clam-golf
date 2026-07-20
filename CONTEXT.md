@@ -68,6 +68,24 @@ Binding a piece of imported map geometry — a green outline, a teeing ground �
 specific Hole. The map data arrives unnumbered, so Assignment is a deliberate,
 correctable step rather than an import detail.
 
+### Scoring
+
+**Round**:
+One trip round a Course from one Tee Set on one day. Exists from the first score
+entered, not from a deliberate "start" — and stays open until it is finished, so an
+abandoned nine is still a Round.
+_Avoid_: Game, scorecard (that's the view of it), session
+
+**Hole Score**:
+What a Hole cost in one Round: strokes always, putts when the player bothered.
+Strokes are gross — no handicap is applied anywhere in this app.
+_Avoid_: Score (ambiguous between one hole and the whole round)
+
+**Green in Regulation**:
+Reaching the putting surface with at least two strokes left for par. Never recorded —
+always derived, as strokes minus putts being at most par minus two.
+_Avoid_: GIR in prose, though the abbreviation is fine in a column heading
+
 ### On the course
 
 **Aim Point**:

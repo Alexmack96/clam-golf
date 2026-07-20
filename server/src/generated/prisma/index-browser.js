@@ -188,6 +188,24 @@ exports.Prisma.HoleTeeScalarFieldEnum = {
   teeLng: 'teeLng'
 };
 
+exports.Prisma.RoundScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  teeSetId: 'teeSetId',
+  playedOn: 'playedOn',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.HoleScoreScalarFieldEnum = {
+  id: 'id',
+  roundId: 'roundId',
+  holeId: 'holeId',
+  strokes: 'strokes',
+  putts: 'putts'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -270,6 +288,8 @@ exports.Prisma.ModelName = {
   Hole: 'Hole',
   TeeSet: 'TeeSet',
   HoleTee: 'HoleTee',
+  Round: 'Round',
+  HoleScore: 'HoleScore',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

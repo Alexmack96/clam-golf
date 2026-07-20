@@ -7,6 +7,7 @@ import { Button } from "./ui/button.js";
 const links = [
   { to: "/distances", label: "Distances" },
   { to: "/gps", label: "GPS" },
+  { to: "/scorecard", label: "Scorecard" },
   { to: "/shot-calculator", label: "Shot Calculator" },
   { to: "/clubs", label: "Clubs" },
 ] as const;
