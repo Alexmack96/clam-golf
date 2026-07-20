@@ -29,6 +29,11 @@ export type Club = $Result.DefaultSelection<Prisma.$ClubPayload>
  */
 export type Distance = $Result.DefaultSelection<Prisma.$DistancePayload>
 /**
+ * Model DistanceHistory
+ * 
+ */
+export type DistanceHistory = $Result.DefaultSelection<Prisma.$DistanceHistoryPayload>
+/**
  * Model Session
  * 
  */
@@ -69,6 +74,14 @@ export const SwingLength: {
 
 export type SwingLength = (typeof SwingLength)[keyof typeof SwingLength]
 
+
+export const DistanceUnit: {
+  Yards: 'Yards',
+  Metres: 'Metres'
+};
+
+export type DistanceUnit = (typeof DistanceUnit)[keyof typeof DistanceUnit]
+
 }
 
 export type ClubType = $Enums.ClubType
@@ -78,6 +91,10 @@ export const ClubType: typeof $Enums.ClubType
 export type SwingLength = $Enums.SwingLength
 
 export const SwingLength: typeof $Enums.SwingLength
+
+export type DistanceUnit = $Enums.DistanceUnit
+
+export const DistanceUnit: typeof $Enums.DistanceUnit
 
 /**
  * ##  Prisma Client ʲˢ
@@ -229,6 +246,16 @@ export class PrismaClient<
     * ```
     */
   get distance(): Prisma.DistanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.distanceHistory`: Exposes CRUD operations for the **DistanceHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DistanceHistories
+    * const distanceHistories = await prisma.distanceHistory.findMany()
+    * ```
+    */
+  get distanceHistory(): Prisma.DistanceHistoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -696,6 +723,7 @@ export namespace Prisma {
     User: 'User',
     Club: 'Club',
     Distance: 'Distance',
+    DistanceHistory: 'DistanceHistory',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -714,7 +742,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "club" | "distance" | "session" | "account" | "verification"
+      modelProps: "user" | "club" | "distance" | "distanceHistory" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -937,6 +965,80 @@ export namespace Prisma {
           count: {
             args: Prisma.DistanceCountArgs<ExtArgs>
             result: $Utils.Optional<DistanceCountAggregateOutputType> | number
+          }
+        }
+      }
+      DistanceHistory: {
+        payload: Prisma.$DistanceHistoryPayload<ExtArgs>
+        fields: Prisma.DistanceHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DistanceHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DistanceHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.DistanceHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DistanceHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.DistanceHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.DistanceHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.DistanceHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DistanceHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.DistanceHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          update: {
+            args: Prisma.DistanceHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.DistanceHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DistanceHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DistanceHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.DistanceHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DistanceHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.DistanceHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDistanceHistory>
+          }
+          groupBy: {
+            args: Prisma.DistanceHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DistanceHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DistanceHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<DistanceHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1273,6 +1375,7 @@ export namespace Prisma {
     user?: UserOmit
     club?: ClubOmit
     distance?: DistanceOmit
+    distanceHistory?: DistanceHistoryOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -3672,6 +3775,8 @@ export namespace Prisma {
     clubId: string | null
     swing: $Enums.SwingLength | null
     yards: number | null
+    unit: $Enums.DistanceUnit | null
+    measuredAt: Date | null
     updatedAt: Date | null
   }
 
@@ -3680,6 +3785,8 @@ export namespace Prisma {
     clubId: string | null
     swing: $Enums.SwingLength | null
     yards: number | null
+    unit: $Enums.DistanceUnit | null
+    measuredAt: Date | null
     updatedAt: Date | null
   }
 
@@ -3688,6 +3795,8 @@ export namespace Prisma {
     clubId: number
     swing: number
     yards: number
+    unit: number
+    measuredAt: number
     updatedAt: number
     _all: number
   }
@@ -3706,6 +3815,8 @@ export namespace Prisma {
     clubId?: true
     swing?: true
     yards?: true
+    unit?: true
+    measuredAt?: true
     updatedAt?: true
   }
 
@@ -3714,6 +3825,8 @@ export namespace Prisma {
     clubId?: true
     swing?: true
     yards?: true
+    unit?: true
+    measuredAt?: true
     updatedAt?: true
   }
 
@@ -3722,6 +3835,8 @@ export namespace Prisma {
     clubId?: true
     swing?: true
     yards?: true
+    unit?: true
+    measuredAt?: true
     updatedAt?: true
     _all?: true
   }
@@ -3817,6 +3932,8 @@ export namespace Prisma {
     clubId: string
     swing: $Enums.SwingLength
     yards: number
+    unit: $Enums.DistanceUnit
+    measuredAt: Date
     updatedAt: Date
     _count: DistanceCountAggregateOutputType | null
     _avg: DistanceAvgAggregateOutputType | null
@@ -3844,6 +3961,8 @@ export namespace Prisma {
     clubId?: boolean
     swing?: boolean
     yards?: boolean
+    unit?: boolean
+    measuredAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
@@ -3853,6 +3972,8 @@ export namespace Prisma {
     clubId?: boolean
     swing?: boolean
     yards?: boolean
+    unit?: boolean
+    measuredAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
@@ -3862,6 +3983,8 @@ export namespace Prisma {
     clubId?: boolean
     swing?: boolean
     yards?: boolean
+    unit?: boolean
+    measuredAt?: boolean
     updatedAt?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
@@ -3871,10 +3994,12 @@ export namespace Prisma {
     clubId?: boolean
     swing?: boolean
     yards?: boolean
+    unit?: boolean
+    measuredAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DistanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "swing" | "yards" | "updatedAt", ExtArgs["result"]["distance"]>
+  export type DistanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "swing" | "yards" | "unit" | "measuredAt" | "updatedAt", ExtArgs["result"]["distance"]>
   export type DistanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }
@@ -3895,6 +4020,8 @@ export namespace Prisma {
       clubId: string
       swing: $Enums.SwingLength
       yards: number
+      unit: $Enums.DistanceUnit
+      measuredAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["distance"]>
     composites: {}
@@ -4324,6 +4451,8 @@ export namespace Prisma {
     readonly clubId: FieldRef<"Distance", 'String'>
     readonly swing: FieldRef<"Distance", 'SwingLength'>
     readonly yards: FieldRef<"Distance", 'Int'>
+    readonly unit: FieldRef<"Distance", 'DistanceUnit'>
+    readonly measuredAt: FieldRef<"Distance", 'DateTime'>
     readonly updatedAt: FieldRef<"Distance", 'DateTime'>
   }
     
@@ -4739,6 +4868,1055 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: DistanceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DistanceHistory
+   */
+
+  export type AggregateDistanceHistory = {
+    _count: DistanceHistoryCountAggregateOutputType | null
+    _avg: DistanceHistoryAvgAggregateOutputType | null
+    _sum: DistanceHistorySumAggregateOutputType | null
+    _min: DistanceHistoryMinAggregateOutputType | null
+    _max: DistanceHistoryMaxAggregateOutputType | null
+  }
+
+  export type DistanceHistoryAvgAggregateOutputType = {
+    id: number | null
+    yards: number | null
+  }
+
+  export type DistanceHistorySumAggregateOutputType = {
+    id: number | null
+    yards: number | null
+  }
+
+  export type DistanceHistoryMinAggregateOutputType = {
+    id: number | null
+    distanceId: string | null
+    clubId: string | null
+    swing: $Enums.SwingLength | null
+    yards: number | null
+    changedAt: Date | null
+  }
+
+  export type DistanceHistoryMaxAggregateOutputType = {
+    id: number | null
+    distanceId: string | null
+    clubId: string | null
+    swing: $Enums.SwingLength | null
+    yards: number | null
+    changedAt: Date | null
+  }
+
+  export type DistanceHistoryCountAggregateOutputType = {
+    id: number
+    distanceId: number
+    clubId: number
+    swing: number
+    yards: number
+    changedAt: number
+    _all: number
+  }
+
+
+  export type DistanceHistoryAvgAggregateInputType = {
+    id?: true
+    yards?: true
+  }
+
+  export type DistanceHistorySumAggregateInputType = {
+    id?: true
+    yards?: true
+  }
+
+  export type DistanceHistoryMinAggregateInputType = {
+    id?: true
+    distanceId?: true
+    clubId?: true
+    swing?: true
+    yards?: true
+    changedAt?: true
+  }
+
+  export type DistanceHistoryMaxAggregateInputType = {
+    id?: true
+    distanceId?: true
+    clubId?: true
+    swing?: true
+    yards?: true
+    changedAt?: true
+  }
+
+  export type DistanceHistoryCountAggregateInputType = {
+    id?: true
+    distanceId?: true
+    clubId?: true
+    swing?: true
+    yards?: true
+    changedAt?: true
+    _all?: true
+  }
+
+  export type DistanceHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DistanceHistory to aggregate.
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DistanceHistories to fetch.
+     */
+    orderBy?: DistanceHistoryOrderByWithRelationInput | DistanceHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DistanceHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DistanceHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DistanceHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DistanceHistories
+    **/
+    _count?: true | DistanceHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DistanceHistoryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DistanceHistorySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DistanceHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DistanceHistoryMaxAggregateInputType
+  }
+
+  export type GetDistanceHistoryAggregateType<T extends DistanceHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateDistanceHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDistanceHistory[P]>
+      : GetScalarType<T[P], AggregateDistanceHistory[P]>
+  }
+
+
+
+
+  export type DistanceHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DistanceHistoryWhereInput
+    orderBy?: DistanceHistoryOrderByWithAggregationInput | DistanceHistoryOrderByWithAggregationInput[]
+    by: DistanceHistoryScalarFieldEnum[] | DistanceHistoryScalarFieldEnum
+    having?: DistanceHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DistanceHistoryCountAggregateInputType | true
+    _avg?: DistanceHistoryAvgAggregateInputType
+    _sum?: DistanceHistorySumAggregateInputType
+    _min?: DistanceHistoryMinAggregateInputType
+    _max?: DistanceHistoryMaxAggregateInputType
+  }
+
+  export type DistanceHistoryGroupByOutputType = {
+    id: number
+    distanceId: string
+    clubId: string
+    swing: $Enums.SwingLength
+    yards: number
+    changedAt: Date
+    _count: DistanceHistoryCountAggregateOutputType | null
+    _avg: DistanceHistoryAvgAggregateOutputType | null
+    _sum: DistanceHistorySumAggregateOutputType | null
+    _min: DistanceHistoryMinAggregateOutputType | null
+    _max: DistanceHistoryMaxAggregateOutputType | null
+  }
+
+  type GetDistanceHistoryGroupByPayload<T extends DistanceHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DistanceHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DistanceHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DistanceHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], DistanceHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DistanceHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    distanceId?: boolean
+    clubId?: boolean
+    swing?: boolean
+    yards?: boolean
+    changedAt?: boolean
+  }, ExtArgs["result"]["distanceHistory"]>
+
+  export type DistanceHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    distanceId?: boolean
+    clubId?: boolean
+    swing?: boolean
+    yards?: boolean
+    changedAt?: boolean
+  }, ExtArgs["result"]["distanceHistory"]>
+
+  export type DistanceHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    distanceId?: boolean
+    clubId?: boolean
+    swing?: boolean
+    yards?: boolean
+    changedAt?: boolean
+  }, ExtArgs["result"]["distanceHistory"]>
+
+  export type DistanceHistorySelectScalar = {
+    id?: boolean
+    distanceId?: boolean
+    clubId?: boolean
+    swing?: boolean
+    yards?: boolean
+    changedAt?: boolean
+  }
+
+  export type DistanceHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "distanceId" | "clubId" | "swing" | "yards" | "changedAt", ExtArgs["result"]["distanceHistory"]>
+
+  export type $DistanceHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DistanceHistory"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      distanceId: string
+      clubId: string
+      swing: $Enums.SwingLength
+      yards: number
+      changedAt: Date
+    }, ExtArgs["result"]["distanceHistory"]>
+    composites: {}
+  }
+
+  type DistanceHistoryGetPayload<S extends boolean | null | undefined | DistanceHistoryDefaultArgs> = $Result.GetResult<Prisma.$DistanceHistoryPayload, S>
+
+  type DistanceHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DistanceHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DistanceHistoryCountAggregateInputType | true
+    }
+
+  export interface DistanceHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DistanceHistory'], meta: { name: 'DistanceHistory' } }
+    /**
+     * Find zero or one DistanceHistory that matches the filter.
+     * @param {DistanceHistoryFindUniqueArgs} args - Arguments to find a DistanceHistory
+     * @example
+     * // Get one DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DistanceHistoryFindUniqueArgs>(args: SelectSubset<T, DistanceHistoryFindUniqueArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DistanceHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DistanceHistoryFindUniqueOrThrowArgs} args - Arguments to find a DistanceHistory
+     * @example
+     * // Get one DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DistanceHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, DistanceHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DistanceHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryFindFirstArgs} args - Arguments to find a DistanceHistory
+     * @example
+     * // Get one DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DistanceHistoryFindFirstArgs>(args?: SelectSubset<T, DistanceHistoryFindFirstArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DistanceHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryFindFirstOrThrowArgs} args - Arguments to find a DistanceHistory
+     * @example
+     * // Get one DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DistanceHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, DistanceHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DistanceHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DistanceHistories
+     * const distanceHistories = await prisma.distanceHistory.findMany()
+     * 
+     * // Get first 10 DistanceHistories
+     * const distanceHistories = await prisma.distanceHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const distanceHistoryWithIdOnly = await prisma.distanceHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DistanceHistoryFindManyArgs>(args?: SelectSubset<T, DistanceHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DistanceHistory.
+     * @param {DistanceHistoryCreateArgs} args - Arguments to create a DistanceHistory.
+     * @example
+     * // Create one DistanceHistory
+     * const DistanceHistory = await prisma.distanceHistory.create({
+     *   data: {
+     *     // ... data to create a DistanceHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends DistanceHistoryCreateArgs>(args: SelectSubset<T, DistanceHistoryCreateArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DistanceHistories.
+     * @param {DistanceHistoryCreateManyArgs} args - Arguments to create many DistanceHistories.
+     * @example
+     * // Create many DistanceHistories
+     * const distanceHistory = await prisma.distanceHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DistanceHistoryCreateManyArgs>(args?: SelectSubset<T, DistanceHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DistanceHistories and returns the data saved in the database.
+     * @param {DistanceHistoryCreateManyAndReturnArgs} args - Arguments to create many DistanceHistories.
+     * @example
+     * // Create many DistanceHistories
+     * const distanceHistory = await prisma.distanceHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DistanceHistories and only return the `id`
+     * const distanceHistoryWithIdOnly = await prisma.distanceHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DistanceHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, DistanceHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DistanceHistory.
+     * @param {DistanceHistoryDeleteArgs} args - Arguments to delete one DistanceHistory.
+     * @example
+     * // Delete one DistanceHistory
+     * const DistanceHistory = await prisma.distanceHistory.delete({
+     *   where: {
+     *     // ... filter to delete one DistanceHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DistanceHistoryDeleteArgs>(args: SelectSubset<T, DistanceHistoryDeleteArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DistanceHistory.
+     * @param {DistanceHistoryUpdateArgs} args - Arguments to update one DistanceHistory.
+     * @example
+     * // Update one DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DistanceHistoryUpdateArgs>(args: SelectSubset<T, DistanceHistoryUpdateArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DistanceHistories.
+     * @param {DistanceHistoryDeleteManyArgs} args - Arguments to filter DistanceHistories to delete.
+     * @example
+     * // Delete a few DistanceHistories
+     * const { count } = await prisma.distanceHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DistanceHistoryDeleteManyArgs>(args?: SelectSubset<T, DistanceHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DistanceHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DistanceHistories
+     * const distanceHistory = await prisma.distanceHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DistanceHistoryUpdateManyArgs>(args: SelectSubset<T, DistanceHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DistanceHistories and returns the data updated in the database.
+     * @param {DistanceHistoryUpdateManyAndReturnArgs} args - Arguments to update many DistanceHistories.
+     * @example
+     * // Update many DistanceHistories
+     * const distanceHistory = await prisma.distanceHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DistanceHistories and only return the `id`
+     * const distanceHistoryWithIdOnly = await prisma.distanceHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DistanceHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, DistanceHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DistanceHistory.
+     * @param {DistanceHistoryUpsertArgs} args - Arguments to update or create a DistanceHistory.
+     * @example
+     * // Update or create a DistanceHistory
+     * const distanceHistory = await prisma.distanceHistory.upsert({
+     *   create: {
+     *     // ... data to create a DistanceHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DistanceHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DistanceHistoryUpsertArgs>(args: SelectSubset<T, DistanceHistoryUpsertArgs<ExtArgs>>): Prisma__DistanceHistoryClient<$Result.GetResult<Prisma.$DistanceHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DistanceHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryCountArgs} args - Arguments to filter DistanceHistories to count.
+     * @example
+     * // Count the number of DistanceHistories
+     * const count = await prisma.distanceHistory.count({
+     *   where: {
+     *     // ... the filter for the DistanceHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends DistanceHistoryCountArgs>(
+      args?: Subset<T, DistanceHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DistanceHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DistanceHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DistanceHistoryAggregateArgs>(args: Subset<T, DistanceHistoryAggregateArgs>): Prisma.PrismaPromise<GetDistanceHistoryAggregateType<T>>
+
+    /**
+     * Group by DistanceHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DistanceHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DistanceHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DistanceHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: DistanceHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DistanceHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDistanceHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DistanceHistory model
+   */
+  readonly fields: DistanceHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DistanceHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DistanceHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DistanceHistory model
+   */
+  interface DistanceHistoryFieldRefs {
+    readonly id: FieldRef<"DistanceHistory", 'Int'>
+    readonly distanceId: FieldRef<"DistanceHistory", 'String'>
+    readonly clubId: FieldRef<"DistanceHistory", 'String'>
+    readonly swing: FieldRef<"DistanceHistory", 'SwingLength'>
+    readonly yards: FieldRef<"DistanceHistory", 'Int'>
+    readonly changedAt: FieldRef<"DistanceHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DistanceHistory findUnique
+   */
+  export type DistanceHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter, which DistanceHistory to fetch.
+     */
+    where: DistanceHistoryWhereUniqueInput
+  }
+
+  /**
+   * DistanceHistory findUniqueOrThrow
+   */
+  export type DistanceHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter, which DistanceHistory to fetch.
+     */
+    where: DistanceHistoryWhereUniqueInput
+  }
+
+  /**
+   * DistanceHistory findFirst
+   */
+  export type DistanceHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter, which DistanceHistory to fetch.
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DistanceHistories to fetch.
+     */
+    orderBy?: DistanceHistoryOrderByWithRelationInput | DistanceHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DistanceHistories.
+     */
+    cursor?: DistanceHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DistanceHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DistanceHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DistanceHistories.
+     */
+    distinct?: DistanceHistoryScalarFieldEnum | DistanceHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * DistanceHistory findFirstOrThrow
+   */
+  export type DistanceHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter, which DistanceHistory to fetch.
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DistanceHistories to fetch.
+     */
+    orderBy?: DistanceHistoryOrderByWithRelationInput | DistanceHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DistanceHistories.
+     */
+    cursor?: DistanceHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DistanceHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DistanceHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DistanceHistories.
+     */
+    distinct?: DistanceHistoryScalarFieldEnum | DistanceHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * DistanceHistory findMany
+   */
+  export type DistanceHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter, which DistanceHistories to fetch.
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DistanceHistories to fetch.
+     */
+    orderBy?: DistanceHistoryOrderByWithRelationInput | DistanceHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DistanceHistories.
+     */
+    cursor?: DistanceHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DistanceHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DistanceHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DistanceHistories.
+     */
+    distinct?: DistanceHistoryScalarFieldEnum | DistanceHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * DistanceHistory create
+   */
+  export type DistanceHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DistanceHistory.
+     */
+    data: XOR<DistanceHistoryCreateInput, DistanceHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * DistanceHistory createMany
+   */
+  export type DistanceHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DistanceHistories.
+     */
+    data: DistanceHistoryCreateManyInput | DistanceHistoryCreateManyInput[]
+  }
+
+  /**
+   * DistanceHistory createManyAndReturn
+   */
+  export type DistanceHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many DistanceHistories.
+     */
+    data: DistanceHistoryCreateManyInput | DistanceHistoryCreateManyInput[]
+  }
+
+  /**
+   * DistanceHistory update
+   */
+  export type DistanceHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DistanceHistory.
+     */
+    data: XOR<DistanceHistoryUpdateInput, DistanceHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which DistanceHistory to update.
+     */
+    where: DistanceHistoryWhereUniqueInput
+  }
+
+  /**
+   * DistanceHistory updateMany
+   */
+  export type DistanceHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DistanceHistories.
+     */
+    data: XOR<DistanceHistoryUpdateManyMutationInput, DistanceHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which DistanceHistories to update
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * Limit how many DistanceHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DistanceHistory updateManyAndReturn
+   */
+  export type DistanceHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update DistanceHistories.
+     */
+    data: XOR<DistanceHistoryUpdateManyMutationInput, DistanceHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which DistanceHistories to update
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * Limit how many DistanceHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DistanceHistory upsert
+   */
+  export type DistanceHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DistanceHistory to update in case it exists.
+     */
+    where: DistanceHistoryWhereUniqueInput
+    /**
+     * In case the DistanceHistory found by the `where` argument doesn't exist, create a new DistanceHistory with this data.
+     */
+    create: XOR<DistanceHistoryCreateInput, DistanceHistoryUncheckedCreateInput>
+    /**
+     * In case the DistanceHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DistanceHistoryUpdateInput, DistanceHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * DistanceHistory delete
+   */
+  export type DistanceHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
+    /**
+     * Filter which DistanceHistory to delete.
+     */
+    where: DistanceHistoryWhereUniqueInput
+  }
+
+  /**
+   * DistanceHistory deleteMany
+   */
+  export type DistanceHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DistanceHistories to delete
+     */
+    where?: DistanceHistoryWhereInput
+    /**
+     * Limit how many DistanceHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DistanceHistory without action
+   */
+  export type DistanceHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DistanceHistory
+     */
+    select?: DistanceHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DistanceHistory
+     */
+    omit?: DistanceHistoryOmit<ExtArgs> | null
   }
 
 
@@ -8057,10 +9235,24 @@ export namespace Prisma {
     clubId: 'clubId',
     swing: 'swing',
     yards: 'yards',
+    unit: 'unit',
+    measuredAt: 'measuredAt',
     updatedAt: 'updatedAt'
   };
 
   export type DistanceScalarFieldEnum = (typeof DistanceScalarFieldEnum)[keyof typeof DistanceScalarFieldEnum]
+
+
+  export const DistanceHistoryScalarFieldEnum: {
+    id: 'id',
+    distanceId: 'distanceId',
+    clubId: 'clubId',
+    swing: 'swing',
+    yards: 'yards',
+    changedAt: 'changedAt'
+  };
+
+  export type DistanceHistoryScalarFieldEnum = (typeof DistanceHistoryScalarFieldEnum)[keyof typeof DistanceHistoryScalarFieldEnum]
 
 
   export const SessionScalarFieldEnum: {
@@ -8168,6 +9360,13 @@ export namespace Prisma {
    * Reference to a field of type 'SwingLength'
    */
   export type EnumSwingLengthFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SwingLength'>
+    
+
+
+  /**
+   * Reference to a field of type 'DistanceUnit'
+   */
+  export type EnumDistanceUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DistanceUnit'>
     
 
 
@@ -8309,6 +9508,8 @@ export namespace Prisma {
     clubId?: StringFilter<"Distance"> | string
     swing?: EnumSwingLengthFilter<"Distance"> | $Enums.SwingLength
     yards?: IntFilter<"Distance"> | number
+    unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
+    measuredAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
@@ -8318,6 +9519,8 @@ export namespace Prisma {
     clubId?: SortOrder
     swing?: SortOrder
     yards?: SortOrder
+    unit?: SortOrder
+    measuredAt?: SortOrder
     updatedAt?: SortOrder
     club?: ClubOrderByWithRelationInput
   }
@@ -8331,6 +9534,8 @@ export namespace Prisma {
     clubId?: StringFilter<"Distance"> | string
     swing?: EnumSwingLengthFilter<"Distance"> | $Enums.SwingLength
     yards?: IntFilter<"Distance"> | number
+    unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
+    measuredAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }, "id" | "clubId_swing">
@@ -8340,6 +9545,8 @@ export namespace Prisma {
     clubId?: SortOrder
     swing?: SortOrder
     yards?: SortOrder
+    unit?: SortOrder
+    measuredAt?: SortOrder
     updatedAt?: SortOrder
     _count?: DistanceCountOrderByAggregateInput
     _avg?: DistanceAvgOrderByAggregateInput
@@ -8356,7 +9563,68 @@ export namespace Prisma {
     clubId?: StringWithAggregatesFilter<"Distance"> | string
     swing?: EnumSwingLengthWithAggregatesFilter<"Distance"> | $Enums.SwingLength
     yards?: IntWithAggregatesFilter<"Distance"> | number
+    unit?: EnumDistanceUnitWithAggregatesFilter<"Distance"> | $Enums.DistanceUnit
+    measuredAt?: DateTimeWithAggregatesFilter<"Distance"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Distance"> | Date | string
+  }
+
+  export type DistanceHistoryWhereInput = {
+    AND?: DistanceHistoryWhereInput | DistanceHistoryWhereInput[]
+    OR?: DistanceHistoryWhereInput[]
+    NOT?: DistanceHistoryWhereInput | DistanceHistoryWhereInput[]
+    id?: IntFilter<"DistanceHistory"> | number
+    distanceId?: StringFilter<"DistanceHistory"> | string
+    clubId?: StringFilter<"DistanceHistory"> | string
+    swing?: EnumSwingLengthFilter<"DistanceHistory"> | $Enums.SwingLength
+    yards?: IntFilter<"DistanceHistory"> | number
+    changedAt?: DateTimeFilter<"DistanceHistory"> | Date | string
+  }
+
+  export type DistanceHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    distanceId?: SortOrder
+    clubId?: SortOrder
+    swing?: SortOrder
+    yards?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type DistanceHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DistanceHistoryWhereInput | DistanceHistoryWhereInput[]
+    OR?: DistanceHistoryWhereInput[]
+    NOT?: DistanceHistoryWhereInput | DistanceHistoryWhereInput[]
+    distanceId?: StringFilter<"DistanceHistory"> | string
+    clubId?: StringFilter<"DistanceHistory"> | string
+    swing?: EnumSwingLengthFilter<"DistanceHistory"> | $Enums.SwingLength
+    yards?: IntFilter<"DistanceHistory"> | number
+    changedAt?: DateTimeFilter<"DistanceHistory"> | Date | string
+  }, "id">
+
+  export type DistanceHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    distanceId?: SortOrder
+    clubId?: SortOrder
+    swing?: SortOrder
+    yards?: SortOrder
+    changedAt?: SortOrder
+    _count?: DistanceHistoryCountOrderByAggregateInput
+    _avg?: DistanceHistoryAvgOrderByAggregateInput
+    _max?: DistanceHistoryMaxOrderByAggregateInput
+    _min?: DistanceHistoryMinOrderByAggregateInput
+    _sum?: DistanceHistorySumOrderByAggregateInput
+  }
+
+  export type DistanceHistoryScalarWhereWithAggregatesInput = {
+    AND?: DistanceHistoryScalarWhereWithAggregatesInput | DistanceHistoryScalarWhereWithAggregatesInput[]
+    OR?: DistanceHistoryScalarWhereWithAggregatesInput[]
+    NOT?: DistanceHistoryScalarWhereWithAggregatesInput | DistanceHistoryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"DistanceHistory"> | number
+    distanceId?: StringWithAggregatesFilter<"DistanceHistory"> | string
+    clubId?: StringWithAggregatesFilter<"DistanceHistory"> | string
+    swing?: EnumSwingLengthWithAggregatesFilter<"DistanceHistory"> | $Enums.SwingLength
+    yards?: IntWithAggregatesFilter<"DistanceHistory"> | number
+    changedAt?: DateTimeWithAggregatesFilter<"DistanceHistory"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -8716,6 +9984,8 @@ export namespace Prisma {
     id?: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
     club: ClubCreateNestedOneWithoutDistancesInput
   }
@@ -8725,6 +9995,8 @@ export namespace Prisma {
     clubId: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -8732,6 +10004,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     club?: ClubUpdateOneRequiredWithoutDistancesNestedInput
   }
@@ -8741,6 +10015,8 @@ export namespace Prisma {
     clubId?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8749,6 +10025,8 @@ export namespace Prisma {
     clubId: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -8756,6 +10034,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8764,7 +10044,69 @@ export namespace Prisma {
     clubId?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DistanceHistoryCreateInput = {
+    distanceId: string
+    clubId: string
+    swing: $Enums.SwingLength
+    yards: number
+    changedAt?: Date | string
+  }
+
+  export type DistanceHistoryUncheckedCreateInput = {
+    id?: number
+    distanceId: string
+    clubId: string
+    swing: $Enums.SwingLength
+    yards: number
+    changedAt?: Date | string
+  }
+
+  export type DistanceHistoryUpdateInput = {
+    distanceId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
+    yards?: IntFieldUpdateOperationsInput | number
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DistanceHistoryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    distanceId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
+    yards?: IntFieldUpdateOperationsInput | number
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DistanceHistoryCreateManyInput = {
+    id?: number
+    distanceId: string
+    clubId: string
+    swing: $Enums.SwingLength
+    yards: number
+    changedAt?: Date | string
+  }
+
+  export type DistanceHistoryUpdateManyMutationInput = {
+    distanceId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
+    yards?: IntFieldUpdateOperationsInput | number
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DistanceHistoryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    distanceId?: StringFieldUpdateOperationsInput | string
+    clubId?: StringFieldUpdateOperationsInput | string
+    swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
+    yards?: IntFieldUpdateOperationsInput | number
+    changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateInput = {
@@ -9262,6 +10604,13 @@ export namespace Prisma {
     not?: NestedEnumSwingLengthFilter<$PrismaModel> | $Enums.SwingLength
   }
 
+  export type EnumDistanceUnitFilter<$PrismaModel = never> = {
+    equals?: $Enums.DistanceUnit | EnumDistanceUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.DistanceUnit[]
+    notIn?: $Enums.DistanceUnit[]
+    not?: NestedEnumDistanceUnitFilter<$PrismaModel> | $Enums.DistanceUnit
+  }
+
   export type ClubScalarRelationFilter = {
     is?: ClubWhereInput
     isNot?: ClubWhereInput
@@ -9277,6 +10626,8 @@ export namespace Prisma {
     clubId?: SortOrder
     swing?: SortOrder
     yards?: SortOrder
+    unit?: SortOrder
+    measuredAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -9289,6 +10640,8 @@ export namespace Prisma {
     clubId?: SortOrder
     swing?: SortOrder
     yards?: SortOrder
+    unit?: SortOrder
+    measuredAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -9297,6 +10650,8 @@ export namespace Prisma {
     clubId?: SortOrder
     swing?: SortOrder
     yards?: SortOrder
+    unit?: SortOrder
+    measuredAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -9312,6 +10667,53 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSwingLengthFilter<$PrismaModel>
     _max?: NestedEnumSwingLengthFilter<$PrismaModel>
+  }
+
+  export type EnumDistanceUnitWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DistanceUnit | EnumDistanceUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.DistanceUnit[]
+    notIn?: $Enums.DistanceUnit[]
+    not?: NestedEnumDistanceUnitWithAggregatesFilter<$PrismaModel> | $Enums.DistanceUnit
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDistanceUnitFilter<$PrismaModel>
+    _max?: NestedEnumDistanceUnitFilter<$PrismaModel>
+  }
+
+  export type DistanceHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    distanceId?: SortOrder
+    clubId?: SortOrder
+    swing?: SortOrder
+    yards?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type DistanceHistoryAvgOrderByAggregateInput = {
+    id?: SortOrder
+    yards?: SortOrder
+  }
+
+  export type DistanceHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    distanceId?: SortOrder
+    clubId?: SortOrder
+    swing?: SortOrder
+    yards?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type DistanceHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    distanceId?: SortOrder
+    clubId?: SortOrder
+    swing?: SortOrder
+    yards?: SortOrder
+    changedAt?: SortOrder
+  }
+
+  export type DistanceHistorySumOrderByAggregateInput = {
+    id?: SortOrder
+    yards?: SortOrder
   }
 
   export type UserScalarRelationFilter = {
@@ -9616,6 +11018,10 @@ export namespace Prisma {
     set?: $Enums.SwingLength
   }
 
+  export type EnumDistanceUnitFieldUpdateOperationsInput = {
+    set?: $Enums.DistanceUnit
+  }
+
   export type ClubUpdateOneRequiredWithoutDistancesNestedInput = {
     create?: XOR<ClubCreateWithoutDistancesInput, ClubUncheckedCreateWithoutDistancesInput>
     connectOrCreate?: ClubCreateOrConnectWithoutDistancesInput
@@ -9829,6 +11235,13 @@ export namespace Prisma {
     not?: NestedEnumSwingLengthFilter<$PrismaModel> | $Enums.SwingLength
   }
 
+  export type NestedEnumDistanceUnitFilter<$PrismaModel = never> = {
+    equals?: $Enums.DistanceUnit | EnumDistanceUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.DistanceUnit[]
+    notIn?: $Enums.DistanceUnit[]
+    not?: NestedEnumDistanceUnitFilter<$PrismaModel> | $Enums.DistanceUnit
+  }
+
   export type NestedEnumSwingLengthWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.SwingLength | EnumSwingLengthFieldRefInput<$PrismaModel>
     in?: $Enums.SwingLength[]
@@ -9837,6 +11250,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSwingLengthFilter<$PrismaModel>
     _max?: NestedEnumSwingLengthFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDistanceUnitWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DistanceUnit | EnumDistanceUnitFieldRefInput<$PrismaModel>
+    in?: $Enums.DistanceUnit[]
+    notIn?: $Enums.DistanceUnit[]
+    not?: NestedEnumDistanceUnitWithAggregatesFilter<$PrismaModel> | $Enums.DistanceUnit
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDistanceUnitFilter<$PrismaModel>
+    _max?: NestedEnumDistanceUnitFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -10001,6 +11424,8 @@ export namespace Prisma {
     id?: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -10008,6 +11433,8 @@ export namespace Prisma {
     id?: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -10044,6 +11471,8 @@ export namespace Prisma {
     clubId?: StringFilter<"Distance"> | string
     swing?: EnumSwingLengthFilter<"Distance"> | $Enums.SwingLength
     yards?: IntFilter<"Distance"> | number
+    unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
+    measuredAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
   }
 
@@ -10311,6 +11740,8 @@ export namespace Prisma {
     id?: string
     swing?: $Enums.SwingLength
     yards: number
+    unit?: $Enums.DistanceUnit
+    measuredAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -10318,6 +11749,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10325,6 +11758,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10332,6 +11767,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
+    unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
+    measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

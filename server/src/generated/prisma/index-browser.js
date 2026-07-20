@@ -139,7 +139,18 @@ exports.Prisma.DistanceScalarFieldEnum = {
   clubId: 'clubId',
   swing: 'swing',
   yards: 'yards',
+  unit: 'unit',
+  measuredAt: 'measuredAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DistanceHistoryScalarFieldEnum = {
+  id: 'id',
+  distanceId: 'distanceId',
+  clubId: 'clubId',
+  swing: 'swing',
+  yards: 'yards',
+  changedAt: 'changedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -203,10 +214,16 @@ exports.SwingLength = exports.$Enums.SwingLength = {
   Hip: 'Hip'
 };
 
+exports.DistanceUnit = exports.$Enums.DistanceUnit = {
+  Yards: 'Yards',
+  Metres: 'Metres'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Club: 'Club',
   Distance: 'Distance',
+  DistanceHistory: 'DistanceHistory',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

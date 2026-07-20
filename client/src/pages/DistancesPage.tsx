@@ -1,13 +1,111 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Settings2 } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card.js";
 import { Skeleton } from "../components/ui/skeleton.js";
 import { ClubIcon } from "../components/ClubIcon.js";
+import api from "../lib/api.js";
 import { useClubs, type ClubRow, type SwingLength } from "../hooks/useClubs.js";
 
-const SWING_COLUMNS: SwingLength[] = ["Hip", "Chest", "Shoulder", "Full"];
+// Full swing first (LHS) — it's the number you actually reach for most.
+const SWING_COLUMNS: SwingLength[] = ["Full", "Shoulder", "Chest", "Hip"];
 
-function ClubMatrix({ clubs }: { clubs: ClubRow[] }) {
+function DistanceCell({
+  yards,
+  tint,
+  isPending,
+  onSave,
+  onClear,
+}: {
+  yards: number | undefined;
+  tint: string;
+  isPending: boolean;
+  onSave: (yards: number) => void;
+  onClear: () => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState("");
+
+  function commit() {
+    const trimmed = draft.trim();
+    if (trimmed === "") {
+      if (yards !== undefined) onClear();
+      setEditing(false);
+      return;
+    }
+    const n = Number(trimmed);
+    if (!Number.isInteger(n) || n <= 0) {
+      setEditing(false);
+      return;
+    }
+    if (n !== yards) onSave(n);
+    setEditing(false);
+  }
+
+  if (editing) {
+    return (
+      <input
+        autoFocus
+        type="number"
+        inputMode="numeric"
+        min={1}
+        max={400}
+        defaultValue={yards ?? ""}
+        disabled={isPending}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            e.currentTarget.blur();
+          }
+          if (e.key === "Escape") setEditing(false);
+        }}
+        className="w-full rounded-lg border border-primary bg-background py-1.5 text-center text-xs font-semibold text-foreground outline-none ring-2 ring-primary/20 sm:py-2 sm:text-sm"
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      disabled={isPending}
+      onClick={() => {
+        setDraft(String(yards ?? ""));
+        setEditing(true);
+      }}
+      className="w-full rounded-lg border border-border py-1.5 text-center transition-colors hover:border-primary/50 disabled:opacity-50"
+      style={{ background: tint }}
+    >
+      <span className="text-xs font-semibold text-foreground sm:text-sm">{yards ?? "—"}</span>
+    </button>
+  );
+}
+
+function ClubChart({ clubs }: { clubs: ClubRow[] }) {
+  const queryClient = useQueryClient();
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ["clubs"] });
+
+  const saveMutation = useMutation({
+    mutationFn: ({ clubId, swing, yards }: { clubId: string; swing: SwingLength; yards: number }) =>
+      api.patch(`/api/distances/${clubId}/${swing}`, { yards }),
+    onSuccess: invalidate,
+  });
+
+  const clearMutation = useMutation({
+    mutationFn: ({ clubId, swing }: { clubId: string; swing: SwingLength }) =>
+      api.delete(`/api/distances/${clubId}/${swing}`),
+    onSuccess: invalidate,
+  });
+
+  const pendingKey =
+    saveMutation.isPending && saveMutation.variables
+      ? `${saveMutation.variables.clubId}:${saveMutation.variables.swing}`
+      : clearMutation.isPending && clearMutation.variables
+        ? `${clearMutation.variables.clubId}:${clearMutation.variables.swing}`
+        : null;
+
   const rows = clubs
     .filter((c) => c.isActive && (c.type === "Iron" || c.type === "Wedge"))
     .sort((a, b) => a.sortOrder - b.sortOrder);
@@ -39,14 +137,17 @@ function ClubMatrix({ clubs }: { clubs: ClubRow[] }) {
             </div>
             {SWING_COLUMNS.map((swing, i) => {
               const yards = club.distances.find((d) => d.swing === swing)?.yards;
+              // Full (i=0) stays the most prominent column now it's on the left.
+              const emphasis = SWING_COLUMNS.length - 1 - i;
               return (
-                <div
+                <DistanceCell
                   key={swing}
-                  className="rounded-lg border border-border py-1.5 text-center sm:py-2"
-                  style={{ background: `oklch(0.9 ${0.02 + i * 0.015} 152 / ${0.35 + i * 0.12})` }}
-                >
-                  <span className="text-xs font-semibold text-foreground sm:text-sm">{yards ?? "—"}</span>
-                </div>
+                  yards={yards}
+                  tint={`oklch(0.9 ${0.02 + emphasis * 0.015} 152 / ${0.35 + emphasis * 0.12})`}
+                  isPending={pendingKey === `${club.id}:${swing}`}
+                  onSave={(newYards) => saveMutation.mutate({ clubId: club.id, swing, yards: newYards })}
+                  onClear={() => clearMutation.mutate({ clubId: club.id, swing })}
+                />
               );
             })}
           </div>
@@ -68,11 +169,11 @@ export function DistancesPage() {
 
       <Card className="border-primary/20 bg-gradient-to-b from-primary/[0.06] to-transparent shadow-lg shadow-primary/5">
         <CardHeader className="px-4 text-center pb-2 sm:px-6">
-          <CardTitle className="text-2xl font-bold text-foreground">Wedge & Iron Matrix</CardTitle>
-          <CardDescription>Partial-swing yardages by club-face position — active bag only</CardDescription>
+          <CardTitle className="text-2xl font-bold text-foreground">Wedge & Iron Chart</CardTitle>
+          <CardDescription>Tap a number to edit — partial-swing yardages, active bag only</CardDescription>
         </CardHeader>
         <CardContent className="px-3 sm:px-6">
-          {isPending ? <Skeleton className="w-full h-[320px] rounded-md" /> : <ClubMatrix clubs={data!} />}
+          {isPending ? <Skeleton className="w-full h-[320px] rounded-md" /> : <ClubChart clubs={data!} />}
           <div className="mt-4 text-center">
             <Link
               to="/clubs"

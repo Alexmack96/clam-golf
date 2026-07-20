@@ -25,6 +25,11 @@ enum SwingLength {
   Hip
 }
 
+enum DistanceUnit {
+  Yards
+  Metres
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -56,15 +61,34 @@ model Club {
 // woods, driver) only ever have a "Full" row; wedges also get partial-swing
 // rows (Shoulder/Chest/Hip) for the gapping matrix.
 model Distance {
-  id        String      @id @default(cuid())
-  clubId    String
-  club      Club        @relation(fields: [clubId], references: [id], onDelete: Cascade)
-  swing     SwingLength @default(Full)
-  yards     Int
-  updatedAt DateTime    @updatedAt
+  id         String       @id @default(cuid())
+  clubId     String
+  club       Club         @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  swing      SwingLength  @default(Full)
+  yards      Int
+  unit       DistanceUnit @default(Yards)
+  // The day this yardage was actually measured/verified (range session, not
+  // edit time — see updatedAt for that). Backfilled to 2026-07-19 for rows
+  // that predate this column.
+  measuredAt DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 
   @@unique([clubId, swing])
   @@map("distances")
+}
+
+// Snapshot of a distance's previous yards value, written by a DB trigger
+// (see migration 20260720000000_distance_history) every time "distances.yards"
+// changes. Prisma never writes here directly — read-only from the app's side.
+model DistanceHistory {
+  id         Int      @id @default(autoincrement())
+  distanceId String
+  clubId     String
+  swing      SwingLength
+  yards      Int
+  changedAt  DateTime @default(now())
+
+  @@map("distance_history")
 }
 
 model Session {
