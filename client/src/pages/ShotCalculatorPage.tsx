@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Info } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card.js";
 import { Skeleton } from "../components/ui/skeleton.js";
@@ -73,7 +74,10 @@ function WindTable() {
 type WindDir = "head" | "tail" | "cross";
 
 function Calculator({ clubs }: { clubs: ClubRow[] }) {
-  const [distance, setDistance] = useState("150");
+  // /gps hands the yardage over in the query string, so tapping the club chip
+  // on the course lands here with the number already filled in.
+  const [params] = useSearchParams();
+  const [distance, setDistance] = useState(params.get("distance") ?? "150");
   const [elevation, setElevation] = useState("0");
   const [windMph, setWindMph] = useState("0");
   const [windDir, setWindDir] = useState<WindDir>("head");

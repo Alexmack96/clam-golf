@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { Ruler, Calculator, Settings2 } from "lucide-react";
+import { Ruler, Calculator, Settings2, Satellite } from "lucide-react";
 
 const mainTabs = [
   { to: "/distances", label: "Distances", Icon: Ruler },
+  { to: "/gps", label: "GPS", Icon: Satellite },
   { to: "/shot-calculator", label: "Calculator", Icon: Calculator },
   { to: "/clubs", label: "Clubs", Icon: Settings2 },
 ] as const;

@@ -30,6 +30,13 @@ enum DistanceUnit {
   Metres
 }
 
+enum TeeColour {
+  Yellow
+  White
+  Red
+  Blue
+}
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -89,6 +96,77 @@ model DistanceHistory {
   changedAt  DateTime @default(now())
 
   @@map("distance_history")
+}
+
+// One 18-hole layout. Richmond Park is two Courses (Duke's, Prince's), not one.
+model Course {
+  id        String   @id @default(cuid())
+  name      String   @unique // "Duke's", "Prince's"
+  sortOrder Int      @default(0)
+  holes     Hole[]
+  teeSets   TeeSet[]
+
+  @@map("courses")
+}
+
+// A numbered hole, identified by its green. Everything here is course-wide —
+// anything that varies by which tees you play lives on HoleTee instead.
+model Hole {
+  id       String @id @default(cuid())
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  number   Int
+
+  // The green's outline as a JSON array of [lat, lng] pairs, imported from
+  // OpenStreetMap. Front/middle/back are all derived from this — the outline
+  // and the centroid below must always describe the same green, which is why
+  // the editor reassigns whole outlines rather than dragging the centre pin.
+  greenPolygon String?
+  greenLat     Float?
+  greenLng     Float?
+
+  // A chosen spot the hole is played through: a dogleg corner or a layup
+  // target. Set by dragging the marker on /gps; persists between rounds.
+  aimLat Float?
+  aimLng Float?
+
+  tees HoleTee[]
+
+  @@unique([courseId, number])
+  @@map("holes")
+}
+
+// A course played from one set of tee markers. Par and stroke index belong
+// here, not on Hole — Duke's 17th is a par 5 off white and a par 4 off yellow.
+model TeeSet {
+  id       String    @id @default(cuid())
+  courseId String
+  course   Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  colour   TeeColour
+  name     String // "Men's Yellow"
+  holes    HoleTee[]
+
+  @@unique([courseId, colour])
+  @@map("tee_sets")
+}
+
+// One hole as played from one tee set. Coordinates are nullable: the yellow
+// set has them, the others carry scorecard numbers only until someone places
+// their tee boxes.
+model HoleTee {
+  id          String @id @default(cuid())
+  holeId      String
+  hole        Hole   @relation(fields: [holeId], references: [id], onDelete: Cascade)
+  teeSetId    String
+  teeSet      TeeSet @relation(fields: [teeSetId], references: [id], onDelete: Cascade)
+  yards       Int
+  par         Int
+  strokeIndex Int
+  teeLat      Float?
+  teeLng      Float?
+
+  @@unique([holeId, teeSetId])
+  @@map("hole_tees")
 }
 
 model Session {

@@ -34,6 +34,26 @@ export type Distance = $Result.DefaultSelection<Prisma.$DistancePayload>
  */
 export type DistanceHistory = $Result.DefaultSelection<Prisma.$DistanceHistoryPayload>
 /**
+ * Model Course
+ * 
+ */
+export type Course = $Result.DefaultSelection<Prisma.$CoursePayload>
+/**
+ * Model Hole
+ * 
+ */
+export type Hole = $Result.DefaultSelection<Prisma.$HolePayload>
+/**
+ * Model TeeSet
+ * 
+ */
+export type TeeSet = $Result.DefaultSelection<Prisma.$TeeSetPayload>
+/**
+ * Model HoleTee
+ * 
+ */
+export type HoleTee = $Result.DefaultSelection<Prisma.$HoleTeePayload>
+/**
  * Model Session
  * 
  */
@@ -82,6 +102,16 @@ export const DistanceUnit: {
 
 export type DistanceUnit = (typeof DistanceUnit)[keyof typeof DistanceUnit]
 
+
+export const TeeColour: {
+  Yellow: 'Yellow',
+  White: 'White',
+  Red: 'Red',
+  Blue: 'Blue'
+};
+
+export type TeeColour = (typeof TeeColour)[keyof typeof TeeColour]
+
 }
 
 export type ClubType = $Enums.ClubType
@@ -95,6 +125,10 @@ export const SwingLength: typeof $Enums.SwingLength
 export type DistanceUnit = $Enums.DistanceUnit
 
 export const DistanceUnit: typeof $Enums.DistanceUnit
+
+export type TeeColour = $Enums.TeeColour
+
+export const TeeColour: typeof $Enums.TeeColour
 
 /**
  * ##  Prisma Client ʲˢ
@@ -256,6 +290,46 @@ export class PrismaClient<
     * ```
     */
   get distanceHistory(): Prisma.DistanceHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.course`: Exposes CRUD operations for the **Course** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Courses
+    * const courses = await prisma.course.findMany()
+    * ```
+    */
+  get course(): Prisma.CourseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.hole`: Exposes CRUD operations for the **Hole** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Holes
+    * const holes = await prisma.hole.findMany()
+    * ```
+    */
+  get hole(): Prisma.HoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.teeSet`: Exposes CRUD operations for the **TeeSet** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TeeSets
+    * const teeSets = await prisma.teeSet.findMany()
+    * ```
+    */
+  get teeSet(): Prisma.TeeSetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.holeTee`: Exposes CRUD operations for the **HoleTee** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HoleTees
+    * const holeTees = await prisma.holeTee.findMany()
+    * ```
+    */
+  get holeTee(): Prisma.HoleTeeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -724,6 +798,10 @@ export namespace Prisma {
     Club: 'Club',
     Distance: 'Distance',
     DistanceHistory: 'DistanceHistory',
+    Course: 'Course',
+    Hole: 'Hole',
+    TeeSet: 'TeeSet',
+    HoleTee: 'HoleTee',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -742,7 +820,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "club" | "distance" | "distanceHistory" | "session" | "account" | "verification"
+      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1039,6 +1117,302 @@ export namespace Prisma {
           count: {
             args: Prisma.DistanceHistoryCountArgs<ExtArgs>
             result: $Utils.Optional<DistanceHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Course: {
+        payload: Prisma.$CoursePayload<ExtArgs>
+        fields: Prisma.CourseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CourseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CourseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          findFirst: {
+            args: Prisma.CourseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CourseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          findMany: {
+            args: Prisma.CourseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>[]
+          }
+          create: {
+            args: Prisma.CourseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          createMany: {
+            args: Prisma.CourseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CourseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>[]
+          }
+          delete: {
+            args: Prisma.CourseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          update: {
+            args: Prisma.CourseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          deleteMany: {
+            args: Prisma.CourseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CourseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CourseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>[]
+          }
+          upsert: {
+            args: Prisma.CourseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoursePayload>
+          }
+          aggregate: {
+            args: Prisma.CourseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCourse>
+          }
+          groupBy: {
+            args: Prisma.CourseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CourseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CourseCountArgs<ExtArgs>
+            result: $Utils.Optional<CourseCountAggregateOutputType> | number
+          }
+        }
+      }
+      Hole: {
+        payload: Prisma.$HolePayload<ExtArgs>
+        fields: Prisma.HoleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HoleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HoleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          findFirst: {
+            args: Prisma.HoleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HoleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          findMany: {
+            args: Prisma.HoleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>[]
+          }
+          create: {
+            args: Prisma.HoleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          createMany: {
+            args: Prisma.HoleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HoleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>[]
+          }
+          delete: {
+            args: Prisma.HoleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          update: {
+            args: Prisma.HoleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          deleteMany: {
+            args: Prisma.HoleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HoleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HoleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>[]
+          }
+          upsert: {
+            args: Prisma.HoleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HolePayload>
+          }
+          aggregate: {
+            args: Prisma.HoleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHole>
+          }
+          groupBy: {
+            args: Prisma.HoleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HoleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HoleCountArgs<ExtArgs>
+            result: $Utils.Optional<HoleCountAggregateOutputType> | number
+          }
+        }
+      }
+      TeeSet: {
+        payload: Prisma.$TeeSetPayload<ExtArgs>
+        fields: Prisma.TeeSetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TeeSetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TeeSetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          findFirst: {
+            args: Prisma.TeeSetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TeeSetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          findMany: {
+            args: Prisma.TeeSetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>[]
+          }
+          create: {
+            args: Prisma.TeeSetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          createMany: {
+            args: Prisma.TeeSetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TeeSetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>[]
+          }
+          delete: {
+            args: Prisma.TeeSetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          update: {
+            args: Prisma.TeeSetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          deleteMany: {
+            args: Prisma.TeeSetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TeeSetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TeeSetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>[]
+          }
+          upsert: {
+            args: Prisma.TeeSetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TeeSetPayload>
+          }
+          aggregate: {
+            args: Prisma.TeeSetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTeeSet>
+          }
+          groupBy: {
+            args: Prisma.TeeSetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TeeSetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TeeSetCountArgs<ExtArgs>
+            result: $Utils.Optional<TeeSetCountAggregateOutputType> | number
+          }
+        }
+      }
+      HoleTee: {
+        payload: Prisma.$HoleTeePayload<ExtArgs>
+        fields: Prisma.HoleTeeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HoleTeeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HoleTeeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          findFirst: {
+            args: Prisma.HoleTeeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HoleTeeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          findMany: {
+            args: Prisma.HoleTeeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>[]
+          }
+          create: {
+            args: Prisma.HoleTeeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          createMany: {
+            args: Prisma.HoleTeeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HoleTeeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>[]
+          }
+          delete: {
+            args: Prisma.HoleTeeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          update: {
+            args: Prisma.HoleTeeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          deleteMany: {
+            args: Prisma.HoleTeeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HoleTeeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HoleTeeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>[]
+          }
+          upsert: {
+            args: Prisma.HoleTeeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HoleTeePayload>
+          }
+          aggregate: {
+            args: Prisma.HoleTeeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHoleTee>
+          }
+          groupBy: {
+            args: Prisma.HoleTeeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HoleTeeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HoleTeeCountArgs<ExtArgs>
+            result: $Utils.Optional<HoleTeeCountAggregateOutputType> | number
           }
         }
       }
@@ -1376,6 +1750,10 @@ export namespace Prisma {
     club?: ClubOmit
     distance?: DistanceOmit
     distanceHistory?: DistanceHistoryOmit
+    course?: CourseOmit
+    hole?: HoleOmit
+    teeSet?: TeeSetOmit
+    holeTee?: HoleTeeOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1522,6 +1900,108 @@ export namespace Prisma {
    */
   export type ClubCountOutputTypeCountDistancesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DistanceWhereInput
+  }
+
+
+  /**
+   * Count Type CourseCountOutputType
+   */
+
+  export type CourseCountOutputType = {
+    holes: number
+    teeSets: number
+  }
+
+  export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    holes?: boolean | CourseCountOutputTypeCountHolesArgs
+    teeSets?: boolean | CourseCountOutputTypeCountTeeSetsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CourseCountOutputType
+     */
+    select?: CourseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountHolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleWhereInput
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountTeeSetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeeSetWhereInput
+  }
+
+
+  /**
+   * Count Type HoleCountOutputType
+   */
+
+  export type HoleCountOutputType = {
+    tees: number
+  }
+
+  export type HoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tees?: boolean | HoleCountOutputTypeCountTeesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * HoleCountOutputType without action
+   */
+  export type HoleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleCountOutputType
+     */
+    select?: HoleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * HoleCountOutputType without action
+   */
+  export type HoleCountOutputTypeCountTeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleTeeWhereInput
+  }
+
+
+  /**
+   * Count Type TeeSetCountOutputType
+   */
+
+  export type TeeSetCountOutputType = {
+    holes: number
+  }
+
+  export type TeeSetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    holes?: boolean | TeeSetCountOutputTypeCountHolesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TeeSetCountOutputType without action
+   */
+  export type TeeSetCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSetCountOutputType
+     */
+    select?: TeeSetCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TeeSetCountOutputType without action
+   */
+  export type TeeSetCountOutputTypeCountHolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleTeeWhereInput
   }
 
 
@@ -5921,6 +6401,4531 @@ export namespace Prisma {
 
 
   /**
+   * Model Course
+   */
+
+  export type AggregateCourse = {
+    _count: CourseCountAggregateOutputType | null
+    _avg: CourseAvgAggregateOutputType | null
+    _sum: CourseSumAggregateOutputType | null
+    _min: CourseMinAggregateOutputType | null
+    _max: CourseMaxAggregateOutputType | null
+  }
+
+  export type CourseAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type CourseSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type CourseMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    sortOrder: number | null
+  }
+
+  export type CourseMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    sortOrder: number | null
+  }
+
+  export type CourseCountAggregateOutputType = {
+    id: number
+    name: number
+    sortOrder: number
+    _all: number
+  }
+
+
+  export type CourseAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type CourseSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type CourseMinAggregateInputType = {
+    id?: true
+    name?: true
+    sortOrder?: true
+  }
+
+  export type CourseMaxAggregateInputType = {
+    id?: true
+    name?: true
+    sortOrder?: true
+  }
+
+  export type CourseCountAggregateInputType = {
+    id?: true
+    name?: true
+    sortOrder?: true
+    _all?: true
+  }
+
+  export type CourseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Course to aggregate.
+     */
+    where?: CourseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courses to fetch.
+     */
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CourseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Courses
+    **/
+    _count?: true | CourseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CourseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CourseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CourseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CourseMaxAggregateInputType
+  }
+
+  export type GetCourseAggregateType<T extends CourseAggregateArgs> = {
+        [P in keyof T & keyof AggregateCourse]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCourse[P]>
+      : GetScalarType<T[P], AggregateCourse[P]>
+  }
+
+
+
+
+  export type CourseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourseWhereInput
+    orderBy?: CourseOrderByWithAggregationInput | CourseOrderByWithAggregationInput[]
+    by: CourseScalarFieldEnum[] | CourseScalarFieldEnum
+    having?: CourseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CourseCountAggregateInputType | true
+    _avg?: CourseAvgAggregateInputType
+    _sum?: CourseSumAggregateInputType
+    _min?: CourseMinAggregateInputType
+    _max?: CourseMaxAggregateInputType
+  }
+
+  export type CourseGroupByOutputType = {
+    id: string
+    name: string
+    sortOrder: number
+    _count: CourseCountAggregateOutputType | null
+    _avg: CourseAvgAggregateOutputType | null
+    _sum: CourseSumAggregateOutputType | null
+    _min: CourseMinAggregateOutputType | null
+    _max: CourseMaxAggregateOutputType | null
+  }
+
+  type GetCourseGroupByPayload<T extends CourseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CourseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CourseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CourseGroupByOutputType[P]>
+            : GetScalarType<T[P], CourseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CourseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    sortOrder?: boolean
+    holes?: boolean | Course$holesArgs<ExtArgs>
+    teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
+    _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["course"]>
+
+  export type CourseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    sortOrder?: boolean
+  }, ExtArgs["result"]["course"]>
+
+  export type CourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    sortOrder?: boolean
+  }, ExtArgs["result"]["course"]>
+
+  export type CourseSelectScalar = {
+    id?: boolean
+    name?: boolean
+    sortOrder?: boolean
+  }
+
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "sortOrder", ExtArgs["result"]["course"]>
+  export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    holes?: boolean | Course$holesArgs<ExtArgs>
+    teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
+    _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Course"
+    objects: {
+      holes: Prisma.$HolePayload<ExtArgs>[]
+      teeSets: Prisma.$TeeSetPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      sortOrder: number
+    }, ExtArgs["result"]["course"]>
+    composites: {}
+  }
+
+  type CourseGetPayload<S extends boolean | null | undefined | CourseDefaultArgs> = $Result.GetResult<Prisma.$CoursePayload, S>
+
+  type CourseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CourseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CourseCountAggregateInputType | true
+    }
+
+  export interface CourseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Course'], meta: { name: 'Course' } }
+    /**
+     * Find zero or one Course that matches the filter.
+     * @param {CourseFindUniqueArgs} args - Arguments to find a Course
+     * @example
+     * // Get one Course
+     * const course = await prisma.course.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CourseFindUniqueArgs>(args: SelectSubset<T, CourseFindUniqueArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Course that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CourseFindUniqueOrThrowArgs} args - Arguments to find a Course
+     * @example
+     * // Get one Course
+     * const course = await prisma.course.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CourseFindUniqueOrThrowArgs>(args: SelectSubset<T, CourseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Course that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseFindFirstArgs} args - Arguments to find a Course
+     * @example
+     * // Get one Course
+     * const course = await prisma.course.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CourseFindFirstArgs>(args?: SelectSubset<T, CourseFindFirstArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Course that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseFindFirstOrThrowArgs} args - Arguments to find a Course
+     * @example
+     * // Get one Course
+     * const course = await prisma.course.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CourseFindFirstOrThrowArgs>(args?: SelectSubset<T, CourseFindFirstOrThrowArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Courses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Courses
+     * const courses = await prisma.course.findMany()
+     * 
+     * // Get first 10 Courses
+     * const courses = await prisma.course.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const courseWithIdOnly = await prisma.course.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CourseFindManyArgs>(args?: SelectSubset<T, CourseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Course.
+     * @param {CourseCreateArgs} args - Arguments to create a Course.
+     * @example
+     * // Create one Course
+     * const Course = await prisma.course.create({
+     *   data: {
+     *     // ... data to create a Course
+     *   }
+     * })
+     * 
+     */
+    create<T extends CourseCreateArgs>(args: SelectSubset<T, CourseCreateArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Courses.
+     * @param {CourseCreateManyArgs} args - Arguments to create many Courses.
+     * @example
+     * // Create many Courses
+     * const course = await prisma.course.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CourseCreateManyArgs>(args?: SelectSubset<T, CourseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Courses and returns the data saved in the database.
+     * @param {CourseCreateManyAndReturnArgs} args - Arguments to create many Courses.
+     * @example
+     * // Create many Courses
+     * const course = await prisma.course.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Courses and only return the `id`
+     * const courseWithIdOnly = await prisma.course.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CourseCreateManyAndReturnArgs>(args?: SelectSubset<T, CourseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Course.
+     * @param {CourseDeleteArgs} args - Arguments to delete one Course.
+     * @example
+     * // Delete one Course
+     * const Course = await prisma.course.delete({
+     *   where: {
+     *     // ... filter to delete one Course
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CourseDeleteArgs>(args: SelectSubset<T, CourseDeleteArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Course.
+     * @param {CourseUpdateArgs} args - Arguments to update one Course.
+     * @example
+     * // Update one Course
+     * const course = await prisma.course.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CourseUpdateArgs>(args: SelectSubset<T, CourseUpdateArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Courses.
+     * @param {CourseDeleteManyArgs} args - Arguments to filter Courses to delete.
+     * @example
+     * // Delete a few Courses
+     * const { count } = await prisma.course.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CourseDeleteManyArgs>(args?: SelectSubset<T, CourseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Courses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Courses
+     * const course = await prisma.course.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CourseUpdateManyArgs>(args: SelectSubset<T, CourseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Courses and returns the data updated in the database.
+     * @param {CourseUpdateManyAndReturnArgs} args - Arguments to update many Courses.
+     * @example
+     * // Update many Courses
+     * const course = await prisma.course.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Courses and only return the `id`
+     * const courseWithIdOnly = await prisma.course.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CourseUpdateManyAndReturnArgs>(args: SelectSubset<T, CourseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Course.
+     * @param {CourseUpsertArgs} args - Arguments to update or create a Course.
+     * @example
+     * // Update or create a Course
+     * const course = await prisma.course.upsert({
+     *   create: {
+     *     // ... data to create a Course
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Course we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CourseUpsertArgs>(args: SelectSubset<T, CourseUpsertArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Courses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseCountArgs} args - Arguments to filter Courses to count.
+     * @example
+     * // Count the number of Courses
+     * const count = await prisma.course.count({
+     *   where: {
+     *     // ... the filter for the Courses we want to count
+     *   }
+     * })
+    **/
+    count<T extends CourseCountArgs>(
+      args?: Subset<T, CourseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CourseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Course.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CourseAggregateArgs>(args: Subset<T, CourseAggregateArgs>): Prisma.PrismaPromise<GetCourseAggregateType<T>>
+
+    /**
+     * Group by Course.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CourseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CourseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CourseGroupByArgs['orderBy'] }
+        : { orderBy?: CourseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CourseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCourseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Course model
+   */
+  readonly fields: CourseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Course.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    holes<T extends Course$holesArgs<ExtArgs> = {}>(args?: Subset<T, Course$holesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    teeSets<T extends Course$teeSetsArgs<ExtArgs> = {}>(args?: Subset<T, Course$teeSetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Course model
+   */
+  interface CourseFieldRefs {
+    readonly id: FieldRef<"Course", 'String'>
+    readonly name: FieldRef<"Course", 'String'>
+    readonly sortOrder: FieldRef<"Course", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Course findUnique
+   */
+  export type CourseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter, which Course to fetch.
+     */
+    where: CourseWhereUniqueInput
+  }
+
+  /**
+   * Course findUniqueOrThrow
+   */
+  export type CourseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter, which Course to fetch.
+     */
+    where: CourseWhereUniqueInput
+  }
+
+  /**
+   * Course findFirst
+   */
+  export type CourseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter, which Course to fetch.
+     */
+    where?: CourseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courses to fetch.
+     */
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Courses.
+     */
+    cursor?: CourseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courses.
+     */
+    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
+  }
+
+  /**
+   * Course findFirstOrThrow
+   */
+  export type CourseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter, which Course to fetch.
+     */
+    where?: CourseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courses to fetch.
+     */
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Courses.
+     */
+    cursor?: CourseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courses.
+     */
+    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
+  }
+
+  /**
+   * Course findMany
+   */
+  export type CourseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter, which Courses to fetch.
+     */
+    where?: CourseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Courses to fetch.
+     */
+    orderBy?: CourseOrderByWithRelationInput | CourseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Courses.
+     */
+    cursor?: CourseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Courses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Courses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courses.
+     */
+    distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
+  }
+
+  /**
+   * Course create
+   */
+  export type CourseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Course.
+     */
+    data: XOR<CourseCreateInput, CourseUncheckedCreateInput>
+  }
+
+  /**
+   * Course createMany
+   */
+  export type CourseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Courses.
+     */
+    data: CourseCreateManyInput | CourseCreateManyInput[]
+  }
+
+  /**
+   * Course createManyAndReturn
+   */
+  export type CourseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * The data used to create many Courses.
+     */
+    data: CourseCreateManyInput | CourseCreateManyInput[]
+  }
+
+  /**
+   * Course update
+   */
+  export type CourseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Course.
+     */
+    data: XOR<CourseUpdateInput, CourseUncheckedUpdateInput>
+    /**
+     * Choose, which Course to update.
+     */
+    where: CourseWhereUniqueInput
+  }
+
+  /**
+   * Course updateMany
+   */
+  export type CourseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Courses.
+     */
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyInput>
+    /**
+     * Filter which Courses to update
+     */
+    where?: CourseWhereInput
+    /**
+     * Limit how many Courses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Course updateManyAndReturn
+   */
+  export type CourseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * The data used to update Courses.
+     */
+    data: XOR<CourseUpdateManyMutationInput, CourseUncheckedUpdateManyInput>
+    /**
+     * Filter which Courses to update
+     */
+    where?: CourseWhereInput
+    /**
+     * Limit how many Courses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Course upsert
+   */
+  export type CourseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Course to update in case it exists.
+     */
+    where: CourseWhereUniqueInput
+    /**
+     * In case the Course found by the `where` argument doesn't exist, create a new Course with this data.
+     */
+    create: XOR<CourseCreateInput, CourseUncheckedCreateInput>
+    /**
+     * In case the Course was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CourseUpdateInput, CourseUncheckedUpdateInput>
+  }
+
+  /**
+   * Course delete
+   */
+  export type CourseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    /**
+     * Filter which Course to delete.
+     */
+    where: CourseWhereUniqueInput
+  }
+
+  /**
+   * Course deleteMany
+   */
+  export type CourseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Courses to delete
+     */
+    where?: CourseWhereInput
+    /**
+     * Limit how many Courses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Course.holes
+   */
+  export type Course$holesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    where?: HoleWhereInput
+    orderBy?: HoleOrderByWithRelationInput | HoleOrderByWithRelationInput[]
+    cursor?: HoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HoleScalarFieldEnum | HoleScalarFieldEnum[]
+  }
+
+  /**
+   * Course.teeSets
+   */
+  export type Course$teeSetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    where?: TeeSetWhereInput
+    orderBy?: TeeSetOrderByWithRelationInput | TeeSetOrderByWithRelationInput[]
+    cursor?: TeeSetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TeeSetScalarFieldEnum | TeeSetScalarFieldEnum[]
+  }
+
+  /**
+   * Course without action
+   */
+  export type CourseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Hole
+   */
+
+  export type AggregateHole = {
+    _count: HoleCountAggregateOutputType | null
+    _avg: HoleAvgAggregateOutputType | null
+    _sum: HoleSumAggregateOutputType | null
+    _min: HoleMinAggregateOutputType | null
+    _max: HoleMaxAggregateOutputType | null
+  }
+
+  export type HoleAvgAggregateOutputType = {
+    number: number | null
+    greenLat: number | null
+    greenLng: number | null
+    aimLat: number | null
+    aimLng: number | null
+  }
+
+  export type HoleSumAggregateOutputType = {
+    number: number | null
+    greenLat: number | null
+    greenLng: number | null
+    aimLat: number | null
+    aimLng: number | null
+  }
+
+  export type HoleMinAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    number: number | null
+    greenPolygon: string | null
+    greenLat: number | null
+    greenLng: number | null
+    aimLat: number | null
+    aimLng: number | null
+  }
+
+  export type HoleMaxAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    number: number | null
+    greenPolygon: string | null
+    greenLat: number | null
+    greenLng: number | null
+    aimLat: number | null
+    aimLng: number | null
+  }
+
+  export type HoleCountAggregateOutputType = {
+    id: number
+    courseId: number
+    number: number
+    greenPolygon: number
+    greenLat: number
+    greenLng: number
+    aimLat: number
+    aimLng: number
+    _all: number
+  }
+
+
+  export type HoleAvgAggregateInputType = {
+    number?: true
+    greenLat?: true
+    greenLng?: true
+    aimLat?: true
+    aimLng?: true
+  }
+
+  export type HoleSumAggregateInputType = {
+    number?: true
+    greenLat?: true
+    greenLng?: true
+    aimLat?: true
+    aimLng?: true
+  }
+
+  export type HoleMinAggregateInputType = {
+    id?: true
+    courseId?: true
+    number?: true
+    greenPolygon?: true
+    greenLat?: true
+    greenLng?: true
+    aimLat?: true
+    aimLng?: true
+  }
+
+  export type HoleMaxAggregateInputType = {
+    id?: true
+    courseId?: true
+    number?: true
+    greenPolygon?: true
+    greenLat?: true
+    greenLng?: true
+    aimLat?: true
+    aimLng?: true
+  }
+
+  export type HoleCountAggregateInputType = {
+    id?: true
+    courseId?: true
+    number?: true
+    greenPolygon?: true
+    greenLat?: true
+    greenLng?: true
+    aimLat?: true
+    aimLng?: true
+    _all?: true
+  }
+
+  export type HoleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Hole to aggregate.
+     */
+    where?: HoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Holes to fetch.
+     */
+    orderBy?: HoleOrderByWithRelationInput | HoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Holes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Holes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Holes
+    **/
+    _count?: true | HoleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HoleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HoleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HoleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HoleMaxAggregateInputType
+  }
+
+  export type GetHoleAggregateType<T extends HoleAggregateArgs> = {
+        [P in keyof T & keyof AggregateHole]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHole[P]>
+      : GetScalarType<T[P], AggregateHole[P]>
+  }
+
+
+
+
+  export type HoleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleWhereInput
+    orderBy?: HoleOrderByWithAggregationInput | HoleOrderByWithAggregationInput[]
+    by: HoleScalarFieldEnum[] | HoleScalarFieldEnum
+    having?: HoleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HoleCountAggregateInputType | true
+    _avg?: HoleAvgAggregateInputType
+    _sum?: HoleSumAggregateInputType
+    _min?: HoleMinAggregateInputType
+    _max?: HoleMaxAggregateInputType
+  }
+
+  export type HoleGroupByOutputType = {
+    id: string
+    courseId: string
+    number: number
+    greenPolygon: string | null
+    greenLat: number | null
+    greenLng: number | null
+    aimLat: number | null
+    aimLng: number | null
+    _count: HoleCountAggregateOutputType | null
+    _avg: HoleAvgAggregateOutputType | null
+    _sum: HoleSumAggregateOutputType | null
+    _min: HoleMinAggregateOutputType | null
+    _max: HoleMaxAggregateOutputType | null
+  }
+
+  type GetHoleGroupByPayload<T extends HoleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HoleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HoleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HoleGroupByOutputType[P]>
+            : GetScalarType<T[P], HoleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    number?: boolean
+    greenPolygon?: boolean
+    greenLat?: boolean
+    greenLng?: boolean
+    aimLat?: boolean
+    aimLng?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    tees?: boolean | Hole$teesArgs<ExtArgs>
+    _count?: boolean | HoleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hole"]>
+
+  export type HoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    number?: boolean
+    greenPolygon?: boolean
+    greenLat?: boolean
+    greenLng?: boolean
+    aimLat?: boolean
+    aimLng?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hole"]>
+
+  export type HoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    number?: boolean
+    greenPolygon?: boolean
+    greenLat?: boolean
+    greenLng?: boolean
+    aimLat?: boolean
+    aimLng?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["hole"]>
+
+  export type HoleSelectScalar = {
+    id?: boolean
+    courseId?: boolean
+    number?: boolean
+    greenPolygon?: boolean
+    greenLat?: boolean
+    greenLng?: boolean
+    aimLat?: boolean
+    aimLng?: boolean
+  }
+
+  export type HoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "number" | "greenPolygon" | "greenLat" | "greenLng" | "aimLat" | "aimLng", ExtArgs["result"]["hole"]>
+  export type HoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    tees?: boolean | Hole$teesArgs<ExtArgs>
+    _count?: boolean | HoleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type HoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+  export type HoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+
+  export type $HolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Hole"
+    objects: {
+      course: Prisma.$CoursePayload<ExtArgs>
+      tees: Prisma.$HoleTeePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      courseId: string
+      number: number
+      greenPolygon: string | null
+      greenLat: number | null
+      greenLng: number | null
+      aimLat: number | null
+      aimLng: number | null
+    }, ExtArgs["result"]["hole"]>
+    composites: {}
+  }
+
+  type HoleGetPayload<S extends boolean | null | undefined | HoleDefaultArgs> = $Result.GetResult<Prisma.$HolePayload, S>
+
+  type HoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HoleCountAggregateInputType | true
+    }
+
+  export interface HoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Hole'], meta: { name: 'Hole' } }
+    /**
+     * Find zero or one Hole that matches the filter.
+     * @param {HoleFindUniqueArgs} args - Arguments to find a Hole
+     * @example
+     * // Get one Hole
+     * const hole = await prisma.hole.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HoleFindUniqueArgs>(args: SelectSubset<T, HoleFindUniqueArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Hole that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HoleFindUniqueOrThrowArgs} args - Arguments to find a Hole
+     * @example
+     * // Get one Hole
+     * const hole = await prisma.hole.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HoleFindUniqueOrThrowArgs>(args: SelectSubset<T, HoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Hole that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleFindFirstArgs} args - Arguments to find a Hole
+     * @example
+     * // Get one Hole
+     * const hole = await prisma.hole.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HoleFindFirstArgs>(args?: SelectSubset<T, HoleFindFirstArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Hole that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleFindFirstOrThrowArgs} args - Arguments to find a Hole
+     * @example
+     * // Get one Hole
+     * const hole = await prisma.hole.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HoleFindFirstOrThrowArgs>(args?: SelectSubset<T, HoleFindFirstOrThrowArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Holes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Holes
+     * const holes = await prisma.hole.findMany()
+     * 
+     * // Get first 10 Holes
+     * const holes = await prisma.hole.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holeWithIdOnly = await prisma.hole.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HoleFindManyArgs>(args?: SelectSubset<T, HoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Hole.
+     * @param {HoleCreateArgs} args - Arguments to create a Hole.
+     * @example
+     * // Create one Hole
+     * const Hole = await prisma.hole.create({
+     *   data: {
+     *     // ... data to create a Hole
+     *   }
+     * })
+     * 
+     */
+    create<T extends HoleCreateArgs>(args: SelectSubset<T, HoleCreateArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Holes.
+     * @param {HoleCreateManyArgs} args - Arguments to create many Holes.
+     * @example
+     * // Create many Holes
+     * const hole = await prisma.hole.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HoleCreateManyArgs>(args?: SelectSubset<T, HoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Holes and returns the data saved in the database.
+     * @param {HoleCreateManyAndReturnArgs} args - Arguments to create many Holes.
+     * @example
+     * // Create many Holes
+     * const hole = await prisma.hole.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Holes and only return the `id`
+     * const holeWithIdOnly = await prisma.hole.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HoleCreateManyAndReturnArgs>(args?: SelectSubset<T, HoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Hole.
+     * @param {HoleDeleteArgs} args - Arguments to delete one Hole.
+     * @example
+     * // Delete one Hole
+     * const Hole = await prisma.hole.delete({
+     *   where: {
+     *     // ... filter to delete one Hole
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HoleDeleteArgs>(args: SelectSubset<T, HoleDeleteArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Hole.
+     * @param {HoleUpdateArgs} args - Arguments to update one Hole.
+     * @example
+     * // Update one Hole
+     * const hole = await prisma.hole.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HoleUpdateArgs>(args: SelectSubset<T, HoleUpdateArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Holes.
+     * @param {HoleDeleteManyArgs} args - Arguments to filter Holes to delete.
+     * @example
+     * // Delete a few Holes
+     * const { count } = await prisma.hole.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HoleDeleteManyArgs>(args?: SelectSubset<T, HoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Holes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Holes
+     * const hole = await prisma.hole.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HoleUpdateManyArgs>(args: SelectSubset<T, HoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Holes and returns the data updated in the database.
+     * @param {HoleUpdateManyAndReturnArgs} args - Arguments to update many Holes.
+     * @example
+     * // Update many Holes
+     * const hole = await prisma.hole.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Holes and only return the `id`
+     * const holeWithIdOnly = await prisma.hole.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HoleUpdateManyAndReturnArgs>(args: SelectSubset<T, HoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Hole.
+     * @param {HoleUpsertArgs} args - Arguments to update or create a Hole.
+     * @example
+     * // Update or create a Hole
+     * const hole = await prisma.hole.upsert({
+     *   create: {
+     *     // ... data to create a Hole
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Hole we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HoleUpsertArgs>(args: SelectSubset<T, HoleUpsertArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Holes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleCountArgs} args - Arguments to filter Holes to count.
+     * @example
+     * // Count the number of Holes
+     * const count = await prisma.hole.count({
+     *   where: {
+     *     // ... the filter for the Holes we want to count
+     *   }
+     * })
+    **/
+    count<T extends HoleCountArgs>(
+      args?: Subset<T, HoleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HoleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Hole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HoleAggregateArgs>(args: Subset<T, HoleAggregateArgs>): Prisma.PrismaPromise<GetHoleAggregateType<T>>
+
+    /**
+     * Group by Hole.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HoleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HoleGroupByArgs['orderBy'] }
+        : { orderBy?: HoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Hole model
+   */
+  readonly fields: HoleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Hole.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tees<T extends Hole$teesArgs<ExtArgs> = {}>(args?: Subset<T, Hole$teesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Hole model
+   */
+  interface HoleFieldRefs {
+    readonly id: FieldRef<"Hole", 'String'>
+    readonly courseId: FieldRef<"Hole", 'String'>
+    readonly number: FieldRef<"Hole", 'Int'>
+    readonly greenPolygon: FieldRef<"Hole", 'String'>
+    readonly greenLat: FieldRef<"Hole", 'Float'>
+    readonly greenLng: FieldRef<"Hole", 'Float'>
+    readonly aimLat: FieldRef<"Hole", 'Float'>
+    readonly aimLng: FieldRef<"Hole", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Hole findUnique
+   */
+  export type HoleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Hole to fetch.
+     */
+    where: HoleWhereUniqueInput
+  }
+
+  /**
+   * Hole findUniqueOrThrow
+   */
+  export type HoleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Hole to fetch.
+     */
+    where: HoleWhereUniqueInput
+  }
+
+  /**
+   * Hole findFirst
+   */
+  export type HoleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Hole to fetch.
+     */
+    where?: HoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Holes to fetch.
+     */
+    orderBy?: HoleOrderByWithRelationInput | HoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Holes.
+     */
+    cursor?: HoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Holes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Holes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Holes.
+     */
+    distinct?: HoleScalarFieldEnum | HoleScalarFieldEnum[]
+  }
+
+  /**
+   * Hole findFirstOrThrow
+   */
+  export type HoleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Hole to fetch.
+     */
+    where?: HoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Holes to fetch.
+     */
+    orderBy?: HoleOrderByWithRelationInput | HoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Holes.
+     */
+    cursor?: HoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Holes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Holes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Holes.
+     */
+    distinct?: HoleScalarFieldEnum | HoleScalarFieldEnum[]
+  }
+
+  /**
+   * Hole findMany
+   */
+  export type HoleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter, which Holes to fetch.
+     */
+    where?: HoleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Holes to fetch.
+     */
+    orderBy?: HoleOrderByWithRelationInput | HoleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Holes.
+     */
+    cursor?: HoleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Holes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Holes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Holes.
+     */
+    distinct?: HoleScalarFieldEnum | HoleScalarFieldEnum[]
+  }
+
+  /**
+   * Hole create
+   */
+  export type HoleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Hole.
+     */
+    data: XOR<HoleCreateInput, HoleUncheckedCreateInput>
+  }
+
+  /**
+   * Hole createMany
+   */
+  export type HoleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Holes.
+     */
+    data: HoleCreateManyInput | HoleCreateManyInput[]
+  }
+
+  /**
+   * Hole createManyAndReturn
+   */
+  export type HoleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * The data used to create many Holes.
+     */
+    data: HoleCreateManyInput | HoleCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Hole update
+   */
+  export type HoleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Hole.
+     */
+    data: XOR<HoleUpdateInput, HoleUncheckedUpdateInput>
+    /**
+     * Choose, which Hole to update.
+     */
+    where: HoleWhereUniqueInput
+  }
+
+  /**
+   * Hole updateMany
+   */
+  export type HoleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Holes.
+     */
+    data: XOR<HoleUpdateManyMutationInput, HoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Holes to update
+     */
+    where?: HoleWhereInput
+    /**
+     * Limit how many Holes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Hole updateManyAndReturn
+   */
+  export type HoleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * The data used to update Holes.
+     */
+    data: XOR<HoleUpdateManyMutationInput, HoleUncheckedUpdateManyInput>
+    /**
+     * Filter which Holes to update
+     */
+    where?: HoleWhereInput
+    /**
+     * Limit how many Holes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Hole upsert
+   */
+  export type HoleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Hole to update in case it exists.
+     */
+    where: HoleWhereUniqueInput
+    /**
+     * In case the Hole found by the `where` argument doesn't exist, create a new Hole with this data.
+     */
+    create: XOR<HoleCreateInput, HoleUncheckedCreateInput>
+    /**
+     * In case the Hole was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HoleUpdateInput, HoleUncheckedUpdateInput>
+  }
+
+  /**
+   * Hole delete
+   */
+  export type HoleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+    /**
+     * Filter which Hole to delete.
+     */
+    where: HoleWhereUniqueInput
+  }
+
+  /**
+   * Hole deleteMany
+   */
+  export type HoleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Holes to delete
+     */
+    where?: HoleWhereInput
+    /**
+     * Limit how many Holes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Hole.tees
+   */
+  export type Hole$teesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    where?: HoleTeeWhereInput
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    cursor?: HoleTeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * Hole without action
+   */
+  export type HoleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Hole
+     */
+    select?: HoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Hole
+     */
+    omit?: HoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TeeSet
+   */
+
+  export type AggregateTeeSet = {
+    _count: TeeSetCountAggregateOutputType | null
+    _min: TeeSetMinAggregateOutputType | null
+    _max: TeeSetMaxAggregateOutputType | null
+  }
+
+  export type TeeSetMinAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    colour: $Enums.TeeColour | null
+    name: string | null
+  }
+
+  export type TeeSetMaxAggregateOutputType = {
+    id: string | null
+    courseId: string | null
+    colour: $Enums.TeeColour | null
+    name: string | null
+  }
+
+  export type TeeSetCountAggregateOutputType = {
+    id: number
+    courseId: number
+    colour: number
+    name: number
+    _all: number
+  }
+
+
+  export type TeeSetMinAggregateInputType = {
+    id?: true
+    courseId?: true
+    colour?: true
+    name?: true
+  }
+
+  export type TeeSetMaxAggregateInputType = {
+    id?: true
+    courseId?: true
+    colour?: true
+    name?: true
+  }
+
+  export type TeeSetCountAggregateInputType = {
+    id?: true
+    courseId?: true
+    colour?: true
+    name?: true
+    _all?: true
+  }
+
+  export type TeeSetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeeSet to aggregate.
+     */
+    where?: TeeSetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeeSets to fetch.
+     */
+    orderBy?: TeeSetOrderByWithRelationInput | TeeSetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TeeSetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeeSets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeeSets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TeeSets
+    **/
+    _count?: true | TeeSetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TeeSetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TeeSetMaxAggregateInputType
+  }
+
+  export type GetTeeSetAggregateType<T extends TeeSetAggregateArgs> = {
+        [P in keyof T & keyof AggregateTeeSet]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTeeSet[P]>
+      : GetScalarType<T[P], AggregateTeeSet[P]>
+  }
+
+
+
+
+  export type TeeSetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TeeSetWhereInput
+    orderBy?: TeeSetOrderByWithAggregationInput | TeeSetOrderByWithAggregationInput[]
+    by: TeeSetScalarFieldEnum[] | TeeSetScalarFieldEnum
+    having?: TeeSetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TeeSetCountAggregateInputType | true
+    _min?: TeeSetMinAggregateInputType
+    _max?: TeeSetMaxAggregateInputType
+  }
+
+  export type TeeSetGroupByOutputType = {
+    id: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+    _count: TeeSetCountAggregateOutputType | null
+    _min: TeeSetMinAggregateOutputType | null
+    _max: TeeSetMaxAggregateOutputType | null
+  }
+
+  type GetTeeSetGroupByPayload<T extends TeeSetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TeeSetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TeeSetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TeeSetGroupByOutputType[P]>
+            : GetScalarType<T[P], TeeSetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TeeSetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    colour?: boolean
+    name?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    holes?: boolean | TeeSet$holesArgs<ExtArgs>
+    _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teeSet"]>
+
+  export type TeeSetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    colour?: boolean
+    name?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teeSet"]>
+
+  export type TeeSetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    courseId?: boolean
+    colour?: boolean
+    name?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["teeSet"]>
+
+  export type TeeSetSelectScalar = {
+    id?: boolean
+    courseId?: boolean
+    colour?: boolean
+    name?: boolean
+  }
+
+  export type TeeSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "colour" | "name", ExtArgs["result"]["teeSet"]>
+  export type TeeSetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    holes?: boolean | TeeSet$holesArgs<ExtArgs>
+    _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TeeSetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+  export type TeeSetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+
+  export type $TeeSetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TeeSet"
+    objects: {
+      course: Prisma.$CoursePayload<ExtArgs>
+      holes: Prisma.$HoleTeePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      courseId: string
+      colour: $Enums.TeeColour
+      name: string
+    }, ExtArgs["result"]["teeSet"]>
+    composites: {}
+  }
+
+  type TeeSetGetPayload<S extends boolean | null | undefined | TeeSetDefaultArgs> = $Result.GetResult<Prisma.$TeeSetPayload, S>
+
+  type TeeSetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TeeSetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TeeSetCountAggregateInputType | true
+    }
+
+  export interface TeeSetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TeeSet'], meta: { name: 'TeeSet' } }
+    /**
+     * Find zero or one TeeSet that matches the filter.
+     * @param {TeeSetFindUniqueArgs} args - Arguments to find a TeeSet
+     * @example
+     * // Get one TeeSet
+     * const teeSet = await prisma.teeSet.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TeeSetFindUniqueArgs>(args: SelectSubset<T, TeeSetFindUniqueArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TeeSet that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TeeSetFindUniqueOrThrowArgs} args - Arguments to find a TeeSet
+     * @example
+     * // Get one TeeSet
+     * const teeSet = await prisma.teeSet.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TeeSetFindUniqueOrThrowArgs>(args: SelectSubset<T, TeeSetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeeSet that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetFindFirstArgs} args - Arguments to find a TeeSet
+     * @example
+     * // Get one TeeSet
+     * const teeSet = await prisma.teeSet.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TeeSetFindFirstArgs>(args?: SelectSubset<T, TeeSetFindFirstArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TeeSet that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetFindFirstOrThrowArgs} args - Arguments to find a TeeSet
+     * @example
+     * // Get one TeeSet
+     * const teeSet = await prisma.teeSet.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TeeSetFindFirstOrThrowArgs>(args?: SelectSubset<T, TeeSetFindFirstOrThrowArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TeeSets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TeeSets
+     * const teeSets = await prisma.teeSet.findMany()
+     * 
+     * // Get first 10 TeeSets
+     * const teeSets = await prisma.teeSet.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const teeSetWithIdOnly = await prisma.teeSet.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TeeSetFindManyArgs>(args?: SelectSubset<T, TeeSetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TeeSet.
+     * @param {TeeSetCreateArgs} args - Arguments to create a TeeSet.
+     * @example
+     * // Create one TeeSet
+     * const TeeSet = await prisma.teeSet.create({
+     *   data: {
+     *     // ... data to create a TeeSet
+     *   }
+     * })
+     * 
+     */
+    create<T extends TeeSetCreateArgs>(args: SelectSubset<T, TeeSetCreateArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TeeSets.
+     * @param {TeeSetCreateManyArgs} args - Arguments to create many TeeSets.
+     * @example
+     * // Create many TeeSets
+     * const teeSet = await prisma.teeSet.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TeeSetCreateManyArgs>(args?: SelectSubset<T, TeeSetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TeeSets and returns the data saved in the database.
+     * @param {TeeSetCreateManyAndReturnArgs} args - Arguments to create many TeeSets.
+     * @example
+     * // Create many TeeSets
+     * const teeSet = await prisma.teeSet.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TeeSets and only return the `id`
+     * const teeSetWithIdOnly = await prisma.teeSet.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TeeSetCreateManyAndReturnArgs>(args?: SelectSubset<T, TeeSetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TeeSet.
+     * @param {TeeSetDeleteArgs} args - Arguments to delete one TeeSet.
+     * @example
+     * // Delete one TeeSet
+     * const TeeSet = await prisma.teeSet.delete({
+     *   where: {
+     *     // ... filter to delete one TeeSet
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TeeSetDeleteArgs>(args: SelectSubset<T, TeeSetDeleteArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TeeSet.
+     * @param {TeeSetUpdateArgs} args - Arguments to update one TeeSet.
+     * @example
+     * // Update one TeeSet
+     * const teeSet = await prisma.teeSet.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TeeSetUpdateArgs>(args: SelectSubset<T, TeeSetUpdateArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TeeSets.
+     * @param {TeeSetDeleteManyArgs} args - Arguments to filter TeeSets to delete.
+     * @example
+     * // Delete a few TeeSets
+     * const { count } = await prisma.teeSet.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TeeSetDeleteManyArgs>(args?: SelectSubset<T, TeeSetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeeSets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TeeSets
+     * const teeSet = await prisma.teeSet.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TeeSetUpdateManyArgs>(args: SelectSubset<T, TeeSetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TeeSets and returns the data updated in the database.
+     * @param {TeeSetUpdateManyAndReturnArgs} args - Arguments to update many TeeSets.
+     * @example
+     * // Update many TeeSets
+     * const teeSet = await prisma.teeSet.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TeeSets and only return the `id`
+     * const teeSetWithIdOnly = await prisma.teeSet.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TeeSetUpdateManyAndReturnArgs>(args: SelectSubset<T, TeeSetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TeeSet.
+     * @param {TeeSetUpsertArgs} args - Arguments to update or create a TeeSet.
+     * @example
+     * // Update or create a TeeSet
+     * const teeSet = await prisma.teeSet.upsert({
+     *   create: {
+     *     // ... data to create a TeeSet
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TeeSet we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TeeSetUpsertArgs>(args: SelectSubset<T, TeeSetUpsertArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TeeSets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetCountArgs} args - Arguments to filter TeeSets to count.
+     * @example
+     * // Count the number of TeeSets
+     * const count = await prisma.teeSet.count({
+     *   where: {
+     *     // ... the filter for the TeeSets we want to count
+     *   }
+     * })
+    **/
+    count<T extends TeeSetCountArgs>(
+      args?: Subset<T, TeeSetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TeeSetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TeeSet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TeeSetAggregateArgs>(args: Subset<T, TeeSetAggregateArgs>): Prisma.PrismaPromise<GetTeeSetAggregateType<T>>
+
+    /**
+     * Group by TeeSet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TeeSetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TeeSetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TeeSetGroupByArgs['orderBy'] }
+        : { orderBy?: TeeSetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TeeSetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTeeSetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TeeSet model
+   */
+  readonly fields: TeeSetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TeeSet.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TeeSetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    holes<T extends TeeSet$holesArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$holesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TeeSet model
+   */
+  interface TeeSetFieldRefs {
+    readonly id: FieldRef<"TeeSet", 'String'>
+    readonly courseId: FieldRef<"TeeSet", 'String'>
+    readonly colour: FieldRef<"TeeSet", 'TeeColour'>
+    readonly name: FieldRef<"TeeSet", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TeeSet findUnique
+   */
+  export type TeeSetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter, which TeeSet to fetch.
+     */
+    where: TeeSetWhereUniqueInput
+  }
+
+  /**
+   * TeeSet findUniqueOrThrow
+   */
+  export type TeeSetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter, which TeeSet to fetch.
+     */
+    where: TeeSetWhereUniqueInput
+  }
+
+  /**
+   * TeeSet findFirst
+   */
+  export type TeeSetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter, which TeeSet to fetch.
+     */
+    where?: TeeSetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeeSets to fetch.
+     */
+    orderBy?: TeeSetOrderByWithRelationInput | TeeSetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeeSets.
+     */
+    cursor?: TeeSetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeeSets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeeSets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeeSets.
+     */
+    distinct?: TeeSetScalarFieldEnum | TeeSetScalarFieldEnum[]
+  }
+
+  /**
+   * TeeSet findFirstOrThrow
+   */
+  export type TeeSetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter, which TeeSet to fetch.
+     */
+    where?: TeeSetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeeSets to fetch.
+     */
+    orderBy?: TeeSetOrderByWithRelationInput | TeeSetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TeeSets.
+     */
+    cursor?: TeeSetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeeSets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeeSets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeeSets.
+     */
+    distinct?: TeeSetScalarFieldEnum | TeeSetScalarFieldEnum[]
+  }
+
+  /**
+   * TeeSet findMany
+   */
+  export type TeeSetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter, which TeeSets to fetch.
+     */
+    where?: TeeSetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TeeSets to fetch.
+     */
+    orderBy?: TeeSetOrderByWithRelationInput | TeeSetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TeeSets.
+     */
+    cursor?: TeeSetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TeeSets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TeeSets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TeeSets.
+     */
+    distinct?: TeeSetScalarFieldEnum | TeeSetScalarFieldEnum[]
+  }
+
+  /**
+   * TeeSet create
+   */
+  export type TeeSetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TeeSet.
+     */
+    data: XOR<TeeSetCreateInput, TeeSetUncheckedCreateInput>
+  }
+
+  /**
+   * TeeSet createMany
+   */
+  export type TeeSetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TeeSets.
+     */
+    data: TeeSetCreateManyInput | TeeSetCreateManyInput[]
+  }
+
+  /**
+   * TeeSet createManyAndReturn
+   */
+  export type TeeSetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * The data used to create many TeeSets.
+     */
+    data: TeeSetCreateManyInput | TeeSetCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TeeSet update
+   */
+  export type TeeSetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TeeSet.
+     */
+    data: XOR<TeeSetUpdateInput, TeeSetUncheckedUpdateInput>
+    /**
+     * Choose, which TeeSet to update.
+     */
+    where: TeeSetWhereUniqueInput
+  }
+
+  /**
+   * TeeSet updateMany
+   */
+  export type TeeSetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TeeSets.
+     */
+    data: XOR<TeeSetUpdateManyMutationInput, TeeSetUncheckedUpdateManyInput>
+    /**
+     * Filter which TeeSets to update
+     */
+    where?: TeeSetWhereInput
+    /**
+     * Limit how many TeeSets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeeSet updateManyAndReturn
+   */
+  export type TeeSetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * The data used to update TeeSets.
+     */
+    data: XOR<TeeSetUpdateManyMutationInput, TeeSetUncheckedUpdateManyInput>
+    /**
+     * Filter which TeeSets to update
+     */
+    where?: TeeSetWhereInput
+    /**
+     * Limit how many TeeSets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TeeSet upsert
+   */
+  export type TeeSetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TeeSet to update in case it exists.
+     */
+    where: TeeSetWhereUniqueInput
+    /**
+     * In case the TeeSet found by the `where` argument doesn't exist, create a new TeeSet with this data.
+     */
+    create: XOR<TeeSetCreateInput, TeeSetUncheckedCreateInput>
+    /**
+     * In case the TeeSet was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TeeSetUpdateInput, TeeSetUncheckedUpdateInput>
+  }
+
+  /**
+   * TeeSet delete
+   */
+  export type TeeSetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+    /**
+     * Filter which TeeSet to delete.
+     */
+    where: TeeSetWhereUniqueInput
+  }
+
+  /**
+   * TeeSet deleteMany
+   */
+  export type TeeSetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TeeSets to delete
+     */
+    where?: TeeSetWhereInput
+    /**
+     * Limit how many TeeSets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TeeSet.holes
+   */
+  export type TeeSet$holesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    where?: HoleTeeWhereInput
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    cursor?: HoleTeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * TeeSet without action
+   */
+  export type TeeSetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TeeSet
+     */
+    select?: TeeSetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TeeSet
+     */
+    omit?: TeeSetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TeeSetInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model HoleTee
+   */
+
+  export type AggregateHoleTee = {
+    _count: HoleTeeCountAggregateOutputType | null
+    _avg: HoleTeeAvgAggregateOutputType | null
+    _sum: HoleTeeSumAggregateOutputType | null
+    _min: HoleTeeMinAggregateOutputType | null
+    _max: HoleTeeMaxAggregateOutputType | null
+  }
+
+  export type HoleTeeAvgAggregateOutputType = {
+    yards: number | null
+    par: number | null
+    strokeIndex: number | null
+    teeLat: number | null
+    teeLng: number | null
+  }
+
+  export type HoleTeeSumAggregateOutputType = {
+    yards: number | null
+    par: number | null
+    strokeIndex: number | null
+    teeLat: number | null
+    teeLng: number | null
+  }
+
+  export type HoleTeeMinAggregateOutputType = {
+    id: string | null
+    holeId: string | null
+    teeSetId: string | null
+    yards: number | null
+    par: number | null
+    strokeIndex: number | null
+    teeLat: number | null
+    teeLng: number | null
+  }
+
+  export type HoleTeeMaxAggregateOutputType = {
+    id: string | null
+    holeId: string | null
+    teeSetId: string | null
+    yards: number | null
+    par: number | null
+    strokeIndex: number | null
+    teeLat: number | null
+    teeLng: number | null
+  }
+
+  export type HoleTeeCountAggregateOutputType = {
+    id: number
+    holeId: number
+    teeSetId: number
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat: number
+    teeLng: number
+    _all: number
+  }
+
+
+  export type HoleTeeAvgAggregateInputType = {
+    yards?: true
+    par?: true
+    strokeIndex?: true
+    teeLat?: true
+    teeLng?: true
+  }
+
+  export type HoleTeeSumAggregateInputType = {
+    yards?: true
+    par?: true
+    strokeIndex?: true
+    teeLat?: true
+    teeLng?: true
+  }
+
+  export type HoleTeeMinAggregateInputType = {
+    id?: true
+    holeId?: true
+    teeSetId?: true
+    yards?: true
+    par?: true
+    strokeIndex?: true
+    teeLat?: true
+    teeLng?: true
+  }
+
+  export type HoleTeeMaxAggregateInputType = {
+    id?: true
+    holeId?: true
+    teeSetId?: true
+    yards?: true
+    par?: true
+    strokeIndex?: true
+    teeLat?: true
+    teeLng?: true
+  }
+
+  export type HoleTeeCountAggregateInputType = {
+    id?: true
+    holeId?: true
+    teeSetId?: true
+    yards?: true
+    par?: true
+    strokeIndex?: true
+    teeLat?: true
+    teeLng?: true
+    _all?: true
+  }
+
+  export type HoleTeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HoleTee to aggregate.
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleTees to fetch.
+     */
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HoleTeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleTees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleTees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HoleTees
+    **/
+    _count?: true | HoleTeeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: HoleTeeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: HoleTeeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HoleTeeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HoleTeeMaxAggregateInputType
+  }
+
+  export type GetHoleTeeAggregateType<T extends HoleTeeAggregateArgs> = {
+        [P in keyof T & keyof AggregateHoleTee]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHoleTee[P]>
+      : GetScalarType<T[P], AggregateHoleTee[P]>
+  }
+
+
+
+
+  export type HoleTeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HoleTeeWhereInput
+    orderBy?: HoleTeeOrderByWithAggregationInput | HoleTeeOrderByWithAggregationInput[]
+    by: HoleTeeScalarFieldEnum[] | HoleTeeScalarFieldEnum
+    having?: HoleTeeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HoleTeeCountAggregateInputType | true
+    _avg?: HoleTeeAvgAggregateInputType
+    _sum?: HoleTeeSumAggregateInputType
+    _min?: HoleTeeMinAggregateInputType
+    _max?: HoleTeeMaxAggregateInputType
+  }
+
+  export type HoleTeeGroupByOutputType = {
+    id: string
+    holeId: string
+    teeSetId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat: number | null
+    teeLng: number | null
+    _count: HoleTeeCountAggregateOutputType | null
+    _avg: HoleTeeAvgAggregateOutputType | null
+    _sum: HoleTeeSumAggregateOutputType | null
+    _min: HoleTeeMinAggregateOutputType | null
+    _max: HoleTeeMaxAggregateOutputType | null
+  }
+
+  type GetHoleTeeGroupByPayload<T extends HoleTeeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HoleTeeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HoleTeeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HoleTeeGroupByOutputType[P]>
+            : GetScalarType<T[P], HoleTeeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HoleTeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    holeId?: boolean
+    teeSetId?: boolean
+    yards?: boolean
+    par?: boolean
+    strokeIndex?: boolean
+    teeLat?: boolean
+    teeLng?: boolean
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeTee"]>
+
+  export type HoleTeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    holeId?: boolean
+    teeSetId?: boolean
+    yards?: boolean
+    par?: boolean
+    strokeIndex?: boolean
+    teeLat?: boolean
+    teeLng?: boolean
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeTee"]>
+
+  export type HoleTeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    holeId?: boolean
+    teeSetId?: boolean
+    yards?: boolean
+    par?: boolean
+    strokeIndex?: boolean
+    teeLat?: boolean
+    teeLng?: boolean
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["holeTee"]>
+
+  export type HoleTeeSelectScalar = {
+    id?: boolean
+    holeId?: boolean
+    teeSetId?: boolean
+    yards?: boolean
+    par?: boolean
+    strokeIndex?: boolean
+    teeLat?: boolean
+    teeLng?: boolean
+  }
+
+  export type HoleTeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "holeId" | "teeSetId" | "yards" | "par" | "strokeIndex" | "teeLat" | "teeLng", ExtArgs["result"]["holeTee"]>
+  export type HoleTeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+  export type HoleTeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+  export type HoleTeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    hole?: boolean | HoleDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+
+  export type $HoleTeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HoleTee"
+    objects: {
+      hole: Prisma.$HolePayload<ExtArgs>
+      teeSet: Prisma.$TeeSetPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      holeId: string
+      teeSetId: string
+      yards: number
+      par: number
+      strokeIndex: number
+      teeLat: number | null
+      teeLng: number | null
+    }, ExtArgs["result"]["holeTee"]>
+    composites: {}
+  }
+
+  type HoleTeeGetPayload<S extends boolean | null | undefined | HoleTeeDefaultArgs> = $Result.GetResult<Prisma.$HoleTeePayload, S>
+
+  type HoleTeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HoleTeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HoleTeeCountAggregateInputType | true
+    }
+
+  export interface HoleTeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HoleTee'], meta: { name: 'HoleTee' } }
+    /**
+     * Find zero or one HoleTee that matches the filter.
+     * @param {HoleTeeFindUniqueArgs} args - Arguments to find a HoleTee
+     * @example
+     * // Get one HoleTee
+     * const holeTee = await prisma.holeTee.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HoleTeeFindUniqueArgs>(args: SelectSubset<T, HoleTeeFindUniqueArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HoleTee that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HoleTeeFindUniqueOrThrowArgs} args - Arguments to find a HoleTee
+     * @example
+     * // Get one HoleTee
+     * const holeTee = await prisma.holeTee.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HoleTeeFindUniqueOrThrowArgs>(args: SelectSubset<T, HoleTeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HoleTee that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeFindFirstArgs} args - Arguments to find a HoleTee
+     * @example
+     * // Get one HoleTee
+     * const holeTee = await prisma.holeTee.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HoleTeeFindFirstArgs>(args?: SelectSubset<T, HoleTeeFindFirstArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HoleTee that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeFindFirstOrThrowArgs} args - Arguments to find a HoleTee
+     * @example
+     * // Get one HoleTee
+     * const holeTee = await prisma.holeTee.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HoleTeeFindFirstOrThrowArgs>(args?: SelectSubset<T, HoleTeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HoleTees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HoleTees
+     * const holeTees = await prisma.holeTee.findMany()
+     * 
+     * // Get first 10 HoleTees
+     * const holeTees = await prisma.holeTee.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const holeTeeWithIdOnly = await prisma.holeTee.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HoleTeeFindManyArgs>(args?: SelectSubset<T, HoleTeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HoleTee.
+     * @param {HoleTeeCreateArgs} args - Arguments to create a HoleTee.
+     * @example
+     * // Create one HoleTee
+     * const HoleTee = await prisma.holeTee.create({
+     *   data: {
+     *     // ... data to create a HoleTee
+     *   }
+     * })
+     * 
+     */
+    create<T extends HoleTeeCreateArgs>(args: SelectSubset<T, HoleTeeCreateArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HoleTees.
+     * @param {HoleTeeCreateManyArgs} args - Arguments to create many HoleTees.
+     * @example
+     * // Create many HoleTees
+     * const holeTee = await prisma.holeTee.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HoleTeeCreateManyArgs>(args?: SelectSubset<T, HoleTeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HoleTees and returns the data saved in the database.
+     * @param {HoleTeeCreateManyAndReturnArgs} args - Arguments to create many HoleTees.
+     * @example
+     * // Create many HoleTees
+     * const holeTee = await prisma.holeTee.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HoleTees and only return the `id`
+     * const holeTeeWithIdOnly = await prisma.holeTee.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HoleTeeCreateManyAndReturnArgs>(args?: SelectSubset<T, HoleTeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HoleTee.
+     * @param {HoleTeeDeleteArgs} args - Arguments to delete one HoleTee.
+     * @example
+     * // Delete one HoleTee
+     * const HoleTee = await prisma.holeTee.delete({
+     *   where: {
+     *     // ... filter to delete one HoleTee
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HoleTeeDeleteArgs>(args: SelectSubset<T, HoleTeeDeleteArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HoleTee.
+     * @param {HoleTeeUpdateArgs} args - Arguments to update one HoleTee.
+     * @example
+     * // Update one HoleTee
+     * const holeTee = await prisma.holeTee.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HoleTeeUpdateArgs>(args: SelectSubset<T, HoleTeeUpdateArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HoleTees.
+     * @param {HoleTeeDeleteManyArgs} args - Arguments to filter HoleTees to delete.
+     * @example
+     * // Delete a few HoleTees
+     * const { count } = await prisma.holeTee.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HoleTeeDeleteManyArgs>(args?: SelectSubset<T, HoleTeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HoleTees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HoleTees
+     * const holeTee = await prisma.holeTee.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HoleTeeUpdateManyArgs>(args: SelectSubset<T, HoleTeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HoleTees and returns the data updated in the database.
+     * @param {HoleTeeUpdateManyAndReturnArgs} args - Arguments to update many HoleTees.
+     * @example
+     * // Update many HoleTees
+     * const holeTee = await prisma.holeTee.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HoleTees and only return the `id`
+     * const holeTeeWithIdOnly = await prisma.holeTee.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HoleTeeUpdateManyAndReturnArgs>(args: SelectSubset<T, HoleTeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HoleTee.
+     * @param {HoleTeeUpsertArgs} args - Arguments to update or create a HoleTee.
+     * @example
+     * // Update or create a HoleTee
+     * const holeTee = await prisma.holeTee.upsert({
+     *   create: {
+     *     // ... data to create a HoleTee
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HoleTee we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HoleTeeUpsertArgs>(args: SelectSubset<T, HoleTeeUpsertArgs<ExtArgs>>): Prisma__HoleTeeClient<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HoleTees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeCountArgs} args - Arguments to filter HoleTees to count.
+     * @example
+     * // Count the number of HoleTees
+     * const count = await prisma.holeTee.count({
+     *   where: {
+     *     // ... the filter for the HoleTees we want to count
+     *   }
+     * })
+    **/
+    count<T extends HoleTeeCountArgs>(
+      args?: Subset<T, HoleTeeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HoleTeeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HoleTee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HoleTeeAggregateArgs>(args: Subset<T, HoleTeeAggregateArgs>): Prisma.PrismaPromise<GetHoleTeeAggregateType<T>>
+
+    /**
+     * Group by HoleTee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HoleTeeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HoleTeeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HoleTeeGroupByArgs['orderBy'] }
+        : { orderBy?: HoleTeeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HoleTeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoleTeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HoleTee model
+   */
+  readonly fields: HoleTeeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HoleTee.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HoleTeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    hole<T extends HoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HoleDefaultArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teeSet<T extends TeeSetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeeSetDefaultArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HoleTee model
+   */
+  interface HoleTeeFieldRefs {
+    readonly id: FieldRef<"HoleTee", 'String'>
+    readonly holeId: FieldRef<"HoleTee", 'String'>
+    readonly teeSetId: FieldRef<"HoleTee", 'String'>
+    readonly yards: FieldRef<"HoleTee", 'Int'>
+    readonly par: FieldRef<"HoleTee", 'Int'>
+    readonly strokeIndex: FieldRef<"HoleTee", 'Int'>
+    readonly teeLat: FieldRef<"HoleTee", 'Float'>
+    readonly teeLng: FieldRef<"HoleTee", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HoleTee findUnique
+   */
+  export type HoleTeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleTee to fetch.
+     */
+    where: HoleTeeWhereUniqueInput
+  }
+
+  /**
+   * HoleTee findUniqueOrThrow
+   */
+  export type HoleTeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleTee to fetch.
+     */
+    where: HoleTeeWhereUniqueInput
+  }
+
+  /**
+   * HoleTee findFirst
+   */
+  export type HoleTeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleTee to fetch.
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleTees to fetch.
+     */
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HoleTees.
+     */
+    cursor?: HoleTeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleTees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleTees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleTees.
+     */
+    distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * HoleTee findFirstOrThrow
+   */
+  export type HoleTeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleTee to fetch.
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleTees to fetch.
+     */
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HoleTees.
+     */
+    cursor?: HoleTeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleTees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleTees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleTees.
+     */
+    distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * HoleTee findMany
+   */
+  export type HoleTeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter, which HoleTees to fetch.
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HoleTees to fetch.
+     */
+    orderBy?: HoleTeeOrderByWithRelationInput | HoleTeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HoleTees.
+     */
+    cursor?: HoleTeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HoleTees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HoleTees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HoleTees.
+     */
+    distinct?: HoleTeeScalarFieldEnum | HoleTeeScalarFieldEnum[]
+  }
+
+  /**
+   * HoleTee create
+   */
+  export type HoleTeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HoleTee.
+     */
+    data: XOR<HoleTeeCreateInput, HoleTeeUncheckedCreateInput>
+  }
+
+  /**
+   * HoleTee createMany
+   */
+  export type HoleTeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HoleTees.
+     */
+    data: HoleTeeCreateManyInput | HoleTeeCreateManyInput[]
+  }
+
+  /**
+   * HoleTee createManyAndReturn
+   */
+  export type HoleTeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * The data used to create many HoleTees.
+     */
+    data: HoleTeeCreateManyInput | HoleTeeCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HoleTee update
+   */
+  export type HoleTeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HoleTee.
+     */
+    data: XOR<HoleTeeUpdateInput, HoleTeeUncheckedUpdateInput>
+    /**
+     * Choose, which HoleTee to update.
+     */
+    where: HoleTeeWhereUniqueInput
+  }
+
+  /**
+   * HoleTee updateMany
+   */
+  export type HoleTeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HoleTees.
+     */
+    data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyInput>
+    /**
+     * Filter which HoleTees to update
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * Limit how many HoleTees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HoleTee updateManyAndReturn
+   */
+  export type HoleTeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * The data used to update HoleTees.
+     */
+    data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyInput>
+    /**
+     * Filter which HoleTees to update
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * Limit how many HoleTees to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HoleTee upsert
+   */
+  export type HoleTeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HoleTee to update in case it exists.
+     */
+    where: HoleTeeWhereUniqueInput
+    /**
+     * In case the HoleTee found by the `where` argument doesn't exist, create a new HoleTee with this data.
+     */
+    create: XOR<HoleTeeCreateInput, HoleTeeUncheckedCreateInput>
+    /**
+     * In case the HoleTee was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HoleTeeUpdateInput, HoleTeeUncheckedUpdateInput>
+  }
+
+  /**
+   * HoleTee delete
+   */
+  export type HoleTeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+    /**
+     * Filter which HoleTee to delete.
+     */
+    where: HoleTeeWhereUniqueInput
+  }
+
+  /**
+   * HoleTee deleteMany
+   */
+  export type HoleTeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HoleTees to delete
+     */
+    where?: HoleTeeWhereInput
+    /**
+     * Limit how many HoleTees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HoleTee without action
+   */
+  export type HoleTeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HoleTee
+     */
+    select?: HoleTeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HoleTee
+     */
+    omit?: HoleTeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HoleTeeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Session
    */
 
@@ -9255,6 +14260,53 @@ export namespace Prisma {
   export type DistanceHistoryScalarFieldEnum = (typeof DistanceHistoryScalarFieldEnum)[keyof typeof DistanceHistoryScalarFieldEnum]
 
 
+  export const CourseScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    sortOrder: 'sortOrder'
+  };
+
+  export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+  export const HoleScalarFieldEnum: {
+    id: 'id',
+    courseId: 'courseId',
+    number: 'number',
+    greenPolygon: 'greenPolygon',
+    greenLat: 'greenLat',
+    greenLng: 'greenLng',
+    aimLat: 'aimLat',
+    aimLng: 'aimLng'
+  };
+
+  export type HoleScalarFieldEnum = (typeof HoleScalarFieldEnum)[keyof typeof HoleScalarFieldEnum]
+
+
+  export const TeeSetScalarFieldEnum: {
+    id: 'id',
+    courseId: 'courseId',
+    colour: 'colour',
+    name: 'name'
+  };
+
+  export type TeeSetScalarFieldEnum = (typeof TeeSetScalarFieldEnum)[keyof typeof TeeSetScalarFieldEnum]
+
+
+  export const HoleTeeScalarFieldEnum: {
+    id: 'id',
+    holeId: 'holeId',
+    teeSetId: 'teeSetId',
+    yards: 'yards',
+    par: 'par',
+    strokeIndex: 'strokeIndex',
+    teeLat: 'teeLat',
+    teeLng: 'teeLng'
+  };
+
+  export type HoleTeeScalarFieldEnum = (typeof HoleTeeScalarFieldEnum)[keyof typeof HoleTeeScalarFieldEnum]
+
+
   export const SessionScalarFieldEnum: {
     id: 'id',
     expiresAt: 'expiresAt',
@@ -9374,6 +14426,13 @@ export namespace Prisma {
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'TeeColour'
+   */
+  export type EnumTeeColourFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TeeColour'>
     
   /**
    * Deep Input Types
@@ -9625,6 +14684,262 @@ export namespace Prisma {
     swing?: EnumSwingLengthWithAggregatesFilter<"DistanceHistory"> | $Enums.SwingLength
     yards?: IntWithAggregatesFilter<"DistanceHistory"> | number
     changedAt?: DateTimeWithAggregatesFilter<"DistanceHistory"> | Date | string
+  }
+
+  export type CourseWhereInput = {
+    AND?: CourseWhereInput | CourseWhereInput[]
+    OR?: CourseWhereInput[]
+    NOT?: CourseWhereInput | CourseWhereInput[]
+    id?: StringFilter<"Course"> | string
+    name?: StringFilter<"Course"> | string
+    sortOrder?: IntFilter<"Course"> | number
+    holes?: HoleListRelationFilter
+    teeSets?: TeeSetListRelationFilter
+  }
+
+  export type CourseOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    holes?: HoleOrderByRelationAggregateInput
+    teeSets?: TeeSetOrderByRelationAggregateInput
+  }
+
+  export type CourseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: CourseWhereInput | CourseWhereInput[]
+    OR?: CourseWhereInput[]
+    NOT?: CourseWhereInput | CourseWhereInput[]
+    sortOrder?: IntFilter<"Course"> | number
+    holes?: HoleListRelationFilter
+    teeSets?: TeeSetListRelationFilter
+  }, "id" | "name">
+
+  export type CourseOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    _count?: CourseCountOrderByAggregateInput
+    _avg?: CourseAvgOrderByAggregateInput
+    _max?: CourseMaxOrderByAggregateInput
+    _min?: CourseMinOrderByAggregateInput
+    _sum?: CourseSumOrderByAggregateInput
+  }
+
+  export type CourseScalarWhereWithAggregatesInput = {
+    AND?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
+    OR?: CourseScalarWhereWithAggregatesInput[]
+    NOT?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Course"> | string
+    name?: StringWithAggregatesFilter<"Course"> | string
+    sortOrder?: IntWithAggregatesFilter<"Course"> | number
+  }
+
+  export type HoleWhereInput = {
+    AND?: HoleWhereInput | HoleWhereInput[]
+    OR?: HoleWhereInput[]
+    NOT?: HoleWhereInput | HoleWhereInput[]
+    id?: StringFilter<"Hole"> | string
+    courseId?: StringFilter<"Hole"> | string
+    number?: IntFilter<"Hole"> | number
+    greenPolygon?: StringNullableFilter<"Hole"> | string | null
+    greenLat?: FloatNullableFilter<"Hole"> | number | null
+    greenLng?: FloatNullableFilter<"Hole"> | number | null
+    aimLat?: FloatNullableFilter<"Hole"> | number | null
+    aimLng?: FloatNullableFilter<"Hole"> | number | null
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    tees?: HoleTeeListRelationFilter
+  }
+
+  export type HoleOrderByWithRelationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    number?: SortOrder
+    greenPolygon?: SortOrderInput | SortOrder
+    greenLat?: SortOrderInput | SortOrder
+    greenLng?: SortOrderInput | SortOrder
+    aimLat?: SortOrderInput | SortOrder
+    aimLng?: SortOrderInput | SortOrder
+    course?: CourseOrderByWithRelationInput
+    tees?: HoleTeeOrderByRelationAggregateInput
+  }
+
+  export type HoleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    courseId_number?: HoleCourseIdNumberCompoundUniqueInput
+    AND?: HoleWhereInput | HoleWhereInput[]
+    OR?: HoleWhereInput[]
+    NOT?: HoleWhereInput | HoleWhereInput[]
+    courseId?: StringFilter<"Hole"> | string
+    number?: IntFilter<"Hole"> | number
+    greenPolygon?: StringNullableFilter<"Hole"> | string | null
+    greenLat?: FloatNullableFilter<"Hole"> | number | null
+    greenLng?: FloatNullableFilter<"Hole"> | number | null
+    aimLat?: FloatNullableFilter<"Hole"> | number | null
+    aimLng?: FloatNullableFilter<"Hole"> | number | null
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    tees?: HoleTeeListRelationFilter
+  }, "id" | "courseId_number">
+
+  export type HoleOrderByWithAggregationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    number?: SortOrder
+    greenPolygon?: SortOrderInput | SortOrder
+    greenLat?: SortOrderInput | SortOrder
+    greenLng?: SortOrderInput | SortOrder
+    aimLat?: SortOrderInput | SortOrder
+    aimLng?: SortOrderInput | SortOrder
+    _count?: HoleCountOrderByAggregateInput
+    _avg?: HoleAvgOrderByAggregateInput
+    _max?: HoleMaxOrderByAggregateInput
+    _min?: HoleMinOrderByAggregateInput
+    _sum?: HoleSumOrderByAggregateInput
+  }
+
+  export type HoleScalarWhereWithAggregatesInput = {
+    AND?: HoleScalarWhereWithAggregatesInput | HoleScalarWhereWithAggregatesInput[]
+    OR?: HoleScalarWhereWithAggregatesInput[]
+    NOT?: HoleScalarWhereWithAggregatesInput | HoleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Hole"> | string
+    courseId?: StringWithAggregatesFilter<"Hole"> | string
+    number?: IntWithAggregatesFilter<"Hole"> | number
+    greenPolygon?: StringNullableWithAggregatesFilter<"Hole"> | string | null
+    greenLat?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
+    greenLng?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
+    aimLat?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
+    aimLng?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
+  }
+
+  export type TeeSetWhereInput = {
+    AND?: TeeSetWhereInput | TeeSetWhereInput[]
+    OR?: TeeSetWhereInput[]
+    NOT?: TeeSetWhereInput | TeeSetWhereInput[]
+    id?: StringFilter<"TeeSet"> | string
+    courseId?: StringFilter<"TeeSet"> | string
+    colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
+    name?: StringFilter<"TeeSet"> | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    holes?: HoleTeeListRelationFilter
+  }
+
+  export type TeeSetOrderByWithRelationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    colour?: SortOrder
+    name?: SortOrder
+    course?: CourseOrderByWithRelationInput
+    holes?: HoleTeeOrderByRelationAggregateInput
+  }
+
+  export type TeeSetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    courseId_colour?: TeeSetCourseIdColourCompoundUniqueInput
+    AND?: TeeSetWhereInput | TeeSetWhereInput[]
+    OR?: TeeSetWhereInput[]
+    NOT?: TeeSetWhereInput | TeeSetWhereInput[]
+    courseId?: StringFilter<"TeeSet"> | string
+    colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
+    name?: StringFilter<"TeeSet"> | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    holes?: HoleTeeListRelationFilter
+  }, "id" | "courseId_colour">
+
+  export type TeeSetOrderByWithAggregationInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    colour?: SortOrder
+    name?: SortOrder
+    _count?: TeeSetCountOrderByAggregateInput
+    _max?: TeeSetMaxOrderByAggregateInput
+    _min?: TeeSetMinOrderByAggregateInput
+  }
+
+  export type TeeSetScalarWhereWithAggregatesInput = {
+    AND?: TeeSetScalarWhereWithAggregatesInput | TeeSetScalarWhereWithAggregatesInput[]
+    OR?: TeeSetScalarWhereWithAggregatesInput[]
+    NOT?: TeeSetScalarWhereWithAggregatesInput | TeeSetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TeeSet"> | string
+    courseId?: StringWithAggregatesFilter<"TeeSet"> | string
+    colour?: EnumTeeColourWithAggregatesFilter<"TeeSet"> | $Enums.TeeColour
+    name?: StringWithAggregatesFilter<"TeeSet"> | string
+  }
+
+  export type HoleTeeWhereInput = {
+    AND?: HoleTeeWhereInput | HoleTeeWhereInput[]
+    OR?: HoleTeeWhereInput[]
+    NOT?: HoleTeeWhereInput | HoleTeeWhereInput[]
+    id?: StringFilter<"HoleTee"> | string
+    holeId?: StringFilter<"HoleTee"> | string
+    teeSetId?: StringFilter<"HoleTee"> | string
+    yards?: IntFilter<"HoleTee"> | number
+    par?: IntFilter<"HoleTee"> | number
+    strokeIndex?: IntFilter<"HoleTee"> | number
+    teeLat?: FloatNullableFilter<"HoleTee"> | number | null
+    teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+    hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+  }
+
+  export type HoleTeeOrderByWithRelationInput = {
+    id?: SortOrder
+    holeId?: SortOrder
+    teeSetId?: SortOrder
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrderInput | SortOrder
+    teeLng?: SortOrderInput | SortOrder
+    hole?: HoleOrderByWithRelationInput
+    teeSet?: TeeSetOrderByWithRelationInput
+  }
+
+  export type HoleTeeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    holeId_teeSetId?: HoleTeeHoleIdTeeSetIdCompoundUniqueInput
+    AND?: HoleTeeWhereInput | HoleTeeWhereInput[]
+    OR?: HoleTeeWhereInput[]
+    NOT?: HoleTeeWhereInput | HoleTeeWhereInput[]
+    holeId?: StringFilter<"HoleTee"> | string
+    teeSetId?: StringFilter<"HoleTee"> | string
+    yards?: IntFilter<"HoleTee"> | number
+    par?: IntFilter<"HoleTee"> | number
+    strokeIndex?: IntFilter<"HoleTee"> | number
+    teeLat?: FloatNullableFilter<"HoleTee"> | number | null
+    teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+    hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+  }, "id" | "holeId_teeSetId">
+
+  export type HoleTeeOrderByWithAggregationInput = {
+    id?: SortOrder
+    holeId?: SortOrder
+    teeSetId?: SortOrder
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrderInput | SortOrder
+    teeLng?: SortOrderInput | SortOrder
+    _count?: HoleTeeCountOrderByAggregateInput
+    _avg?: HoleTeeAvgOrderByAggregateInput
+    _max?: HoleTeeMaxOrderByAggregateInput
+    _min?: HoleTeeMinOrderByAggregateInput
+    _sum?: HoleTeeSumOrderByAggregateInput
+  }
+
+  export type HoleTeeScalarWhereWithAggregatesInput = {
+    AND?: HoleTeeScalarWhereWithAggregatesInput | HoleTeeScalarWhereWithAggregatesInput[]
+    OR?: HoleTeeScalarWhereWithAggregatesInput[]
+    NOT?: HoleTeeScalarWhereWithAggregatesInput | HoleTeeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HoleTee"> | string
+    holeId?: StringWithAggregatesFilter<"HoleTee"> | string
+    teeSetId?: StringWithAggregatesFilter<"HoleTee"> | string
+    yards?: IntWithAggregatesFilter<"HoleTee"> | number
+    par?: IntWithAggregatesFilter<"HoleTee"> | number
+    strokeIndex?: IntWithAggregatesFilter<"HoleTee"> | number
+    teeLat?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
+    teeLng?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
   }
 
   export type SessionWhereInput = {
@@ -10107,6 +15422,263 @@ export namespace Prisma {
     swing?: EnumSwingLengthFieldUpdateOperationsInput | $Enums.SwingLength
     yards?: IntFieldUpdateOperationsInput | number
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourseCreateInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleCreateNestedManyWithoutCourseInput
+    teeSets?: TeeSetCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
+    teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUpdateManyWithoutCourseNestedInput
+    teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
+    teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseCreateManyInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+  }
+
+  export type CourseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CourseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type HoleCreateInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    course: CourseCreateNestedOneWithoutHolesInput
+    tees?: HoleTeeCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleUncheckedCreateInput = {
+    id?: string
+    courseId: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    course?: CourseUpdateOneRequiredWithoutHolesNestedInput
+    tees?: HoleTeeUpdateManyWithoutHoleNestedInput
+  }
+
+  export type HoleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
+  }
+
+  export type HoleCreateManyInput = {
+    id?: string
+    courseId: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+  }
+
+  export type HoleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type TeeSetCreateInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    course: CourseCreateNestedOneWithoutTeeSetsInput
+    holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetUncheckedCreateInput = {
+    id?: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+    holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
+    holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type TeeSetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type TeeSetCreateManyInput = {
+    id?: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+  }
+
+  export type TeeSetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TeeSetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type HoleTeeCreateInput = {
+    id?: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+    hole: HoleCreateNestedOneWithoutTeesInput
+    teeSet: TeeSetCreateNestedOneWithoutHolesInput
+  }
+
+  export type HoleTeeUncheckedCreateInput = {
+    id?: string
+    holeId: string
+    teeSetId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    hole?: HoleUpdateOneRequiredWithoutTeesNestedInput
+    teeSet?: TeeSetUpdateOneRequiredWithoutHolesNestedInput
+  }
+
+  export type HoleTeeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleTeeCreateManyInput = {
+    id?: string
+    holeId: string
+    teeSetId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleTeeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type SessionCreateInput = {
@@ -10716,6 +16288,255 @@ export namespace Prisma {
     yards?: SortOrder
   }
 
+  export type HoleListRelationFilter = {
+    every?: HoleWhereInput
+    some?: HoleWhereInput
+    none?: HoleWhereInput
+  }
+
+  export type TeeSetListRelationFilter = {
+    every?: TeeSetWhereInput
+    some?: TeeSetWhereInput
+    none?: TeeSetWhereInput
+  }
+
+  export type HoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TeeSetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CourseCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type CourseAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type CourseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type CourseMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type CourseSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type CourseScalarRelationFilter = {
+    is?: CourseWhereInput
+    isNot?: CourseWhereInput
+  }
+
+  export type HoleTeeListRelationFilter = {
+    every?: HoleTeeWhereInput
+    some?: HoleTeeWhereInput
+    none?: HoleTeeWhereInput
+  }
+
+  export type HoleTeeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HoleCourseIdNumberCompoundUniqueInput = {
+    courseId: string
+    number: number
+  }
+
+  export type HoleCountOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    number?: SortOrder
+    greenPolygon?: SortOrder
+    greenLat?: SortOrder
+    greenLng?: SortOrder
+    aimLat?: SortOrder
+    aimLng?: SortOrder
+  }
+
+  export type HoleAvgOrderByAggregateInput = {
+    number?: SortOrder
+    greenLat?: SortOrder
+    greenLng?: SortOrder
+    aimLat?: SortOrder
+    aimLng?: SortOrder
+  }
+
+  export type HoleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    number?: SortOrder
+    greenPolygon?: SortOrder
+    greenLat?: SortOrder
+    greenLng?: SortOrder
+    aimLat?: SortOrder
+    aimLng?: SortOrder
+  }
+
+  export type HoleMinOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    number?: SortOrder
+    greenPolygon?: SortOrder
+    greenLat?: SortOrder
+    greenLng?: SortOrder
+    aimLat?: SortOrder
+    aimLng?: SortOrder
+  }
+
+  export type HoleSumOrderByAggregateInput = {
+    number?: SortOrder
+    greenLat?: SortOrder
+    greenLng?: SortOrder
+    aimLat?: SortOrder
+    aimLng?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumTeeColourFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeeColour | EnumTeeColourFieldRefInput<$PrismaModel>
+    in?: $Enums.TeeColour[]
+    notIn?: $Enums.TeeColour[]
+    not?: NestedEnumTeeColourFilter<$PrismaModel> | $Enums.TeeColour
+  }
+
+  export type TeeSetCourseIdColourCompoundUniqueInput = {
+    courseId: string
+    colour: $Enums.TeeColour
+  }
+
+  export type TeeSetCountOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    colour?: SortOrder
+    name?: SortOrder
+  }
+
+  export type TeeSetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    colour?: SortOrder
+    name?: SortOrder
+  }
+
+  export type TeeSetMinOrderByAggregateInput = {
+    id?: SortOrder
+    courseId?: SortOrder
+    colour?: SortOrder
+    name?: SortOrder
+  }
+
+  export type EnumTeeColourWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeeColour | EnumTeeColourFieldRefInput<$PrismaModel>
+    in?: $Enums.TeeColour[]
+    notIn?: $Enums.TeeColour[]
+    not?: NestedEnumTeeColourWithAggregatesFilter<$PrismaModel> | $Enums.TeeColour
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTeeColourFilter<$PrismaModel>
+    _max?: NestedEnumTeeColourFilter<$PrismaModel>
+  }
+
+  export type HoleScalarRelationFilter = {
+    is?: HoleWhereInput
+    isNot?: HoleWhereInput
+  }
+
+  export type TeeSetScalarRelationFilter = {
+    is?: TeeSetWhereInput
+    isNot?: TeeSetWhereInput
+  }
+
+  export type HoleTeeHoleIdTeeSetIdCompoundUniqueInput = {
+    holeId: string
+    teeSetId: string
+  }
+
+  export type HoleTeeCountOrderByAggregateInput = {
+    id?: SortOrder
+    holeId?: SortOrder
+    teeSetId?: SortOrder
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrder
+    teeLng?: SortOrder
+  }
+
+  export type HoleTeeAvgOrderByAggregateInput = {
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrder
+    teeLng?: SortOrder
+  }
+
+  export type HoleTeeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    holeId?: SortOrder
+    teeSetId?: SortOrder
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrder
+    teeLng?: SortOrder
+  }
+
+  export type HoleTeeMinOrderByAggregateInput = {
+    id?: SortOrder
+    holeId?: SortOrder
+    teeSetId?: SortOrder
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrder
+    teeLng?: SortOrder
+  }
+
+  export type HoleTeeSumOrderByAggregateInput = {
+    yards?: SortOrder
+    par?: SortOrder
+    strokeIndex?: SortOrder
+    teeLat?: SortOrder
+    teeLng?: SortOrder
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -11030,6 +16851,242 @@ export namespace Prisma {
     update?: XOR<XOR<ClubUpdateToOneWithWhereWithoutDistancesInput, ClubUpdateWithoutDistancesInput>, ClubUncheckedUpdateWithoutDistancesInput>
   }
 
+  export type HoleCreateNestedManyWithoutCourseInput = {
+    create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
+    createMany?: HoleCreateManyCourseInputEnvelope
+    connect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+  }
+
+  export type TeeSetCreateNestedManyWithoutCourseInput = {
+    create?: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput> | TeeSetCreateWithoutCourseInput[] | TeeSetUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: TeeSetCreateOrConnectWithoutCourseInput | TeeSetCreateOrConnectWithoutCourseInput[]
+    createMany?: TeeSetCreateManyCourseInputEnvelope
+    connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+  }
+
+  export type HoleUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
+    createMany?: HoleCreateManyCourseInputEnvelope
+    connect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+  }
+
+  export type TeeSetUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput> | TeeSetCreateWithoutCourseInput[] | TeeSetUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: TeeSetCreateOrConnectWithoutCourseInput | TeeSetCreateOrConnectWithoutCourseInput[]
+    createMany?: TeeSetCreateManyCourseInputEnvelope
+    connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+  }
+
+  export type HoleUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
+    upsert?: HoleUpsertWithWhereUniqueWithoutCourseInput | HoleUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: HoleCreateManyCourseInputEnvelope
+    set?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    disconnect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    delete?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    connect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    update?: HoleUpdateWithWhereUniqueWithoutCourseInput | HoleUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: HoleUpdateManyWithWhereWithoutCourseInput | HoleUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: HoleScalarWhereInput | HoleScalarWhereInput[]
+  }
+
+  export type TeeSetUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput> | TeeSetCreateWithoutCourseInput[] | TeeSetUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: TeeSetCreateOrConnectWithoutCourseInput | TeeSetCreateOrConnectWithoutCourseInput[]
+    upsert?: TeeSetUpsertWithWhereUniqueWithoutCourseInput | TeeSetUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: TeeSetCreateManyCourseInputEnvelope
+    set?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    disconnect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    delete?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    update?: TeeSetUpdateWithWhereUniqueWithoutCourseInput | TeeSetUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: TeeSetUpdateManyWithWhereWithoutCourseInput | TeeSetUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
+  }
+
+  export type HoleUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput> | HoleCreateWithoutCourseInput[] | HoleUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: HoleCreateOrConnectWithoutCourseInput | HoleCreateOrConnectWithoutCourseInput[]
+    upsert?: HoleUpsertWithWhereUniqueWithoutCourseInput | HoleUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: HoleCreateManyCourseInputEnvelope
+    set?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    disconnect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    delete?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    connect?: HoleWhereUniqueInput | HoleWhereUniqueInput[]
+    update?: HoleUpdateWithWhereUniqueWithoutCourseInput | HoleUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: HoleUpdateManyWithWhereWithoutCourseInput | HoleUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: HoleScalarWhereInput | HoleScalarWhereInput[]
+  }
+
+  export type TeeSetUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput> | TeeSetCreateWithoutCourseInput[] | TeeSetUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: TeeSetCreateOrConnectWithoutCourseInput | TeeSetCreateOrConnectWithoutCourseInput[]
+    upsert?: TeeSetUpsertWithWhereUniqueWithoutCourseInput | TeeSetUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: TeeSetCreateManyCourseInputEnvelope
+    set?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    disconnect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    delete?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    connect?: TeeSetWhereUniqueInput | TeeSetWhereUniqueInput[]
+    update?: TeeSetUpdateWithWhereUniqueWithoutCourseInput | TeeSetUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: TeeSetUpdateManyWithWhereWithoutCourseInput | TeeSetUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
+  }
+
+  export type CourseCreateNestedOneWithoutHolesInput = {
+    create?: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutHolesInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type HoleTeeCreateNestedManyWithoutHoleInput = {
+    create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
+    createMany?: HoleTeeCreateManyHoleInputEnvelope
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type HoleTeeUncheckedCreateNestedManyWithoutHoleInput = {
+    create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
+    createMany?: HoleTeeCreateManyHoleInputEnvelope
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CourseUpdateOneRequiredWithoutHolesNestedInput = {
+    create?: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutHolesInput
+    upsert?: CourseUpsertWithoutHolesInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutHolesInput, CourseUpdateWithoutHolesInput>, CourseUncheckedUpdateWithoutHolesInput>
+  }
+
+  export type HoleTeeUpdateManyWithoutHoleNestedInput = {
+    create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
+    upsert?: HoleTeeUpsertWithWhereUniqueWithoutHoleInput | HoleTeeUpsertWithWhereUniqueWithoutHoleInput[]
+    createMany?: HoleTeeCreateManyHoleInputEnvelope
+    set?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    disconnect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    delete?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    update?: HoleTeeUpdateWithWhereUniqueWithoutHoleInput | HoleTeeUpdateWithWhereUniqueWithoutHoleInput[]
+    updateMany?: HoleTeeUpdateManyWithWhereWithoutHoleInput | HoleTeeUpdateManyWithWhereWithoutHoleInput[]
+    deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type HoleTeeUncheckedUpdateManyWithoutHoleNestedInput = {
+    create?: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput> | HoleTeeCreateWithoutHoleInput[] | HoleTeeUncheckedCreateWithoutHoleInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutHoleInput | HoleTeeCreateOrConnectWithoutHoleInput[]
+    upsert?: HoleTeeUpsertWithWhereUniqueWithoutHoleInput | HoleTeeUpsertWithWhereUniqueWithoutHoleInput[]
+    createMany?: HoleTeeCreateManyHoleInputEnvelope
+    set?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    disconnect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    delete?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    update?: HoleTeeUpdateWithWhereUniqueWithoutHoleInput | HoleTeeUpdateWithWhereUniqueWithoutHoleInput[]
+    updateMany?: HoleTeeUpdateManyWithWhereWithoutHoleInput | HoleTeeUpdateManyWithWhereWithoutHoleInput[]
+    deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type CourseCreateNestedOneWithoutTeeSetsInput = {
+    create?: XOR<CourseCreateWithoutTeeSetsInput, CourseUncheckedCreateWithoutTeeSetsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutTeeSetsInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type HoleTeeCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
+    createMany?: HoleTeeCreateManyTeeSetInputEnvelope
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
+    createMany?: HoleTeeCreateManyTeeSetInputEnvelope
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+  }
+
+  export type EnumTeeColourFieldUpdateOperationsInput = {
+    set?: $Enums.TeeColour
+  }
+
+  export type CourseUpdateOneRequiredWithoutTeeSetsNestedInput = {
+    create?: XOR<CourseCreateWithoutTeeSetsInput, CourseUncheckedCreateWithoutTeeSetsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutTeeSetsInput
+    upsert?: CourseUpsertWithoutTeeSetsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutTeeSetsInput, CourseUpdateWithoutTeeSetsInput>, CourseUncheckedUpdateWithoutTeeSetsInput>
+  }
+
+  export type HoleTeeUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
+    upsert?: HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput | HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: HoleTeeCreateManyTeeSetInputEnvelope
+    set?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    disconnect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    delete?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    update?: HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput | HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: HoleTeeUpdateManyWithWhereWithoutTeeSetInput | HoleTeeUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput> | HoleTeeCreateWithoutTeeSetInput[] | HoleTeeUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: HoleTeeCreateOrConnectWithoutTeeSetInput | HoleTeeCreateOrConnectWithoutTeeSetInput[]
+    upsert?: HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput | HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: HoleTeeCreateManyTeeSetInputEnvelope
+    set?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    disconnect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    delete?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
+    update?: HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput | HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: HoleTeeUpdateManyWithWhereWithoutTeeSetInput | HoleTeeUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+  }
+
+  export type HoleCreateNestedOneWithoutTeesInput = {
+    create?: XOR<HoleCreateWithoutTeesInput, HoleUncheckedCreateWithoutTeesInput>
+    connectOrCreate?: HoleCreateOrConnectWithoutTeesInput
+    connect?: HoleWhereUniqueInput
+  }
+
+  export type TeeSetCreateNestedOneWithoutHolesInput = {
+    create?: XOR<TeeSetCreateWithoutHolesInput, TeeSetUncheckedCreateWithoutHolesInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutHolesInput
+    connect?: TeeSetWhereUniqueInput
+  }
+
+  export type HoleUpdateOneRequiredWithoutTeesNestedInput = {
+    create?: XOR<HoleCreateWithoutTeesInput, HoleUncheckedCreateWithoutTeesInput>
+    connectOrCreate?: HoleCreateOrConnectWithoutTeesInput
+    upsert?: HoleUpsertWithoutTeesInput
+    connect?: HoleWhereUniqueInput
+    update?: XOR<XOR<HoleUpdateToOneWithWhereWithoutTeesInput, HoleUpdateWithoutTeesInput>, HoleUncheckedUpdateWithoutTeesInput>
+  }
+
+  export type TeeSetUpdateOneRequiredWithoutHolesNestedInput = {
+    create?: XOR<TeeSetCreateWithoutHolesInput, TeeSetUncheckedCreateWithoutHolesInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutHolesInput
+    upsert?: TeeSetUpsertWithoutHolesInput
+    connect?: TeeSetWhereUniqueInput
+    update?: XOR<XOR<TeeSetUpdateToOneWithWhereWithoutHolesInput, TeeSetUpdateWithoutHolesInput>, TeeSetUncheckedUpdateWithoutHolesInput>
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -11260,6 +17317,50 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDistanceUnitFilter<$PrismaModel>
     _max?: NestedEnumDistanceUnitFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTeeColourFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeeColour | EnumTeeColourFieldRefInput<$PrismaModel>
+    in?: $Enums.TeeColour[]
+    notIn?: $Enums.TeeColour[]
+    not?: NestedEnumTeeColourFilter<$PrismaModel> | $Enums.TeeColour
+  }
+
+  export type NestedEnumTeeColourWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TeeColour | EnumTeeColourFieldRefInput<$PrismaModel>
+    in?: $Enums.TeeColour[]
+    notIn?: $Enums.TeeColour[]
+    not?: NestedEnumTeeColourWithAggregatesFilter<$PrismaModel> | $Enums.TeeColour
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTeeColourFilter<$PrismaModel>
+    _max?: NestedEnumTeeColourFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -11524,6 +17625,412 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type HoleCreateWithoutCourseInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    tees?: HoleTeeCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleUncheckedCreateWithoutCourseInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
+  }
+
+  export type HoleCreateOrConnectWithoutCourseInput = {
+    where: HoleWhereUniqueInput
+    create: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput>
+  }
+
+  export type HoleCreateManyCourseInputEnvelope = {
+    data: HoleCreateManyCourseInput | HoleCreateManyCourseInput[]
+  }
+
+  export type TeeSetCreateWithoutCourseInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetUncheckedCreateWithoutCourseInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetCreateOrConnectWithoutCourseInput = {
+    where: TeeSetWhereUniqueInput
+    create: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput>
+  }
+
+  export type TeeSetCreateManyCourseInputEnvelope = {
+    data: TeeSetCreateManyCourseInput | TeeSetCreateManyCourseInput[]
+  }
+
+  export type HoleUpsertWithWhereUniqueWithoutCourseInput = {
+    where: HoleWhereUniqueInput
+    update: XOR<HoleUpdateWithoutCourseInput, HoleUncheckedUpdateWithoutCourseInput>
+    create: XOR<HoleCreateWithoutCourseInput, HoleUncheckedCreateWithoutCourseInput>
+  }
+
+  export type HoleUpdateWithWhereUniqueWithoutCourseInput = {
+    where: HoleWhereUniqueInput
+    data: XOR<HoleUpdateWithoutCourseInput, HoleUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type HoleUpdateManyWithWhereWithoutCourseInput = {
+    where: HoleScalarWhereInput
+    data: XOR<HoleUpdateManyMutationInput, HoleUncheckedUpdateManyWithoutCourseInput>
+  }
+
+  export type HoleScalarWhereInput = {
+    AND?: HoleScalarWhereInput | HoleScalarWhereInput[]
+    OR?: HoleScalarWhereInput[]
+    NOT?: HoleScalarWhereInput | HoleScalarWhereInput[]
+    id?: StringFilter<"Hole"> | string
+    courseId?: StringFilter<"Hole"> | string
+    number?: IntFilter<"Hole"> | number
+    greenPolygon?: StringNullableFilter<"Hole"> | string | null
+    greenLat?: FloatNullableFilter<"Hole"> | number | null
+    greenLng?: FloatNullableFilter<"Hole"> | number | null
+    aimLat?: FloatNullableFilter<"Hole"> | number | null
+    aimLng?: FloatNullableFilter<"Hole"> | number | null
+  }
+
+  export type TeeSetUpsertWithWhereUniqueWithoutCourseInput = {
+    where: TeeSetWhereUniqueInput
+    update: XOR<TeeSetUpdateWithoutCourseInput, TeeSetUncheckedUpdateWithoutCourseInput>
+    create: XOR<TeeSetCreateWithoutCourseInput, TeeSetUncheckedCreateWithoutCourseInput>
+  }
+
+  export type TeeSetUpdateWithWhereUniqueWithoutCourseInput = {
+    where: TeeSetWhereUniqueInput
+    data: XOR<TeeSetUpdateWithoutCourseInput, TeeSetUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type TeeSetUpdateManyWithWhereWithoutCourseInput = {
+    where: TeeSetScalarWhereInput
+    data: XOR<TeeSetUpdateManyMutationInput, TeeSetUncheckedUpdateManyWithoutCourseInput>
+  }
+
+  export type TeeSetScalarWhereInput = {
+    AND?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
+    OR?: TeeSetScalarWhereInput[]
+    NOT?: TeeSetScalarWhereInput | TeeSetScalarWhereInput[]
+    id?: StringFilter<"TeeSet"> | string
+    courseId?: StringFilter<"TeeSet"> | string
+    colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
+    name?: StringFilter<"TeeSet"> | string
+  }
+
+  export type CourseCreateWithoutHolesInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    teeSets?: TeeSetCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutHolesInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutHolesInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
+  }
+
+  export type HoleTeeCreateWithoutHoleInput = {
+    id?: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+    teeSet: TeeSetCreateNestedOneWithoutHolesInput
+  }
+
+  export type HoleTeeUncheckedCreateWithoutHoleInput = {
+    id?: string
+    teeSetId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeCreateOrConnectWithoutHoleInput = {
+    where: HoleTeeWhereUniqueInput
+    create: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput>
+  }
+
+  export type HoleTeeCreateManyHoleInputEnvelope = {
+    data: HoleTeeCreateManyHoleInput | HoleTeeCreateManyHoleInput[]
+  }
+
+  export type CourseUpsertWithoutHolesInput = {
+    update: XOR<CourseUpdateWithoutHolesInput, CourseUncheckedUpdateWithoutHolesInput>
+    create: XOR<CourseCreateWithoutHolesInput, CourseUncheckedCreateWithoutHolesInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutHolesInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutHolesInput, CourseUncheckedUpdateWithoutHolesInput>
+  }
+
+  export type CourseUpdateWithoutHolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutHolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type HoleTeeUpsertWithWhereUniqueWithoutHoleInput = {
+    where: HoleTeeWhereUniqueInput
+    update: XOR<HoleTeeUpdateWithoutHoleInput, HoleTeeUncheckedUpdateWithoutHoleInput>
+    create: XOR<HoleTeeCreateWithoutHoleInput, HoleTeeUncheckedCreateWithoutHoleInput>
+  }
+
+  export type HoleTeeUpdateWithWhereUniqueWithoutHoleInput = {
+    where: HoleTeeWhereUniqueInput
+    data: XOR<HoleTeeUpdateWithoutHoleInput, HoleTeeUncheckedUpdateWithoutHoleInput>
+  }
+
+  export type HoleTeeUpdateManyWithWhereWithoutHoleInput = {
+    where: HoleTeeScalarWhereInput
+    data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyWithoutHoleInput>
+  }
+
+  export type HoleTeeScalarWhereInput = {
+    AND?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+    OR?: HoleTeeScalarWhereInput[]
+    NOT?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
+    id?: StringFilter<"HoleTee"> | string
+    holeId?: StringFilter<"HoleTee"> | string
+    teeSetId?: StringFilter<"HoleTee"> | string
+    yards?: IntFilter<"HoleTee"> | number
+    par?: IntFilter<"HoleTee"> | number
+    strokeIndex?: IntFilter<"HoleTee"> | number
+    teeLat?: FloatNullableFilter<"HoleTee"> | number | null
+    teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+  }
+
+  export type CourseCreateWithoutTeeSetsInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutTeeSetsInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutTeeSetsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutTeeSetsInput, CourseUncheckedCreateWithoutTeeSetsInput>
+  }
+
+  export type HoleTeeCreateWithoutTeeSetInput = {
+    id?: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+    hole: HoleCreateNestedOneWithoutTeesInput
+  }
+
+  export type HoleTeeUncheckedCreateWithoutTeeSetInput = {
+    id?: string
+    holeId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeCreateOrConnectWithoutTeeSetInput = {
+    where: HoleTeeWhereUniqueInput
+    create: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput>
+  }
+
+  export type HoleTeeCreateManyTeeSetInputEnvelope = {
+    data: HoleTeeCreateManyTeeSetInput | HoleTeeCreateManyTeeSetInput[]
+  }
+
+  export type CourseUpsertWithoutTeeSetsInput = {
+    update: XOR<CourseUpdateWithoutTeeSetsInput, CourseUncheckedUpdateWithoutTeeSetsInput>
+    create: XOR<CourseCreateWithoutTeeSetsInput, CourseUncheckedCreateWithoutTeeSetsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutTeeSetsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutTeeSetsInput, CourseUncheckedUpdateWithoutTeeSetsInput>
+  }
+
+  export type CourseUpdateWithoutTeeSetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutTeeSetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type HoleTeeUpsertWithWhereUniqueWithoutTeeSetInput = {
+    where: HoleTeeWhereUniqueInput
+    update: XOR<HoleTeeUpdateWithoutTeeSetInput, HoleTeeUncheckedUpdateWithoutTeeSetInput>
+    create: XOR<HoleTeeCreateWithoutTeeSetInput, HoleTeeUncheckedCreateWithoutTeeSetInput>
+  }
+
+  export type HoleTeeUpdateWithWhereUniqueWithoutTeeSetInput = {
+    where: HoleTeeWhereUniqueInput
+    data: XOR<HoleTeeUpdateWithoutTeeSetInput, HoleTeeUncheckedUpdateWithoutTeeSetInput>
+  }
+
+  export type HoleTeeUpdateManyWithWhereWithoutTeeSetInput = {
+    where: HoleTeeScalarWhereInput
+    data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyWithoutTeeSetInput>
+  }
+
+  export type HoleCreateWithoutTeesInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+    course: CourseCreateNestedOneWithoutHolesInput
+  }
+
+  export type HoleUncheckedCreateWithoutTeesInput = {
+    id?: string
+    courseId: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+  }
+
+  export type HoleCreateOrConnectWithoutTeesInput = {
+    where: HoleWhereUniqueInput
+    create: XOR<HoleCreateWithoutTeesInput, HoleUncheckedCreateWithoutTeesInput>
+  }
+
+  export type TeeSetCreateWithoutHolesInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    course: CourseCreateNestedOneWithoutTeeSetsInput
+  }
+
+  export type TeeSetUncheckedCreateWithoutHolesInput = {
+    id?: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+  }
+
+  export type TeeSetCreateOrConnectWithoutHolesInput = {
+    where: TeeSetWhereUniqueInput
+    create: XOR<TeeSetCreateWithoutHolesInput, TeeSetUncheckedCreateWithoutHolesInput>
+  }
+
+  export type HoleUpsertWithoutTeesInput = {
+    update: XOR<HoleUpdateWithoutTeesInput, HoleUncheckedUpdateWithoutTeesInput>
+    create: XOR<HoleCreateWithoutTeesInput, HoleUncheckedCreateWithoutTeesInput>
+    where?: HoleWhereInput
+  }
+
+  export type HoleUpdateToOneWithWhereWithoutTeesInput = {
+    where?: HoleWhereInput
+    data: XOR<HoleUpdateWithoutTeesInput, HoleUncheckedUpdateWithoutTeesInput>
+  }
+
+  export type HoleUpdateWithoutTeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    course?: CourseUpdateOneRequiredWithoutHolesNestedInput
+  }
+
+  export type HoleUncheckedUpdateWithoutTeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type TeeSetUpsertWithoutHolesInput = {
+    update: XOR<TeeSetUpdateWithoutHolesInput, TeeSetUncheckedUpdateWithoutHolesInput>
+    create: XOR<TeeSetCreateWithoutHolesInput, TeeSetUncheckedCreateWithoutHolesInput>
+    where?: TeeSetWhereInput
+  }
+
+  export type TeeSetUpdateToOneWithWhereWithoutHolesInput = {
+    where?: TeeSetWhereInput
+    data: XOR<TeeSetUpdateWithoutHolesInput, TeeSetUncheckedUpdateWithoutHolesInput>
+  }
+
+  export type TeeSetUpdateWithoutHolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
+  }
+
+  export type TeeSetUncheckedUpdateWithoutHolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
@@ -11770,6 +18277,154 @@ export namespace Prisma {
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HoleCreateManyCourseInput = {
+    id?: string
+    number: number
+    greenPolygon?: string | null
+    greenLat?: number | null
+    greenLng?: number | null
+    aimLat?: number | null
+    aimLng?: number | null
+  }
+
+  export type TeeSetCreateManyCourseInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+  }
+
+  export type HoleUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    tees?: HoleTeeUpdateManyWithoutHoleNestedInput
+  }
+
+  export type HoleUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
+  }
+
+  export type HoleUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: IntFieldUpdateOperationsInput | number
+    greenPolygon?: NullableStringFieldUpdateOperationsInput | string | null
+    greenLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type TeeSetUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type TeeSetUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+    holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
+  }
+
+  export type TeeSetUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type HoleTeeCreateManyHoleInput = {
+    id?: string
+    teeSetId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeUpdateWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeSet?: TeeSetUpdateOneRequiredWithoutHolesNestedInput
+  }
+
+  export type HoleTeeUncheckedUpdateWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleTeeUncheckedUpdateManyWithoutHoleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleTeeCreateManyTeeSetInput = {
+    id?: string
+    holeId: string
+    yards: number
+    par: number
+    strokeIndex: number
+    teeLat?: number | null
+    teeLng?: number | null
+  }
+
+  export type HoleTeeUpdateWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    hole?: HoleUpdateOneRequiredWithoutTeesNestedInput
+  }
+
+  export type HoleTeeUncheckedUpdateWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type HoleTeeUncheckedUpdateManyWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    holeId?: StringFieldUpdateOperationsInput | string
+    yards?: IntFieldUpdateOperationsInput | number
+    par?: IntFieldUpdateOperationsInput | number
+    strokeIndex?: IntFieldUpdateOperationsInput | number
+    teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
+    teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
 

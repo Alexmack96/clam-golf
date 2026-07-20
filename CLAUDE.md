@@ -2,262 +2,222 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Clam Golf is a single-player golf app: club distances, a shot calculator, and a GPS
+rangefinder. See [CONTEXT.md](./CONTEXT.md) for the domain vocabulary — use those
+terms in code and in conversation.
+
 ## Express 5 Error Handling
 
-Express 5 automatically forwards async errors to the error handler — no `try/catch` needed for generic propagation. Only use `try/catch` when mapping a specific error to a specific HTTP response (e.g. Prisma `P2002` → 409, CSV parse failure → 400). Never wrap async DB calls in `try/catch` just to `throw err` or call `next(err)`.
+Express 5 automatically forwards async errors to the error handler — no `try/catch`
+needed for generic propagation. Only use `try/catch` when mapping a specific error to
+a specific HTTP response (e.g. Prisma `P2025` → 404, `P2002` → 409). Never wrap async
+DB calls in `try/catch` just to `throw err` or call `next(err)`.
 
 ## Enums
 
-Always use Prisma-generated enums (e.g. `UserRole.User`, `UserRole.Admin`) instead of hardcoding string literals. Import from `../generated/prisma/index.js`.
+Always use Prisma-generated enums (e.g. `ClubType.Wedge`, `TeeColour.Yellow`) instead
+of hardcoding string literals. Import from `../generated/prisma/index.js`.
 
 ## Context7
 
-Always use Context7 (`npx ctx7@latest library <name>` then `npx ctx7@latest docs <id>`) when working with any library, framework, or API in this codebase — Prisma, Express, React, Vite, Tailwind, Zod, Bun, Anthropic SDK, etc.
+Always use Context7 (`npx ctx7@latest library <name>` then `npx ctx7@latest docs <id>`)
+when working with any library or API here — Prisma, Express, React, Vite, Tailwind,
+Zod, Leaflet, Better Auth, Bun.
 
 ## Dev Commands
 
-All commands use **Bun** as the runtime/package manager.
-
-### Local development (two terminals)
+All commands use **Bun**.
 
 ```bash
-# Terminal 1
-cd server && bun run dev      # hot-reload via bun --watch
-
-# Terminal 2
-cd client && bun run dev      # Vite dev server on :5173
+bun run dev          # both services from the repo root
 ```
 
-Or from repo root:
+Or separately:
 
 ```bash
-bun run dev
+cd server && bun run dev      # bun --watch, port 3000
+cd client && bun run dev      # Vite, port 5173
 ```
 
-Database is **SQLite** (`server/prisma/dev.db`) — no external DB process needed.
+Both have a `predev` that frees their port first. If a page loads but shows the wrong
+app or routes do not match, something else is squatting on the port — run
+`bun scripts/free-ports.mjs 3000 5173` and restart.
+
+Database is **SQLite** (`server/prisma/dev.db`).
 
 ### Server DB commands
 
 ```bash
-bun run db:migrate:deploy  # apply existing migrations (use this — migrate dev is interactive)
-bun run db:seed            # seed admin user only (no sample data)
-bun run db:studio          # Prisma Studio GUI
-bun run db:generate        # regenerate Prisma client after schema change
+bun run db:migrate:deploy   # apply migrations (migrate dev needs a TTY)
+bun run db:generate         # regenerate the client after a schema change
+bun run db:seed             # admin user
+bun run db:seed:clubs       # the bag
+bun run db:seed:courses     # Richmond Park scorecards
+bun run db:studio
 ```
 
-**Adding a migration:** `prisma migrate dev` requires an interactive TTY. Instead:
-1. Write the SQL manually in `server/prisma/migrations/<timestamp>_<name>/migration.sql`
-2. Run `bun run db:migrate:deploy` to apply it
-3. Run `bun run db:generate` to regenerate the client
+The seed scripts read `DATABASE_URL` from the repo-root `.env`, which Bun only picks
+up in `dev`. To run one by hand: `bun --env-file ../.env src/db/seedCourses.ts`.
 
-### Lint
+All seeds are **fill-only** — they create what is missing and never update what
+exists, because the data they touch is data you edit in the app.
+
+**Adding a migration:** `prisma migrate dev` requires an interactive TTY. Instead:
+1. Write the SQL in `server/prisma/migrations/<timestamp>_<name>/migration.sql`
+2. `bun run db:migrate:deploy`
+3. `bun run db:generate`
+
+### Lint and tests
 
 ```bash
 cd server && bun run lint
-cd client && bun run lint
+cd client && bun run lint      # React Compiler rules are on — see below
+cd client && bunx vitest run
+npx playwright test
 ```
 
-### Component tests (client)
+Use the **playwright-e2e-writer** agent for e2e tests. Do not write them inline.
 
-```bash
-cd client && bun run test       # Vitest watch mode
-cd client && bunx vitest run    # single run
-```
+## React Compiler
 
-Tests use Vitest + React Testing Library. Setup file: `client/src/test/setup.ts`. Shared helper: `client/src/test/renderWithQuery.tsx`.
+The client lints with `eslint-plugin-react-hooks` v7 and the compiler rules enabled.
+Hand-written `useMemo` / `useCallback` is an **error** whenever the compiler cannot
+prove your dependency list matches what it infers. Prefer plain expressions and plain
+functions and let the compiler memoize; only reach for a manual hook when the
+dependencies are genuinely exact. Refs must not be written during render.
 
-### E2E Tests
+## Forms
 
-```bash
-npx playwright test          # run all e2e tests
-npx playwright test --ui     # interactive UI mode
-npx playwright show-report   # view last test report
-```
+**React Hook Form** + **Zod**. Shared schemas go in `@clam/core`; local-only schemas
+stay in the page. Wire with `useForm({ resolver: zodResolver(schema) })`.
 
-Use the **playwright-e2e-writer** agent for all e2e test authoring. Do not write Playwright tests inline.
+## Shared code (`core/`)
 
-## Forms (Client)
+`@clam/core` is the third workspace, imported by both server and client.
 
-Use **React Hook Form** + **Zod** for all forms. Define schemas in `@helpdesk/core` if they're shared with the server; define them locally only if client-only. Wire with `useForm({ resolver: zodResolver(schema) })` and `{...register("field")}`.
-
-## Shared Schemas (`core/`)
-
-`core/` is a third workspace (`@helpdesk/core`) containing Zod schemas shared between server and client.
-
-- `core/src/schemas/` — one file per domain (e.g. `users.ts`)
+- `core/src/schemas/` — one file per domain
+- `core/src/geo.ts` — geospatial maths (distance, bearing, centroid, green distances)
 - `core/src/index.ts` — barrel re-export
-- Import: `import { createUserSchema } from "@helpdesk/core"`
-- Always add new shared validation schemas here; never duplicate them across server and client.
+
+Anything both sides need lives here. Never duplicate it — a copy of the centroid
+function in a script once drifted from the shared one by 26cm.
 
 ## Architecture
 
-Bun monorepo with three workspaces: `server/`, `client/`, and `core/`.
+Bun monorepo: `server/`, `client/`, `core/`.
 
 ### Server (`server/src/`)
 
-Express + TypeScript API. Entry point: `src/index.ts`.
+Express + TypeScript. Entry: `src/index.ts`.
 
-- `config/env.ts` — Zod-validated env vars. Required: `DATABASE_URL`, `SESSION_SECRET`. Optional: SendGrid and Anthropic keys.
-- `db/client.ts` — Prisma client singleton.
-- `db/seed.ts` — seeds admin user only; no sample transactions.
-- `middleware/auth.ts` — `requireAuth` (any logged-in session). There is no admin role gate; every authenticated user can reach every route.
-- `routes/admin.ts` — user list, Monzo CSV import, staging status, process staged.
-- `routes/categories.ts` — category CRUD.
-- `routes/transactions.ts` — transaction CRUD.
-- `routes/dashboard.ts` — summary aggregates for dashboard.
-
-All routes are prefixed and proxied from Vite in dev (see `client/vite.config.ts`).
+- `config/env.ts` — Zod-validated env vars
+- `db/client.ts` — Prisma singleton on the libSQL adapter
+- `middleware/auth.ts` — `requireAuth`. There is no role gate; every signed-in user
+  reaches every route
+- `routes/clubs.ts` — the bag, including the 14-club swap rule
+- `routes/distances.ts` — measured yardages
+- `routes/courses.ts` — courses, green assignment, aim points, tee positions
 
 ### Client (`client/src/`)
 
-React 18 + React Router v6 + Tailwind v4 + shadcn/ui. Entry: `main.tsx` → `App.tsx`.
+React 18 + React Router v6 + Tailwind v4 + shadcn/ui.
 
-- `main.tsx` — Wraps app in `QueryClientProvider` → `ThemeProvider` → `BrowserRouter`.
-- `context/ThemeContext.tsx` — Light/dark theme toggle; persists to `localStorage`; toggles `.dark` on `<html>`.
-- `lib/authClient.ts` — Re-exports Better Auth client (`signIn`, `signOut`, `useSession`).
-- `lib/api.ts` — Axios instance (`withCredentials: true`). **Always import this for HTTP requests — never use `fetch` directly.**
-- `lib/utils.ts` — `cn()` helper (clsx + tailwind-merge).
-- `components/ProtectedRoute.tsx` — Route guard; redirects to `/login` if no session.
-- `components/Layout.tsx` — Shell with `<Navbar>` + `<Outlet>`; handles sign-out.
-- `components/Navbar.tsx` — Green navbar; all pages (incl. Users, Import, Categories) are shown to every logged-in user.
-- `components/ui/` — shadcn/ui components (new-york style).
-- `pages/LoginPage.tsx` — Email/password login.
-- `pages/DashboardPage.tsx` — Summary cards (income/expenses/balance), spending pie chart, transaction table with type/category filters.
-- `pages/UsersPage.tsx` — Admin: list all users with role and verification status.
-- `pages/ImportPage.tsx` — Admin: upload bank CSV files to staging, process staged rows into transactions.
+- `lib/api.ts` — Axios instance. **Always use this; never `fetch` for the API.**
+- `hooks/` — one file per resource, `useQuery` + mutations that invalidate
+- `pages/DistancesPage.tsx` — the gapping table
+- `pages/ShotCalculatorPage.tsx` — plays-like distance; accepts `?distance=` from /gps
+- `pages/ClubsPage.tsx` — bag management
+- `pages/GpsPage.tsx` — the rangefinder
 
-#### HTTP & Server State
+Query keys are descriptive noun arrays: `["clubs"]`, `["courses"]`.
 
-- **Axios** (`client/src/lib/api.ts`) is the only HTTP client. Never use `fetch` directly.
-- **TanStack Query v5** manages all server state.
-  - GET → `useQuery`; mutations → `useMutation` with `queryClient.invalidateQueries` on success.
-  - Query keys: descriptive noun arrays, e.g. `["users"]`, `["transactions", typeFilter, categoryFilter]`.
+### Authentication
 
-#### UI / Theming
+Better Auth, server-side sessions in SQLite via the Prisma adapter. No JWT. Sign-up
+is disabled; the admin account is seeded from `ADMIN_EMAIL` / `ADMIN_PASSWORD`.
 
-- Tailwind v4 via `@tailwindcss/vite` plugin (no `tailwind.config.*` file).
-- shadcn configured in `client/components.json`; add components with `npx shadcn@latest add <name>`.
-- `@` path alias resolves to `client/src/`.
-- Theme: green primary (`oklch(0.527 0.154 150.069)`). Dark mode uses deep Wimbledon purple backgrounds (`oklch(0.19 0.07 300)`).
-- Icons via `lucide-react`.
+## The GPS rangefinder (`/gps`)
 
-Vite proxies `/api`, `/auth`, `/admin`, `/dashboard` → `localhost:3000`.
+### How a hole is modelled
 
-### Authentication (Better Auth)
+`Course` → `Hole` → `HoleTee`, with `TeeSet` naming the colour.
 
-Server-side sessions stored in SQLite via the Prisma adapter. No JWT.
+- **`Hole`** holds geometry true regardless of which tees you play: the green
+  outline, its centroid, and an optional aim point.
+- **`HoleTee`** holds what the scorecard prints per colour: yardage, par, stroke
+  index, and optionally that tee's coordinates.
 
-**Server config** — `server/src/lib/auth.ts`:
-```ts
-export const auth = betterAuth({
-  database: prismaAdapter(db, { provider: "sqlite" }),
-  emailAndPassword: { enabled: true, disableSignUp: true },
-  user: { additionalFields: { role: { type: "string", defaultValue: "User", input: false } } },
-});
-```
+Par is on `HoleTee`, not `Hole`, because Duke's 17th is a par 5 off white and a par 4
+off yellow.
 
-Sign-up is disabled — new users must be created by an admin.
+### Where course geometry comes from
 
-### Database (Prisma + SQLite)
+`scripts/fetch-osm-geometry.mjs` pulls green and tee outlines from OpenStreetMap into
+`client/src/data/richmond-park-geometry.json`, checked in so neither the build nor the
+app depends on Overpass.
 
-Key models:
+Overpass rejects a POST without a named `User-Agent` (406) and rate-limits hard, so
+the script sets one and cycles mirrors.
 
-| Model | Purpose |
-|---|---|
-| `User` | Admin and agent accounts |
-| `Category` | Transaction categories with colour |
-| `Transaction` | Normalised transactions; `externalId` is namespaced bank ID (`monzo:tx_...`) |
-| `MonzoTransaction` | Raw Monzo CSV staging — untouched, one row per CSV row |
+**OSM has no hole numbers, no par and no tee colours.** Binding an outline to a hole
+is therefore a deliberate step: the pencil toggle on `/gps` opens the assignment
+editor, which offers every unclaimed outline and writes the one you tap to that hole.
+The outline and its centroid always move together — front and back are projections of
+the outline, so a centre belonging to a different green would produce plausible wrong
+numbers.
 
-### Bank Import Flow
+The editor flags a hole where straight-line tee-to-green differs from the card by more
+than 60 yards. A dogleg legitimately reads short, because the card follows the line of
+play; a gap that large means the wrong green.
 
-Two-step pipeline: **stage → process**.
+### Distances
 
-1. **Upload** (`POST /api/admin/import/monzo`) — parses CSV into `MonzoTransaction`. Returns `{ imported, duplicates }`. Duplicate `transactionId`s are skipped and listed.
-2. **Process** (`POST /api/admin/process`) — reads unprocessed `MonzoTransaction` rows, normalises each to `Transaction` (date parse, Income/Expense split, category upsert), sets `externalId = "monzo:<transactionId>"`.
+All maths is in `core/src/geo.ts` and runs locally, so yardages work with no network.
 
-**Adding a new bank:** add a `<Bank>Transaction` model with that bank's raw CSV columns. Add `POST /api/admin/import/<bank>` with a bank-specific parser. Add `GET /api/admin/staged` count. Add a `BankUploadCard` on `ImportPage`. The process step handles all tables and funnels into `Transaction`.
+- **Middle** is the area-weighted centroid of the green outline, not the mean of its
+  vertices — hand-traced outlines have far more points on some edges than others.
+- **Front / back** project the outline onto the line of play, rather than taking the
+  nearest and furthest points of the outline. The same green reads deeper attacked
+  end-on than from the side, which is correct.
 
-`externalId` is namespaced (`monzo:tx_...`, `amex:ref_...`) to prevent cross-bank collisions.
+`client/src/test/geo.test.ts` covers these; both behaviours were bugs the tests caught.
 
-Planned banks: Monzo ✓, Amex ✓, Barclays ✓, Santander ✓, HSBC (coming).
+### Position
 
-## Adding a New Bank via Image Upload (fast path)
+`useGeolocation` watches with `enableHighAccuracy` and **tears the watch down on
+`visibilitychange`**. A round is four hours and continuous GPS is the biggest drain on
+the page.
 
-Use this for any bank where `pdf-parse` text extraction is unreliable (HSBC, etc.). Instead of writing regex parsers, accept a JPEG/PNG screenshot of the statement and call Claude vision to extract structured data.
+A fix looser than `USABLE_ACCURACY_M` (50m) is a wifi or IP lookup, not a satellite
+one — which is what a desktop reports. The page then suppresses live yardages and
+falls back to measuring from the tee, plus tap-to-measure. That is the desktop story;
+there is no separate desktop layout.
 
-### Implementation checklist
+Hole selection is **manual**. Nearest-green detection only ever offers a dismissible
+hint, because Richmond Park's holes run close and parallel.
 
-**1. Schema + migration** — add a `<Bank>Transaction` model matching the bank's fields. Minimum: `id`, `transactionId` (unique, SHA-256 hash), `date`, `description`, `amount`, `isCredit`/`moneyIn`/`moneyOut` (whichever fits), `status` (default `"pending"`), `owner`, `statementDate`. Write SQL migration manually, then `bun run db:migrate:deploy && bun run db:generate`.
+### Offline
 
-**2. Upload route** — `POST /api/admin/import/<bank>`:
-```ts
-importRouter.post("/import/hsbc", upload.single("file"), async (req, res) => {
-  if (!req.file) { res.status(400).json({ error: "No file uploaded" }); return; }
-  const owner = VALID_OWNERS.has(req.body.owner) ? req.body.owner : "Alex";
+Numbers never need the network. For imagery:
 
-  // Send image to Claude vision
-  const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
-  const base64 = req.file.buffer.toString("base64");
-  const mediaType = (req.file.mimetype as "image/jpeg" | "image/png" | "image/webp");
+- Workbox runtime-caches Esri tiles `CacheFirst` into `golf-tiles`
+- `lib/tilePrefetch.ts` fills that same cache up front from the "Save map offline"
+  button — roughly 310 tiles, 5–10MB, for both courses at z16–18
 
-  const message = await anthropic.messages.create({
-    model: "claude-opus-4-6",
-    max_tokens: 4096,
-    messages: [{
-      role: "user",
-      content: [
-        { type: "image", source: { type: "base64", media_type: mediaType, data: base64 } },
-        { type: "text", text: `Extract all transactions from this bank statement page as a JSON array.
-Each object must have: date (YYYY-MM-DD), description (string), amount (string, digits and dots only),
-isCredit (boolean — true for money in/payments received), statementDate (string, e.g. "March 2025").
-Return ONLY the JSON array, no prose.` },
-      ],
-    }],
-  });
+The cache name is shared between `vite.config.ts` and `tilePrefetch.ts`; changing one
+without the other silently splits them.
 
-  const raw = (message.content[0] as { type: "text"; text: string }).text;
-  let rows: { date: string; description: string; amount: string; isCredit: boolean; statementDate: string }[];
-  try {
-    const jsonMatch = raw.match(/\[[\s\S]*\]/);
-    rows = JSON.parse(jsonMatch ? jsonMatch[0] : raw);
-  } catch {
-    res.status(422).json({ error: "Claude could not parse transactions from image", raw });
-    return;
-  }
+### Map
 
-  // Dedup by hash
-  const existing = await db.hsbcTransaction.findMany({ select: { transactionId: true } });
-  const existingIds = new Set(existing.map((r) => r.transactionId));
-  const batchCounts = new Map<string, number>();
-  const toInsert = [];
-  const duplicates = [];
+Leaflet with Esri World Imagery. Street tiles are useless here — a golf course renders
+as one undifferentiated green shape.
 
-  for (const row of rows) {
-    const baseId = createHash("sha256")
-      .update(`${row.date}|${row.description}|${row.amount}|${row.isCredit}`)
-      .digest("hex").slice(0, 16);
-    const count = batchCounts.get(baseId) ?? 0;
-    batchCounts.set(baseId, count + 1);
-    const transactionId = count === 0 ? baseId : `${baseId}-${count}`;
-    if (existingIds.has(transactionId)) duplicates.push(transactionId);
-    else toInsert.push({ ...row, transactionId, owner });
-  }
+**North-up, always.** Leaflet core has no rotation; play-direction-up would need a
+third-party fork. The you-to-green line carries the orientation instead.
 
-  if (toInsert.length > 0) await db.hsbcTransaction.createMany({ data: toInsert });
-  res.json({ imported: toInsert.length, duplicates });
-});
-```
+The map auto-fits to whatever is on screen, but stops as soon as you pan or zoom, and
+resumes on the next hole or on entering the editor (`fitKey`). `fitBounds` raises the
+same events a finger does, so the fit flags itself while running.
 
-**3. Process step** — add an `── HSBC ──` block in the `/process` route, same pattern as Barclays/Santander.
-
-**4. Staged count** — add `db.hsbcTransaction.groupBy(...)` to `GET /api/admin/staged`.
-
-**5. Client** — add a `BankUploadCard` for HSBC on `ImportPage`. Accept `image/jpeg,image/png,image/webp`. Pass `owner` in the form body.
-
-### Tips for iteration
-
-- If Claude misparses a page, tweak the prompt text in the route — no regex changes needed.
-- For multi-page statements, have the user upload one page at a time, or accept multiple files and loop.
-- If the image is a PDF, convert it to images server-side with a tool like `sharp` or ask the user to screenshot each page.
-- Always return `raw` in the 422 error response so you can inspect what Claude actually returned.
+Markers are `divIcon` circles, never Leaflet's default pin — the default icon is a PNG
+on a relative path that bundlers rewrite and then fail to resolve.

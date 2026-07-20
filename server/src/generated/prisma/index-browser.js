@@ -153,6 +153,41 @@ exports.Prisma.DistanceHistoryScalarFieldEnum = {
   changedAt: 'changedAt'
 };
 
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  sortOrder: 'sortOrder'
+};
+
+exports.Prisma.HoleScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  number: 'number',
+  greenPolygon: 'greenPolygon',
+  greenLat: 'greenLat',
+  greenLng: 'greenLng',
+  aimLat: 'aimLat',
+  aimLng: 'aimLng'
+};
+
+exports.Prisma.TeeSetScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  colour: 'colour',
+  name: 'name'
+};
+
+exports.Prisma.HoleTeeScalarFieldEnum = {
+  id: 'id',
+  holeId: 'holeId',
+  teeSetId: 'teeSetId',
+  yards: 'yards',
+  par: 'par',
+  strokeIndex: 'strokeIndex',
+  teeLat: 'teeLat',
+  teeLng: 'teeLng'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -219,11 +254,22 @@ exports.DistanceUnit = exports.$Enums.DistanceUnit = {
   Metres: 'Metres'
 };
 
+exports.TeeColour = exports.$Enums.TeeColour = {
+  Yellow: 'Yellow',
+  White: 'White',
+  Red: 'Red',
+  Blue: 'Blue'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Club: 'Club',
   Distance: 'Distance',
   DistanceHistory: 'DistanceHistory',
+  Course: 'Course',
+  Hole: 'Hole',
+  TeeSet: 'TeeSet',
+  HoleTee: 'HoleTee',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

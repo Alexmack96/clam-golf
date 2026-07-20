@@ -20,6 +20,31 @@ export default defineConfig({
         // user sees the latest deploy. No manual cache clearing needed.
         skipWaiting: true,
         clientsClaim: true,
+        runtimeCaching: [
+          {
+            // Satellite imagery for /gps. Tiles for a fixed patch of London
+            // never change, so serve from cache first and only reach the
+            // network for squares nobody has looked at yet. The cache name is
+            // shared with lib/tilePrefetch.ts, which fills it up front.
+            urlPattern: /^https:\/\/server\.arcgisonline\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "golf-tiles",
+              expiration: { maxEntries: 1200, maxAgeSeconds: 60 * 60 * 24 * 180 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            // Course geometry. Serve the stored copy immediately so the page
+            // works in a car park with no signal, and refresh behind it.
+            urlPattern: /\/api\/courses(\?.*)?$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "golf-courses",
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       manifest: {
         name: "Clam Golf",

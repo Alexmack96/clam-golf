@@ -1,55 +1,43 @@
 ## Problem
 
-Support ticket replies feel impersonal, but equally we dont want to do most of the work so should give it to agents.
+Knowing how far you hit each club is the difference between a good miss and a bad
+one, and the numbers drift. Standing over a shot, you also need to know how far you
+actually are from the green — and phone rangefinder apps are cluttered with social
+features and subscriptions.
 
 ## Solution
 
-Get better at categorising tickets, reply with canned responses only to those where we have 95% confidence we picked the right canned answer.
+A single-player app that holds one thing well: your real yardages, and what to do
+with them on the course.
 
 ## Features
 
-- Receive and send support emails
-- Auto-generate human friendly responses using a knowledge base
-- Ticket list with filtering and sorting
-- Ticket detail view
-- AI powered ticket classification
-- AI summaries
-- AI suggested replies
-- User management (admin only)
-- Dashboard to view and manage all tickets
+- Club bag: 14 active clubs, benched clubs keep their history
+- Measured carry distances per club, per swing length, with a change history
+- Gapping view across the bag
+- Shot calculator: plays-like distance from wind and elevation, and the club for it
+- GPS rangefinder on `/gps`: live front/middle/back yardages to the green
+- Layup planning on holes longer than you can carry
+- Tap-to-measure to any point — a ditch to carry, a spot to lay up to
+- Offline-capable PWA
 
-## Ticket
+## Courses
 
-### Statuses
-- Open
-- Resolved
-- Closed
+Richmond Park Golf Course: Duke's and Prince's, both 18 holes.
 
-### Priority
-- Low
-- Medium
-- High
+Scorecard data (yardage, par, stroke index) is seeded for yellow, white and red.
+Green outlines come from OpenStreetMap and are bound to hole numbers by hand in the
+assignment editor, since OSM carries no hole numbering.
 
-### Categories
-- General question
-- Technical question
-- Refund request
+## Users
 
-## Users & Roles
-
-| Role  | Description                        |
-|-------|------------------------------------|
-| Admin | Full access, user management       |
-| User  | Standard agent access              |
-
-System is initially deployed with a single admin user.
+Single player. Every signed-in user sees everything; there are no roles. Sign-up is
+disabled — the admin account is seeded.
 
 ## Open Questions
 
-- Canned vs AI-generated responses — which is it, or both?
-- Sub-95% confidence tickets — manual review queue, or agent handles normally?
-- Knowledge base — how is it populated? (admin uploads, past tickets, manual FAQ?)
-- Do customers have accounts/logins, or are they anonymous email senders?
-- Can a customer reply to a closed ticket to reopen it?
-- Inbound channels — email only, or also a web form?
-- Single org tool, or multi-tenant SaaS?
+- Score and shot tracking — worth building, and does it feed measured distances back
+  into the bag automatically?
+- Tee coordinates for white and red, or is yellow enough forever?
+- More courses, and if so does the OSM-import-plus-assignment flow scale or does it
+  need buying course data?

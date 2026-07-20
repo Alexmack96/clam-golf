@@ -6,6 +6,7 @@ import { LoggedOutPage } from "./pages/LoggedOutPage.js";
 import { DistancesPage } from "./pages/DistancesPage.js";
 import { ShotCalculatorPage } from "./pages/ShotCalculatorPage.js";
 import { ClubsPage } from "./pages/ClubsPage.js";
+import { GpsPage } from "./pages/GpsPage.js";
 
 export function App() {
   return (
@@ -17,6 +18,7 @@ export function App() {
           <Route path="/" element={<Navigate to="/distances" replace />} />
           <Route path="/distances" element={<DistancesPage />} />
           <Route path="/shot-calculator" element={<ShotCalculatorPage />} />
+          <Route path="/gps" element={<GpsPage />} />
           <Route path="/clubs" element={<ClubsPage />} />
           <Route path="*" element={<Navigate to="/distances" replace />} />
         </Route>
