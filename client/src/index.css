@@ -80,34 +80,34 @@
 }
 
 .dark {
-  /* ── Dark mode: deep pine-green night, layered greens ───────────────────── */
-  --background: oklch(0.17 0.035 155);
+  /* ── Dark mode: Augusta National green, not swamp-mossy ─────────────────── */
+  --background: oklch(0.2 0.032 152);
   --foreground: oklch(0.96 0.012 150);
-  --card: oklch(0.22 0.04 155);
+  --card: oklch(0.255 0.04 152);
   --card-foreground: oklch(0.96 0.012 150);
-  --popover: oklch(0.24 0.045 155);
+  --popover: oklch(0.28 0.045 152);
   --popover-foreground: oklch(0.96 0.012 150);
-  /* Masters green jacket (#00563B) — deeper, more muted than the old bright mint */
-  --primary: oklch(0.401 0.086 163.7);
-  --primary-foreground: oklch(0.96 0.012 150);
-  --secondary: oklch(0.27 0.045 155);
+  /* Augusta National / Masters fairway green (#046A38) */
+  --primary: oklch(0.461 0.116 153.6);
+  --primary-foreground: oklch(0.98 0.008 150);
+  --secondary: oklch(0.31 0.045 152);
   --secondary-foreground: oklch(0.96 0.012 150);
-  --muted: oklch(0.27 0.04 155);
-  --muted-foreground: oklch(0.74 0.035 150);
-  --accent: oklch(0.31 0.06 150);
+  --muted: oklch(0.31 0.04 152);
+  --muted-foreground: oklch(0.76 0.035 150);
+  --accent: oklch(0.36 0.065 152);
   --accent-foreground: oklch(0.96 0.012 150);
   --destructive: oklch(0.7 0.2 22);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 8%);
-  --ring: oklch(0.401 0.086 163.7);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 9%);
+  --ring: oklch(0.461 0.116 153.6);
 
   /* Sharp electric lime — high-signal accent on dark canvas */
   --signal: oklch(0.86 0.21 135);
 
-  --atmosphere-1: oklch(0.4 0.14 150 / 0.32);
-  --atmosphere-2: oklch(0.36 0.13 165 / 0.28);
-  --atmosphere-3: oklch(0.42 0.12 130 / 0.22);
-  --grain-opacity: 0.04;
+  --atmosphere-1: oklch(0.42 0.13 152 / 0.32);
+  --atmosphere-2: oklch(0.4 0.12 160 / 0.26);
+  --atmosphere-3: oklch(0.44 0.1 135 / 0.2);
+  --grain-opacity: 0.035;
 
   --chart-1: oklch(0.7 0.15 152);
   --chart-2: oklch(0.74 0.18 175);

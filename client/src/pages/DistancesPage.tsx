@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Settings2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { z } from "zod";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/card.js";
 import { Skeleton } from "../components/ui/skeleton.js";
 import { ClubIcon } from "../components/ClubIcon.js";
@@ -10,6 +11,8 @@ import { useClubs, type ClubRow, type SwingLength } from "../hooks/useClubs.js";
 
 // Full swing first (LHS) — it's the number you actually reach for most.
 const SWING_COLUMNS: SwingLength[] = ["Full", "Shoulder", "Chest", "Hip"];
+
+const yardsSchema = z.coerce.number().int("Whole numbers only").positive("Must be > 0").max(400, "Max 400");
 
 function DistanceCell({
   yards,
@@ -26,44 +29,61 @@ function DistanceCell({
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   function commit() {
     const trimmed = draft.trim();
     if (trimmed === "") {
       if (yards !== undefined) onClear();
       setEditing(false);
+      setError(null);
       return;
     }
-    const n = Number(trimmed);
-    if (!Number.isInteger(n) || n <= 0) {
-      setEditing(false);
+    const result = yardsSchema.safeParse(trimmed);
+    if (!result.success) {
+      setError(result.error.issues[0]?.message ?? "Invalid number");
       return;
     }
-    if (n !== yards) onSave(n);
+    if (result.data !== yards) onSave(result.data);
     setEditing(false);
+    setError(null);
   }
 
   if (editing) {
     return (
-      <input
-        autoFocus
-        type="number"
-        inputMode="numeric"
-        min={1}
-        max={400}
-        defaultValue={yards ?? ""}
-        disabled={isPending}
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={commit}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            e.currentTarget.blur();
-          }
-          if (e.key === "Escape") setEditing(false);
-        }}
-        className="w-full rounded-lg border border-primary bg-background py-1.5 text-center text-xs font-semibold text-foreground outline-none ring-2 ring-primary/20 sm:py-2 sm:text-sm"
-      />
+      <div className="relative">
+        <input
+          autoFocus
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          defaultValue={yards ?? ""}
+          disabled={isPending}
+          onChange={(e) => {
+            setDraft(e.target.value);
+            if (error) setError(null);
+          }}
+          onBlur={commit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              e.currentTarget.blur();
+            }
+            if (e.key === "Escape") {
+              setError(null);
+              setEditing(false);
+            }
+          }}
+          className={`w-full rounded-lg border bg-background py-1.5 text-center text-xs font-semibold text-foreground outline-none ring-2 sm:py-2 sm:text-sm ${
+            error ? "border-destructive ring-destructive/20" : "border-primary ring-primary/20"
+          }`}
+        />
+        {error && (
+          <span className="absolute left-1/2 top-full z-10 mt-1 -translate-x-1/2 whitespace-nowrap rounded bg-destructive px-1.5 py-0.5 text-[10px] font-medium text-destructive-foreground shadow">
+            {error}
+          </span>
+        )}
+      </div>
     );
   }
 
