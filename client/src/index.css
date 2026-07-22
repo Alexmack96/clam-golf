@@ -28,6 +28,8 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-signal: var(--signal);
+  --color-scorecard-grid: var(--scorecard-grid);
+  --color-scorecard-red: var(--scorecard-red);
 
   --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -68,6 +70,10 @@
   /* Signal green — for positive money figures, sharp on either canvas */
   --signal: oklch(0.74 0.18 142);
 
+  /* Scorecard: the printed-card hairline grid and its red stroke-index ink */
+  --scorecard-grid: oklch(0.7 0.02 150);
+  --scorecard-red: oklch(0.5 0.21 22);
+
   /* Atmosphere: soft fairway-green wash with a warm sand-bunker glow */
   --atmosphere-1: oklch(0.9 0.06 150 / 0.5);
   --atmosphere-2: oklch(0.92 0.05 165 / 0.4);
@@ -105,6 +111,10 @@
 
   /* Sharp electric lime — high-signal accent on dark canvas */
   --signal: oklch(0.86 0.21 135);
+
+  /* Scorecard: brighter grid + red so the card reads on the dark canvas */
+  --scorecard-grid: oklch(1 0 0 / 16%);
+  --scorecard-red: oklch(0.7 0.19 22);
 
   --atmosphere-1: oklch(0.42 0.13 152 / 0.32);
   --atmosphere-2: oklch(0.4 0.12 160 / 0.26);

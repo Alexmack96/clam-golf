@@ -25,7 +25,17 @@ import {
   type LocalPlayer,
   type RoundSummary,
 } from "../hooks/useActiveRound.js";
-import { buildLines, scoreClass, sum, type Line } from "../lib/scorecard.js";
+import {
+  buildLines,
+  orderCardTees,
+  playerTotal,
+  scoreClass,
+  sum,
+  sumTeePar,
+  sumTeeYards,
+  teeAt,
+  type Line,
+} from "../lib/scorecard.js";
 import { useQueryClient } from "@tanstack/react-query";
 
 function ScoreInput({
@@ -78,13 +88,28 @@ function ScoreInput({
   );
 }
 
-const TH = "px-1 py-1 font-medium";
-const TD = "px-0.5 py-0.5 tabular-nums";
+// The printed-card look: a hairline grid on every cell, bold small-caps heads.
+const CELL = "border border-scorecard-grid px-1.5 py-1 tabular-nums";
+const HEAD = `${CELL} font-semibold uppercase leading-tight`;
+const SI = "text-scorecard-red"; // stroke index is printed in red on the paper card
+
+// Each tee's yardage column takes the wash of that tee's colour, as on the card.
+const TEE_TINT: Record<string, string> = {
+  White: "bg-muted/40",
+  Yellow: "bg-amber-300/45 dark:bg-amber-400/20",
+  Red: "bg-red-400/25 dark:bg-red-500/25",
+  Blue: "bg-sky-400/25 dark:bg-sky-500/25",
+};
 
 /**
- * The play card: compact, thumb-first, and editable in place. Every player's own
- * yardage lives in their tee, so only the solo card has room to print it; a
- * fourball trades that column for the extra scores. See ADR 0001.
+ * The play card: a faithful redraw of the Toot Hill paper scorecard — a Yards
+ * column per tee washed in its colour, a shared Par + red S.I. for the front
+ * tees, then the players' scores, then the red tee as its own block with its own
+ * par and index. Editable in place, set in our own type.
+ *
+ * It is built around the course's tees, not the players: the card prints every
+ * tee's yardage regardless of who is playing which. Per-player par still comes
+ * from `buildLines` so a mixed fourball scores correctly. See ADR 0001.
  */
 function PlayCard({
   course,
@@ -102,8 +127,8 @@ function PlayCard({
   onScore: (playerId: string, holeId: string, strokes: number | null, putts: number | null) => void;
 }) {
   const lines = buildLines(course, players, scores);
-  const solo = players.length === 1;
-  const p1 = players[0];
+  const { leftTees, redTee, parTee } = orderCardTees(course.teeSets);
+  const cols = 1 + leftTees.length + 2 + players.length + (redTee ? 3 : 0);
 
   const holeCell = (l: Line) =>
     linkHoles ? (
@@ -115,34 +140,17 @@ function PlayCard({
     );
 
   const bodyRow = (l: Line) => (
-    <tr key={l.number} className="border-b border-border/40">
-      <td className={`${TD} text-left font-medium`}>{holeCell(l)}</td>
-      {solo && <td className={`${TD} text-muted-foreground`}>{l.cells[0]?.yards || ""}</td>}
-      <td className={`${TD} text-muted-foreground`}>{l.par}</td>
-      <td className={`${TD} border-l border-border`}>
-        <ScoreInput
-          value={l.cells[0]?.strokes ?? null}
-          min={1}
-          max={20}
-          editable={editable}
-          cls={l.cells[0] ? scoreClass(l.cells[0].strokes ?? 0, l.cells[0].par) : ""}
-          placeholder="–"
-          onCommit={(v) => onScore(p1.id, l.holeId, v, v === null ? null : (l.cells[0]?.putts ?? null))}
-        />
-      </td>
-      <td className={`${TD} text-muted-foreground`}>
-        <ScoreInput
-          value={l.cells[0]?.putts ?? null}
-          min={0}
-          max={10}
-          editable={editable}
-          cls=""
-          placeholder="–"
-          onCommit={(v) => onScore(p1.id, l.holeId, l.cells[0]?.strokes ?? null, v)}
-        />
-      </td>
-      {l.cells.slice(1).map((c, i) => (
-        <td key={players[i + 1].id} className={`${TD} border-l border-border/60`}>
+    <tr key={l.number}>
+      <td className={`${CELL} text-left font-semibold`}>{holeCell(l)}</td>
+      {leftTees.map((ts) => (
+        <td key={ts.id} className={`${CELL} ${TEE_TINT[ts.colour]} text-muted-foreground`}>
+          {teeAt(course, l.holeId, ts.id)?.yards || ""}
+        </td>
+      ))}
+      <td className={`${CELL} font-medium`}>{teeAt(course, l.holeId, parTee?.id)?.par ?? l.par}</td>
+      <td className={`${CELL} ${SI} font-medium`}>{teeAt(course, l.holeId, parTee?.id)?.strokeIndex || ""}</td>
+      {l.cells.map((c, i) => (
+        <td key={players[i].id} className={CELL}>
           <ScoreInput
             value={c.strokes}
             min={1}
@@ -150,66 +158,85 @@ function PlayCard({
             editable={editable}
             cls={scoreClass(c.strokes ?? 0, c.par)}
             placeholder="–"
-            onCommit={(v) => onScore(c.playerId, l.holeId, v, null)}
+            onCommit={(v) =>
+              onScore(c.playerId, l.holeId, v, i === 0 ? (v === null ? null : (c.putts ?? null)) : null)
+            }
           />
         </td>
       ))}
+      {redTee && (
+        <>
+          <td className={`${CELL} ${TEE_TINT.Red} text-muted-foreground`}>{teeAt(course, l.holeId, redTee.id)?.yards || ""}</td>
+          <td className={`${CELL} font-medium`}>{teeAt(course, l.holeId, redTee.id)?.par || ""}</td>
+          <td className={`${CELL} ${SI} font-medium`}>{teeAt(course, l.holeId, redTee.id)?.strokeIndex || ""}</td>
+        </>
+      )}
     </tr>
   );
 
-  const totalRow = (rows: Line[], label: string) => {
-    const parSum = sum(rows.map((r) => r.par));
-    return (
-      <tr className="border-y border-border bg-muted/40 font-semibold">
-        <td className={`${TD} text-left`}>{label}</td>
-        {solo && <td className={TD}>{sum(rows.map((r) => r.cells[0]?.yards ?? 0)) || ""}</td>}
-        <td className={TD}>{parSum}</td>
-        <td className={`${TD} border-l border-border`}>
-          {playerTotal(rows, 0)}
-        </td>
-        <td className={TD}>
-          {(() => {
-            const putts = rows.filter((r) => r.cells[0]?.putts != null);
-            return putts.length ? sum(putts.map((r) => r.cells[0]!.putts ?? 0)) : "";
-          })()}
-        </td>
-        {players.slice(1).map((p, i) => (
-          <td key={p.id} className={`${TD} border-l border-border/60`}>
-            {playerTotal(rows, i + 1)}
-          </td>
-        ))}
-      </tr>
-    );
+  const totalRow = (rows: Line[], label: string) => (
+    <tr className="bg-muted/60 font-semibold">
+      <td className={`${CELL} text-left uppercase`}>{label}</td>
+      {leftTees.map((ts) => (
+        <td key={ts.id} className={`${CELL} ${TEE_TINT[ts.colour]}`}>{sumTeeYards(course, rows, ts.id) || ""}</td>
+      ))}
+      <td className={CELL}>{sumTeePar(course, rows, parTee?.id) || ""}</td>
+      <td className={CELL} />
+      {players.map((p, idx) => (
+        <td key={p.id} className={CELL}>{playerTotal(rows, idx)}</td>
+      ))}
+      {redTee && (
+        <>
+          <td className={`${CELL} ${TEE_TINT.Red}`}>{sumTeeYards(course, rows, redTee.id) || ""}</td>
+          <td className={CELL}>{sumTeePar(course, rows, redTee.id) || ""}</td>
+          <td className={CELL} />
+        </>
+      )}
+    </tr>
+  );
 
-    function playerTotal(rs: Line[], idx: number) {
-      const played = rs.filter((r) => r.cells[idx]?.strokes != null);
-      return played.length ? sum(played.map((r) => r.cells[idx]!.strokes ?? 0)) : "–";
-    }
-  };
+  const yardHead = (colour: string) => (
+    <th key={colour} className={`${HEAD} ${TEE_TINT[colour]} text-foreground`}>
+      {colour}
+      <span className="block text-[8px] font-medium opacity-70">Yards</span>
+    </th>
+  );
 
   return (
     <div className="surface-card overflow-hidden rounded-xl">
       <div className="overflow-x-auto">
-        <table className="w-full table-fixed text-center text-[12px]">
-          <thead className="text-[9px] uppercase tracking-wide text-muted-foreground">
-            <tr className="border-y border-border">
-              <th className={`${TH} text-left`}>#</th>
-              {solo && <th className={TH}>Yds</th>}
-              <th className={TH}>Par</th>
-              <th className={`${TH} border-l border-border text-foreground`}>
-                <span className="block max-w-[52px] truncate">{p1.name}</span>
-              </th>
-              <th className={TH}>Putt</th>
-              {players.slice(1).map((p) => (
-                <th key={p.id} className={`${TH} border-l border-border/60 text-foreground`}>
-                  <span className="block max-w-[52px] truncate">{p.name}</span>
+        <table className="w-full min-w-[420px] border-collapse text-center font-numeric text-[12px]">
+          <thead className="text-[9px] tracking-wide text-muted-foreground">
+            <tr>
+              <th className={`${HEAD} text-left`}>Hole</th>
+              {leftTees.map((ts) => yardHead(ts.colour))}
+              <th className={`${HEAD} text-foreground`}>Par</th>
+              <th className={`${HEAD} ${SI}`}>S.I.</th>
+              {players.map((p) => (
+                <th key={p.id} className={`${HEAD} text-foreground`}>
+                  <span className="block max-w-[64px] truncate">{p.name}</span>
                 </th>
               ))}
+              {redTee && (
+                <>
+                  {yardHead("Red")}
+                  <th className={`${HEAD} text-foreground`}>Par</th>
+                  <th className={`${HEAD} ${SI}`}>S.I.</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
             {lines.slice(0, 9).map(bodyRow)}
             {totalRow(lines.slice(0, 9), "Out")}
+            <tr>
+              <td
+                colSpan={cols}
+                className="border border-scorecard-grid bg-scorecard-red/10 py-0.5 text-center text-[9px] font-semibold uppercase tracking-[0.16em] text-scorecard-red"
+              >
+                Please avoid slow play at all times
+              </td>
+            </tr>
             {lines.slice(9).map(bodyRow)}
             {totalRow(lines.slice(9), "In")}
             {totalRow(lines, "Tot")}
