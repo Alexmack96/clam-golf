@@ -1,48 +1,17 @@
-# Clam Finance Tracker
+# Clam Golf
 
-Personal finance tracker. Import bank transactions (Monzo, Amex, Barclays, Santander), categorise spending, and track savings goals.
+Golf tracker to help improve your game. Play rounds with friends and analyze your rounds together, and post about your rounds yoo.
 
 ## Stack
 
-- **Server:** Express 5 + Prisma + SQLite (Bun runtime)
+- **Server:** Soon to be .NET 10
 - **Client:** React 18 + React Router v6 + Tailwind v4 + shadcn/ui
 - **Auth:** Better Auth (server-side sessions)
 - **Monorepo:** Bun workspaces (`server/`, `client/`, `core/`)
 
-## Getting Started
-
-```bash
-# Install dependencies
-bun install
-
-# Apply DB migrations & seed admin user
-cd server && bun run db:migrate:deploy && bun run db:seed
-
-# Run dev servers (two terminals, or from root)
-bun run dev
-```
-
-Client: http://localhost:5173 — API: http://localhost:3000
-
-## Key Commands
-
-```bash
-bun run dev                    # start both client and server
-cd server && bun run db:studio # Prisma Studio GUI
-cd client && bun run test      # component tests (Vitest)
-npx playwright test            # e2e tests
-```
-
-## Bank Import Flow
-
-1. Upload a CSV on the Import page → rows land in a staging table
-2. Hit "Process" → staged rows normalise into `Transaction` records
-3. Duplicate `externalId`s are skipped automatically
-
-Supported: Monzo ✓ — Amex, Barclays, Santander, Caseys banks coming soon. 
-
----
-
 ## Todo 18-Jul-2026
 [] L - Migrate to .NET 10 backend
-[] M - 
+[] M - Add friends concept within the users table
+[] L - Migrate to WorkOS
+[] M - Maybe migrate GPS to google and pay for it if cheap
+[] L - Scorecards update live for your friends in you decided to link a scorecard

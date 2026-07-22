@@ -49,7 +49,8 @@ Derived from the Green's outline, never stored separately.
 A Course played from one set of tee markers, e.g. Men's Yellow. Carries a Yardage,
 Par and Stroke Index for every Hole, and optionally a tee position. Par and Stroke
 Index belong to the Tee Set, not the Hole — Duke's 17th is a par 5 off white and a
-par 4 off yellow.
+par 4 off yellow. Chosen per Player, not per Round: a mixed fourball plays off
+different tees on the same card.
 _Avoid_: Tee colour, tee box (that's the physical ground)
 
 **Yardage**:
@@ -71,14 +72,23 @@ correctable step rather than an import detail.
 ### Scoring
 
 **Round**:
-One trip round a Course from one Tee Set on one day. Exists from the first score
-entered, not from a deliberate "start" — and stays open until it is finished, so an
-abandoned nine is still a Round.
+One trip round a Course by a group of up to four Players, on a chosen date and tee
+time. Created deliberately — you pick the Course and tee time — not from the first
+score entered. Stays open until it is finished, so an abandoned nine is still a
+Round, and only one Round is open at a time. A finished Round is locked; editing it
+takes a deliberate unlock and leaves it finished.
 _Avoid_: Game, scorecard (that's the view of it), session
 
+**Player**:
+One person on a Round's card — one to four of them. Carries a name, the Tee Set they
+played, and their own Hole Scores. You are always Player 1, added for you. A Player
+is a name you key in; linking one to a real account is a later, separate feature.
+_Avoid_: Competitor, marker (you mark the whole group), user (that's the account)
+
 **Hole Score**:
-What a Hole cost in one Round: strokes always, putts when the player bothered.
-Strokes are gross — no handicap is applied anywhere in this app.
+What a Hole cost one Player in one Round: strokes always, putts when bothered — in
+practice putts are entered only for you, Player 1. Strokes are gross — no handicap is
+applied anywhere in this app.
 _Avoid_: Score (ambiguous between one hole and the whole round)
 
 **Green in Regulation**:

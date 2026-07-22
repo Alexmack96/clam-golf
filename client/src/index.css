@@ -50,7 +50,9 @@
   --card-foreground: oklch(0.2 0.03 155);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.03 155);
-  --primary: oklch(0.52 0.14 152);
+  /* Peacock green (#42b883, oklch ~0.70/0.13/160) pulled a touch deeper so
+     white button text keeps ~4:1 contrast. */
+  --primary: oklch(0.56 0.14 160);
   --primary-foreground: oklch(0.99 0.005 140);
   --secondary: oklch(0.96 0.012 150);
   --secondary-foreground: oklch(0.24 0.03 155);
@@ -61,7 +63,7 @@
   --destructive: oklch(0.58 0.22 25);
   --border: oklch(0.88 0.012 150);
   --input: oklch(0.92 0.01 150);
-  --ring: oklch(0.52 0.14 152);
+  --ring: oklch(0.56 0.14 160);
 
   /* Signal green — for positive money figures, sharp on either canvas */
   --signal: oklch(0.74 0.18 142);
@@ -87,8 +89,8 @@
   --card-foreground: oklch(0.96 0.012 150);
   --popover: oklch(0.28 0.045 152);
   --popover-foreground: oklch(0.96 0.012 150);
-  /* Augusta National / Masters fairway green (#046A38) */
-  --primary: oklch(0.461 0.116 153.6);
+  /* Peacock green (#42b883), brightened for a dark canvas */
+  --primary: oklch(0.58 0.135 160);
   --primary-foreground: oklch(0.98 0.008 150);
   --secondary: oklch(0.31 0.045 152);
   --secondary-foreground: oklch(0.96 0.012 150);
@@ -99,7 +101,7 @@
   --destructive: oklch(0.7 0.2 22);
   --border: oklch(1 0 0 / 11%);
   --input: oklch(1 0 0 / 9%);
-  --ring: oklch(0.461 0.116 153.6);
+  --ring: oklch(0.58 0.135 160);
 
   /* Sharp electric lime — high-signal accent on dark canvas */
   --signal: oklch(0.86 0.21 135);
