@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "../lib/api.js";
+import { toUpsertBody, fromSummary } from "../lib/roundSync.js";
 
 // v2: the round became multi-player (players + per-player scores). An old
 // single-player card in storage has no `players` and is dropped on read.
@@ -101,24 +102,6 @@ function setSyncState(next: SyncState) {
   emit();
 }
 
-/** The shape the server expects: players carrying their own scores. */
-function toUpsertBody(r: ActiveRound) {
-  return {
-    courseId: r.courseId,
-    playedOn: r.playedOn,
-    completedAt: r.completedAt,
-    players: r.players.map((p) => ({
-      id: p.id,
-      position: p.position,
-      name: p.name,
-      teeSetId: p.teeSetId,
-      scores: r.scores
-        .filter((s) => s.playerId === p.id)
-        .map((s) => ({ holeId: s.holeId, strokes: s.strokes, putts: s.putts })),
-    })),
-  };
-}
-
 async function push(r: ActiveRound, onSynced?: () => void) {
   try {
     await api.put(`/api/rounds/${r.id}`, toUpsertBody(r));
@@ -162,30 +145,6 @@ function blankRound(courseId: string, players: NewPlayer[]): ActiveRound {
       teeSetId: p.teeSetId,
     })),
     scores: [],
-  };
-}
-
-/** Maps a server round back into the local shape, for editing a finished card. */
-function fromSummary(r: RoundSummary): ActiveRound {
-  return {
-    id: r.id,
-    courseId: r.courseId,
-    playedOn: r.playedOn,
-    completedAt: r.completedAt,
-    players: r.players.map((p) => ({
-      id: p.id,
-      position: p.position,
-      name: p.name,
-      teeSetId: p.teeSetId,
-    })),
-    scores: r.players.flatMap((p) =>
-      p.scores.map((s) => ({
-        playerId: p.id,
-        holeId: s.holeId,
-        strokes: s.strokes,
-        putts: s.putts,
-      })),
-    ),
   };
 }
 

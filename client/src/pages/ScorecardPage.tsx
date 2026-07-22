@@ -25,53 +25,8 @@ import {
   type LocalPlayer,
   type RoundSummary,
 } from "../hooks/useActiveRound.js";
+import { buildLines, scoreClass, sum, type Line } from "../lib/scorecard.js";
 import { useQueryClient } from "@tanstack/react-query";
-
-/** Colour a score the way you would ring it on paper. */
-function scoreClass(strokes: number, par: number) {
-  const d = strokes - par;
-  if (d <= -2) return "bg-amber-400/30 font-semibold rounded";
-  if (d === -1) return "bg-primary/25 font-semibold rounded";
-  if (d === 0) return "";
-  if (d >= 2) return "text-destructive";
-  return "text-muted-foreground";
-}
-
-interface Cell {
-  playerId: string;
-  yards: number;
-  par: number;
-  strokes: number | null;
-  putts: number | null;
-}
-interface Line {
-  holeId: string;
-  number: number;
-  par: number;
-  cells: Cell[];
-}
-
-function buildLines(course: CourseRow, players: LocalPlayer[], scores: ActiveRound["scores"]): Line[] {
-  return course.holes
-    .slice()
-    .sort((a, b) => a.number - b.number)
-    .map((h) => {
-      const cells = players.map((pl) => {
-        const tee = h.tees.find((t) => t.teeSetId === pl.teeSetId);
-        const sc = scores.find((s) => s.playerId === pl.id && s.holeId === h.id);
-        return {
-          playerId: pl.id,
-          yards: tee?.yards ?? 0,
-          par: tee?.par ?? 4,
-          strokes: sc?.strokes ?? null,
-          putts: sc?.putts ?? null,
-        };
-      });
-      return { holeId: h.id, number: h.number, par: cells[0]?.par ?? 4, cells };
-    });
-}
-
-const sum = (ns: number[]) => ns.reduce((n, x) => n + x, 0);
 
 function ScoreInput({
   value,

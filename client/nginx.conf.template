@@ -27,13 +27,29 @@ server {
         add_header Cache-Control "no-cache";
     }
 
+    # index.html and the manifest are the entry points every load starts from.
+    # If either is cached, the browser boots an old build that references asset
+    # hashes and a precache manifest that no longer exist — the exact state a
+    # hard refresh (Ctrl+Shift+R) was needed to escape. Revalidate them every
+    # time so a deploy is picked up on the next load, not the next manual reload.
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+    location = /manifest.webmanifest {
+        add_header Cache-Control "no-cache";
+    }
+
     # Vite emits content-hashed filenames under /assets, so they are immutable.
     location /assets/ {
         expires 1y;
         add_header Cache-Control "public, immutable";
     }
 
+    # The SPA fallback also serves index.html, so pin the same no-cache there —
+    # a deep link like /scorecard resolves here, not through the exact-match
+    # block above.
     location / {
+        add_header Cache-Control "no-cache";
         try_files $uri $uri/ /index.html;
     }
 }
