@@ -64,6 +64,11 @@ export type Round = $Result.DefaultSelection<Prisma.$RoundPayload>
  */
 export type HoleScore = $Result.DefaultSelection<Prisma.$HoleScorePayload>
 /**
+ * Model SwingThought
+ * 
+ */
+export type SwingThought = $Result.DefaultSelection<Prisma.$SwingThoughtPayload>
+/**
  * Model Session
  * 
  */
@@ -122,6 +127,28 @@ export const TeeColour: {
 
 export type TeeColour = (typeof TeeColour)[keyof typeof TeeColour]
 
+
+export const ShotType: {
+  Driver: 'Driver',
+  Iron: 'Iron',
+  Pitch: 'Pitch',
+  Chip: 'Chip',
+  Putt: 'Putt',
+  Bunker: 'Bunker'
+};
+
+export type ShotType = (typeof ShotType)[keyof typeof ShotType]
+
+
+export const SwingPhase: {
+  Setup: 'Setup',
+  Backswing: 'Backswing',
+  Downswing: 'Downswing',
+  Finish: 'Finish'
+};
+
+export type SwingPhase = (typeof SwingPhase)[keyof typeof SwingPhase]
+
 }
 
 export type ClubType = $Enums.ClubType
@@ -139,6 +166,14 @@ export const DistanceUnit: typeof $Enums.DistanceUnit
 export type TeeColour = $Enums.TeeColour
 
 export const TeeColour: typeof $Enums.TeeColour
+
+export type ShotType = $Enums.ShotType
+
+export const ShotType: typeof $Enums.ShotType
+
+export type SwingPhase = $Enums.SwingPhase
+
+export const SwingPhase: typeof $Enums.SwingPhase
 
 /**
  * ##  Prisma Client ʲˢ
@@ -360,6 +395,16 @@ export class PrismaClient<
     * ```
     */
   get holeScore(): Prisma.HoleScoreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.swingThought`: Exposes CRUD operations for the **SwingThought** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SwingThoughts
+    * const swingThoughts = await prisma.swingThought.findMany()
+    * ```
+    */
+  get swingThought(): Prisma.SwingThoughtDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -834,6 +879,7 @@ export namespace Prisma {
     HoleTee: 'HoleTee',
     Round: 'Round',
     HoleScore: 'HoleScore',
+    SwingThought: 'SwingThought',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -852,7 +898,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "round" | "holeScore" | "session" | "account" | "verification"
+      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "round" | "holeScore" | "swingThought" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1596,6 +1642,80 @@ export namespace Prisma {
           }
         }
       }
+      SwingThought: {
+        payload: Prisma.$SwingThoughtPayload<ExtArgs>
+        fields: Prisma.SwingThoughtFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SwingThoughtFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SwingThoughtFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          findFirst: {
+            args: Prisma.SwingThoughtFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SwingThoughtFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          findMany: {
+            args: Prisma.SwingThoughtFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>[]
+          }
+          create: {
+            args: Prisma.SwingThoughtCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          createMany: {
+            args: Prisma.SwingThoughtCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SwingThoughtCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>[]
+          }
+          delete: {
+            args: Prisma.SwingThoughtDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          update: {
+            args: Prisma.SwingThoughtUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          deleteMany: {
+            args: Prisma.SwingThoughtDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SwingThoughtUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SwingThoughtUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>[]
+          }
+          upsert: {
+            args: Prisma.SwingThoughtUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SwingThoughtPayload>
+          }
+          aggregate: {
+            args: Prisma.SwingThoughtAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSwingThought>
+          }
+          groupBy: {
+            args: Prisma.SwingThoughtGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SwingThoughtGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SwingThoughtCountArgs<ExtArgs>
+            result: $Utils.Optional<SwingThoughtCountAggregateOutputType> | number
+          }
+        }
+      }
       Session: {
         payload: Prisma.$SessionPayload<ExtArgs>
         fields: Prisma.SessionFieldRefs
@@ -1936,6 +2056,7 @@ export namespace Prisma {
     holeTee?: HoleTeeOmit
     round?: RoundOmit
     holeScore?: HoleScoreOmit
+    swingThought?: SwingThoughtOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -13482,6 +13603,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model SwingThought
+   */
+
+  export type AggregateSwingThought = {
+    _count: SwingThoughtCountAggregateOutputType | null
+    _avg: SwingThoughtAvgAggregateOutputType | null
+    _sum: SwingThoughtSumAggregateOutputType | null
+    _min: SwingThoughtMinAggregateOutputType | null
+    _max: SwingThoughtMaxAggregateOutputType | null
+  }
+
+  export type SwingThoughtAvgAggregateOutputType = {
+    rank: number | null
+  }
+
+  export type SwingThoughtSumAggregateOutputType = {
+    rank: number | null
+  }
+
+  export type SwingThoughtMinAggregateOutputType = {
+    id: string | null
+    shotType: $Enums.ShotType | null
+    phase: $Enums.SwingPhase | null
+    rank: number | null
+    text: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SwingThoughtMaxAggregateOutputType = {
+    id: string | null
+    shotType: $Enums.ShotType | null
+    phase: $Enums.SwingPhase | null
+    rank: number | null
+    text: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SwingThoughtCountAggregateOutputType = {
+    id: number
+    shotType: number
+    phase: number
+    rank: number
+    text: number
+    note: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SwingThoughtAvgAggregateInputType = {
+    rank?: true
+  }
+
+  export type SwingThoughtSumAggregateInputType = {
+    rank?: true
+  }
+
+  export type SwingThoughtMinAggregateInputType = {
+    id?: true
+    shotType?: true
+    phase?: true
+    rank?: true
+    text?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SwingThoughtMaxAggregateInputType = {
+    id?: true
+    shotType?: true
+    phase?: true
+    rank?: true
+    text?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SwingThoughtCountAggregateInputType = {
+    id?: true
+    shotType?: true
+    phase?: true
+    rank?: true
+    text?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SwingThoughtAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SwingThought to aggregate.
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SwingThoughts to fetch.
+     */
+    orderBy?: SwingThoughtOrderByWithRelationInput | SwingThoughtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SwingThoughtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SwingThoughts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SwingThoughts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SwingThoughts
+    **/
+    _count?: true | SwingThoughtCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SwingThoughtAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SwingThoughtSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SwingThoughtMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SwingThoughtMaxAggregateInputType
+  }
+
+  export type GetSwingThoughtAggregateType<T extends SwingThoughtAggregateArgs> = {
+        [P in keyof T & keyof AggregateSwingThought]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSwingThought[P]>
+      : GetScalarType<T[P], AggregateSwingThought[P]>
+  }
+
+
+
+
+  export type SwingThoughtGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SwingThoughtWhereInput
+    orderBy?: SwingThoughtOrderByWithAggregationInput | SwingThoughtOrderByWithAggregationInput[]
+    by: SwingThoughtScalarFieldEnum[] | SwingThoughtScalarFieldEnum
+    having?: SwingThoughtScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SwingThoughtCountAggregateInputType | true
+    _avg?: SwingThoughtAvgAggregateInputType
+    _sum?: SwingThoughtSumAggregateInputType
+    _min?: SwingThoughtMinAggregateInputType
+    _max?: SwingThoughtMaxAggregateInputType
+  }
+
+  export type SwingThoughtGroupByOutputType = {
+    id: string
+    shotType: $Enums.ShotType
+    phase: $Enums.SwingPhase
+    rank: number
+    text: string
+    note: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SwingThoughtCountAggregateOutputType | null
+    _avg: SwingThoughtAvgAggregateOutputType | null
+    _sum: SwingThoughtSumAggregateOutputType | null
+    _min: SwingThoughtMinAggregateOutputType | null
+    _max: SwingThoughtMaxAggregateOutputType | null
+  }
+
+  type GetSwingThoughtGroupByPayload<T extends SwingThoughtGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SwingThoughtGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SwingThoughtGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SwingThoughtGroupByOutputType[P]>
+            : GetScalarType<T[P], SwingThoughtGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SwingThoughtSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shotType?: boolean
+    phase?: boolean
+    rank?: boolean
+    text?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["swingThought"]>
+
+  export type SwingThoughtSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shotType?: boolean
+    phase?: boolean
+    rank?: boolean
+    text?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["swingThought"]>
+
+  export type SwingThoughtSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    shotType?: boolean
+    phase?: boolean
+    rank?: boolean
+    text?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["swingThought"]>
+
+  export type SwingThoughtSelectScalar = {
+    id?: boolean
+    shotType?: boolean
+    phase?: boolean
+    rank?: boolean
+    text?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SwingThoughtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shotType" | "phase" | "rank" | "text" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["swingThought"]>
+
+  export type $SwingThoughtPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SwingThought"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      shotType: $Enums.ShotType
+      phase: $Enums.SwingPhase
+      rank: number
+      text: string
+      note: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["swingThought"]>
+    composites: {}
+  }
+
+  type SwingThoughtGetPayload<S extends boolean | null | undefined | SwingThoughtDefaultArgs> = $Result.GetResult<Prisma.$SwingThoughtPayload, S>
+
+  type SwingThoughtCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SwingThoughtFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SwingThoughtCountAggregateInputType | true
+    }
+
+  export interface SwingThoughtDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SwingThought'], meta: { name: 'SwingThought' } }
+    /**
+     * Find zero or one SwingThought that matches the filter.
+     * @param {SwingThoughtFindUniqueArgs} args - Arguments to find a SwingThought
+     * @example
+     * // Get one SwingThought
+     * const swingThought = await prisma.swingThought.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SwingThoughtFindUniqueArgs>(args: SelectSubset<T, SwingThoughtFindUniqueArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SwingThought that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SwingThoughtFindUniqueOrThrowArgs} args - Arguments to find a SwingThought
+     * @example
+     * // Get one SwingThought
+     * const swingThought = await prisma.swingThought.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SwingThoughtFindUniqueOrThrowArgs>(args: SelectSubset<T, SwingThoughtFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SwingThought that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtFindFirstArgs} args - Arguments to find a SwingThought
+     * @example
+     * // Get one SwingThought
+     * const swingThought = await prisma.swingThought.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SwingThoughtFindFirstArgs>(args?: SelectSubset<T, SwingThoughtFindFirstArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SwingThought that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtFindFirstOrThrowArgs} args - Arguments to find a SwingThought
+     * @example
+     * // Get one SwingThought
+     * const swingThought = await prisma.swingThought.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SwingThoughtFindFirstOrThrowArgs>(args?: SelectSubset<T, SwingThoughtFindFirstOrThrowArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SwingThoughts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SwingThoughts
+     * const swingThoughts = await prisma.swingThought.findMany()
+     * 
+     * // Get first 10 SwingThoughts
+     * const swingThoughts = await prisma.swingThought.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const swingThoughtWithIdOnly = await prisma.swingThought.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SwingThoughtFindManyArgs>(args?: SelectSubset<T, SwingThoughtFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SwingThought.
+     * @param {SwingThoughtCreateArgs} args - Arguments to create a SwingThought.
+     * @example
+     * // Create one SwingThought
+     * const SwingThought = await prisma.swingThought.create({
+     *   data: {
+     *     // ... data to create a SwingThought
+     *   }
+     * })
+     * 
+     */
+    create<T extends SwingThoughtCreateArgs>(args: SelectSubset<T, SwingThoughtCreateArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SwingThoughts.
+     * @param {SwingThoughtCreateManyArgs} args - Arguments to create many SwingThoughts.
+     * @example
+     * // Create many SwingThoughts
+     * const swingThought = await prisma.swingThought.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SwingThoughtCreateManyArgs>(args?: SelectSubset<T, SwingThoughtCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SwingThoughts and returns the data saved in the database.
+     * @param {SwingThoughtCreateManyAndReturnArgs} args - Arguments to create many SwingThoughts.
+     * @example
+     * // Create many SwingThoughts
+     * const swingThought = await prisma.swingThought.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SwingThoughts and only return the `id`
+     * const swingThoughtWithIdOnly = await prisma.swingThought.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SwingThoughtCreateManyAndReturnArgs>(args?: SelectSubset<T, SwingThoughtCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SwingThought.
+     * @param {SwingThoughtDeleteArgs} args - Arguments to delete one SwingThought.
+     * @example
+     * // Delete one SwingThought
+     * const SwingThought = await prisma.swingThought.delete({
+     *   where: {
+     *     // ... filter to delete one SwingThought
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SwingThoughtDeleteArgs>(args: SelectSubset<T, SwingThoughtDeleteArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SwingThought.
+     * @param {SwingThoughtUpdateArgs} args - Arguments to update one SwingThought.
+     * @example
+     * // Update one SwingThought
+     * const swingThought = await prisma.swingThought.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SwingThoughtUpdateArgs>(args: SelectSubset<T, SwingThoughtUpdateArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SwingThoughts.
+     * @param {SwingThoughtDeleteManyArgs} args - Arguments to filter SwingThoughts to delete.
+     * @example
+     * // Delete a few SwingThoughts
+     * const { count } = await prisma.swingThought.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SwingThoughtDeleteManyArgs>(args?: SelectSubset<T, SwingThoughtDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SwingThoughts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SwingThoughts
+     * const swingThought = await prisma.swingThought.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SwingThoughtUpdateManyArgs>(args: SelectSubset<T, SwingThoughtUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SwingThoughts and returns the data updated in the database.
+     * @param {SwingThoughtUpdateManyAndReturnArgs} args - Arguments to update many SwingThoughts.
+     * @example
+     * // Update many SwingThoughts
+     * const swingThought = await prisma.swingThought.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SwingThoughts and only return the `id`
+     * const swingThoughtWithIdOnly = await prisma.swingThought.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SwingThoughtUpdateManyAndReturnArgs>(args: SelectSubset<T, SwingThoughtUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SwingThought.
+     * @param {SwingThoughtUpsertArgs} args - Arguments to update or create a SwingThought.
+     * @example
+     * // Update or create a SwingThought
+     * const swingThought = await prisma.swingThought.upsert({
+     *   create: {
+     *     // ... data to create a SwingThought
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SwingThought we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SwingThoughtUpsertArgs>(args: SelectSubset<T, SwingThoughtUpsertArgs<ExtArgs>>): Prisma__SwingThoughtClient<$Result.GetResult<Prisma.$SwingThoughtPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SwingThoughts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtCountArgs} args - Arguments to filter SwingThoughts to count.
+     * @example
+     * // Count the number of SwingThoughts
+     * const count = await prisma.swingThought.count({
+     *   where: {
+     *     // ... the filter for the SwingThoughts we want to count
+     *   }
+     * })
+    **/
+    count<T extends SwingThoughtCountArgs>(
+      args?: Subset<T, SwingThoughtCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SwingThoughtCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SwingThought.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SwingThoughtAggregateArgs>(args: Subset<T, SwingThoughtAggregateArgs>): Prisma.PrismaPromise<GetSwingThoughtAggregateType<T>>
+
+    /**
+     * Group by SwingThought.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SwingThoughtGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SwingThoughtGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SwingThoughtGroupByArgs['orderBy'] }
+        : { orderBy?: SwingThoughtGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SwingThoughtGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSwingThoughtGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SwingThought model
+   */
+  readonly fields: SwingThoughtFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SwingThought.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SwingThoughtClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SwingThought model
+   */
+  interface SwingThoughtFieldRefs {
+    readonly id: FieldRef<"SwingThought", 'String'>
+    readonly shotType: FieldRef<"SwingThought", 'ShotType'>
+    readonly phase: FieldRef<"SwingThought", 'SwingPhase'>
+    readonly rank: FieldRef<"SwingThought", 'Int'>
+    readonly text: FieldRef<"SwingThought", 'String'>
+    readonly note: FieldRef<"SwingThought", 'String'>
+    readonly createdAt: FieldRef<"SwingThought", 'DateTime'>
+    readonly updatedAt: FieldRef<"SwingThought", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SwingThought findUnique
+   */
+  export type SwingThoughtFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter, which SwingThought to fetch.
+     */
+    where: SwingThoughtWhereUniqueInput
+  }
+
+  /**
+   * SwingThought findUniqueOrThrow
+   */
+  export type SwingThoughtFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter, which SwingThought to fetch.
+     */
+    where: SwingThoughtWhereUniqueInput
+  }
+
+  /**
+   * SwingThought findFirst
+   */
+  export type SwingThoughtFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter, which SwingThought to fetch.
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SwingThoughts to fetch.
+     */
+    orderBy?: SwingThoughtOrderByWithRelationInput | SwingThoughtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SwingThoughts.
+     */
+    cursor?: SwingThoughtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SwingThoughts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SwingThoughts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SwingThoughts.
+     */
+    distinct?: SwingThoughtScalarFieldEnum | SwingThoughtScalarFieldEnum[]
+  }
+
+  /**
+   * SwingThought findFirstOrThrow
+   */
+  export type SwingThoughtFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter, which SwingThought to fetch.
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SwingThoughts to fetch.
+     */
+    orderBy?: SwingThoughtOrderByWithRelationInput | SwingThoughtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SwingThoughts.
+     */
+    cursor?: SwingThoughtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SwingThoughts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SwingThoughts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SwingThoughts.
+     */
+    distinct?: SwingThoughtScalarFieldEnum | SwingThoughtScalarFieldEnum[]
+  }
+
+  /**
+   * SwingThought findMany
+   */
+  export type SwingThoughtFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter, which SwingThoughts to fetch.
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SwingThoughts to fetch.
+     */
+    orderBy?: SwingThoughtOrderByWithRelationInput | SwingThoughtOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SwingThoughts.
+     */
+    cursor?: SwingThoughtWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SwingThoughts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SwingThoughts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SwingThoughts.
+     */
+    distinct?: SwingThoughtScalarFieldEnum | SwingThoughtScalarFieldEnum[]
+  }
+
+  /**
+   * SwingThought create
+   */
+  export type SwingThoughtCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SwingThought.
+     */
+    data: XOR<SwingThoughtCreateInput, SwingThoughtUncheckedCreateInput>
+  }
+
+  /**
+   * SwingThought createMany
+   */
+  export type SwingThoughtCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SwingThoughts.
+     */
+    data: SwingThoughtCreateManyInput | SwingThoughtCreateManyInput[]
+  }
+
+  /**
+   * SwingThought createManyAndReturn
+   */
+  export type SwingThoughtCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * The data used to create many SwingThoughts.
+     */
+    data: SwingThoughtCreateManyInput | SwingThoughtCreateManyInput[]
+  }
+
+  /**
+   * SwingThought update
+   */
+  export type SwingThoughtUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SwingThought.
+     */
+    data: XOR<SwingThoughtUpdateInput, SwingThoughtUncheckedUpdateInput>
+    /**
+     * Choose, which SwingThought to update.
+     */
+    where: SwingThoughtWhereUniqueInput
+  }
+
+  /**
+   * SwingThought updateMany
+   */
+  export type SwingThoughtUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SwingThoughts.
+     */
+    data: XOR<SwingThoughtUpdateManyMutationInput, SwingThoughtUncheckedUpdateManyInput>
+    /**
+     * Filter which SwingThoughts to update
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * Limit how many SwingThoughts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SwingThought updateManyAndReturn
+   */
+  export type SwingThoughtUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * The data used to update SwingThoughts.
+     */
+    data: XOR<SwingThoughtUpdateManyMutationInput, SwingThoughtUncheckedUpdateManyInput>
+    /**
+     * Filter which SwingThoughts to update
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * Limit how many SwingThoughts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SwingThought upsert
+   */
+  export type SwingThoughtUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SwingThought to update in case it exists.
+     */
+    where: SwingThoughtWhereUniqueInput
+    /**
+     * In case the SwingThought found by the `where` argument doesn't exist, create a new SwingThought with this data.
+     */
+    create: XOR<SwingThoughtCreateInput, SwingThoughtUncheckedCreateInput>
+    /**
+     * In case the SwingThought was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SwingThoughtUpdateInput, SwingThoughtUncheckedUpdateInput>
+  }
+
+  /**
+   * SwingThought delete
+   */
+  export type SwingThoughtDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+    /**
+     * Filter which SwingThought to delete.
+     */
+    where: SwingThoughtWhereUniqueInput
+  }
+
+  /**
+   * SwingThought deleteMany
+   */
+  export type SwingThoughtDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SwingThoughts to delete
+     */
+    where?: SwingThoughtWhereInput
+    /**
+     * Limit how many SwingThoughts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SwingThought without action
+   */
+  export type SwingThoughtDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SwingThought
+     */
+    select?: SwingThoughtSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SwingThought
+     */
+    omit?: SwingThoughtOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Session
    */
 
@@ -16887,6 +18079,20 @@ export namespace Prisma {
   export type HoleScoreScalarFieldEnum = (typeof HoleScoreScalarFieldEnum)[keyof typeof HoleScoreScalarFieldEnum]
 
 
+  export const SwingThoughtScalarFieldEnum: {
+    id: 'id',
+    shotType: 'shotType',
+    phase: 'phase',
+    rank: 'rank',
+    text: 'text',
+    note: 'note',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SwingThoughtScalarFieldEnum = (typeof SwingThoughtScalarFieldEnum)[keyof typeof SwingThoughtScalarFieldEnum]
+
+
   export const SessionScalarFieldEnum: {
     id: 'id',
     expiresAt: 'expiresAt',
@@ -17013,6 +18219,20 @@ export namespace Prisma {
    * Reference to a field of type 'TeeColour'
    */
   export type EnumTeeColourFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TeeColour'>
+    
+
+
+  /**
+   * Reference to a field of type 'ShotType'
+   */
+  export type EnumShotTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShotType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SwingPhase'
+   */
+  export type EnumSwingPhaseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SwingPhase'>
     
   /**
    * Deep Input Types
@@ -17661,6 +18881,75 @@ export namespace Prisma {
     holeId?: StringWithAggregatesFilter<"HoleScore"> | string
     strokes?: IntWithAggregatesFilter<"HoleScore"> | number
     putts?: IntNullableWithAggregatesFilter<"HoleScore"> | number | null
+  }
+
+  export type SwingThoughtWhereInput = {
+    AND?: SwingThoughtWhereInput | SwingThoughtWhereInput[]
+    OR?: SwingThoughtWhereInput[]
+    NOT?: SwingThoughtWhereInput | SwingThoughtWhereInput[]
+    id?: StringFilter<"SwingThought"> | string
+    shotType?: EnumShotTypeFilter<"SwingThought"> | $Enums.ShotType
+    phase?: EnumSwingPhaseFilter<"SwingThought"> | $Enums.SwingPhase
+    rank?: IntFilter<"SwingThought"> | number
+    text?: StringFilter<"SwingThought"> | string
+    note?: StringNullableFilter<"SwingThought"> | string | null
+    createdAt?: DateTimeFilter<"SwingThought"> | Date | string
+    updatedAt?: DateTimeFilter<"SwingThought"> | Date | string
+  }
+
+  export type SwingThoughtOrderByWithRelationInput = {
+    id?: SortOrder
+    shotType?: SortOrder
+    phase?: SortOrder
+    rank?: SortOrder
+    text?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SwingThoughtWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SwingThoughtWhereInput | SwingThoughtWhereInput[]
+    OR?: SwingThoughtWhereInput[]
+    NOT?: SwingThoughtWhereInput | SwingThoughtWhereInput[]
+    shotType?: EnumShotTypeFilter<"SwingThought"> | $Enums.ShotType
+    phase?: EnumSwingPhaseFilter<"SwingThought"> | $Enums.SwingPhase
+    rank?: IntFilter<"SwingThought"> | number
+    text?: StringFilter<"SwingThought"> | string
+    note?: StringNullableFilter<"SwingThought"> | string | null
+    createdAt?: DateTimeFilter<"SwingThought"> | Date | string
+    updatedAt?: DateTimeFilter<"SwingThought"> | Date | string
+  }, "id">
+
+  export type SwingThoughtOrderByWithAggregationInput = {
+    id?: SortOrder
+    shotType?: SortOrder
+    phase?: SortOrder
+    rank?: SortOrder
+    text?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SwingThoughtCountOrderByAggregateInput
+    _avg?: SwingThoughtAvgOrderByAggregateInput
+    _max?: SwingThoughtMaxOrderByAggregateInput
+    _min?: SwingThoughtMinOrderByAggregateInput
+    _sum?: SwingThoughtSumOrderByAggregateInput
+  }
+
+  export type SwingThoughtScalarWhereWithAggregatesInput = {
+    AND?: SwingThoughtScalarWhereWithAggregatesInput | SwingThoughtScalarWhereWithAggregatesInput[]
+    OR?: SwingThoughtScalarWhereWithAggregatesInput[]
+    NOT?: SwingThoughtScalarWhereWithAggregatesInput | SwingThoughtScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SwingThought"> | string
+    shotType?: EnumShotTypeWithAggregatesFilter<"SwingThought"> | $Enums.ShotType
+    phase?: EnumSwingPhaseWithAggregatesFilter<"SwingThought"> | $Enums.SwingPhase
+    rank?: IntWithAggregatesFilter<"SwingThought"> | number
+    text?: StringWithAggregatesFilter<"SwingThought"> | string
+    note?: StringNullableWithAggregatesFilter<"SwingThought"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SwingThought"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SwingThought"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -18538,6 +19827,83 @@ export namespace Prisma {
     holeId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SwingThoughtCreateInput = {
+    id?: string
+    shotType: $Enums.ShotType
+    phase: $Enums.SwingPhase
+    rank: number
+    text: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SwingThoughtUncheckedCreateInput = {
+    id?: string
+    shotType: $Enums.ShotType
+    phase: $Enums.SwingPhase
+    rank: number
+    text: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SwingThoughtUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shotType?: EnumShotTypeFieldUpdateOperationsInput | $Enums.ShotType
+    phase?: EnumSwingPhaseFieldUpdateOperationsInput | $Enums.SwingPhase
+    rank?: IntFieldUpdateOperationsInput | number
+    text?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SwingThoughtUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shotType?: EnumShotTypeFieldUpdateOperationsInput | $Enums.ShotType
+    phase?: EnumSwingPhaseFieldUpdateOperationsInput | $Enums.SwingPhase
+    rank?: IntFieldUpdateOperationsInput | number
+    text?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SwingThoughtCreateManyInput = {
+    id?: string
+    shotType: $Enums.ShotType
+    phase: $Enums.SwingPhase
+    rank: number
+    text: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SwingThoughtUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shotType?: EnumShotTypeFieldUpdateOperationsInput | $Enums.ShotType
+    phase?: EnumSwingPhaseFieldUpdateOperationsInput | $Enums.SwingPhase
+    rank?: IntFieldUpdateOperationsInput | number
+    text?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SwingThoughtUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    shotType?: EnumShotTypeFieldUpdateOperationsInput | $Enums.ShotType
+    phase?: EnumSwingPhaseFieldUpdateOperationsInput | $Enums.SwingPhase
+    rank?: IntFieldUpdateOperationsInput | number
+    text?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateInput = {
@@ -19542,6 +20908,81 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type EnumShotTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShotType | EnumShotTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ShotType[]
+    notIn?: $Enums.ShotType[]
+    not?: NestedEnumShotTypeFilter<$PrismaModel> | $Enums.ShotType
+  }
+
+  export type EnumSwingPhaseFilter<$PrismaModel = never> = {
+    equals?: $Enums.SwingPhase | EnumSwingPhaseFieldRefInput<$PrismaModel>
+    in?: $Enums.SwingPhase[]
+    notIn?: $Enums.SwingPhase[]
+    not?: NestedEnumSwingPhaseFilter<$PrismaModel> | $Enums.SwingPhase
+  }
+
+  export type SwingThoughtCountOrderByAggregateInput = {
+    id?: SortOrder
+    shotType?: SortOrder
+    phase?: SortOrder
+    rank?: SortOrder
+    text?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SwingThoughtAvgOrderByAggregateInput = {
+    rank?: SortOrder
+  }
+
+  export type SwingThoughtMaxOrderByAggregateInput = {
+    id?: SortOrder
+    shotType?: SortOrder
+    phase?: SortOrder
+    rank?: SortOrder
+    text?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SwingThoughtMinOrderByAggregateInput = {
+    id?: SortOrder
+    shotType?: SortOrder
+    phase?: SortOrder
+    rank?: SortOrder
+    text?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SwingThoughtSumOrderByAggregateInput = {
+    rank?: SortOrder
+  }
+
+  export type EnumShotTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShotType | EnumShotTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ShotType[]
+    notIn?: $Enums.ShotType[]
+    not?: NestedEnumShotTypeWithAggregatesFilter<$PrismaModel> | $Enums.ShotType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShotTypeFilter<$PrismaModel>
+    _max?: NestedEnumShotTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSwingPhaseWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SwingPhase | EnumSwingPhaseFieldRefInput<$PrismaModel>
+    in?: $Enums.SwingPhase[]
+    notIn?: $Enums.SwingPhase[]
+    not?: NestedEnumSwingPhaseWithAggregatesFilter<$PrismaModel> | $Enums.SwingPhase
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSwingPhaseFilter<$PrismaModel>
+    _max?: NestedEnumSwingPhaseFilter<$PrismaModel>
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -20303,6 +21744,14 @@ export namespace Prisma {
     update?: XOR<XOR<HoleUpdateToOneWithWhereWithoutScoresInput, HoleUpdateWithoutScoresInput>, HoleUncheckedUpdateWithoutScoresInput>
   }
 
+  export type EnumShotTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ShotType
+  }
+
+  export type EnumSwingPhaseFieldUpdateOperationsInput = {
+    set?: $Enums.SwingPhase
+  }
+
   export type UserCreateNestedOneWithoutSessionsInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -20614,6 +22063,40 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumShotTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShotType | EnumShotTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ShotType[]
+    notIn?: $Enums.ShotType[]
+    not?: NestedEnumShotTypeFilter<$PrismaModel> | $Enums.ShotType
+  }
+
+  export type NestedEnumSwingPhaseFilter<$PrismaModel = never> = {
+    equals?: $Enums.SwingPhase | EnumSwingPhaseFieldRefInput<$PrismaModel>
+    in?: $Enums.SwingPhase[]
+    notIn?: $Enums.SwingPhase[]
+    not?: NestedEnumSwingPhaseFilter<$PrismaModel> | $Enums.SwingPhase
+  }
+
+  export type NestedEnumShotTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ShotType | EnumShotTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ShotType[]
+    notIn?: $Enums.ShotType[]
+    not?: NestedEnumShotTypeWithAggregatesFilter<$PrismaModel> | $Enums.ShotType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumShotTypeFilter<$PrismaModel>
+    _max?: NestedEnumShotTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSwingPhaseWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SwingPhase | EnumSwingPhaseFieldRefInput<$PrismaModel>
+    in?: $Enums.SwingPhase[]
+    notIn?: $Enums.SwingPhase[]
+    not?: NestedEnumSwingPhaseWithAggregatesFilter<$PrismaModel> | $Enums.SwingPhase
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSwingPhaseFilter<$PrismaModel>
+    _max?: NestedEnumSwingPhaseFilter<$PrismaModel>
   }
 
   export type SessionCreateWithoutUserInput = {

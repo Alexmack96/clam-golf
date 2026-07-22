@@ -96,6 +96,33 @@ Reaching the putting surface with at least two strokes left for par. Never recor
 always derived, as strokes minus putts being at most par minus two.
 _Avoid_: GIR in prose, though the abbreviation is fine in a column heading
 
+### Swing thoughts
+
+**Swing Thought**:
+One cue you want to hold in mind for a kind of shot — "weight forward", "slow
+takeaway". Belongs to exactly one Shot Type and one Swing Phase, carries a Rank and
+an optional Note. The same cue wanted for two shots is two Swing Thoughts, ranked
+independently — you think about one shot at a time.
+_Avoid_: Tip, cue, key
+
+**Shot Type**:
+The kind of shot a Swing Thought is for — Driver, Iron, Pitch, Chip, Putt, Bunker.
+A shot you play, deliberately distinct from Club (the implement) and its Club Type:
+Pitch, Chip and Bunker are shots with no club of their own.
+_Avoid_: Club, Club Type (that's equipment)
+
+**Swing Phase**:
+Where in the motion a Swing Thought applies — Setup, Backswing, Downswing, Finish.
+The phase of the stroke, unrelated to Swing Length (which is depth of backswing on a
+wedge, not a moment in the swing).
+_Avoid_: Backswing as a Swing Length, swing type
+
+**Rank**:
+How much a Swing Thought is worth thinking about, 0–100. Orders the thoughts within a
+Shot Type, highest first, so the highest-impact cue sits on top. Relative within its
+Shot Type, not across the whole game; ties allowed.
+_Avoid_: Score, priority, weight
+
 ### On the course
 
 **Aim Point**:

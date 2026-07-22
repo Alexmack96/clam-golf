@@ -10,6 +10,7 @@ const links = [
   { to: "/scorecard", label: "Scorecard" },
   { to: "/shot-calculator", label: "Shot Calculator" },
   { to: "/clubs", label: "Clubs" },
+  { to: "/swing-thoughts", label: "Swing Thoughts" },
 ] as const;
 
 export function Navbar({ onSignOut }: { onSignOut: () => void }) {

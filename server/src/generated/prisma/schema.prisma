@@ -36,6 +36,27 @@ enum TeeColour {
   Blue
 }
 
+// The kind of shot a swing thought is for. Deliberately its own enum, not
+// ClubType — a shot you play, not an implement in the bag. Pitch, Chip and
+// Bunker are shots with no club of their own. See docs/adr/0002.
+enum ShotType {
+  Driver
+  Iron
+  Pitch
+  Chip
+  Putt
+  Bunker
+}
+
+// Where in the motion a swing thought applies. Unrelated to SwingLength, which
+// is the depth of a wedge's backswing, not a moment in the stroke.
+enum SwingPhase {
+  Setup
+  Backswing
+  Downswing
+  Finish
+}
+
 model User {
   id        String    @id @default(cuid())
   email     String    @unique
@@ -205,6 +226,24 @@ model HoleScore {
 
   @@unique([roundId, holeId])
   @@map("hole_scores")
+}
+
+// One cue held in mind for a kind of shot. Filed under exactly one ShotType
+// and one SwingPhase; rank orders it within its ShotType (highest first). The
+// same cue wanted for two shots is two rows, ranked independently.
+model SwingThought {
+  id        String     @id @default(cuid())
+  shotType  ShotType
+  phase     SwingPhase
+  // 0–100, how much this is worth thinking about. Sorted desc within a ShotType.
+  rank      Int
+  text      String
+  note      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([shotType, rank])
+  @@map("swing_thoughts")
 }
 
 model Session {

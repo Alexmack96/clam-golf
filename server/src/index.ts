@@ -15,6 +15,7 @@ import { distancesRouter } from "./routes/distances.js";
 import { clubsRouter } from "./routes/clubs.js";
 import { coursesRouter } from "./routes/courses.js";
 import { roundsRouter } from "./routes/rounds.js";
+import { swingThoughtsRouter } from "./routes/swingThoughts.js";
 
 Sentry.init({ dsn: env.SENTRY_DSN, environment: env.SENTRY_ENVIRONMENT });
 
@@ -66,6 +67,7 @@ app.use("/api/distances", requireAuth, distancesRouter);
 app.use("/api/clubs", requireAuth, clubsRouter);
 app.use("/api/courses", requireAuth, coursesRouter);
 app.use("/api/rounds", requireAuth, roundsRouter);
+app.use("/api/swing-thoughts", requireAuth, swingThoughtsRouter);
 
 Sentry.setupExpressErrorHandler(app);
 app.use(errorHandler);

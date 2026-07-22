@@ -11,6 +11,8 @@ Golf tracker to help improve your game. Play rounds with friends and analyze you
 
 ## Todo 18-Jul-2026
 [] L - Migrate to .NET 10 backend
+[] - Add toot hill and decouple from GPS to make ti one way click thru
+[] L - 
 [] M - Add friends concept within the users table
 [] L - Migrate to WorkOS
 [] M - Maybe migrate GPS to google and pay for it if cheap

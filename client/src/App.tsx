@@ -8,6 +8,7 @@ import { ShotCalculatorPage } from "./pages/ShotCalculatorPage.js";
 import { ClubsPage } from "./pages/ClubsPage.js";
 import { GpsPage } from "./pages/GpsPage.js";
 import { ScorecardPage } from "./pages/ScorecardPage.js";
+import { SwingThoughtsPage } from "./pages/SwingThoughtsPage.js";
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
           <Route path="/gps" element={<GpsPage />} />
           <Route path="/scorecard" element={<ScorecardPage />} />
           <Route path="/clubs" element={<ClubsPage />} />
+          <Route path="/swing-thoughts" element={<SwingThoughtsPage />} />
           <Route path="*" element={<Navigate to="/distances" replace />} />
         </Route>
       </Route>

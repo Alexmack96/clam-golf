@@ -206,6 +206,17 @@ exports.Prisma.HoleScoreScalarFieldEnum = {
   putts: 'putts'
 };
 
+exports.Prisma.SwingThoughtScalarFieldEnum = {
+  id: 'id',
+  shotType: 'shotType',
+  phase: 'phase',
+  rank: 'rank',
+  text: 'text',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -279,6 +290,22 @@ exports.TeeColour = exports.$Enums.TeeColour = {
   Blue: 'Blue'
 };
 
+exports.ShotType = exports.$Enums.ShotType = {
+  Driver: 'Driver',
+  Iron: 'Iron',
+  Pitch: 'Pitch',
+  Chip: 'Chip',
+  Putt: 'Putt',
+  Bunker: 'Bunker'
+};
+
+exports.SwingPhase = exports.$Enums.SwingPhase = {
+  Setup: 'Setup',
+  Backswing: 'Backswing',
+  Downswing: 'Downswing',
+  Finish: 'Finish'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Club: 'Club',
@@ -290,6 +317,7 @@ exports.Prisma.ModelName = {
   HoleTee: 'HoleTee',
   Round: 'Round',
   HoleScore: 'HoleScore',
+  SwingThought: 'SwingThought',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
