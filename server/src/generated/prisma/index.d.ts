@@ -59,6 +59,11 @@ export type HoleTee = $Result.DefaultSelection<Prisma.$HoleTeePayload>
  */
 export type Round = $Result.DefaultSelection<Prisma.$RoundPayload>
 /**
+ * Model Player
+ * 
+ */
+export type Player = $Result.DefaultSelection<Prisma.$PlayerPayload>
+/**
  * Model HoleScore
  * 
  */
@@ -385,6 +390,16 @@ export class PrismaClient<
     * ```
     */
   get round(): Prisma.RoundDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.player`: Exposes CRUD operations for the **Player** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Players
+    * const players = await prisma.player.findMany()
+    * ```
+    */
+  get player(): Prisma.PlayerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.holeScore`: Exposes CRUD operations for the **HoleScore** model.
@@ -878,6 +893,7 @@ export namespace Prisma {
     TeeSet: 'TeeSet',
     HoleTee: 'HoleTee',
     Round: 'Round',
+    Player: 'Player',
     HoleScore: 'HoleScore',
     SwingThought: 'SwingThought',
     Session: 'Session',
@@ -898,7 +914,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "round" | "holeScore" | "swingThought" | "session" | "account" | "verification"
+      modelProps: "user" | "club" | "distance" | "distanceHistory" | "course" | "hole" | "teeSet" | "holeTee" | "round" | "player" | "holeScore" | "swingThought" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1568,6 +1584,80 @@ export namespace Prisma {
           }
         }
       }
+      Player: {
+        payload: Prisma.$PlayerPayload<ExtArgs>
+        fields: Prisma.PlayerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          findMany: {
+            args: Prisma.PlayerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          create: {
+            args: Prisma.PlayerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          createMany: {
+            args: Prisma.PlayerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          update: {
+            args: Prisma.PlayerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerPayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayer>
+          }
+          groupBy: {
+            args: Prisma.PlayerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerCountAggregateOutputType> | number
+          }
+        }
+      }
       HoleScore: {
         payload: Prisma.$HoleScorePayload<ExtArgs>
         fields: Prisma.HoleScoreFieldRefs
@@ -2055,6 +2145,7 @@ export namespace Prisma {
     teeSet?: TeeSetOmit
     holeTee?: HoleTeeOmit
     round?: RoundOmit
+    player?: PlayerOmit
     holeScore?: HoleScoreOmit
     swingThought?: SwingThoughtOmit
     session?: SessionOmit
@@ -2301,12 +2392,12 @@ export namespace Prisma {
 
   export type TeeSetCountOutputType = {
     holes: number
-    rounds: number
+    players: number
   }
 
   export type TeeSetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     holes?: boolean | TeeSetCountOutputTypeCountHolesArgs
-    rounds?: boolean | TeeSetCountOutputTypeCountRoundsArgs
+    players?: boolean | TeeSetCountOutputTypeCountPlayersArgs
   }
 
   // Custom InputTypes
@@ -2330,8 +2421,8 @@ export namespace Prisma {
   /**
    * TeeSetCountOutputType without action
    */
-  export type TeeSetCountOutputTypeCountRoundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RoundWhereInput
+  export type TeeSetCountOutputTypeCountPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
   }
 
 
@@ -2340,11 +2431,11 @@ export namespace Prisma {
    */
 
   export type RoundCountOutputType = {
-    scores: number
+    players: number
   }
 
   export type RoundCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    scores?: boolean | RoundCountOutputTypeCountScoresArgs
+    players?: boolean | RoundCountOutputTypeCountPlayersArgs
   }
 
   // Custom InputTypes
@@ -2361,7 +2452,38 @@ export namespace Prisma {
   /**
    * RoundCountOutputType without action
    */
-  export type RoundCountOutputTypeCountScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type RoundCountOutputTypeCountPlayersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
+  }
+
+
+  /**
+   * Count Type PlayerCountOutputType
+   */
+
+  export type PlayerCountOutputType = {
+    scores: number
+  }
+
+  export type PlayerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    scores?: boolean | PlayerCountOutputTypeCountScoresArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerCountOutputType
+     */
+    select?: PlayerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeCountScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: HoleScoreWhereInput
   }
 
@@ -3510,6 +3632,10 @@ export namespace Prisma {
     type: $Enums.ClubType | null
     sortOrder: number | null
     isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type ClubMaxAggregateOutputType = {
@@ -3518,6 +3644,10 @@ export namespace Prisma {
     type: $Enums.ClubType | null
     sortOrder: number | null
     isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type ClubCountAggregateOutputType = {
@@ -3526,6 +3656,10 @@ export namespace Prisma {
     type: number
     sortOrder: number
     isActive: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -3544,6 +3678,10 @@ export namespace Prisma {
     type?: true
     sortOrder?: true
     isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type ClubMaxAggregateInputType = {
@@ -3552,6 +3690,10 @@ export namespace Prisma {
     type?: true
     sortOrder?: true
     isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type ClubCountAggregateInputType = {
@@ -3560,6 +3702,10 @@ export namespace Prisma {
     type?: true
     sortOrder?: true
     isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -3655,6 +3801,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder: number
     isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: ClubCountAggregateOutputType | null
     _avg: ClubAvgAggregateOutputType | null
     _sum: ClubSumAggregateOutputType | null
@@ -3682,6 +3832,10 @@ export namespace Prisma {
     type?: boolean
     sortOrder?: boolean
     isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     distances?: boolean | Club$distancesArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["club"]>
@@ -3692,6 +3846,10 @@ export namespace Prisma {
     type?: boolean
     sortOrder?: boolean
     isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["club"]>
 
   export type ClubSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3700,6 +3858,10 @@ export namespace Prisma {
     type?: boolean
     sortOrder?: boolean
     isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["club"]>
 
   export type ClubSelectScalar = {
@@ -3708,9 +3870,13 @@ export namespace Prisma {
     type?: boolean
     sortOrder?: boolean
     isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "sortOrder" | "isActive", ExtArgs["result"]["club"]>
+  export type ClubOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "sortOrder" | "isActive" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["club"]>
   export type ClubInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     distances?: boolean | Club$distancesArgs<ExtArgs>
     _count?: boolean | ClubCountOutputTypeDefaultArgs<ExtArgs>
@@ -3729,6 +3895,10 @@ export namespace Prisma {
       type: $Enums.ClubType
       sortOrder: number
       isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["club"]>
     composites: {}
   }
@@ -4158,6 +4328,10 @@ export namespace Prisma {
     readonly type: FieldRef<"Club", 'ClubType'>
     readonly sortOrder: FieldRef<"Club", 'Int'>
     readonly isActive: FieldRef<"Club", 'Boolean'>
+    readonly createdAt: FieldRef<"Club", 'DateTime'>
+    readonly updatedAt: FieldRef<"Club", 'DateTime'>
+    readonly createdById: FieldRef<"Club", 'String'>
+    readonly updatedById: FieldRef<"Club", 'String'>
   }
     
 
@@ -4618,7 +4792,10 @@ export namespace Prisma {
     yards: number | null
     unit: $Enums.DistanceUnit | null
     measuredAt: Date | null
+    createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type DistanceMaxAggregateOutputType = {
@@ -4628,7 +4805,10 @@ export namespace Prisma {
     yards: number | null
     unit: $Enums.DistanceUnit | null
     measuredAt: Date | null
+    createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type DistanceCountAggregateOutputType = {
@@ -4638,7 +4818,10 @@ export namespace Prisma {
     yards: number
     unit: number
     measuredAt: number
+    createdAt: number
     updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -4658,7 +4841,10 @@ export namespace Prisma {
     yards?: true
     unit?: true
     measuredAt?: true
+    createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type DistanceMaxAggregateInputType = {
@@ -4668,7 +4854,10 @@ export namespace Prisma {
     yards?: true
     unit?: true
     measuredAt?: true
+    createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type DistanceCountAggregateInputType = {
@@ -4678,7 +4867,10 @@ export namespace Prisma {
     yards?: true
     unit?: true
     measuredAt?: true
+    createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -4775,7 +4967,10 @@ export namespace Prisma {
     yards: number
     unit: $Enums.DistanceUnit
     measuredAt: Date
+    createdAt: Date
     updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: DistanceCountAggregateOutputType | null
     _avg: DistanceAvgAggregateOutputType | null
     _sum: DistanceSumAggregateOutputType | null
@@ -4804,7 +4999,10 @@ export namespace Prisma {
     yards?: boolean
     unit?: boolean
     measuredAt?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
 
@@ -4815,7 +5013,10 @@ export namespace Prisma {
     yards?: boolean
     unit?: boolean
     measuredAt?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
 
@@ -4826,7 +5027,10 @@ export namespace Prisma {
     yards?: boolean
     unit?: boolean
     measuredAt?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["distance"]>
 
@@ -4837,10 +5041,13 @@ export namespace Prisma {
     yards?: boolean
     unit?: boolean
     measuredAt?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type DistanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "swing" | "yards" | "unit" | "measuredAt" | "updatedAt", ExtArgs["result"]["distance"]>
+  export type DistanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clubId" | "swing" | "yards" | "unit" | "measuredAt" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["distance"]>
   export type DistanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     club?: boolean | ClubDefaultArgs<ExtArgs>
   }
@@ -4863,7 +5070,10 @@ export namespace Prisma {
       yards: number
       unit: $Enums.DistanceUnit
       measuredAt: Date
+      createdAt: Date
       updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["distance"]>
     composites: {}
   }
@@ -5294,7 +5504,10 @@ export namespace Prisma {
     readonly yards: FieldRef<"Distance", 'Int'>
     readonly unit: FieldRef<"Distance", 'DistanceUnit'>
     readonly measuredAt: FieldRef<"Distance", 'DateTime'>
+    readonly createdAt: FieldRef<"Distance", 'DateTime'>
     readonly updatedAt: FieldRef<"Distance", 'DateTime'>
+    readonly createdById: FieldRef<"Distance", 'String'>
+    readonly updatedById: FieldRef<"Distance", 'String'>
   }
     
 
@@ -6784,19 +6997,34 @@ export namespace Prisma {
   export type CourseMinAggregateOutputType = {
     id: string | null
     name: string | null
+    venue: string | null
     sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type CourseMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    venue: string | null
     sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type CourseCountAggregateOutputType = {
     id: number
     name: number
+    venue: number
     sortOrder: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -6812,19 +7040,34 @@ export namespace Prisma {
   export type CourseMinAggregateInputType = {
     id?: true
     name?: true
+    venue?: true
     sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type CourseMaxAggregateInputType = {
     id?: true
     name?: true
+    venue?: true
     sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type CourseCountAggregateInputType = {
     id?: true
     name?: true
+    venue?: true
     sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -6917,7 +7160,12 @@ export namespace Prisma {
   export type CourseGroupByOutputType = {
     id: string
     name: string
+    venue: string
     sortOrder: number
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -6942,7 +7190,12 @@ export namespace Prisma {
   export type CourseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    venue?: boolean
     sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     holes?: boolean | Course$holesArgs<ExtArgs>
     teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
     rounds?: boolean | Course$roundsArgs<ExtArgs>
@@ -6952,22 +7205,37 @@ export namespace Prisma {
   export type CourseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    venue?: boolean
     sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    venue?: boolean
     sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectScalar = {
     id?: boolean
     name?: boolean
+    venue?: boolean
     sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "sortOrder", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "venue" | "sortOrder" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     holes?: boolean | Course$holesArgs<ExtArgs>
     teeSets?: boolean | Course$teeSetsArgs<ExtArgs>
@@ -6987,7 +7255,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      venue: string
       sortOrder: number
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -7416,7 +7689,12 @@ export namespace Prisma {
   interface CourseFieldRefs {
     readonly id: FieldRef<"Course", 'String'>
     readonly name: FieldRef<"Course", 'String'>
+    readonly venue: FieldRef<"Course", 'String'>
     readonly sortOrder: FieldRef<"Course", 'Int'>
+    readonly createdAt: FieldRef<"Course", 'DateTime'>
+    readonly updatedAt: FieldRef<"Course", 'DateTime'>
+    readonly createdById: FieldRef<"Course", 'String'>
+    readonly updatedById: FieldRef<"Course", 'String'>
   }
     
 
@@ -7935,6 +8213,10 @@ export namespace Prisma {
     greenLng: number | null
     aimLat: number | null
     aimLng: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type HoleMaxAggregateOutputType = {
@@ -7946,6 +8228,10 @@ export namespace Prisma {
     greenLng: number | null
     aimLat: number | null
     aimLng: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type HoleCountAggregateOutputType = {
@@ -7957,6 +8243,10 @@ export namespace Prisma {
     greenLng: number
     aimLat: number
     aimLng: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -7986,6 +8276,10 @@ export namespace Prisma {
     greenLng?: true
     aimLat?: true
     aimLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type HoleMaxAggregateInputType = {
@@ -7997,6 +8291,10 @@ export namespace Prisma {
     greenLng?: true
     aimLat?: true
     aimLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type HoleCountAggregateInputType = {
@@ -8008,6 +8306,10 @@ export namespace Prisma {
     greenLng?: true
     aimLat?: true
     aimLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -8106,6 +8408,10 @@ export namespace Prisma {
     greenLng: number | null
     aimLat: number | null
     aimLng: number | null
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: HoleCountAggregateOutputType | null
     _avg: HoleAvgAggregateOutputType | null
     _sum: HoleSumAggregateOutputType | null
@@ -8136,6 +8442,10 @@ export namespace Prisma {
     greenLng?: boolean
     aimLat?: boolean
     aimLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
     tees?: boolean | Hole$teesArgs<ExtArgs>
     scores?: boolean | Hole$scoresArgs<ExtArgs>
@@ -8151,6 +8461,10 @@ export namespace Prisma {
     greenLng?: boolean
     aimLat?: boolean
     aimLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hole"]>
 
@@ -8163,6 +8477,10 @@ export namespace Prisma {
     greenLng?: boolean
     aimLat?: boolean
     aimLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hole"]>
 
@@ -8175,9 +8493,13 @@ export namespace Prisma {
     greenLng?: boolean
     aimLat?: boolean
     aimLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type HoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "number" | "greenPolygon" | "greenLat" | "greenLng" | "aimLat" | "aimLng", ExtArgs["result"]["hole"]>
+  export type HoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "number" | "greenPolygon" | "greenLat" | "greenLng" | "aimLat" | "aimLng" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["hole"]>
   export type HoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     tees?: boolean | Hole$teesArgs<ExtArgs>
@@ -8207,6 +8529,10 @@ export namespace Prisma {
       greenLng: number | null
       aimLat: number | null
       aimLng: number | null
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["hole"]>
     composites: {}
   }
@@ -8641,6 +8967,10 @@ export namespace Prisma {
     readonly greenLng: FieldRef<"Hole", 'Float'>
     readonly aimLat: FieldRef<"Hole", 'Float'>
     readonly aimLng: FieldRef<"Hole", 'Float'>
+    readonly createdAt: FieldRef<"Hole", 'DateTime'>
+    readonly updatedAt: FieldRef<"Hole", 'DateTime'>
+    readonly createdById: FieldRef<"Hole", 'String'>
+    readonly updatedById: FieldRef<"Hole", 'String'>
   }
     
 
@@ -9121,6 +9451,10 @@ export namespace Prisma {
     courseId: string | null
     colour: $Enums.TeeColour | null
     name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type TeeSetMaxAggregateOutputType = {
@@ -9128,6 +9462,10 @@ export namespace Prisma {
     courseId: string | null
     colour: $Enums.TeeColour | null
     name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type TeeSetCountAggregateOutputType = {
@@ -9135,6 +9473,10 @@ export namespace Prisma {
     courseId: number
     colour: number
     name: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -9144,6 +9486,10 @@ export namespace Prisma {
     courseId?: true
     colour?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type TeeSetMaxAggregateInputType = {
@@ -9151,6 +9497,10 @@ export namespace Prisma {
     courseId?: true
     colour?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type TeeSetCountAggregateInputType = {
@@ -9158,6 +9508,10 @@ export namespace Prisma {
     courseId?: true
     colour?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -9238,6 +9592,10 @@ export namespace Prisma {
     courseId: string
     colour: $Enums.TeeColour
     name: string
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: TeeSetCountAggregateOutputType | null
     _min: TeeSetMinAggregateOutputType | null
     _max: TeeSetMaxAggregateOutputType | null
@@ -9262,9 +9620,13 @@ export namespace Prisma {
     courseId?: boolean
     colour?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
     holes?: boolean | TeeSet$holesArgs<ExtArgs>
-    rounds?: boolean | TeeSet$roundsArgs<ExtArgs>
+    players?: boolean | TeeSet$playersArgs<ExtArgs>
     _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teeSet"]>
 
@@ -9273,6 +9635,10 @@ export namespace Prisma {
     courseId?: boolean
     colour?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teeSet"]>
 
@@ -9281,6 +9647,10 @@ export namespace Prisma {
     courseId?: boolean
     colour?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teeSet"]>
 
@@ -9289,13 +9659,17 @@ export namespace Prisma {
     courseId?: boolean
     colour?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type TeeSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "colour" | "name", ExtArgs["result"]["teeSet"]>
+  export type TeeSetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "colour" | "name" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["teeSet"]>
   export type TeeSetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     holes?: boolean | TeeSet$holesArgs<ExtArgs>
-    rounds?: boolean | TeeSet$roundsArgs<ExtArgs>
+    players?: boolean | TeeSet$playersArgs<ExtArgs>
     _count?: boolean | TeeSetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeeSetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9310,13 +9684,17 @@ export namespace Prisma {
     objects: {
       course: Prisma.$CoursePayload<ExtArgs>
       holes: Prisma.$HoleTeePayload<ExtArgs>[]
-      rounds: Prisma.$RoundPayload<ExtArgs>[]
+      players: Prisma.$PlayerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       courseId: string
       colour: $Enums.TeeColour
       name: string
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["teeSet"]>
     composites: {}
   }
@@ -9713,7 +10091,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     holes<T extends TeeSet$holesArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$holesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleTeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    rounds<T extends TeeSet$roundsArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$roundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    players<T extends TeeSet$playersArgs<ExtArgs> = {}>(args?: Subset<T, TeeSet$playersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9747,6 +10125,10 @@ export namespace Prisma {
     readonly courseId: FieldRef<"TeeSet", 'String'>
     readonly colour: FieldRef<"TeeSet", 'TeeColour'>
     readonly name: FieldRef<"TeeSet", 'String'>
+    readonly createdAt: FieldRef<"TeeSet", 'DateTime'>
+    readonly updatedAt: FieldRef<"TeeSet", 'DateTime'>
+    readonly createdById: FieldRef<"TeeSet", 'String'>
+    readonly updatedById: FieldRef<"TeeSet", 'String'>
   }
     
 
@@ -10170,27 +10552,27 @@ export namespace Prisma {
   }
 
   /**
-   * TeeSet.rounds
+   * TeeSet.players
    */
-  export type TeeSet$roundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TeeSet$playersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Round
+     * Select specific fields to fetch from the Player
      */
-    select?: RoundSelect<ExtArgs> | null
+    select?: PlayerSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Round
+     * Omit specific fields from the Player
      */
-    omit?: RoundOmit<ExtArgs> | null
+    omit?: PlayerOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RoundInclude<ExtArgs> | null
-    where?: RoundWhereInput
-    orderBy?: RoundOrderByWithRelationInput | RoundOrderByWithRelationInput[]
-    cursor?: RoundWhereUniqueInput
+    include?: PlayerInclude<ExtArgs> | null
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    cursor?: PlayerWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
   }
 
   /**
@@ -10249,6 +10631,10 @@ export namespace Prisma {
     strokeIndex: number | null
     teeLat: number | null
     teeLng: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type HoleTeeMaxAggregateOutputType = {
@@ -10260,6 +10646,10 @@ export namespace Prisma {
     strokeIndex: number | null
     teeLat: number | null
     teeLng: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type HoleTeeCountAggregateOutputType = {
@@ -10271,6 +10661,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat: number
     teeLng: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -10300,6 +10694,10 @@ export namespace Prisma {
     strokeIndex?: true
     teeLat?: true
     teeLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type HoleTeeMaxAggregateInputType = {
@@ -10311,6 +10709,10 @@ export namespace Prisma {
     strokeIndex?: true
     teeLat?: true
     teeLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type HoleTeeCountAggregateInputType = {
@@ -10322,6 +10724,10 @@ export namespace Prisma {
     strokeIndex?: true
     teeLat?: true
     teeLng?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -10420,6 +10826,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat: number | null
     teeLng: number | null
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: HoleTeeCountAggregateOutputType | null
     _avg: HoleTeeAvgAggregateOutputType | null
     _sum: HoleTeeSumAggregateOutputType | null
@@ -10450,6 +10860,10 @@ export namespace Prisma {
     strokeIndex?: boolean
     teeLat?: boolean
     teeLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     hole?: boolean | HoleDefaultArgs<ExtArgs>
     teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeTee"]>
@@ -10463,6 +10877,10 @@ export namespace Prisma {
     strokeIndex?: boolean
     teeLat?: boolean
     teeLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     hole?: boolean | HoleDefaultArgs<ExtArgs>
     teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeTee"]>
@@ -10476,6 +10894,10 @@ export namespace Prisma {
     strokeIndex?: boolean
     teeLat?: boolean
     teeLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     hole?: boolean | HoleDefaultArgs<ExtArgs>
     teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeTee"]>
@@ -10489,9 +10911,13 @@ export namespace Prisma {
     strokeIndex?: boolean
     teeLat?: boolean
     teeLng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type HoleTeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "holeId" | "teeSetId" | "yards" | "par" | "strokeIndex" | "teeLat" | "teeLng", ExtArgs["result"]["holeTee"]>
+  export type HoleTeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "holeId" | "teeSetId" | "yards" | "par" | "strokeIndex" | "teeLat" | "teeLng" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["holeTee"]>
   export type HoleTeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     hole?: boolean | HoleDefaultArgs<ExtArgs>
     teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
@@ -10520,6 +10946,10 @@ export namespace Prisma {
       strokeIndex: number
       teeLat: number | null
       teeLng: number | null
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["holeTee"]>
     composites: {}
   }
@@ -10953,6 +11383,10 @@ export namespace Prisma {
     readonly strokeIndex: FieldRef<"HoleTee", 'Int'>
     readonly teeLat: FieldRef<"HoleTee", 'Float'>
     readonly teeLng: FieldRef<"HoleTee", 'Float'>
+    readonly createdAt: FieldRef<"HoleTee", 'DateTime'>
+    readonly updatedAt: FieldRef<"HoleTee", 'DateTime'>
+    readonly createdById: FieldRef<"HoleTee", 'String'>
+    readonly updatedById: FieldRef<"HoleTee", 'String'>
   }
     
 
@@ -11383,31 +11817,40 @@ export namespace Prisma {
   export type RoundMinAggregateOutputType = {
     id: string | null
     courseId: string | null
-    teeSetId: string | null
     playedOn: Date | null
     completedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
   }
 
   export type RoundMaxAggregateOutputType = {
     id: string | null
     courseId: string | null
-    teeSetId: string | null
     playedOn: Date | null
     completedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
   }
 
   export type RoundCountAggregateOutputType = {
     id: number
     courseId: number
-    teeSetId: number
     playedOn: number
     completedAt: number
     createdAt: number
     updatedAt: number
+    createdById: number
+    updatedById: number
+    deletedAt: number
+    deletedById: number
     _all: number
   }
 
@@ -11415,31 +11858,40 @@ export namespace Prisma {
   export type RoundMinAggregateInputType = {
     id?: true
     courseId?: true
-    teeSetId?: true
     playedOn?: true
     completedAt?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
   }
 
   export type RoundMaxAggregateInputType = {
     id?: true
     courseId?: true
-    teeSetId?: true
     playedOn?: true
     completedAt?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
   }
 
   export type RoundCountAggregateInputType = {
     id?: true
     courseId?: true
-    teeSetId?: true
     playedOn?: true
     completedAt?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
     _all?: true
   }
 
@@ -11518,11 +11970,14 @@ export namespace Prisma {
   export type RoundGroupByOutputType = {
     id: string
     courseId: string
-    teeSetId: string
     playedOn: Date
     completedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
     _count: RoundCountAggregateOutputType | null
     _min: RoundMinAggregateOutputType | null
     _max: RoundMaxAggregateOutputType | null
@@ -11545,82 +12000,90 @@ export namespace Prisma {
   export type RoundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
-    teeSetId?: boolean
     playedOn?: boolean
     completedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
-    scores?: boolean | Round$scoresArgs<ExtArgs>
+    players?: boolean | Round$playersArgs<ExtArgs>
     _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
   export type RoundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
-    teeSetId?: boolean
     playedOn?: boolean
     completedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
   export type RoundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
-    teeSetId?: boolean
     playedOn?: boolean
     completedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
   export type RoundSelectScalar = {
     id?: boolean
     courseId?: boolean
-    teeSetId?: boolean
     playedOn?: boolean
     completedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
   }
 
-  export type RoundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "teeSetId" | "playedOn" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["round"]>
+  export type RoundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "playedOn" | "completedAt" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedAt" | "deletedById", ExtArgs["result"]["round"]>
   export type RoundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
-    scores?: boolean | Round$scoresArgs<ExtArgs>
+    players?: boolean | Round$playersArgs<ExtArgs>
     _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }
   export type RoundIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
-    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
   }
 
   export type $RoundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Round"
     objects: {
       course: Prisma.$CoursePayload<ExtArgs>
-      teeSet: Prisma.$TeeSetPayload<ExtArgs>
-      scores: Prisma.$HoleScorePayload<ExtArgs>[]
+      players: Prisma.$PlayerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       courseId: string
-      teeSetId: string
       playedOn: Date
       completedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
+      deletedAt: Date | null
+      deletedById: string | null
     }, ExtArgs["result"]["round"]>
     composites: {}
   }
@@ -12016,8 +12479,7 @@ export namespace Prisma {
   export interface Prisma__RoundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    teeSet<T extends TeeSetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeeSetDefaultArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    scores<T extends Round$scoresArgs<ExtArgs> = {}>(args?: Subset<T, Round$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    players<T extends Round$playersArgs<ExtArgs> = {}>(args?: Subset<T, Round$playersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12049,11 +12511,14 @@ export namespace Prisma {
   interface RoundFieldRefs {
     readonly id: FieldRef<"Round", 'String'>
     readonly courseId: FieldRef<"Round", 'String'>
-    readonly teeSetId: FieldRef<"Round", 'String'>
     readonly playedOn: FieldRef<"Round", 'DateTime'>
     readonly completedAt: FieldRef<"Round", 'DateTime'>
     readonly createdAt: FieldRef<"Round", 'DateTime'>
     readonly updatedAt: FieldRef<"Round", 'DateTime'>
+    readonly createdById: FieldRef<"Round", 'String'>
+    readonly updatedById: FieldRef<"Round", 'String'>
+    readonly deletedAt: FieldRef<"Round", 'DateTime'>
+    readonly deletedById: FieldRef<"Round", 'String'>
   }
     
 
@@ -12453,9 +12918,1233 @@ export namespace Prisma {
   }
 
   /**
-   * Round.scores
+   * Round.players
    */
-  export type Round$scoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Round$playersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    cursor?: PlayerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Round without action
+   */
+  export type RoundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Round
+     */
+    select?: RoundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Round
+     */
+    omit?: RoundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoundInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Player
+   */
+
+  export type AggregatePlayer = {
+    _count: PlayerCountAggregateOutputType | null
+    _avg: PlayerAvgAggregateOutputType | null
+    _sum: PlayerSumAggregateOutputType | null
+    _min: PlayerMinAggregateOutputType | null
+    _max: PlayerMaxAggregateOutputType | null
+  }
+
+  export type PlayerAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type PlayerSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type PlayerMinAggregateOutputType = {
+    id: string | null
+    roundId: string | null
+    position: number | null
+    name: string | null
+    teeSetId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
+  }
+
+  export type PlayerMaxAggregateOutputType = {
+    id: string | null
+    roundId: string | null
+    position: number | null
+    name: string | null
+    teeSetId: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
+  }
+
+  export type PlayerCountAggregateOutputType = {
+    id: number
+    roundId: number
+    position: number
+    name: number
+    teeSetId: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
+    deletedAt: number
+    deletedById: number
+    _all: number
+  }
+
+
+  export type PlayerAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type PlayerSumAggregateInputType = {
+    position?: true
+  }
+
+  export type PlayerMinAggregateInputType = {
+    id?: true
+    roundId?: true
+    position?: true
+    name?: true
+    teeSetId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
+  }
+
+  export type PlayerMaxAggregateInputType = {
+    id?: true
+    roundId?: true
+    position?: true
+    name?: true
+    teeSetId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
+  }
+
+  export type PlayerCountAggregateInputType = {
+    id?: true
+    roundId?: true
+    position?: true
+    name?: true
+    teeSetId?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
+    _all?: true
+  }
+
+  export type PlayerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Player to aggregate.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Players
+    **/
+    _count?: true | PlayerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlayerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlayerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerMaxAggregateInputType
+  }
+
+  export type GetPlayerAggregateType<T extends PlayerAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayer[P]>
+      : GetScalarType<T[P], AggregatePlayer[P]>
+  }
+
+
+
+
+  export type PlayerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerWhereInput
+    orderBy?: PlayerOrderByWithAggregationInput | PlayerOrderByWithAggregationInput[]
+    by: PlayerScalarFieldEnum[] | PlayerScalarFieldEnum
+    having?: PlayerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerCountAggregateInputType | true
+    _avg?: PlayerAvgAggregateInputType
+    _sum?: PlayerSumAggregateInputType
+    _min?: PlayerMinAggregateInputType
+    _max?: PlayerMaxAggregateInputType
+  }
+
+  export type PlayerGroupByOutputType = {
+    id: string
+    roundId: string
+    position: number
+    name: string
+    teeSetId: string
+    userId: string | null
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
+    _count: PlayerCountAggregateOutputType | null
+    _avg: PlayerAvgAggregateOutputType | null
+    _sum: PlayerSumAggregateOutputType | null
+    _min: PlayerMinAggregateOutputType | null
+    _max: PlayerMaxAggregateOutputType | null
+  }
+
+  type GetPlayerGroupByPayload<T extends PlayerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    position?: boolean
+    name?: boolean
+    teeSetId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+    scores?: boolean | Player$scoresArgs<ExtArgs>
+    _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    position?: boolean
+    name?: boolean
+    teeSetId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roundId?: boolean
+    position?: boolean
+    name?: boolean
+    teeSetId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["player"]>
+
+  export type PlayerSelectScalar = {
+    id?: boolean
+    roundId?: boolean
+    position?: boolean
+    name?: boolean
+    teeSetId?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+  }
+
+  export type PlayerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roundId" | "position" | "name" | "teeSetId" | "userId" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedAt" | "deletedById", ExtArgs["result"]["player"]>
+  export type PlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+    scores?: boolean | Player$scoresArgs<ExtArgs>
+    _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlayerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+  export type PlayerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    round?: boolean | RoundDefaultArgs<ExtArgs>
+    teeSet?: boolean | TeeSetDefaultArgs<ExtArgs>
+  }
+
+  export type $PlayerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Player"
+    objects: {
+      round: Prisma.$RoundPayload<ExtArgs>
+      teeSet: Prisma.$TeeSetPayload<ExtArgs>
+      scores: Prisma.$HoleScorePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roundId: string
+      position: number
+      name: string
+      teeSetId: string
+      userId: string | null
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
+      deletedAt: Date | null
+      deletedById: string | null
+    }, ExtArgs["result"]["player"]>
+    composites: {}
+  }
+
+  type PlayerGetPayload<S extends boolean | null | undefined | PlayerDefaultArgs> = $Result.GetResult<Prisma.$PlayerPayload, S>
+
+  type PlayerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerCountAggregateInputType | true
+    }
+
+  export interface PlayerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Player'], meta: { name: 'Player' } }
+    /**
+     * Find zero or one Player that matches the filter.
+     * @param {PlayerFindUniqueArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerFindUniqueArgs>(args: SelectSubset<T, PlayerFindUniqueArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Player that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerFindUniqueOrThrowArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Player that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindFirstArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerFindFirstArgs>(args?: SelectSubset<T, PlayerFindFirstArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Player that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindFirstOrThrowArgs} args - Arguments to find a Player
+     * @example
+     * // Get one Player
+     * const player = await prisma.player.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Players that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Players
+     * const players = await prisma.player.findMany()
+     * 
+     * // Get first 10 Players
+     * const players = await prisma.player.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerWithIdOnly = await prisma.player.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerFindManyArgs>(args?: SelectSubset<T, PlayerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Player.
+     * @param {PlayerCreateArgs} args - Arguments to create a Player.
+     * @example
+     * // Create one Player
+     * const Player = await prisma.player.create({
+     *   data: {
+     *     // ... data to create a Player
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerCreateArgs>(args: SelectSubset<T, PlayerCreateArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Players.
+     * @param {PlayerCreateManyArgs} args - Arguments to create many Players.
+     * @example
+     * // Create many Players
+     * const player = await prisma.player.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerCreateManyArgs>(args?: SelectSubset<T, PlayerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Players and returns the data saved in the database.
+     * @param {PlayerCreateManyAndReturnArgs} args - Arguments to create many Players.
+     * @example
+     * // Create many Players
+     * const player = await prisma.player.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Players and only return the `id`
+     * const playerWithIdOnly = await prisma.player.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Player.
+     * @param {PlayerDeleteArgs} args - Arguments to delete one Player.
+     * @example
+     * // Delete one Player
+     * const Player = await prisma.player.delete({
+     *   where: {
+     *     // ... filter to delete one Player
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerDeleteArgs>(args: SelectSubset<T, PlayerDeleteArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Player.
+     * @param {PlayerUpdateArgs} args - Arguments to update one Player.
+     * @example
+     * // Update one Player
+     * const player = await prisma.player.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerUpdateArgs>(args: SelectSubset<T, PlayerUpdateArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Players.
+     * @param {PlayerDeleteManyArgs} args - Arguments to filter Players to delete.
+     * @example
+     * // Delete a few Players
+     * const { count } = await prisma.player.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerDeleteManyArgs>(args?: SelectSubset<T, PlayerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Players.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Players
+     * const player = await prisma.player.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerUpdateManyArgs>(args: SelectSubset<T, PlayerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Players and returns the data updated in the database.
+     * @param {PlayerUpdateManyAndReturnArgs} args - Arguments to update many Players.
+     * @example
+     * // Update many Players
+     * const player = await prisma.player.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Players and only return the `id`
+     * const playerWithIdOnly = await prisma.player.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Player.
+     * @param {PlayerUpsertArgs} args - Arguments to update or create a Player.
+     * @example
+     * // Update or create a Player
+     * const player = await prisma.player.upsert({
+     *   create: {
+     *     // ... data to create a Player
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Player we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerUpsertArgs>(args: SelectSubset<T, PlayerUpsertArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Players.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerCountArgs} args - Arguments to filter Players to count.
+     * @example
+     * // Count the number of Players
+     * const count = await prisma.player.count({
+     *   where: {
+     *     // ... the filter for the Players we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerCountArgs>(
+      args?: Subset<T, PlayerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Player.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerAggregateArgs>(args: Subset<T, PlayerAggregateArgs>): Prisma.PrismaPromise<GetPlayerAggregateType<T>>
+
+    /**
+     * Group by Player.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Player model
+   */
+  readonly fields: PlayerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Player.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    round<T extends RoundDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoundDefaultArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    teeSet<T extends TeeSetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeeSetDefaultArgs<ExtArgs>>): Prisma__TeeSetClient<$Result.GetResult<Prisma.$TeeSetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    scores<T extends Player$scoresArgs<ExtArgs> = {}>(args?: Subset<T, Player$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoleScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Player model
+   */
+  interface PlayerFieldRefs {
+    readonly id: FieldRef<"Player", 'String'>
+    readonly roundId: FieldRef<"Player", 'String'>
+    readonly position: FieldRef<"Player", 'Int'>
+    readonly name: FieldRef<"Player", 'String'>
+    readonly teeSetId: FieldRef<"Player", 'String'>
+    readonly userId: FieldRef<"Player", 'String'>
+    readonly createdAt: FieldRef<"Player", 'DateTime'>
+    readonly updatedAt: FieldRef<"Player", 'DateTime'>
+    readonly createdById: FieldRef<"Player", 'String'>
+    readonly updatedById: FieldRef<"Player", 'String'>
+    readonly deletedAt: FieldRef<"Player", 'DateTime'>
+    readonly deletedById: FieldRef<"Player", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Player findUnique
+   */
+  export type PlayerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player findUniqueOrThrow
+   */
+  export type PlayerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player findFirst
+   */
+  export type PlayerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Players.
+     */
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player findFirstOrThrow
+   */
+  export type PlayerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Player to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Players.
+     */
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player findMany
+   */
+  export type PlayerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter, which Players to fetch.
+     */
+    where?: PlayerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Players to fetch.
+     */
+    orderBy?: PlayerOrderByWithRelationInput | PlayerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Players.
+     */
+    cursor?: PlayerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Players from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Players.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Players.
+     */
+    distinct?: PlayerScalarFieldEnum | PlayerScalarFieldEnum[]
+  }
+
+  /**
+   * Player create
+   */
+  export type PlayerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Player.
+     */
+    data: XOR<PlayerCreateInput, PlayerUncheckedCreateInput>
+  }
+
+  /**
+   * Player createMany
+   */
+  export type PlayerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Players.
+     */
+    data: PlayerCreateManyInput | PlayerCreateManyInput[]
+  }
+
+  /**
+   * Player createManyAndReturn
+   */
+  export type PlayerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * The data used to create many Players.
+     */
+    data: PlayerCreateManyInput | PlayerCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Player update
+   */
+  export type PlayerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Player.
+     */
+    data: XOR<PlayerUpdateInput, PlayerUncheckedUpdateInput>
+    /**
+     * Choose, which Player to update.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player updateMany
+   */
+  export type PlayerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Players.
+     */
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which Players to update
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Player updateManyAndReturn
+   */
+  export type PlayerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * The data used to update Players.
+     */
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyInput>
+    /**
+     * Filter which Players to update
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Player upsert
+   */
+  export type PlayerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Player to update in case it exists.
+     */
+    where: PlayerWhereUniqueInput
+    /**
+     * In case the Player found by the `where` argument doesn't exist, create a new Player with this data.
+     */
+    create: XOR<PlayerCreateInput, PlayerUncheckedCreateInput>
+    /**
+     * In case the Player was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerUpdateInput, PlayerUncheckedUpdateInput>
+  }
+
+  /**
+   * Player delete
+   */
+  export type PlayerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Player
+     */
+    select?: PlayerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Player
+     */
+    omit?: PlayerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerInclude<ExtArgs> | null
+    /**
+     * Filter which Player to delete.
+     */
+    where: PlayerWhereUniqueInput
+  }
+
+  /**
+   * Player deleteMany
+   */
+  export type PlayerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Players to delete
+     */
+    where?: PlayerWhereInput
+    /**
+     * Limit how many Players to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Player.scores
+   */
+  export type Player$scoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the HoleScore
      */
@@ -12477,21 +14166,21 @@ export namespace Prisma {
   }
 
   /**
-   * Round without action
+   * Player without action
    */
-  export type RoundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PlayerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Round
+     * Select specific fields to fetch from the Player
      */
-    select?: RoundSelect<ExtArgs> | null
+    select?: PlayerSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Round
+     * Omit specific fields from the Player
      */
-    omit?: RoundOmit<ExtArgs> | null
+    omit?: PlayerOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RoundInclude<ExtArgs> | null
+    include?: PlayerInclude<ExtArgs> | null
   }
 
 
@@ -12519,26 +14208,44 @@ export namespace Prisma {
 
   export type HoleScoreMinAggregateOutputType = {
     id: string | null
-    roundId: string | null
+    playerId: string | null
     holeId: string | null
     strokes: number | null
     putts: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
   }
 
   export type HoleScoreMaxAggregateOutputType = {
     id: string | null
-    roundId: string | null
+    playerId: string | null
     holeId: string | null
     strokes: number | null
     putts: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
   }
 
   export type HoleScoreCountAggregateOutputType = {
     id: number
-    roundId: number
+    playerId: number
     holeId: number
     strokes: number
     putts: number
+    createdAt: number
+    updatedAt: number
+    createdById: number
+    updatedById: number
+    deletedAt: number
+    deletedById: number
     _all: number
   }
 
@@ -12555,26 +14262,44 @@ export namespace Prisma {
 
   export type HoleScoreMinAggregateInputType = {
     id?: true
-    roundId?: true
+    playerId?: true
     holeId?: true
     strokes?: true
     putts?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
   }
 
   export type HoleScoreMaxAggregateInputType = {
     id?: true
-    roundId?: true
+    playerId?: true
     holeId?: true
     strokes?: true
     putts?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
   }
 
   export type HoleScoreCountAggregateInputType = {
     id?: true
-    roundId?: true
+    playerId?: true
     holeId?: true
     strokes?: true
     putts?: true
+    createdAt?: true
+    updatedAt?: true
+    createdById?: true
+    updatedById?: true
+    deletedAt?: true
+    deletedById?: true
     _all?: true
   }
 
@@ -12666,10 +14391,16 @@ export namespace Prisma {
 
   export type HoleScoreGroupByOutputType = {
     id: string
-    roundId: string
+    playerId: string
     holeId: string
     strokes: number
     putts: number | null
+    createdAt: Date
+    updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
+    deletedAt: Date | null
+    deletedById: string | null
     _count: HoleScoreCountAggregateOutputType | null
     _avg: HoleScoreAvgAggregateOutputType | null
     _sum: HoleScoreSumAggregateOutputType | null
@@ -12693,68 +14424,98 @@ export namespace Prisma {
 
   export type HoleScoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    roundId?: boolean
+    playerId?: boolean
     holeId?: boolean
     strokes?: boolean
     putts?: boolean
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeScore"]>
 
   export type HoleScoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    roundId?: boolean
+    playerId?: boolean
     holeId?: boolean
     strokes?: boolean
     putts?: boolean
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeScore"]>
 
   export type HoleScoreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    roundId?: boolean
+    playerId?: boolean
     holeId?: boolean
     strokes?: boolean
     putts?: boolean
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["holeScore"]>
 
   export type HoleScoreSelectScalar = {
     id?: boolean
-    roundId?: boolean
+    playerId?: boolean
     holeId?: boolean
     strokes?: boolean
     putts?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    deletedAt?: boolean
+    deletedById?: boolean
   }
 
-  export type HoleScoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roundId" | "holeId" | "strokes" | "putts", ExtArgs["result"]["holeScore"]>
+  export type HoleScoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "holeId" | "strokes" | "putts" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedAt" | "deletedById", ExtArgs["result"]["holeScore"]>
   export type HoleScoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }
   export type HoleScoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }
   export type HoleScoreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    round?: boolean | RoundDefaultArgs<ExtArgs>
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
     hole?: boolean | HoleDefaultArgs<ExtArgs>
   }
 
   export type $HoleScorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HoleScore"
     objects: {
-      round: Prisma.$RoundPayload<ExtArgs>
+      player: Prisma.$PlayerPayload<ExtArgs>
       hole: Prisma.$HolePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      roundId: string
+      playerId: string
       holeId: string
       strokes: number
       putts: number | null
+      createdAt: Date
+      updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
+      deletedAt: Date | null
+      deletedById: string | null
     }, ExtArgs["result"]["holeScore"]>
     composites: {}
   }
@@ -13149,7 +14910,7 @@ export namespace Prisma {
    */
   export interface Prisma__HoleScoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    round<T extends RoundDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoundDefaultArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    player<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     hole<T extends HoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HoleDefaultArgs<ExtArgs>>): Prisma__HoleClient<$Result.GetResult<Prisma.$HolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13181,10 +14942,16 @@ export namespace Prisma {
    */
   interface HoleScoreFieldRefs {
     readonly id: FieldRef<"HoleScore", 'String'>
-    readonly roundId: FieldRef<"HoleScore", 'String'>
+    readonly playerId: FieldRef<"HoleScore", 'String'>
     readonly holeId: FieldRef<"HoleScore", 'String'>
     readonly strokes: FieldRef<"HoleScore", 'Int'>
     readonly putts: FieldRef<"HoleScore", 'Int'>
+    readonly createdAt: FieldRef<"HoleScore", 'DateTime'>
+    readonly updatedAt: FieldRef<"HoleScore", 'DateTime'>
+    readonly createdById: FieldRef<"HoleScore", 'String'>
+    readonly updatedById: FieldRef<"HoleScore", 'String'>
+    readonly deletedAt: FieldRef<"HoleScore", 'DateTime'>
+    readonly deletedById: FieldRef<"HoleScore", 'String'>
   }
     
 
@@ -13631,6 +15398,8 @@ export namespace Prisma {
     note: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type SwingThoughtMaxAggregateOutputType = {
@@ -13642,6 +15411,8 @@ export namespace Prisma {
     note: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
+    updatedById: string | null
   }
 
   export type SwingThoughtCountAggregateOutputType = {
@@ -13653,6 +15424,8 @@ export namespace Prisma {
     note: number
     createdAt: number
     updatedAt: number
+    createdById: number
+    updatedById: number
     _all: number
   }
 
@@ -13674,6 +15447,8 @@ export namespace Prisma {
     note?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type SwingThoughtMaxAggregateInputType = {
@@ -13685,6 +15460,8 @@ export namespace Prisma {
     note?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
   }
 
   export type SwingThoughtCountAggregateInputType = {
@@ -13696,6 +15473,8 @@ export namespace Prisma {
     note?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
+    updatedById?: true
     _all?: true
   }
 
@@ -13794,6 +15573,8 @@ export namespace Prisma {
     note: string | null
     createdAt: Date
     updatedAt: Date
+    createdById: string | null
+    updatedById: string | null
     _count: SwingThoughtCountAggregateOutputType | null
     _avg: SwingThoughtAvgAggregateOutputType | null
     _sum: SwingThoughtSumAggregateOutputType | null
@@ -13824,6 +15605,8 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["swingThought"]>
 
   export type SwingThoughtSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13835,6 +15618,8 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["swingThought"]>
 
   export type SwingThoughtSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13846,6 +15631,8 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }, ExtArgs["result"]["swingThought"]>
 
   export type SwingThoughtSelectScalar = {
@@ -13857,9 +15644,11 @@ export namespace Prisma {
     note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
+    updatedById?: boolean
   }
 
-  export type SwingThoughtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shotType" | "phase" | "rank" | "text" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["swingThought"]>
+  export type SwingThoughtOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shotType" | "phase" | "rank" | "text" | "note" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["swingThought"]>
 
   export type $SwingThoughtPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SwingThought"
@@ -13873,6 +15662,8 @@ export namespace Prisma {
       note: string | null
       createdAt: Date
       updatedAt: Date
+      createdById: string | null
+      updatedById: string | null
     }, ExtArgs["result"]["swingThought"]>
     composites: {}
   }
@@ -14304,6 +16095,8 @@ export namespace Prisma {
     readonly note: FieldRef<"SwingThought", 'String'>
     readonly createdAt: FieldRef<"SwingThought", 'DateTime'>
     readonly updatedAt: FieldRef<"SwingThought", 'DateTime'>
+    readonly createdById: FieldRef<"SwingThought", 'String'>
+    readonly updatedById: FieldRef<"SwingThought", 'String'>
   }
     
 
@@ -17977,7 +19770,11 @@ export namespace Prisma {
     name: 'name',
     type: 'type',
     sortOrder: 'sortOrder',
-    isActive: 'isActive'
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type ClubScalarFieldEnum = (typeof ClubScalarFieldEnum)[keyof typeof ClubScalarFieldEnum]
@@ -17990,7 +19787,10 @@ export namespace Prisma {
     yards: 'yards',
     unit: 'unit',
     measuredAt: 'measuredAt',
-    updatedAt: 'updatedAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type DistanceScalarFieldEnum = (typeof DistanceScalarFieldEnum)[keyof typeof DistanceScalarFieldEnum]
@@ -18011,7 +19811,12 @@ export namespace Prisma {
   export const CourseScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    sortOrder: 'sortOrder'
+    venue: 'venue',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -18025,7 +19830,11 @@ export namespace Prisma {
     greenLat: 'greenLat',
     greenLng: 'greenLng',
     aimLat: 'aimLat',
-    aimLng: 'aimLng'
+    aimLng: 'aimLng',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type HoleScalarFieldEnum = (typeof HoleScalarFieldEnum)[keyof typeof HoleScalarFieldEnum]
@@ -18035,7 +19844,11 @@ export namespace Prisma {
     id: 'id',
     courseId: 'courseId',
     colour: 'colour',
-    name: 'name'
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type TeeSetScalarFieldEnum = (typeof TeeSetScalarFieldEnum)[keyof typeof TeeSetScalarFieldEnum]
@@ -18049,7 +19862,11 @@ export namespace Prisma {
     par: 'par',
     strokeIndex: 'strokeIndex',
     teeLat: 'teeLat',
-    teeLng: 'teeLng'
+    teeLng: 'teeLng',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type HoleTeeScalarFieldEnum = (typeof HoleTeeScalarFieldEnum)[keyof typeof HoleTeeScalarFieldEnum]
@@ -18058,22 +19875,49 @@ export namespace Prisma {
   export const RoundScalarFieldEnum: {
     id: 'id',
     courseId: 'courseId',
-    teeSetId: 'teeSetId',
     playedOn: 'playedOn',
     completedAt: 'completedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    deletedAt: 'deletedAt',
+    deletedById: 'deletedById'
   };
 
   export type RoundScalarFieldEnum = (typeof RoundScalarFieldEnum)[keyof typeof RoundScalarFieldEnum]
 
 
-  export const HoleScoreScalarFieldEnum: {
+  export const PlayerScalarFieldEnum: {
     id: 'id',
     roundId: 'roundId',
+    position: 'position',
+    name: 'name',
+    teeSetId: 'teeSetId',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    deletedAt: 'deletedAt',
+    deletedById: 'deletedById'
+  };
+
+  export type PlayerScalarFieldEnum = (typeof PlayerScalarFieldEnum)[keyof typeof PlayerScalarFieldEnum]
+
+
+  export const HoleScoreScalarFieldEnum: {
+    id: 'id',
+    playerId: 'playerId',
     holeId: 'holeId',
     strokes: 'strokes',
-    putts: 'putts'
+    putts: 'putts',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    deletedAt: 'deletedAt',
+    deletedById: 'deletedById'
   };
 
   export type HoleScoreScalarFieldEnum = (typeof HoleScoreScalarFieldEnum)[keyof typeof HoleScoreScalarFieldEnum]
@@ -18087,7 +19931,9 @@ export namespace Prisma {
     text: 'text',
     note: 'note',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdById: 'createdById',
+    updatedById: 'updatedById'
   };
 
   export type SwingThoughtScalarFieldEnum = (typeof SwingThoughtScalarFieldEnum)[keyof typeof SwingThoughtScalarFieldEnum]
@@ -18311,6 +20157,10 @@ export namespace Prisma {
     type?: EnumClubTypeFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntFilter<"Club"> | number
     isActive?: BoolFilter<"Club"> | boolean
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+    createdById?: StringNullableFilter<"Club"> | string | null
+    updatedById?: StringNullableFilter<"Club"> | string | null
     distances?: DistanceListRelationFilter
   }
 
@@ -18320,6 +20170,10 @@ export namespace Prisma {
     type?: SortOrder
     sortOrder?: SortOrder
     isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     distances?: DistanceOrderByRelationAggregateInput
   }
 
@@ -18332,6 +20186,10 @@ export namespace Prisma {
     type?: EnumClubTypeFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntFilter<"Club"> | number
     isActive?: BoolFilter<"Club"> | boolean
+    createdAt?: DateTimeFilter<"Club"> | Date | string
+    updatedAt?: DateTimeFilter<"Club"> | Date | string
+    createdById?: StringNullableFilter<"Club"> | string | null
+    updatedById?: StringNullableFilter<"Club"> | string | null
     distances?: DistanceListRelationFilter
   }, "id" | "name">
 
@@ -18341,6 +20199,10 @@ export namespace Prisma {
     type?: SortOrder
     sortOrder?: SortOrder
     isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: ClubCountOrderByAggregateInput
     _avg?: ClubAvgOrderByAggregateInput
     _max?: ClubMaxOrderByAggregateInput
@@ -18357,6 +20219,10 @@ export namespace Prisma {
     type?: EnumClubTypeWithAggregatesFilter<"Club"> | $Enums.ClubType
     sortOrder?: IntWithAggregatesFilter<"Club"> | number
     isActive?: BoolWithAggregatesFilter<"Club"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Club"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Club"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Club"> | string | null
   }
 
   export type DistanceWhereInput = {
@@ -18369,7 +20235,10 @@ export namespace Prisma {
     yards?: IntFilter<"Distance"> | number
     unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
     measuredAt?: DateTimeFilter<"Distance"> | Date | string
+    createdAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
+    createdById?: StringNullableFilter<"Distance"> | string | null
+    updatedById?: StringNullableFilter<"Distance"> | string | null
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }
 
@@ -18380,7 +20249,10 @@ export namespace Prisma {
     yards?: SortOrder
     unit?: SortOrder
     measuredAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     club?: ClubOrderByWithRelationInput
   }
 
@@ -18395,7 +20267,10 @@ export namespace Prisma {
     yards?: IntFilter<"Distance"> | number
     unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
     measuredAt?: DateTimeFilter<"Distance"> | Date | string
+    createdAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
+    createdById?: StringNullableFilter<"Distance"> | string | null
+    updatedById?: StringNullableFilter<"Distance"> | string | null
     club?: XOR<ClubScalarRelationFilter, ClubWhereInput>
   }, "id" | "clubId_swing">
 
@@ -18406,7 +20281,10 @@ export namespace Prisma {
     yards?: SortOrder
     unit?: SortOrder
     measuredAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: DistanceCountOrderByAggregateInput
     _avg?: DistanceAvgOrderByAggregateInput
     _max?: DistanceMaxOrderByAggregateInput
@@ -18424,7 +20302,10 @@ export namespace Prisma {
     yards?: IntWithAggregatesFilter<"Distance"> | number
     unit?: EnumDistanceUnitWithAggregatesFilter<"Distance"> | $Enums.DistanceUnit
     measuredAt?: DateTimeWithAggregatesFilter<"Distance"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Distance"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Distance"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Distance"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Distance"> | string | null
   }
 
   export type DistanceHistoryWhereInput = {
@@ -18492,7 +20373,12 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     id?: StringFilter<"Course"> | string
     name?: StringFilter<"Course"> | string
+    venue?: StringFilter<"Course"> | string
     sortOrder?: IntFilter<"Course"> | number
+    createdAt?: DateTimeFilter<"Course"> | Date | string
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    createdById?: StringNullableFilter<"Course"> | string | null
+    updatedById?: StringNullableFilter<"Course"> | string | null
     holes?: HoleListRelationFilter
     teeSets?: TeeSetListRelationFilter
     rounds?: RoundListRelationFilter
@@ -18501,7 +20387,12 @@ export namespace Prisma {
   export type CourseOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    venue?: SortOrder
     sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     holes?: HoleOrderByRelationAggregateInput
     teeSets?: TeeSetOrderByRelationAggregateInput
     rounds?: RoundOrderByRelationAggregateInput
@@ -18513,7 +20404,12 @@ export namespace Prisma {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
+    venue?: StringFilter<"Course"> | string
     sortOrder?: IntFilter<"Course"> | number
+    createdAt?: DateTimeFilter<"Course"> | Date | string
+    updatedAt?: DateTimeFilter<"Course"> | Date | string
+    createdById?: StringNullableFilter<"Course"> | string | null
+    updatedById?: StringNullableFilter<"Course"> | string | null
     holes?: HoleListRelationFilter
     teeSets?: TeeSetListRelationFilter
     rounds?: RoundListRelationFilter
@@ -18522,7 +20418,12 @@ export namespace Prisma {
   export type CourseOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    venue?: SortOrder
     sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -18536,7 +20437,12 @@ export namespace Prisma {
     NOT?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Course"> | string
     name?: StringWithAggregatesFilter<"Course"> | string
+    venue?: StringWithAggregatesFilter<"Course"> | string
     sortOrder?: IntWithAggregatesFilter<"Course"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Course"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Course"> | string | null
   }
 
   export type HoleWhereInput = {
@@ -18551,6 +20457,10 @@ export namespace Prisma {
     greenLng?: FloatNullableFilter<"Hole"> | number | null
     aimLat?: FloatNullableFilter<"Hole"> | number | null
     aimLng?: FloatNullableFilter<"Hole"> | number | null
+    createdAt?: DateTimeFilter<"Hole"> | Date | string
+    updatedAt?: DateTimeFilter<"Hole"> | Date | string
+    createdById?: StringNullableFilter<"Hole"> | string | null
+    updatedById?: StringNullableFilter<"Hole"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     tees?: HoleTeeListRelationFilter
     scores?: HoleScoreListRelationFilter
@@ -18565,6 +20475,10 @@ export namespace Prisma {
     greenLng?: SortOrderInput | SortOrder
     aimLat?: SortOrderInput | SortOrder
     aimLng?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     course?: CourseOrderByWithRelationInput
     tees?: HoleTeeOrderByRelationAggregateInput
     scores?: HoleScoreOrderByRelationAggregateInput
@@ -18583,6 +20497,10 @@ export namespace Prisma {
     greenLng?: FloatNullableFilter<"Hole"> | number | null
     aimLat?: FloatNullableFilter<"Hole"> | number | null
     aimLng?: FloatNullableFilter<"Hole"> | number | null
+    createdAt?: DateTimeFilter<"Hole"> | Date | string
+    updatedAt?: DateTimeFilter<"Hole"> | Date | string
+    createdById?: StringNullableFilter<"Hole"> | string | null
+    updatedById?: StringNullableFilter<"Hole"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     tees?: HoleTeeListRelationFilter
     scores?: HoleScoreListRelationFilter
@@ -18597,6 +20515,10 @@ export namespace Prisma {
     greenLng?: SortOrderInput | SortOrder
     aimLat?: SortOrderInput | SortOrder
     aimLng?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: HoleCountOrderByAggregateInput
     _avg?: HoleAvgOrderByAggregateInput
     _max?: HoleMaxOrderByAggregateInput
@@ -18616,6 +20538,10 @@ export namespace Prisma {
     greenLng?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
     aimLat?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
     aimLng?: FloatNullableWithAggregatesFilter<"Hole"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Hole"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Hole"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Hole"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Hole"> | string | null
   }
 
   export type TeeSetWhereInput = {
@@ -18626,9 +20552,13 @@ export namespace Prisma {
     courseId?: StringFilter<"TeeSet"> | string
     colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
     name?: StringFilter<"TeeSet"> | string
+    createdAt?: DateTimeFilter<"TeeSet"> | Date | string
+    updatedAt?: DateTimeFilter<"TeeSet"> | Date | string
+    createdById?: StringNullableFilter<"TeeSet"> | string | null
+    updatedById?: StringNullableFilter<"TeeSet"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     holes?: HoleTeeListRelationFilter
-    rounds?: RoundListRelationFilter
+    players?: PlayerListRelationFilter
   }
 
   export type TeeSetOrderByWithRelationInput = {
@@ -18636,9 +20566,13 @@ export namespace Prisma {
     courseId?: SortOrder
     colour?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     course?: CourseOrderByWithRelationInput
     holes?: HoleTeeOrderByRelationAggregateInput
-    rounds?: RoundOrderByRelationAggregateInput
+    players?: PlayerOrderByRelationAggregateInput
   }
 
   export type TeeSetWhereUniqueInput = Prisma.AtLeast<{
@@ -18650,9 +20584,13 @@ export namespace Prisma {
     courseId?: StringFilter<"TeeSet"> | string
     colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
     name?: StringFilter<"TeeSet"> | string
+    createdAt?: DateTimeFilter<"TeeSet"> | Date | string
+    updatedAt?: DateTimeFilter<"TeeSet"> | Date | string
+    createdById?: StringNullableFilter<"TeeSet"> | string | null
+    updatedById?: StringNullableFilter<"TeeSet"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     holes?: HoleTeeListRelationFilter
-    rounds?: RoundListRelationFilter
+    players?: PlayerListRelationFilter
   }, "id" | "courseId_colour">
 
   export type TeeSetOrderByWithAggregationInput = {
@@ -18660,6 +20598,10 @@ export namespace Prisma {
     courseId?: SortOrder
     colour?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: TeeSetCountOrderByAggregateInput
     _max?: TeeSetMaxOrderByAggregateInput
     _min?: TeeSetMinOrderByAggregateInput
@@ -18673,6 +20615,10 @@ export namespace Prisma {
     courseId?: StringWithAggregatesFilter<"TeeSet"> | string
     colour?: EnumTeeColourWithAggregatesFilter<"TeeSet"> | $Enums.TeeColour
     name?: StringWithAggregatesFilter<"TeeSet"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TeeSet"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TeeSet"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"TeeSet"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"TeeSet"> | string | null
   }
 
   export type HoleTeeWhereInput = {
@@ -18687,6 +20633,10 @@ export namespace Prisma {
     strokeIndex?: IntFilter<"HoleTee"> | number
     teeLat?: FloatNullableFilter<"HoleTee"> | number | null
     teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+    createdAt?: DateTimeFilter<"HoleTee"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleTee"> | Date | string
+    createdById?: StringNullableFilter<"HoleTee"> | string | null
+    updatedById?: StringNullableFilter<"HoleTee"> | string | null
     hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
     teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
   }
@@ -18700,6 +20650,10 @@ export namespace Prisma {
     strokeIndex?: SortOrder
     teeLat?: SortOrderInput | SortOrder
     teeLng?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     hole?: HoleOrderByWithRelationInput
     teeSet?: TeeSetOrderByWithRelationInput
   }
@@ -18717,6 +20671,10 @@ export namespace Prisma {
     strokeIndex?: IntFilter<"HoleTee"> | number
     teeLat?: FloatNullableFilter<"HoleTee"> | number | null
     teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+    createdAt?: DateTimeFilter<"HoleTee"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleTee"> | Date | string
+    createdById?: StringNullableFilter<"HoleTee"> | string | null
+    updatedById?: StringNullableFilter<"HoleTee"> | string | null
     hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
     teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
   }, "id" | "holeId_teeSetId">
@@ -18730,6 +20688,10 @@ export namespace Prisma {
     strokeIndex?: SortOrder
     teeLat?: SortOrderInput | SortOrder
     teeLng?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: HoleTeeCountOrderByAggregateInput
     _avg?: HoleTeeAvgOrderByAggregateInput
     _max?: HoleTeeMaxOrderByAggregateInput
@@ -18749,6 +20711,10 @@ export namespace Prisma {
     strokeIndex?: IntWithAggregatesFilter<"HoleTee"> | number
     teeLat?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
     teeLng?: FloatNullableWithAggregatesFilter<"HoleTee"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"HoleTee"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HoleTee"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"HoleTee"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"HoleTee"> | string | null
   }
 
   export type RoundWhereInput = {
@@ -18757,27 +20723,31 @@ export namespace Prisma {
     NOT?: RoundWhereInput | RoundWhereInput[]
     id?: StringFilter<"Round"> | string
     courseId?: StringFilter<"Round"> | string
-    teeSetId?: StringFilter<"Round"> | string
     playedOn?: DateTimeFilter<"Round"> | Date | string
     completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
     createdAt?: DateTimeFilter<"Round"> | Date | string
     updatedAt?: DateTimeFilter<"Round"> | Date | string
+    createdById?: StringNullableFilter<"Round"> | string | null
+    updatedById?: StringNullableFilter<"Round"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    deletedById?: StringNullableFilter<"Round"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
-    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
-    scores?: HoleScoreListRelationFilter
+    players?: PlayerListRelationFilter
   }
 
   export type RoundOrderByWithRelationInput = {
     id?: SortOrder
     courseId?: SortOrder
-    teeSetId?: SortOrder
     playedOn?: SortOrder
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
     course?: CourseOrderByWithRelationInput
-    teeSet?: TeeSetOrderByWithRelationInput
-    scores?: HoleScoreOrderByRelationAggregateInput
+    players?: PlayerOrderByRelationAggregateInput
   }
 
   export type RoundWhereUniqueInput = Prisma.AtLeast<{
@@ -18786,24 +20756,29 @@ export namespace Prisma {
     OR?: RoundWhereInput[]
     NOT?: RoundWhereInput | RoundWhereInput[]
     courseId?: StringFilter<"Round"> | string
-    teeSetId?: StringFilter<"Round"> | string
     playedOn?: DateTimeFilter<"Round"> | Date | string
     completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
     createdAt?: DateTimeFilter<"Round"> | Date | string
     updatedAt?: DateTimeFilter<"Round"> | Date | string
+    createdById?: StringNullableFilter<"Round"> | string | null
+    updatedById?: StringNullableFilter<"Round"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    deletedById?: StringNullableFilter<"Round"> | string | null
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
-    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
-    scores?: HoleScoreListRelationFilter
+    players?: PlayerListRelationFilter
   }, "id">
 
   export type RoundOrderByWithAggregationInput = {
     id?: SortOrder
     courseId?: SortOrder
-    teeSetId?: SortOrder
     playedOn?: SortOrder
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
     _count?: RoundCountOrderByAggregateInput
     _max?: RoundMaxOrderByAggregateInput
     _min?: RoundMinOrderByAggregateInput
@@ -18815,11 +20790,113 @@ export namespace Prisma {
     NOT?: RoundScalarWhereWithAggregatesInput | RoundScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Round"> | string
     courseId?: StringWithAggregatesFilter<"Round"> | string
-    teeSetId?: StringWithAggregatesFilter<"Round"> | string
     playedOn?: DateTimeWithAggregatesFilter<"Round"> | Date | string
     completedAt?: DateTimeNullableWithAggregatesFilter<"Round"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Round"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Round"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Round"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Round"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Round"> | Date | string | null
+    deletedById?: StringNullableWithAggregatesFilter<"Round"> | string | null
+  }
+
+  export type PlayerWhereInput = {
+    AND?: PlayerWhereInput | PlayerWhereInput[]
+    OR?: PlayerWhereInput[]
+    NOT?: PlayerWhereInput | PlayerWhereInput[]
+    id?: StringFilter<"Player"> | string
+    roundId?: StringFilter<"Player"> | string
+    position?: IntFilter<"Player"> | number
+    name?: StringFilter<"Player"> | string
+    teeSetId?: StringFilter<"Player"> | string
+    userId?: StringNullableFilter<"Player"> | string | null
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    updatedAt?: DateTimeFilter<"Player"> | Date | string
+    createdById?: StringNullableFilter<"Player"> | string | null
+    updatedById?: StringNullableFilter<"Player"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Player"> | Date | string | null
+    deletedById?: StringNullableFilter<"Player"> | string | null
+    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+    scores?: HoleScoreListRelationFilter
+  }
+
+  export type PlayerOrderByWithRelationInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    position?: SortOrder
+    name?: SortOrder
+    teeSetId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
+    round?: RoundOrderByWithRelationInput
+    teeSet?: TeeSetOrderByWithRelationInput
+    scores?: HoleScoreOrderByRelationAggregateInput
+  }
+
+  export type PlayerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    roundId_position?: PlayerRoundIdPositionCompoundUniqueInput
+    AND?: PlayerWhereInput | PlayerWhereInput[]
+    OR?: PlayerWhereInput[]
+    NOT?: PlayerWhereInput | PlayerWhereInput[]
+    roundId?: StringFilter<"Player"> | string
+    position?: IntFilter<"Player"> | number
+    name?: StringFilter<"Player"> | string
+    teeSetId?: StringFilter<"Player"> | string
+    userId?: StringNullableFilter<"Player"> | string | null
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    updatedAt?: DateTimeFilter<"Player"> | Date | string
+    createdById?: StringNullableFilter<"Player"> | string | null
+    updatedById?: StringNullableFilter<"Player"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Player"> | Date | string | null
+    deletedById?: StringNullableFilter<"Player"> | string | null
+    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    teeSet?: XOR<TeeSetScalarRelationFilter, TeeSetWhereInput>
+    scores?: HoleScoreListRelationFilter
+  }, "id" | "roundId_position">
+
+  export type PlayerOrderByWithAggregationInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    position?: SortOrder
+    name?: SortOrder
+    teeSetId?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
+    _count?: PlayerCountOrderByAggregateInput
+    _avg?: PlayerAvgOrderByAggregateInput
+    _max?: PlayerMaxOrderByAggregateInput
+    _min?: PlayerMinOrderByAggregateInput
+    _sum?: PlayerSumOrderByAggregateInput
+  }
+
+  export type PlayerScalarWhereWithAggregatesInput = {
+    AND?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
+    OR?: PlayerScalarWhereWithAggregatesInput[]
+    NOT?: PlayerScalarWhereWithAggregatesInput | PlayerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Player"> | string
+    roundId?: StringWithAggregatesFilter<"Player"> | string
+    position?: IntWithAggregatesFilter<"Player"> | number
+    name?: StringWithAggregatesFilter<"Player"> | string
+    teeSetId?: StringWithAggregatesFilter<"Player"> | string
+    userId?: StringNullableWithAggregatesFilter<"Player"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Player"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Player"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Player"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"Player"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Player"> | Date | string | null
+    deletedById?: StringNullableWithAggregatesFilter<"Player"> | string | null
   }
 
   export type HoleScoreWhereInput = {
@@ -18827,44 +20904,68 @@ export namespace Prisma {
     OR?: HoleScoreWhereInput[]
     NOT?: HoleScoreWhereInput | HoleScoreWhereInput[]
     id?: StringFilter<"HoleScore"> | string
-    roundId?: StringFilter<"HoleScore"> | string
+    playerId?: StringFilter<"HoleScore"> | string
     holeId?: StringFilter<"HoleScore"> | string
     strokes?: IntFilter<"HoleScore"> | number
     putts?: IntNullableFilter<"HoleScore"> | number | null
-    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    createdAt?: DateTimeFilter<"HoleScore"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleScore"> | Date | string
+    createdById?: StringNullableFilter<"HoleScore"> | string | null
+    updatedById?: StringNullableFilter<"HoleScore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"HoleScore"> | Date | string | null
+    deletedById?: StringNullableFilter<"HoleScore"> | string | null
+    player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
   }
 
   export type HoleScoreOrderByWithRelationInput = {
     id?: SortOrder
-    roundId?: SortOrder
+    playerId?: SortOrder
     holeId?: SortOrder
     strokes?: SortOrder
     putts?: SortOrderInput | SortOrder
-    round?: RoundOrderByWithRelationInput
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
+    player?: PlayerOrderByWithRelationInput
     hole?: HoleOrderByWithRelationInput
   }
 
   export type HoleScoreWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    roundId_holeId?: HoleScoreRoundIdHoleIdCompoundUniqueInput
+    playerId_holeId?: HoleScorePlayerIdHoleIdCompoundUniqueInput
     AND?: HoleScoreWhereInput | HoleScoreWhereInput[]
     OR?: HoleScoreWhereInput[]
     NOT?: HoleScoreWhereInput | HoleScoreWhereInput[]
-    roundId?: StringFilter<"HoleScore"> | string
+    playerId?: StringFilter<"HoleScore"> | string
     holeId?: StringFilter<"HoleScore"> | string
     strokes?: IntFilter<"HoleScore"> | number
     putts?: IntNullableFilter<"HoleScore"> | number | null
-    round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
+    createdAt?: DateTimeFilter<"HoleScore"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleScore"> | Date | string
+    createdById?: StringNullableFilter<"HoleScore"> | string | null
+    updatedById?: StringNullableFilter<"HoleScore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"HoleScore"> | Date | string | null
+    deletedById?: StringNullableFilter<"HoleScore"> | string | null
+    player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     hole?: XOR<HoleScalarRelationFilter, HoleWhereInput>
-  }, "id" | "roundId_holeId">
+  }, "id" | "playerId_holeId">
 
   export type HoleScoreOrderByWithAggregationInput = {
     id?: SortOrder
-    roundId?: SortOrder
+    playerId?: SortOrder
     holeId?: SortOrder
     strokes?: SortOrder
     putts?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    deletedById?: SortOrderInput | SortOrder
     _count?: HoleScoreCountOrderByAggregateInput
     _avg?: HoleScoreAvgOrderByAggregateInput
     _max?: HoleScoreMaxOrderByAggregateInput
@@ -18877,10 +20978,16 @@ export namespace Prisma {
     OR?: HoleScoreScalarWhereWithAggregatesInput[]
     NOT?: HoleScoreScalarWhereWithAggregatesInput | HoleScoreScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HoleScore"> | string
-    roundId?: StringWithAggregatesFilter<"HoleScore"> | string
+    playerId?: StringWithAggregatesFilter<"HoleScore"> | string
     holeId?: StringWithAggregatesFilter<"HoleScore"> | string
     strokes?: IntWithAggregatesFilter<"HoleScore"> | number
     putts?: IntNullableWithAggregatesFilter<"HoleScore"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"HoleScore"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HoleScore"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"HoleScore"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"HoleScore"> | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"HoleScore"> | Date | string | null
+    deletedById?: StringNullableWithAggregatesFilter<"HoleScore"> | string | null
   }
 
   export type SwingThoughtWhereInput = {
@@ -18895,6 +21002,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"SwingThought"> | string | null
     createdAt?: DateTimeFilter<"SwingThought"> | Date | string
     updatedAt?: DateTimeFilter<"SwingThought"> | Date | string
+    createdById?: StringNullableFilter<"SwingThought"> | string | null
+    updatedById?: StringNullableFilter<"SwingThought"> | string | null
   }
 
   export type SwingThoughtOrderByWithRelationInput = {
@@ -18906,6 +21015,8 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
   }
 
   export type SwingThoughtWhereUniqueInput = Prisma.AtLeast<{
@@ -18920,6 +21031,8 @@ export namespace Prisma {
     note?: StringNullableFilter<"SwingThought"> | string | null
     createdAt?: DateTimeFilter<"SwingThought"> | Date | string
     updatedAt?: DateTimeFilter<"SwingThought"> | Date | string
+    createdById?: StringNullableFilter<"SwingThought"> | string | null
+    updatedById?: StringNullableFilter<"SwingThought"> | string | null
   }, "id">
 
   export type SwingThoughtOrderByWithAggregationInput = {
@@ -18931,6 +21044,8 @@ export namespace Prisma {
     note?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
     _count?: SwingThoughtCountOrderByAggregateInput
     _avg?: SwingThoughtAvgOrderByAggregateInput
     _max?: SwingThoughtMaxOrderByAggregateInput
@@ -18950,6 +21065,8 @@ export namespace Prisma {
     note?: StringNullableWithAggregatesFilter<"SwingThought"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"SwingThought"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SwingThought"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"SwingThought"> | string | null
+    updatedById?: StringNullableWithAggregatesFilter<"SwingThought"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -19251,6 +21368,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder?: number
     isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     distances?: DistanceCreateNestedManyWithoutClubInput
   }
 
@@ -19260,6 +21381,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder?: number
     isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     distances?: DistanceUncheckedCreateNestedManyWithoutClubInput
   }
 
@@ -19269,6 +21394,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     distances?: DistanceUpdateManyWithoutClubNestedInput
   }
 
@@ -19278,6 +21407,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     distances?: DistanceUncheckedUpdateManyWithoutClubNestedInput
   }
 
@@ -19287,6 +21420,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder?: number
     isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type ClubUpdateManyMutationInput = {
@@ -19295,6 +21432,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ClubUncheckedUpdateManyInput = {
@@ -19303,6 +21444,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceCreateInput = {
@@ -19311,7 +21456,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     club: ClubCreateNestedOneWithoutDistancesInput
   }
 
@@ -19322,7 +21470,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type DistanceUpdateInput = {
@@ -19331,7 +21482,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     club?: ClubUpdateOneRequiredWithoutDistancesNestedInput
   }
 
@@ -19342,7 +21496,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceCreateManyInput = {
@@ -19352,7 +21509,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type DistanceUpdateManyMutationInput = {
@@ -19361,7 +21521,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceUncheckedUpdateManyInput = {
@@ -19371,7 +21534,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceHistoryCreateInput = {
@@ -19437,7 +21603,12 @@ export namespace Prisma {
   export type CourseCreateInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetCreateNestedManyWithoutCourseInput
     rounds?: RoundCreateNestedManyWithoutCourseInput
@@ -19446,7 +21617,12 @@ export namespace Prisma {
   export type CourseUncheckedCreateInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
     rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
@@ -19455,7 +21631,12 @@ export namespace Prisma {
   export type CourseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
     rounds?: RoundUpdateManyWithoutCourseNestedInput
@@ -19464,7 +21645,12 @@ export namespace Prisma {
   export type CourseUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
     rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
@@ -19473,19 +21659,34 @@ export namespace Prisma {
   export type CourseCreateManyInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type CourseUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CourseUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleCreateInput = {
@@ -19496,6 +21697,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     course: CourseCreateNestedOneWithoutHolesInput
     tees?: HoleTeeCreateNestedManyWithoutHoleInput
     scores?: HoleScoreCreateNestedManyWithoutHoleInput
@@ -19510,6 +21715,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
     scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
@@ -19522,6 +21731,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutHolesNestedInput
     tees?: HoleTeeUpdateManyWithoutHoleNestedInput
     scores?: HoleScoreUpdateManyWithoutHoleNestedInput
@@ -19536,6 +21749,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
     scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
@@ -19549,6 +21766,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleUpdateManyMutationInput = {
@@ -19559,6 +21780,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleUncheckedUpdateManyInput = {
@@ -19570,15 +21795,23 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TeeSetCreateInput = {
     id?: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     course: CourseCreateNestedOneWithoutTeeSetsInput
     holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
-    rounds?: RoundCreateNestedManyWithoutTeeSetInput
+    players?: PlayerCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateInput = {
@@ -19586,17 +21819,25 @@ export namespace Prisma {
     courseId: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
-    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
+    players?: PlayerUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
     holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
-    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
+    players?: PlayerUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateInput = {
@@ -19604,8 +21845,12 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
-    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
+    players?: PlayerUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetCreateManyInput = {
@@ -19613,12 +21858,20 @@ export namespace Prisma {
     courseId: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type TeeSetUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TeeSetUncheckedUpdateManyInput = {
@@ -19626,6 +21879,10 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeCreateInput = {
@@ -19635,6 +21892,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     hole: HoleCreateNestedOneWithoutTeesInput
     teeSet: TeeSetCreateNestedOneWithoutHolesInput
   }
@@ -19648,6 +21909,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleTeeUpdateInput = {
@@ -19657,6 +21922,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     hole?: HoleUpdateOneRequiredWithoutTeesNestedInput
     teeSet?: TeeSetUpdateOneRequiredWithoutHolesNestedInput
   }
@@ -19670,6 +21939,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeCreateManyInput = {
@@ -19681,6 +21954,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleTeeUpdateManyMutationInput = {
@@ -19690,6 +21967,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeUncheckedUpdateManyInput = {
@@ -19701,6 +21982,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoundCreateInput = {
@@ -19709,20 +21994,26 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
     course: CourseCreateNestedOneWithoutRoundsInput
-    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
-    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+    players?: PlayerCreateNestedManyWithoutRoundInput
   }
 
   export type RoundUncheckedCreateInput = {
     id: string
     courseId: string
-    teeSetId: string
     playedOn?: Date | string
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    players?: PlayerUncheckedCreateNestedManyWithoutRoundInput
   }
 
   export type RoundUpdateInput = {
@@ -19731,30 +22022,39 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
-    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
-    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+    players?: PlayerUpdateManyWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
-    teeSetId?: StringFieldUpdateOperationsInput | string
     playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    players?: PlayerUncheckedUpdateManyWithoutRoundNestedInput
   }
 
   export type RoundCreateManyInput = {
     id: string
     courseId: string
-    teeSetId: string
     playedOn?: Date | string
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type RoundUpdateManyMutationInput = {
@@ -19763,70 +22063,226 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoundUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
-    teeSetId?: StringFieldUpdateOperationsInput | string
     playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlayerCreateInput = {
+    id: string
+    position: number
+    name: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    round: RoundCreateNestedOneWithoutPlayersInput
+    teeSet: TeeSetCreateNestedOneWithoutPlayersInput
+    scores?: HoleScoreCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateInput = {
+    id: string
+    roundId: string
+    position: number
+    name: string
+    teeSetId: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    round?: RoundUpdateOneRequiredWithoutPlayersNestedInput
+    teeSet?: TeeSetUpdateOneRequiredWithoutPlayersNestedInput
+    scores?: HoleScoreUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    scores?: HoleScoreUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerCreateManyInput = {
+    id: string
+    roundId: string
+    position: number
+    name: string
+    teeSetId: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+  }
+
+  export type PlayerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlayerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleScoreCreateInput = {
     id?: string
     strokes: number
     putts?: number | null
-    round: RoundCreateNestedOneWithoutScoresInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    player: PlayerCreateNestedOneWithoutScoresInput
     hole: HoleCreateNestedOneWithoutScoresInput
   }
 
   export type HoleScoreUncheckedCreateInput = {
     id?: string
-    roundId: string
+    playerId: string
     holeId: string
     strokes: number
     putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleScoreUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
-    round?: RoundUpdateOneRequiredWithoutScoresNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    player?: PlayerUpdateOneRequiredWithoutScoresNestedInput
     hole?: HoleUpdateOneRequiredWithoutScoresNestedInput
   }
 
   export type HoleScoreUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
     holeId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleScoreCreateManyInput = {
     id?: string
-    roundId: string
+    playerId: string
     holeId: string
     strokes: number
     putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleScoreUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleScoreUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
     holeId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwingThoughtCreateInput = {
@@ -19838,6 +22294,8 @@ export namespace Prisma {
     note?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type SwingThoughtUncheckedCreateInput = {
@@ -19849,6 +22307,8 @@ export namespace Prisma {
     note?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type SwingThoughtUpdateInput = {
@@ -19860,6 +22320,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwingThoughtUncheckedUpdateInput = {
@@ -19871,6 +22333,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwingThoughtCreateManyInput = {
@@ -19882,6 +22346,8 @@ export namespace Prisma {
     note?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type SwingThoughtUpdateManyMutationInput = {
@@ -19893,6 +22359,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SwingThoughtUncheckedUpdateManyInput = {
@@ -19904,6 +22372,8 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -20334,6 +22804,10 @@ export namespace Prisma {
     type?: SortOrder
     sortOrder?: SortOrder
     isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type ClubAvgOrderByAggregateInput = {
@@ -20346,6 +22820,10 @@ export namespace Prisma {
     type?: SortOrder
     sortOrder?: SortOrder
     isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type ClubMinOrderByAggregateInput = {
@@ -20354,6 +22832,10 @@ export namespace Prisma {
     type?: SortOrder
     sortOrder?: SortOrder
     isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type ClubSumOrderByAggregateInput = {
@@ -20425,7 +22907,10 @@ export namespace Prisma {
     yards?: SortOrder
     unit?: SortOrder
     measuredAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type DistanceAvgOrderByAggregateInput = {
@@ -20439,7 +22924,10 @@ export namespace Prisma {
     yards?: SortOrder
     unit?: SortOrder
     measuredAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type DistanceMinOrderByAggregateInput = {
@@ -20449,7 +22937,10 @@ export namespace Prisma {
     yards?: SortOrder
     unit?: SortOrder
     measuredAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type DistanceSumOrderByAggregateInput = {
@@ -20546,7 +23037,12 @@ export namespace Prisma {
   export type CourseCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    venue?: SortOrder
     sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
@@ -20556,13 +23052,23 @@ export namespace Prisma {
   export type CourseMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    venue?: SortOrder
     sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    venue?: SortOrder
     sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
@@ -20619,6 +23125,10 @@ export namespace Prisma {
     greenLng?: SortOrder
     aimLat?: SortOrder
     aimLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleAvgOrderByAggregateInput = {
@@ -20638,6 +23148,10 @@ export namespace Prisma {
     greenLng?: SortOrder
     aimLat?: SortOrder
     aimLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleMinOrderByAggregateInput = {
@@ -20649,6 +23163,10 @@ export namespace Prisma {
     greenLng?: SortOrder
     aimLat?: SortOrder
     aimLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleSumOrderByAggregateInput = {
@@ -20682,6 +23200,16 @@ export namespace Prisma {
     not?: NestedEnumTeeColourFilter<$PrismaModel> | $Enums.TeeColour
   }
 
+  export type PlayerListRelationFilter = {
+    every?: PlayerWhereInput
+    some?: PlayerWhereInput
+    none?: PlayerWhereInput
+  }
+
+  export type PlayerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TeeSetCourseIdColourCompoundUniqueInput = {
     courseId: string
     colour: $Enums.TeeColour
@@ -20692,6 +23220,10 @@ export namespace Prisma {
     courseId?: SortOrder
     colour?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type TeeSetMaxOrderByAggregateInput = {
@@ -20699,6 +23231,10 @@ export namespace Prisma {
     courseId?: SortOrder
     colour?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type TeeSetMinOrderByAggregateInput = {
@@ -20706,6 +23242,10 @@ export namespace Prisma {
     courseId?: SortOrder
     colour?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type EnumTeeColourWithAggregatesFilter<$PrismaModel = never> = {
@@ -20742,6 +23282,10 @@ export namespace Prisma {
     strokeIndex?: SortOrder
     teeLat?: SortOrder
     teeLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleTeeAvgOrderByAggregateInput = {
@@ -20761,6 +23305,10 @@ export namespace Prisma {
     strokeIndex?: SortOrder
     teeLat?: SortOrder
     teeLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleTeeMinOrderByAggregateInput = {
@@ -20772,6 +23320,10 @@ export namespace Prisma {
     strokeIndex?: SortOrder
     teeLat?: SortOrder
     teeLng?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type HoleTeeSumOrderByAggregateInput = {
@@ -20796,31 +23348,40 @@ export namespace Prisma {
   export type RoundCountOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
-    teeSetId?: SortOrder
     playedOn?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type RoundMaxOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
-    teeSetId?: SortOrder
     playedOn?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type RoundMinOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
-    teeSetId?: SortOrder
     playedOn?: SortOrder
     completedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -20837,6 +23398,69 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type RoundScalarRelationFilter = {
+    is?: RoundWhereInput
+    isNot?: RoundWhereInput
+  }
+
+  export type PlayerRoundIdPositionCompoundUniqueInput = {
+    roundId: string
+    position: number
+  }
+
+  export type PlayerCountOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    position?: SortOrder
+    name?: SortOrder
+    teeSetId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
+  }
+
+  export type PlayerAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type PlayerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    position?: SortOrder
+    name?: SortOrder
+    teeSetId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
+  }
+
+  export type PlayerMinOrderByAggregateInput = {
+    id?: SortOrder
+    roundId?: SortOrder
+    position?: SortOrder
+    name?: SortOrder
+    teeSetId?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
+  }
+
+  export type PlayerSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -20848,22 +23472,28 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type RoundScalarRelationFilter = {
-    is?: RoundWhereInput
-    isNot?: RoundWhereInput
+  export type PlayerScalarRelationFilter = {
+    is?: PlayerWhereInput
+    isNot?: PlayerWhereInput
   }
 
-  export type HoleScoreRoundIdHoleIdCompoundUniqueInput = {
-    roundId: string
+  export type HoleScorePlayerIdHoleIdCompoundUniqueInput = {
+    playerId: string
     holeId: string
   }
 
   export type HoleScoreCountOrderByAggregateInput = {
     id?: SortOrder
-    roundId?: SortOrder
+    playerId?: SortOrder
     holeId?: SortOrder
     strokes?: SortOrder
     putts?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type HoleScoreAvgOrderByAggregateInput = {
@@ -20873,18 +23503,30 @@ export namespace Prisma {
 
   export type HoleScoreMaxOrderByAggregateInput = {
     id?: SortOrder
-    roundId?: SortOrder
+    playerId?: SortOrder
     holeId?: SortOrder
     strokes?: SortOrder
     putts?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type HoleScoreMinOrderByAggregateInput = {
     id?: SortOrder
-    roundId?: SortOrder
+    playerId?: SortOrder
     holeId?: SortOrder
     strokes?: SortOrder
     putts?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    deletedAt?: SortOrder
+    deletedById?: SortOrder
   }
 
   export type HoleScoreSumOrderByAggregateInput = {
@@ -20931,6 +23573,8 @@ export namespace Prisma {
     note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type SwingThoughtAvgOrderByAggregateInput = {
@@ -20946,6 +23590,8 @@ export namespace Prisma {
     note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type SwingThoughtMinOrderByAggregateInput = {
@@ -20957,6 +23603,8 @@ export namespace Prisma {
     note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
   }
 
   export type SwingThoughtSumOrderByAggregateInput = {
@@ -21517,11 +24165,11 @@ export namespace Prisma {
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
   }
 
-  export type RoundCreateNestedManyWithoutTeeSetInput = {
-    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
-    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
-    createMany?: RoundCreateManyTeeSetInputEnvelope
-    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+  export type PlayerCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput> | PlayerCreateWithoutTeeSetInput[] | PlayerUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTeeSetInput | PlayerCreateOrConnectWithoutTeeSetInput[]
+    createMany?: PlayerCreateManyTeeSetInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
   }
 
   export type HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput = {
@@ -21531,11 +24179,11 @@ export namespace Prisma {
     connect?: HoleTeeWhereUniqueInput | HoleTeeWhereUniqueInput[]
   }
 
-  export type RoundUncheckedCreateNestedManyWithoutTeeSetInput = {
-    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
-    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
-    createMany?: RoundCreateManyTeeSetInputEnvelope
-    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
+  export type PlayerUncheckedCreateNestedManyWithoutTeeSetInput = {
+    create?: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput> | PlayerCreateWithoutTeeSetInput[] | PlayerUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTeeSetInput | PlayerCreateOrConnectWithoutTeeSetInput[]
+    createMany?: PlayerCreateManyTeeSetInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
   }
 
   export type EnumTeeColourFieldUpdateOperationsInput = {
@@ -21564,18 +24212,18 @@ export namespace Prisma {
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
   }
 
-  export type RoundUpdateManyWithoutTeeSetNestedInput = {
-    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
-    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
-    upsert?: RoundUpsertWithWhereUniqueWithoutTeeSetInput | RoundUpsertWithWhereUniqueWithoutTeeSetInput[]
-    createMany?: RoundCreateManyTeeSetInputEnvelope
-    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    update?: RoundUpdateWithWhereUniqueWithoutTeeSetInput | RoundUpdateWithWhereUniqueWithoutTeeSetInput[]
-    updateMany?: RoundUpdateManyWithWhereWithoutTeeSetInput | RoundUpdateManyWithWhereWithoutTeeSetInput[]
-    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
+  export type PlayerUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput> | PlayerCreateWithoutTeeSetInput[] | PlayerUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTeeSetInput | PlayerCreateOrConnectWithoutTeeSetInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutTeeSetInput | PlayerUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: PlayerCreateManyTeeSetInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutTeeSetInput | PlayerUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutTeeSetInput | PlayerUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
   export type HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput = {
@@ -21592,18 +24240,18 @@ export namespace Prisma {
     deleteMany?: HoleTeeScalarWhereInput | HoleTeeScalarWhereInput[]
   }
 
-  export type RoundUncheckedUpdateManyWithoutTeeSetNestedInput = {
-    create?: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput> | RoundCreateWithoutTeeSetInput[] | RoundUncheckedCreateWithoutTeeSetInput[]
-    connectOrCreate?: RoundCreateOrConnectWithoutTeeSetInput | RoundCreateOrConnectWithoutTeeSetInput[]
-    upsert?: RoundUpsertWithWhereUniqueWithoutTeeSetInput | RoundUpsertWithWhereUniqueWithoutTeeSetInput[]
-    createMany?: RoundCreateManyTeeSetInputEnvelope
-    set?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    disconnect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    delete?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-    update?: RoundUpdateWithWhereUniqueWithoutTeeSetInput | RoundUpdateWithWhereUniqueWithoutTeeSetInput[]
-    updateMany?: RoundUpdateManyWithWhereWithoutTeeSetInput | RoundUpdateManyWithWhereWithoutTeeSetInput[]
-    deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
+  export type PlayerUncheckedUpdateManyWithoutTeeSetNestedInput = {
+    create?: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput> | PlayerCreateWithoutTeeSetInput[] | PlayerUncheckedCreateWithoutTeeSetInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutTeeSetInput | PlayerCreateOrConnectWithoutTeeSetInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutTeeSetInput | PlayerUpsertWithWhereUniqueWithoutTeeSetInput[]
+    createMany?: PlayerCreateManyTeeSetInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutTeeSetInput | PlayerUpdateWithWhereUniqueWithoutTeeSetInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutTeeSetInput | PlayerUpdateManyWithWhereWithoutTeeSetInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
   export type HoleCreateNestedOneWithoutTeesInput = {
@@ -21640,24 +24288,18 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
-  export type TeeSetCreateNestedOneWithoutRoundsInput = {
-    create?: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
-    connectOrCreate?: TeeSetCreateOrConnectWithoutRoundsInput
-    connect?: TeeSetWhereUniqueInput
+  export type PlayerCreateNestedManyWithoutRoundInput = {
+    create?: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput> | PlayerCreateWithoutRoundInput[] | PlayerUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutRoundInput | PlayerCreateOrConnectWithoutRoundInput[]
+    createMany?: PlayerCreateManyRoundInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
   }
 
-  export type HoleScoreCreateNestedManyWithoutRoundInput = {
-    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
-    createMany?: HoleScoreCreateManyRoundInputEnvelope
-    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-  }
-
-  export type HoleScoreUncheckedCreateNestedManyWithoutRoundInput = {
-    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
-    createMany?: HoleScoreCreateManyRoundInputEnvelope
-    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  export type PlayerUncheckedCreateNestedManyWithoutRoundInput = {
+    create?: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput> | PlayerCreateWithoutRoundInput[] | PlayerUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutRoundInput | PlayerCreateOrConnectWithoutRoundInput[]
+    createMany?: PlayerCreateManyRoundInputEnvelope
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -21672,46 +24314,108 @@ export namespace Prisma {
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutRoundsInput, CourseUpdateWithoutRoundsInput>, CourseUncheckedUpdateWithoutRoundsInput>
   }
 
-  export type TeeSetUpdateOneRequiredWithoutRoundsNestedInput = {
-    create?: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
-    connectOrCreate?: TeeSetCreateOrConnectWithoutRoundsInput
-    upsert?: TeeSetUpsertWithoutRoundsInput
-    connect?: TeeSetWhereUniqueInput
-    update?: XOR<XOR<TeeSetUpdateToOneWithWhereWithoutRoundsInput, TeeSetUpdateWithoutRoundsInput>, TeeSetUncheckedUpdateWithoutRoundsInput>
+  export type PlayerUpdateManyWithoutRoundNestedInput = {
+    create?: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput> | PlayerCreateWithoutRoundInput[] | PlayerUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutRoundInput | PlayerCreateOrConnectWithoutRoundInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutRoundInput | PlayerUpsertWithWhereUniqueWithoutRoundInput[]
+    createMany?: PlayerCreateManyRoundInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutRoundInput | PlayerUpdateWithWhereUniqueWithoutRoundInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutRoundInput | PlayerUpdateManyWithWhereWithoutRoundInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
-  export type HoleScoreUpdateManyWithoutRoundNestedInput = {
-    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
-    upsert?: HoleScoreUpsertWithWhereUniqueWithoutRoundInput | HoleScoreUpsertWithWhereUniqueWithoutRoundInput[]
-    createMany?: HoleScoreCreateManyRoundInputEnvelope
-    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    update?: HoleScoreUpdateWithWhereUniqueWithoutRoundInput | HoleScoreUpdateWithWhereUniqueWithoutRoundInput[]
-    updateMany?: HoleScoreUpdateManyWithWhereWithoutRoundInput | HoleScoreUpdateManyWithWhereWithoutRoundInput[]
-    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  export type PlayerUncheckedUpdateManyWithoutRoundNestedInput = {
+    create?: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput> | PlayerCreateWithoutRoundInput[] | PlayerUncheckedCreateWithoutRoundInput[]
+    connectOrCreate?: PlayerCreateOrConnectWithoutRoundInput | PlayerCreateOrConnectWithoutRoundInput[]
+    upsert?: PlayerUpsertWithWhereUniqueWithoutRoundInput | PlayerUpsertWithWhereUniqueWithoutRoundInput[]
+    createMany?: PlayerCreateManyRoundInputEnvelope
+    set?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    disconnect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    delete?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    connect?: PlayerWhereUniqueInput | PlayerWhereUniqueInput[]
+    update?: PlayerUpdateWithWhereUniqueWithoutRoundInput | PlayerUpdateWithWhereUniqueWithoutRoundInput[]
+    updateMany?: PlayerUpdateManyWithWhereWithoutRoundInput | PlayerUpdateManyWithWhereWithoutRoundInput[]
+    deleteMany?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
   }
 
-  export type HoleScoreUncheckedUpdateManyWithoutRoundNestedInput = {
-    create?: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput> | HoleScoreCreateWithoutRoundInput[] | HoleScoreUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: HoleScoreCreateOrConnectWithoutRoundInput | HoleScoreCreateOrConnectWithoutRoundInput[]
-    upsert?: HoleScoreUpsertWithWhereUniqueWithoutRoundInput | HoleScoreUpsertWithWhereUniqueWithoutRoundInput[]
-    createMany?: HoleScoreCreateManyRoundInputEnvelope
-    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
-    update?: HoleScoreUpdateWithWhereUniqueWithoutRoundInput | HoleScoreUpdateWithWhereUniqueWithoutRoundInput[]
-    updateMany?: HoleScoreUpdateManyWithWhereWithoutRoundInput | HoleScoreUpdateManyWithWhereWithoutRoundInput[]
-    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
-  }
-
-  export type RoundCreateNestedOneWithoutScoresInput = {
-    create?: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
-    connectOrCreate?: RoundCreateOrConnectWithoutScoresInput
+  export type RoundCreateNestedOneWithoutPlayersInput = {
+    create?: XOR<RoundCreateWithoutPlayersInput, RoundUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: RoundCreateOrConnectWithoutPlayersInput
     connect?: RoundWhereUniqueInput
+  }
+
+  export type TeeSetCreateNestedOneWithoutPlayersInput = {
+    create?: XOR<TeeSetCreateWithoutPlayersInput, TeeSetUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutPlayersInput
+    connect?: TeeSetWhereUniqueInput
+  }
+
+  export type HoleScoreCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput> | HoleScoreCreateWithoutPlayerInput[] | HoleScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutPlayerInput | HoleScoreCreateOrConnectWithoutPlayerInput[]
+    createMany?: HoleScoreCreateManyPlayerInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  }
+
+  export type HoleScoreUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput> | HoleScoreCreateWithoutPlayerInput[] | HoleScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutPlayerInput | HoleScoreCreateOrConnectWithoutPlayerInput[]
+    createMany?: HoleScoreCreateManyPlayerInputEnvelope
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+  }
+
+  export type RoundUpdateOneRequiredWithoutPlayersNestedInput = {
+    create?: XOR<RoundCreateWithoutPlayersInput, RoundUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: RoundCreateOrConnectWithoutPlayersInput
+    upsert?: RoundUpsertWithoutPlayersInput
+    connect?: RoundWhereUniqueInput
+    update?: XOR<XOR<RoundUpdateToOneWithWhereWithoutPlayersInput, RoundUpdateWithoutPlayersInput>, RoundUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type TeeSetUpdateOneRequiredWithoutPlayersNestedInput = {
+    create?: XOR<TeeSetCreateWithoutPlayersInput, TeeSetUncheckedCreateWithoutPlayersInput>
+    connectOrCreate?: TeeSetCreateOrConnectWithoutPlayersInput
+    upsert?: TeeSetUpsertWithoutPlayersInput
+    connect?: TeeSetWhereUniqueInput
+    update?: XOR<XOR<TeeSetUpdateToOneWithWhereWithoutPlayersInput, TeeSetUpdateWithoutPlayersInput>, TeeSetUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type HoleScoreUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput> | HoleScoreCreateWithoutPlayerInput[] | HoleScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutPlayerInput | HoleScoreCreateOrConnectWithoutPlayerInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutPlayerInput | HoleScoreUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: HoleScoreCreateManyPlayerInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutPlayerInput | HoleScoreUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutPlayerInput | HoleScoreUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  }
+
+  export type HoleScoreUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput> | HoleScoreCreateWithoutPlayerInput[] | HoleScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: HoleScoreCreateOrConnectWithoutPlayerInput | HoleScoreCreateOrConnectWithoutPlayerInput[]
+    upsert?: HoleScoreUpsertWithWhereUniqueWithoutPlayerInput | HoleScoreUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: HoleScoreCreateManyPlayerInputEnvelope
+    set?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    disconnect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    delete?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    connect?: HoleScoreWhereUniqueInput | HoleScoreWhereUniqueInput[]
+    update?: HoleScoreUpdateWithWhereUniqueWithoutPlayerInput | HoleScoreUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: HoleScoreUpdateManyWithWhereWithoutPlayerInput | HoleScoreUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
+  }
+
+  export type PlayerCreateNestedOneWithoutScoresInput = {
+    create?: XOR<PlayerCreateWithoutScoresInput, PlayerUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutScoresInput
+    connect?: PlayerWhereUniqueInput
   }
 
   export type HoleCreateNestedOneWithoutScoresInput = {
@@ -21728,12 +24432,12 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type RoundUpdateOneRequiredWithoutScoresNestedInput = {
-    create?: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
-    connectOrCreate?: RoundCreateOrConnectWithoutScoresInput
-    upsert?: RoundUpsertWithoutScoresInput
-    connect?: RoundWhereUniqueInput
-    update?: XOR<XOR<RoundUpdateToOneWithWhereWithoutScoresInput, RoundUpdateWithoutScoresInput>, RoundUncheckedUpdateWithoutScoresInput>
+  export type PlayerUpdateOneRequiredWithoutScoresNestedInput = {
+    create?: XOR<PlayerCreateWithoutScoresInput, PlayerUncheckedCreateWithoutScoresInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutScoresInput
+    upsert?: PlayerUpsertWithoutScoresInput
+    connect?: PlayerWhereUniqueInput
+    update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutScoresInput, PlayerUpdateWithoutScoresInput>, PlayerUncheckedUpdateWithoutScoresInput>
   }
 
   export type HoleUpdateOneRequiredWithoutScoresNestedInput = {
@@ -22238,7 +24942,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type DistanceUncheckedCreateWithoutClubInput = {
@@ -22247,7 +24954,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type DistanceCreateOrConnectWithoutClubInput = {
@@ -22285,7 +24995,10 @@ export namespace Prisma {
     yards?: IntFilter<"Distance"> | number
     unit?: EnumDistanceUnitFilter<"Distance"> | $Enums.DistanceUnit
     measuredAt?: DateTimeFilter<"Distance"> | Date | string
+    createdAt?: DateTimeFilter<"Distance"> | Date | string
     updatedAt?: DateTimeFilter<"Distance"> | Date | string
+    createdById?: StringNullableFilter<"Distance"> | string | null
+    updatedById?: StringNullableFilter<"Distance"> | string | null
   }
 
   export type ClubCreateWithoutDistancesInput = {
@@ -22294,6 +25007,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder?: number
     isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type ClubUncheckedCreateWithoutDistancesInput = {
@@ -22302,6 +25019,10 @@ export namespace Prisma {
     type: $Enums.ClubType
     sortOrder?: number
     isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type ClubCreateOrConnectWithoutDistancesInput = {
@@ -22326,6 +25047,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ClubUncheckedUpdateWithoutDistancesInput = {
@@ -22334,6 +25059,10 @@ export namespace Prisma {
     type?: EnumClubTypeFieldUpdateOperationsInput | $Enums.ClubType
     sortOrder?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleCreateWithoutCourseInput = {
@@ -22344,6 +25073,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     tees?: HoleTeeCreateNestedManyWithoutHoleInput
     scores?: HoleScoreCreateNestedManyWithoutHoleInput
   }
@@ -22356,6 +25089,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
     scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
@@ -22373,16 +25110,24 @@ export namespace Prisma {
     id?: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
-    rounds?: RoundCreateNestedManyWithoutTeeSetInput
+    players?: PlayerCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateWithoutCourseInput = {
     id?: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
-    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
+    players?: PlayerUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetCreateOrConnectWithoutCourseInput = {
@@ -22400,18 +25145,24 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
-    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    players?: PlayerCreateNestedManyWithoutRoundInput
   }
 
   export type RoundUncheckedCreateWithoutCourseInput = {
     id: string
-    teeSetId: string
     playedOn?: Date | string
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    players?: PlayerUncheckedCreateNestedManyWithoutRoundInput
   }
 
   export type RoundCreateOrConnectWithoutCourseInput = {
@@ -22451,6 +25202,10 @@ export namespace Prisma {
     greenLng?: FloatNullableFilter<"Hole"> | number | null
     aimLat?: FloatNullableFilter<"Hole"> | number | null
     aimLng?: FloatNullableFilter<"Hole"> | number | null
+    createdAt?: DateTimeFilter<"Hole"> | Date | string
+    updatedAt?: DateTimeFilter<"Hole"> | Date | string
+    createdById?: StringNullableFilter<"Hole"> | string | null
+    updatedById?: StringNullableFilter<"Hole"> | string | null
   }
 
   export type TeeSetUpsertWithWhereUniqueWithoutCourseInput = {
@@ -22477,6 +25232,10 @@ export namespace Prisma {
     courseId?: StringFilter<"TeeSet"> | string
     colour?: EnumTeeColourFilter<"TeeSet"> | $Enums.TeeColour
     name?: StringFilter<"TeeSet"> | string
+    createdAt?: DateTimeFilter<"TeeSet"> | Date | string
+    updatedAt?: DateTimeFilter<"TeeSet"> | Date | string
+    createdById?: StringNullableFilter<"TeeSet"> | string | null
+    updatedById?: StringNullableFilter<"TeeSet"> | string | null
   }
 
   export type RoundUpsertWithWhereUniqueWithoutCourseInput = {
@@ -22501,17 +25260,25 @@ export namespace Prisma {
     NOT?: RoundScalarWhereInput | RoundScalarWhereInput[]
     id?: StringFilter<"Round"> | string
     courseId?: StringFilter<"Round"> | string
-    teeSetId?: StringFilter<"Round"> | string
     playedOn?: DateTimeFilter<"Round"> | Date | string
     completedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
     createdAt?: DateTimeFilter<"Round"> | Date | string
     updatedAt?: DateTimeFilter<"Round"> | Date | string
+    createdById?: StringNullableFilter<"Round"> | string | null
+    updatedById?: StringNullableFilter<"Round"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Round"> | Date | string | null
+    deletedById?: StringNullableFilter<"Round"> | string | null
   }
 
   export type CourseCreateWithoutHolesInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     teeSets?: TeeSetCreateNestedManyWithoutCourseInput
     rounds?: RoundCreateNestedManyWithoutCourseInput
   }
@@ -22519,7 +25286,12 @@ export namespace Prisma {
   export type CourseUncheckedCreateWithoutHolesInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
     rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
   }
@@ -22536,6 +25308,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     teeSet: TeeSetCreateNestedOneWithoutHolesInput
   }
 
@@ -22547,6 +25323,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleTeeCreateOrConnectWithoutHoleInput = {
@@ -22562,14 +25342,26 @@ export namespace Prisma {
     id?: string
     strokes: number
     putts?: number | null
-    round: RoundCreateNestedOneWithoutScoresInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    player: PlayerCreateNestedOneWithoutScoresInput
   }
 
   export type HoleScoreUncheckedCreateWithoutHoleInput = {
     id?: string
-    roundId: string
+    playerId: string
     strokes: number
     putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleScoreCreateOrConnectWithoutHoleInput = {
@@ -22595,7 +25387,12 @@ export namespace Prisma {
   export type CourseUpdateWithoutHolesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
     rounds?: RoundUpdateManyWithoutCourseNestedInput
   }
@@ -22603,7 +25400,12 @@ export namespace Prisma {
   export type CourseUncheckedUpdateWithoutHolesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
     rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
   }
@@ -22636,6 +25438,10 @@ export namespace Prisma {
     strokeIndex?: IntFilter<"HoleTee"> | number
     teeLat?: FloatNullableFilter<"HoleTee"> | number | null
     teeLng?: FloatNullableFilter<"HoleTee"> | number | null
+    createdAt?: DateTimeFilter<"HoleTee"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleTee"> | Date | string
+    createdById?: StringNullableFilter<"HoleTee"> | string | null
+    updatedById?: StringNullableFilter<"HoleTee"> | string | null
   }
 
   export type HoleScoreUpsertWithWhereUniqueWithoutHoleInput = {
@@ -22659,16 +25465,27 @@ export namespace Prisma {
     OR?: HoleScoreScalarWhereInput[]
     NOT?: HoleScoreScalarWhereInput | HoleScoreScalarWhereInput[]
     id?: StringFilter<"HoleScore"> | string
-    roundId?: StringFilter<"HoleScore"> | string
+    playerId?: StringFilter<"HoleScore"> | string
     holeId?: StringFilter<"HoleScore"> | string
     strokes?: IntFilter<"HoleScore"> | number
     putts?: IntNullableFilter<"HoleScore"> | number | null
+    createdAt?: DateTimeFilter<"HoleScore"> | Date | string
+    updatedAt?: DateTimeFilter<"HoleScore"> | Date | string
+    createdById?: StringNullableFilter<"HoleScore"> | string | null
+    updatedById?: StringNullableFilter<"HoleScore"> | string | null
+    deletedAt?: DateTimeNullableFilter<"HoleScore"> | Date | string | null
+    deletedById?: StringNullableFilter<"HoleScore"> | string | null
   }
 
   export type CourseCreateWithoutTeeSetsInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleCreateNestedManyWithoutCourseInput
     rounds?: RoundCreateNestedManyWithoutCourseInput
   }
@@ -22676,7 +25493,12 @@ export namespace Prisma {
   export type CourseUncheckedCreateWithoutTeeSetsInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
     rounds?: RoundUncheckedCreateNestedManyWithoutCourseInput
   }
@@ -22693,6 +25515,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     hole: HoleCreateNestedOneWithoutTeesInput
   }
 
@@ -22704,6 +25530,10 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleTeeCreateOrConnectWithoutTeeSetInput = {
@@ -22715,33 +25545,43 @@ export namespace Prisma {
     data: HoleTeeCreateManyTeeSetInput | HoleTeeCreateManyTeeSetInput[]
   }
 
-  export type RoundCreateWithoutTeeSetInput = {
+  export type PlayerCreateWithoutTeeSetInput = {
     id: string
-    playedOn?: Date | string
-    completedAt?: Date | string | null
+    position: number
+    name: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    course: CourseCreateNestedOneWithoutRoundsInput
-    scores?: HoleScoreCreateNestedManyWithoutRoundInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    round: RoundCreateNestedOneWithoutPlayersInput
+    scores?: HoleScoreCreateNestedManyWithoutPlayerInput
   }
 
-  export type RoundUncheckedCreateWithoutTeeSetInput = {
+  export type PlayerUncheckedCreateWithoutTeeSetInput = {
     id: string
-    courseId: string
-    playedOn?: Date | string
-    completedAt?: Date | string | null
+    roundId: string
+    position: number
+    name: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    scores?: HoleScoreUncheckedCreateNestedManyWithoutRoundInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
 
-  export type RoundCreateOrConnectWithoutTeeSetInput = {
-    where: RoundWhereUniqueInput
-    create: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput>
+  export type PlayerCreateOrConnectWithoutTeeSetInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput>
   }
 
-  export type RoundCreateManyTeeSetInputEnvelope = {
-    data: RoundCreateManyTeeSetInput | RoundCreateManyTeeSetInput[]
+  export type PlayerCreateManyTeeSetInputEnvelope = {
+    data: PlayerCreateManyTeeSetInput | PlayerCreateManyTeeSetInput[]
   }
 
   export type CourseUpsertWithoutTeeSetsInput = {
@@ -22758,7 +25598,12 @@ export namespace Prisma {
   export type CourseUpdateWithoutTeeSetsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUpdateManyWithoutCourseNestedInput
     rounds?: RoundUpdateManyWithoutCourseNestedInput
   }
@@ -22766,7 +25611,12 @@ export namespace Prisma {
   export type CourseUncheckedUpdateWithoutTeeSetsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
     rounds?: RoundUncheckedUpdateManyWithoutCourseNestedInput
   }
@@ -22787,20 +25637,38 @@ export namespace Prisma {
     data: XOR<HoleTeeUpdateManyMutationInput, HoleTeeUncheckedUpdateManyWithoutTeeSetInput>
   }
 
-  export type RoundUpsertWithWhereUniqueWithoutTeeSetInput = {
-    where: RoundWhereUniqueInput
-    update: XOR<RoundUpdateWithoutTeeSetInput, RoundUncheckedUpdateWithoutTeeSetInput>
-    create: XOR<RoundCreateWithoutTeeSetInput, RoundUncheckedCreateWithoutTeeSetInput>
+  export type PlayerUpsertWithWhereUniqueWithoutTeeSetInput = {
+    where: PlayerWhereUniqueInput
+    update: XOR<PlayerUpdateWithoutTeeSetInput, PlayerUncheckedUpdateWithoutTeeSetInput>
+    create: XOR<PlayerCreateWithoutTeeSetInput, PlayerUncheckedCreateWithoutTeeSetInput>
   }
 
-  export type RoundUpdateWithWhereUniqueWithoutTeeSetInput = {
-    where: RoundWhereUniqueInput
-    data: XOR<RoundUpdateWithoutTeeSetInput, RoundUncheckedUpdateWithoutTeeSetInput>
+  export type PlayerUpdateWithWhereUniqueWithoutTeeSetInput = {
+    where: PlayerWhereUniqueInput
+    data: XOR<PlayerUpdateWithoutTeeSetInput, PlayerUncheckedUpdateWithoutTeeSetInput>
   }
 
-  export type RoundUpdateManyWithWhereWithoutTeeSetInput = {
-    where: RoundScalarWhereInput
-    data: XOR<RoundUpdateManyMutationInput, RoundUncheckedUpdateManyWithoutTeeSetInput>
+  export type PlayerUpdateManyWithWhereWithoutTeeSetInput = {
+    where: PlayerScalarWhereInput
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyWithoutTeeSetInput>
+  }
+
+  export type PlayerScalarWhereInput = {
+    AND?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    OR?: PlayerScalarWhereInput[]
+    NOT?: PlayerScalarWhereInput | PlayerScalarWhereInput[]
+    id?: StringFilter<"Player"> | string
+    roundId?: StringFilter<"Player"> | string
+    position?: IntFilter<"Player"> | number
+    name?: StringFilter<"Player"> | string
+    teeSetId?: StringFilter<"Player"> | string
+    userId?: StringNullableFilter<"Player"> | string | null
+    createdAt?: DateTimeFilter<"Player"> | Date | string
+    updatedAt?: DateTimeFilter<"Player"> | Date | string
+    createdById?: StringNullableFilter<"Player"> | string | null
+    updatedById?: StringNullableFilter<"Player"> | string | null
+    deletedAt?: DateTimeNullableFilter<"Player"> | Date | string | null
+    deletedById?: StringNullableFilter<"Player"> | string | null
   }
 
   export type HoleCreateWithoutTeesInput = {
@@ -22811,6 +25679,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     course: CourseCreateNestedOneWithoutHolesInput
     scores?: HoleScoreCreateNestedManyWithoutHoleInput
   }
@@ -22824,6 +25696,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     scores?: HoleScoreUncheckedCreateNestedManyWithoutHoleInput
   }
 
@@ -22836,8 +25712,12 @@ export namespace Prisma {
     id?: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     course: CourseCreateNestedOneWithoutTeeSetsInput
-    rounds?: RoundCreateNestedManyWithoutTeeSetInput
+    players?: PlayerCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetUncheckedCreateWithoutHolesInput = {
@@ -22845,7 +25725,11 @@ export namespace Prisma {
     courseId: string
     colour: $Enums.TeeColour
     name: string
-    rounds?: RoundUncheckedCreateNestedManyWithoutTeeSetInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    players?: PlayerUncheckedCreateNestedManyWithoutTeeSetInput
   }
 
   export type TeeSetCreateOrConnectWithoutHolesInput = {
@@ -22872,6 +25756,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutHolesNestedInput
     scores?: HoleScoreUpdateManyWithoutHoleNestedInput
   }
@@ -22885,6 +25773,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
 
@@ -22903,8 +25795,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
-    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
+    players?: PlayerUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateWithoutHolesInput = {
@@ -22912,13 +25808,22 @@ export namespace Prisma {
     courseId?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
-    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    players?: PlayerUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
   export type CourseCreateWithoutRoundsInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetCreateNestedManyWithoutCourseInput
   }
@@ -22926,7 +25831,12 @@ export namespace Prisma {
   export type CourseUncheckedCreateWithoutRoundsInput = {
     id?: string
     name: string
+    venue?: string
     sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     holes?: HoleUncheckedCreateNestedManyWithoutCourseInput
     teeSets?: TeeSetUncheckedCreateNestedManyWithoutCourseInput
   }
@@ -22936,48 +25846,43 @@ export namespace Prisma {
     create: XOR<CourseCreateWithoutRoundsInput, CourseUncheckedCreateWithoutRoundsInput>
   }
 
-  export type TeeSetCreateWithoutRoundsInput = {
-    id?: string
-    colour: $Enums.TeeColour
+  export type PlayerCreateWithoutRoundInput = {
+    id: string
+    position: number
     name: string
-    course: CourseCreateNestedOneWithoutTeeSetsInput
-    holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    teeSet: TeeSetCreateNestedOneWithoutPlayersInput
+    scores?: HoleScoreCreateNestedManyWithoutPlayerInput
   }
 
-  export type TeeSetUncheckedCreateWithoutRoundsInput = {
-    id?: string
-    courseId: string
-    colour: $Enums.TeeColour
+  export type PlayerUncheckedCreateWithoutRoundInput = {
+    id: string
+    position: number
     name: string
-    holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+    teeSetId: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    scores?: HoleScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
 
-  export type TeeSetCreateOrConnectWithoutRoundsInput = {
-    where: TeeSetWhereUniqueInput
-    create: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+  export type PlayerCreateOrConnectWithoutRoundInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput>
   }
 
-  export type HoleScoreCreateWithoutRoundInput = {
-    id?: string
-    strokes: number
-    putts?: number | null
-    hole: HoleCreateNestedOneWithoutScoresInput
-  }
-
-  export type HoleScoreUncheckedCreateWithoutRoundInput = {
-    id?: string
-    holeId: string
-    strokes: number
-    putts?: number | null
-  }
-
-  export type HoleScoreCreateOrConnectWithoutRoundInput = {
-    where: HoleScoreWhereUniqueInput
-    create: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput>
-  }
-
-  export type HoleScoreCreateManyRoundInputEnvelope = {
-    data: HoleScoreCreateManyRoundInput | HoleScoreCreateManyRoundInput[]
+  export type PlayerCreateManyRoundInputEnvelope = {
+    data: PlayerCreateManyRoundInput | PlayerCreateManyRoundInput[]
   }
 
   export type CourseUpsertWithoutRoundsInput = {
@@ -22994,7 +25899,12 @@ export namespace Prisma {
   export type CourseUpdateWithoutRoundsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUpdateManyWithoutCourseNestedInput
   }
@@ -23002,77 +25912,248 @@ export namespace Prisma {
   export type CourseUncheckedUpdateWithoutRoundsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    venue?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleUncheckedUpdateManyWithoutCourseNestedInput
     teeSets?: TeeSetUncheckedUpdateManyWithoutCourseNestedInput
   }
 
-  export type TeeSetUpsertWithoutRoundsInput = {
-    update: XOR<TeeSetUpdateWithoutRoundsInput, TeeSetUncheckedUpdateWithoutRoundsInput>
-    create: XOR<TeeSetCreateWithoutRoundsInput, TeeSetUncheckedCreateWithoutRoundsInput>
+  export type PlayerUpsertWithWhereUniqueWithoutRoundInput = {
+    where: PlayerWhereUniqueInput
+    update: XOR<PlayerUpdateWithoutRoundInput, PlayerUncheckedUpdateWithoutRoundInput>
+    create: XOR<PlayerCreateWithoutRoundInput, PlayerUncheckedCreateWithoutRoundInput>
+  }
+
+  export type PlayerUpdateWithWhereUniqueWithoutRoundInput = {
+    where: PlayerWhereUniqueInput
+    data: XOR<PlayerUpdateWithoutRoundInput, PlayerUncheckedUpdateWithoutRoundInput>
+  }
+
+  export type PlayerUpdateManyWithWhereWithoutRoundInput = {
+    where: PlayerScalarWhereInput
+    data: XOR<PlayerUpdateManyMutationInput, PlayerUncheckedUpdateManyWithoutRoundInput>
+  }
+
+  export type RoundCreateWithoutPlayersInput = {
+    id: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    course: CourseCreateNestedOneWithoutRoundsInput
+  }
+
+  export type RoundUncheckedCreateWithoutPlayersInput = {
+    id: string
+    courseId: string
+    playedOn?: Date | string
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+  }
+
+  export type RoundCreateOrConnectWithoutPlayersInput = {
+    where: RoundWhereUniqueInput
+    create: XOR<RoundCreateWithoutPlayersInput, RoundUncheckedCreateWithoutPlayersInput>
+  }
+
+  export type TeeSetCreateWithoutPlayersInput = {
+    id?: string
+    colour: $Enums.TeeColour
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    course: CourseCreateNestedOneWithoutTeeSetsInput
+    holes?: HoleTeeCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetUncheckedCreateWithoutPlayersInput = {
+    id?: string
+    courseId: string
+    colour: $Enums.TeeColour
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    holes?: HoleTeeUncheckedCreateNestedManyWithoutTeeSetInput
+  }
+
+  export type TeeSetCreateOrConnectWithoutPlayersInput = {
+    where: TeeSetWhereUniqueInput
+    create: XOR<TeeSetCreateWithoutPlayersInput, TeeSetUncheckedCreateWithoutPlayersInput>
+  }
+
+  export type HoleScoreCreateWithoutPlayerInput = {
+    id?: string
+    strokes: number
+    putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    hole: HoleCreateNestedOneWithoutScoresInput
+  }
+
+  export type HoleScoreUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    holeId: string
+    strokes: number
+    putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+  }
+
+  export type HoleScoreCreateOrConnectWithoutPlayerInput = {
+    where: HoleScoreWhereUniqueInput
+    create: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type HoleScoreCreateManyPlayerInputEnvelope = {
+    data: HoleScoreCreateManyPlayerInput | HoleScoreCreateManyPlayerInput[]
+  }
+
+  export type RoundUpsertWithoutPlayersInput = {
+    update: XOR<RoundUpdateWithoutPlayersInput, RoundUncheckedUpdateWithoutPlayersInput>
+    create: XOR<RoundCreateWithoutPlayersInput, RoundUncheckedCreateWithoutPlayersInput>
+    where?: RoundWhereInput
+  }
+
+  export type RoundUpdateToOneWithWhereWithoutPlayersInput = {
+    where?: RoundWhereInput
+    data: XOR<RoundUpdateWithoutPlayersInput, RoundUncheckedUpdateWithoutPlayersInput>
+  }
+
+  export type RoundUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
+  }
+
+  export type RoundUncheckedUpdateWithoutPlayersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TeeSetUpsertWithoutPlayersInput = {
+    update: XOR<TeeSetUpdateWithoutPlayersInput, TeeSetUncheckedUpdateWithoutPlayersInput>
+    create: XOR<TeeSetCreateWithoutPlayersInput, TeeSetUncheckedCreateWithoutPlayersInput>
     where?: TeeSetWhereInput
   }
 
-  export type TeeSetUpdateToOneWithWhereWithoutRoundsInput = {
+  export type TeeSetUpdateToOneWithWhereWithoutPlayersInput = {
     where?: TeeSetWhereInput
-    data: XOR<TeeSetUpdateWithoutRoundsInput, TeeSetUncheckedUpdateWithoutRoundsInput>
+    data: XOR<TeeSetUpdateWithoutPlayersInput, TeeSetUncheckedUpdateWithoutPlayersInput>
   }
 
-  export type TeeSetUpdateWithoutRoundsInput = {
+  export type TeeSetUpdateWithoutPlayersInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutTeeSetsNestedInput
     holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
   }
 
-  export type TeeSetUncheckedUpdateWithoutRoundsInput = {
+  export type TeeSetUncheckedUpdateWithoutPlayersInput = {
     id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
-  export type HoleScoreUpsertWithWhereUniqueWithoutRoundInput = {
+  export type HoleScoreUpsertWithWhereUniqueWithoutPlayerInput = {
     where: HoleScoreWhereUniqueInput
-    update: XOR<HoleScoreUpdateWithoutRoundInput, HoleScoreUncheckedUpdateWithoutRoundInput>
-    create: XOR<HoleScoreCreateWithoutRoundInput, HoleScoreUncheckedCreateWithoutRoundInput>
+    update: XOR<HoleScoreUpdateWithoutPlayerInput, HoleScoreUncheckedUpdateWithoutPlayerInput>
+    create: XOR<HoleScoreCreateWithoutPlayerInput, HoleScoreUncheckedCreateWithoutPlayerInput>
   }
 
-  export type HoleScoreUpdateWithWhereUniqueWithoutRoundInput = {
+  export type HoleScoreUpdateWithWhereUniqueWithoutPlayerInput = {
     where: HoleScoreWhereUniqueInput
-    data: XOR<HoleScoreUpdateWithoutRoundInput, HoleScoreUncheckedUpdateWithoutRoundInput>
+    data: XOR<HoleScoreUpdateWithoutPlayerInput, HoleScoreUncheckedUpdateWithoutPlayerInput>
   }
 
-  export type HoleScoreUpdateManyWithWhereWithoutRoundInput = {
+  export type HoleScoreUpdateManyWithWhereWithoutPlayerInput = {
     where: HoleScoreScalarWhereInput
-    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyWithoutRoundInput>
+    data: XOR<HoleScoreUpdateManyMutationInput, HoleScoreUncheckedUpdateManyWithoutPlayerInput>
   }
 
-  export type RoundCreateWithoutScoresInput = {
+  export type PlayerCreateWithoutScoresInput = {
     id: string
-    playedOn?: Date | string
-    completedAt?: Date | string | null
+    position: number
+    name: string
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    course: CourseCreateNestedOneWithoutRoundsInput
-    teeSet: TeeSetCreateNestedOneWithoutRoundsInput
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+    round: RoundCreateNestedOneWithoutPlayersInput
+    teeSet: TeeSetCreateNestedOneWithoutPlayersInput
   }
 
-  export type RoundUncheckedCreateWithoutScoresInput = {
+  export type PlayerUncheckedCreateWithoutScoresInput = {
     id: string
-    courseId: string
+    roundId: string
+    position: number
+    name: string
     teeSetId: string
-    playedOn?: Date | string
-    completedAt?: Date | string | null
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
-  export type RoundCreateOrConnectWithoutScoresInput = {
-    where: RoundWhereUniqueInput
-    create: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
+  export type PlayerCreateOrConnectWithoutScoresInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutScoresInput, PlayerUncheckedCreateWithoutScoresInput>
   }
 
   export type HoleCreateWithoutScoresInput = {
@@ -23083,6 +26164,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     course: CourseCreateNestedOneWithoutHolesInput
     tees?: HoleTeeCreateNestedManyWithoutHoleInput
   }
@@ -23096,6 +26181,10 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
     tees?: HoleTeeUncheckedCreateNestedManyWithoutHoleInput
   }
 
@@ -23104,35 +26193,45 @@ export namespace Prisma {
     create: XOR<HoleCreateWithoutScoresInput, HoleUncheckedCreateWithoutScoresInput>
   }
 
-  export type RoundUpsertWithoutScoresInput = {
-    update: XOR<RoundUpdateWithoutScoresInput, RoundUncheckedUpdateWithoutScoresInput>
-    create: XOR<RoundCreateWithoutScoresInput, RoundUncheckedCreateWithoutScoresInput>
-    where?: RoundWhereInput
+  export type PlayerUpsertWithoutScoresInput = {
+    update: XOR<PlayerUpdateWithoutScoresInput, PlayerUncheckedUpdateWithoutScoresInput>
+    create: XOR<PlayerCreateWithoutScoresInput, PlayerUncheckedCreateWithoutScoresInput>
+    where?: PlayerWhereInput
   }
 
-  export type RoundUpdateToOneWithWhereWithoutScoresInput = {
-    where?: RoundWhereInput
-    data: XOR<RoundUpdateWithoutScoresInput, RoundUncheckedUpdateWithoutScoresInput>
+  export type PlayerUpdateToOneWithWhereWithoutScoresInput = {
+    where?: PlayerWhereInput
+    data: XOR<PlayerUpdateWithoutScoresInput, PlayerUncheckedUpdateWithoutScoresInput>
   }
 
-  export type RoundUpdateWithoutScoresInput = {
+  export type PlayerUpdateWithoutScoresInput = {
     id?: StringFieldUpdateOperationsInput | string
-    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
-    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    round?: RoundUpdateOneRequiredWithoutPlayersNestedInput
+    teeSet?: TeeSetUpdateOneRequiredWithoutPlayersNestedInput
   }
 
-  export type RoundUncheckedUpdateWithoutScoresInput = {
+  export type PlayerUncheckedUpdateWithoutScoresInput = {
     id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     teeSetId?: StringFieldUpdateOperationsInput | string
-    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleUpsertWithoutScoresInput = {
@@ -23154,6 +26253,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     course?: CourseUpdateOneRequiredWithoutHolesNestedInput
     tees?: HoleTeeUpdateManyWithoutHoleNestedInput
   }
@@ -23167,6 +26270,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
   }
 
@@ -23388,7 +26495,10 @@ export namespace Prisma {
     yards: number
     unit?: $Enums.DistanceUnit
     measuredAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type DistanceUpdateWithoutClubInput = {
@@ -23397,7 +26507,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceUncheckedUpdateWithoutClubInput = {
@@ -23406,7 +26519,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DistanceUncheckedUpdateManyWithoutClubInput = {
@@ -23415,7 +26531,10 @@ export namespace Prisma {
     yards?: IntFieldUpdateOperationsInput | number
     unit?: EnumDistanceUnitFieldUpdateOperationsInput | $Enums.DistanceUnit
     measuredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleCreateManyCourseInput = {
@@ -23426,21 +26545,32 @@ export namespace Prisma {
     greenLng?: number | null
     aimLat?: number | null
     aimLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type TeeSetCreateManyCourseInput = {
     id?: string
     colour: $Enums.TeeColour
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type RoundCreateManyCourseInput = {
     id: string
-    teeSetId: string
     playedOn?: Date | string
     completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleUpdateWithoutCourseInput = {
@@ -23451,6 +26581,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     tees?: HoleTeeUpdateManyWithoutHoleNestedInput
     scores?: HoleScoreUpdateManyWithoutHoleNestedInput
   }
@@ -23463,6 +26597,10 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     tees?: HoleTeeUncheckedUpdateManyWithoutHoleNestedInput
     scores?: HoleScoreUncheckedUpdateManyWithoutHoleNestedInput
   }
@@ -23475,28 +26613,44 @@ export namespace Prisma {
     greenLng?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLat?: NullableFloatFieldUpdateOperationsInput | number | null
     aimLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TeeSetUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleTeeUpdateManyWithoutTeeSetNestedInput
-    rounds?: RoundUpdateManyWithoutTeeSetNestedInput
+    players?: PlayerUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     holes?: HoleTeeUncheckedUpdateManyWithoutTeeSetNestedInput
-    rounds?: RoundUncheckedUpdateManyWithoutTeeSetNestedInput
+    players?: PlayerUncheckedUpdateManyWithoutTeeSetNestedInput
   }
 
   export type TeeSetUncheckedUpdateManyWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
     colour?: EnumTeeColourFieldUpdateOperationsInput | $Enums.TeeColour
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoundUpdateWithoutCourseInput = {
@@ -23505,27 +26659,36 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    teeSet?: TeeSetUpdateOneRequiredWithoutRoundsNestedInput
-    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    players?: PlayerUpdateManyWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
-    teeSetId?: StringFieldUpdateOperationsInput | string
     playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    players?: PlayerUncheckedUpdateManyWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateManyWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
-    teeSetId?: StringFieldUpdateOperationsInput | string
     playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeCreateManyHoleInput = {
@@ -23536,13 +26699,23 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
   }
 
   export type HoleScoreCreateManyHoleInput = {
     id?: string
-    roundId: string
+    playerId: string
     strokes: number
     putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleTeeUpdateWithoutHoleInput = {
@@ -23552,6 +26725,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     teeSet?: TeeSetUpdateOneRequiredWithoutHolesNestedInput
   }
 
@@ -23563,6 +26740,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeUncheckedUpdateManyWithoutHoleInput = {
@@ -23573,27 +26754,49 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleScoreUpdateWithoutHoleInput = {
     id?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
-    round?: RoundUpdateOneRequiredWithoutScoresNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    player?: PlayerUpdateOneRequiredWithoutScoresNestedInput
   }
 
   export type HoleScoreUncheckedUpdateWithoutHoleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleScoreUncheckedUpdateManyWithoutHoleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeCreateManyTeeSetInput = {
@@ -23604,15 +26807,24 @@ export namespace Prisma {
     strokeIndex: number
     teeLat?: number | null
     teeLng?: number | null
-  }
-
-  export type RoundCreateManyTeeSetInput = {
-    id: string
-    courseId: string
-    playedOn?: Date | string
-    completedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+  }
+
+  export type PlayerCreateManyTeeSetInput = {
+    id: string
+    roundId: string
+    position: number
+    name: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
   export type HoleTeeUpdateWithoutTeeSetInput = {
@@ -23622,6 +26834,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     hole?: HoleUpdateOneRequiredWithoutTeesNestedInput
   }
 
@@ -23633,6 +26849,10 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HoleTeeUncheckedUpdateManyWithoutTeeSetInput = {
@@ -23643,63 +26863,164 @@ export namespace Prisma {
     strokeIndex?: IntFieldUpdateOperationsInput | number
     teeLat?: NullableFloatFieldUpdateOperationsInput | number | null
     teeLng?: NullableFloatFieldUpdateOperationsInput | number | null
-  }
-
-  export type RoundUpdateWithoutTeeSetInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    course?: CourseUpdateOneRequiredWithoutRoundsNestedInput
-    scores?: HoleScoreUpdateManyWithoutRoundNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type RoundUncheckedUpdateWithoutTeeSetInput = {
+  export type PlayerUpdateWithoutTeeSetInput = {
     id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    scores?: HoleScoreUncheckedUpdateManyWithoutRoundNestedInput
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    round?: RoundUpdateOneRequiredWithoutPlayersNestedInput
+    scores?: HoleScoreUpdateManyWithoutPlayerNestedInput
   }
 
-  export type RoundUncheckedUpdateManyWithoutTeeSetInput = {
+  export type PlayerUncheckedUpdateWithoutTeeSetInput = {
     id?: StringFieldUpdateOperationsInput | string
-    courseId?: StringFieldUpdateOperationsInput | string
-    playedOn?: DateTimeFieldUpdateOperationsInput | Date | string
-    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    roundId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    scores?: HoleScoreUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
-  export type HoleScoreCreateManyRoundInput = {
+  export type PlayerUncheckedUpdateManyWithoutTeeSetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roundId?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PlayerCreateManyRoundInput = {
+    id: string
+    position: number
+    name: string
+    teeSetId: string
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
+  }
+
+  export type PlayerUpdateWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    teeSet?: TeeSetUpdateOneRequiredWithoutPlayersNestedInput
+    scores?: HoleScoreUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+    scores?: HoleScoreUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateManyWithoutRoundInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teeSetId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type HoleScoreCreateManyPlayerInput = {
     id?: string
     holeId: string
     strokes: number
     putts?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdById?: string | null
+    updatedById?: string | null
+    deletedAt?: Date | string | null
+    deletedById?: string | null
   }
 
-  export type HoleScoreUpdateWithoutRoundInput = {
+  export type HoleScoreUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
     hole?: HoleUpdateOneRequiredWithoutScoresNestedInput
   }
 
-  export type HoleScoreUncheckedUpdateWithoutRoundInput = {
+  export type HoleScoreUncheckedUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     holeId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type HoleScoreUncheckedUpdateManyWithoutRoundInput = {
+  export type HoleScoreUncheckedUpdateManyWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     holeId?: StringFieldUpdateOperationsInput | string
     strokes?: IntFieldUpdateOperationsInput | number
     putts?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

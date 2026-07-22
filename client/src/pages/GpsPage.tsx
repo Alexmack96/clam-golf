@@ -73,9 +73,17 @@ export function GpsPage() {
   const setAimPoint = useSetAimPoint();
   const { round, syncState, setScore } = useActiveRound();
 
+  // While a round is open the page belongs to it: the course and tees are the
+  // round's (Player 1's), not the free-roam pickers. The card is the one place a
+  // round is started or switched — GPS only ever plays the one you are on.
+  const player1 = round?.players.find((p) => p.position === 1) ?? round?.players[0] ?? null;
+  const boundCourse = round ? courses?.find((c) => c.id === round.courseId) : undefined;
+  const boundTeeSet = boundCourse?.teeSets.find((t) => t.id === player1?.teeSetId);
+
   const course: CourseRow | undefined =
-    courses?.find((c) => c.name === courseName) ?? courses?.[0];
-  const teeSet = course?.teeSets.find((t) => t.colour === teeColour) ?? course?.teeSets[0];
+    boundCourse ?? courses?.find((c) => c.name === courseName) ?? courses?.[0];
+  const teeSet =
+    boundTeeSet ?? course?.teeSets.find((t) => t.colour === teeColour) ?? course?.teeSets[0];
   const hole: HoleRow | undefined = course?.holes.find((h) => h.number === holeNumber);
   const holeTee = hole?.tees.find((t) => t.teeSetId === teeSet?.id);
 
@@ -202,11 +210,12 @@ export function GpsPage() {
     setDismissedHint(null);
   }
 
-  const holeScore = round?.scores.find((s) => s.holeId === hole?.id) ?? null;
+  const holeScore =
+    round?.scores.find((s) => s.playerId === player1?.id && s.holeId === hole?.id) ?? null;
 
   function handleScoreChange(strokes: number | null, putts: number | null) {
-    if (!hole || !course || !teeSet) return;
-    setScore(hole.id, strokes, putts, course.id, teeSet.id);
+    if (!hole || !player1) return;
+    setScore(player1.id, hole.id, strokes, putts);
   }
 
   async function handleDownload() {
@@ -227,34 +236,43 @@ export function GpsPage() {
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-col gap-3">
-      {/* Course and tees. Both are pickers because Richmond Park is two courses
-          sharing one clubhouse, and the yardage on the card depends on which
-          markers you played from. */}
+      {/* Course and tees. Free pickers when you are just ranging; while a round
+          is open they are locked to the round and shown as a label, because the
+          card owns which course you are on. */}
       <div className="flex items-center gap-2">
-        <Select value={course?.name ?? ""} onValueChange={setCourseName}>
-          <SelectTrigger className="h-9 flex-1 text-[13px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {courses?.map((c) => (
-              <SelectItem key={c.id} value={c.name}>
-                {c.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={teeSet?.colour ?? ""} onValueChange={setTeeColour}>
-          <SelectTrigger className="h-9 w-[130px] text-[13px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {course?.teeSets.map((t) => (
-              <SelectItem key={t.id} value={t.colour}>
-                {t.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {round ? (
+          <div className="flex h-9 flex-1 items-center gap-2 rounded-md border border-border px-3 text-[13px]">
+            <span className="font-medium">{course?.name}</span>
+            <span className="text-muted-foreground">· {teeSet?.name}</span>
+          </div>
+        ) : (
+          <>
+            <Select value={course?.name ?? ""} onValueChange={setCourseName}>
+              <SelectTrigger className="h-9 flex-1 text-[13px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {courses?.map((c) => (
+                  <SelectItem key={c.id} value={c.name}>
+                    {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={teeSet?.colour ?? ""} onValueChange={setTeeColour}>
+              <SelectTrigger className="h-9 w-[130px] text-[13px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {course?.teeSets.map((t) => (
+                  <SelectItem key={t.id} value={t.colour}>
+                    {t.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </>
+        )}
         <Button
           variant={editing ? "default" : "ghost"}
           size="icon-sm"
@@ -311,8 +329,9 @@ export function GpsPage() {
 
       {/* Scoring sits right under the hole switcher: you are already on this
           hole with its par in front of you, so the score is one tap away and
-          "Next" walks you to the following tee. */}
-      {!editing && holeTee && (
+          "Next" walks you to the following tee. Only while a round is open — a
+          round is started on the card, never here. */}
+      {!editing && holeTee && round && (
         <ScoreEntry
           par={holeTee.par}
           strokes={holeScore?.strokes ?? null}

@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Flag, Trash2 } from "lucide-react";
+import { Trash2, Lock, LockOpen, Check, Pencil } from "lucide-react";
 import { isGreenInRegulation } from "@clam/core";
 import { Button } from "../components/ui/button.js";
 import { Skeleton } from "../components/ui/skeleton.js";
@@ -14,175 +15,249 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog.js";
+import { NewRoundDialog } from "../components/scorecard/NewRoundDialog.js";
 import { useCourses, type CourseRow } from "../hooks/useCourses.js";
-import { useActiveRound, useRounds, type RoundSummary } from "../hooks/useActiveRound.js";
+import {
+  useActiveRound,
+  useRounds,
+  deleteRound,
+  type ActiveRound,
+  type LocalPlayer,
+  type RoundSummary,
+} from "../hooks/useActiveRound.js";
+import { useQueryClient } from "@tanstack/react-query";
 
 /** Colour a score the way you would ring it on paper. */
 function scoreClass(strokes: number, par: number) {
   const d = strokes - par;
-  if (d <= -2) return "bg-amber-400/30 font-semibold";
-  if (d === -1) return "bg-primary/25 font-semibold";
+  if (d <= -2) return "bg-amber-400/30 font-semibold rounded";
+  if (d === -1) return "bg-primary/25 font-semibold rounded";
   if (d === 0) return "";
   if (d >= 2) return "text-destructive";
   return "text-muted-foreground";
 }
 
-interface Row {
-  number: number;
-  whiteYards: number;
-  redYards: number;
-  yellowYards: number;
-  whitePar: number;
-  yellowPar: number;
-  redPar: number;
-  strokeIndex: number;
-  redStrokeIndex: number;
+interface Cell {
+  playerId: string;
+  yards: number;
+  par: number;
   strokes: number | null;
   putts: number | null;
 }
-
-function buildRows(course: CourseRow, scores: { holeId: string; strokes: number; putts: number | null }[]): Row[] {
-  const byColour = (colour: string) => course.teeSets.find((t) => t.colour === colour);
-  const white = byColour("White");
-  const yellow = byColour("Yellow");
-  const red = byColour("Red");
-
-  return course.holes.map((h) => {
-    const tee = (setId?: string) => h.tees.find((t) => t.teeSetId === setId);
-    const w = tee(white?.id);
-    const y = tee(yellow?.id);
-    const r = tee(red?.id);
-    const score = scores.find((s) => s.holeId === h.id);
-    return {
-      number: h.number,
-      whiteYards: w?.yards ?? 0,
-      yellowYards: y?.yards ?? 0,
-      redYards: r?.yards ?? 0,
-      whitePar: w?.par ?? 4,
-      yellowPar: y?.par ?? 4,
-      redPar: r?.par ?? 4,
-      strokeIndex: y?.strokeIndex ?? 0,
-      redStrokeIndex: r?.strokeIndex ?? 0,
-      strokes: score?.strokes ?? null,
-      putts: score?.putts ?? null,
-    };
-  });
+interface Line {
+  holeId: string;
+  number: number;
+  par: number;
+  cells: Cell[];
 }
 
-const sum = (rows: Row[], pick: (r: Row) => number) => rows.reduce((n, r) => n + pick(r), 0);
+function buildLines(course: CourseRow, players: LocalPlayer[], scores: ActiveRound["scores"]): Line[] {
+  return course.holes
+    .slice()
+    .sort((a, b) => a.number - b.number)
+    .map((h) => {
+      const cells = players.map((pl) => {
+        const tee = h.tees.find((t) => t.teeSetId === pl.teeSetId);
+        const sc = scores.find((s) => s.playerId === pl.id && s.holeId === h.id);
+        return {
+          playerId: pl.id,
+          yards: tee?.yards ?? 0,
+          par: tee?.par ?? 4,
+          strokes: sc?.strokes ?? null,
+          putts: sc?.putts ?? null,
+        };
+      });
+      return { holeId: h.id, number: h.number, par: cells[0]?.par ?? 4, cells };
+    });
+}
+
+const sum = (ns: number[]) => ns.reduce((n, x) => n + x, 0);
+
+function ScoreInput({
+  value,
+  min,
+  max,
+  editable,
+  cls,
+  placeholder,
+  onCommit,
+}: {
+  value: number | null;
+  min: number;
+  max: number;
+  editable: boolean;
+  cls: string;
+  placeholder: string;
+  onCommit: (v: number | null) => void;
+}) {
+  function commit(raw: string) {
+    const t = raw.trim();
+    if (t === "") return onCommit(null);
+    const n = parseInt(t, 10);
+    if (Number.isNaN(n)) return onCommit(null);
+    onCommit(Math.max(min, Math.min(max, n)));
+  }
+
+  if (!editable) {
+    return (
+      <span className={`inline-flex size-6 items-center justify-center ${value !== null ? cls : ""}`}>
+        {value ?? <span className="text-muted-foreground/30">–</span>}
+      </span>
+    );
+  }
+
+  return (
+    <input
+      // Reset the uncontrolled field whenever the stored value changes.
+      key={value ?? "empty"}
+      defaultValue={value ?? ""}
+      inputMode="numeric"
+      placeholder={placeholder}
+      onFocus={(e) => e.currentTarget.select()}
+      onBlur={(e) => commit(e.currentTarget.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") e.currentTarget.blur();
+      }}
+      className={`h-6 w-full min-w-0 rounded bg-transparent text-center tabular-nums outline-none focus:bg-muted focus:ring-1 focus:ring-primary ${cls}`}
+    />
+  );
+}
+
+const TH = "px-1 py-1 font-medium";
+const TD = "px-0.5 py-0.5 tabular-nums";
 
 /**
- * The par printed between the white and yellow yardages. They agree on every
- * hole at Richmond Park except Duke's 17th, which the paper card annotates
- * "5/4" — so do the same rather than silently picking one.
+ * The play card: compact, thumb-first, and editable in place. Every player's own
+ * yardage lives in their tee, so only the solo card has room to print it; a
+ * fourball trades that column for the extra scores. See ADR 0001.
  */
-function sharedPar(r: Row) {
-  return r.whitePar === r.yellowPar ? String(r.whitePar) : `${r.whitePar}/${r.yellowPar}`;
-}
+function PlayCard({
+  course,
+  players,
+  scores,
+  editable,
+  linkHoles,
+  onScore,
+}: {
+  course: CourseRow;
+  players: LocalPlayer[];
+  scores: ActiveRound["scores"];
+  editable: boolean;
+  linkHoles: boolean;
+  onScore: (playerId: string, holeId: string, strokes: number | null, putts: number | null) => void;
+}) {
+  const lines = buildLines(course, players, scores);
+  const solo = players.length === 1;
+  const p1 = players[0];
 
-const TH = "px-1 py-1.5 font-medium";
-const TD = "px-1 py-1 tabular-nums";
+  const holeCell = (l: Line) =>
+    linkHoles ? (
+      <Link to={`/gps?hole=${l.number}`} className="text-primary underline-offset-2 hover:underline">
+        {l.number}
+      </Link>
+    ) : (
+      l.number
+    );
 
-function TotalRow({ rows, label }: { rows: Row[]; label: string }) {
-  const played = rows.filter((r) => r.strokes !== null);
-  return (
-    <tr className="border-y border-border bg-muted/40 font-semibold">
-      <td className={`${TD} text-left`}>{label}</td>
-      <td className={TD}>{sum(rows, (r) => r.whiteYards)}</td>
-      <td className={TD}>{sum(rows, (r) => r.whitePar)}</td>
-      <td className={`${TD} bg-amber-300/25`}>{sum(rows, (r) => r.yellowYards)}</td>
-      <td className={TD} />
+  const bodyRow = (l: Line) => (
+    <tr key={l.number} className="border-b border-border/40">
+      <td className={`${TD} text-left font-medium`}>{holeCell(l)}</td>
+      {solo && <td className={`${TD} text-muted-foreground`}>{l.cells[0]?.yards || ""}</td>}
+      <td className={`${TD} text-muted-foreground`}>{l.par}</td>
       <td className={`${TD} border-l border-border`}>
-        {played.length ? sum(played, (r) => r.strokes ?? 0) : "–"}
-      </td>
-      <td className={TD}>
-        {played.some((r) => r.putts !== null) ? sum(played, (r) => r.putts ?? 0) : "–"}
-      </td>
-      <td className={`${TD} bg-red-500/15`}>{sum(rows, (r) => r.redYards)}</td>
-      <td className={`${TD} bg-red-500/15`}>{sum(rows, (r) => r.redPar)}</td>
-      <td className={`${TD} bg-red-500/15`} />
-    </tr>
-  );
-}
-
-function CardTable({ course, rows }: { course: CourseRow; rows: Row[] }) {
-  // Duke's is printed in blue on the card, Prince's in red.
-  const banner =
-    course.name === "Prince's"
-      ? "text-red-600 dark:text-red-400"
-      : "text-blue-700 dark:text-blue-400";
-
-  const body = (r: Row) => (
-    <tr key={r.number} className="border-b border-border/50">
-      <td className={`${TD} text-left font-medium`}>{r.number}</td>
-      <td className={TD}>{r.whiteYards}</td>
-      <td className={TD}>{sharedPar(r)}</td>
-      {/* The card prints the yellow yardage on a yellow ground and the whole
-          red block on red. That colour coding is how you find your row at a
-          glance, so it is not decoration. */}
-      <td className={`${TD} bg-amber-300/25 font-medium`}>{r.yellowYards}</td>
-      <td className={`${TD} text-red-600/90 dark:text-red-400/90`}>{r.strokeIndex}</td>
-      <td className="border-l border-border px-1 py-1">
-        {r.strokes === null ? (
-          <span className="text-muted-foreground/40">–</span>
-        ) : (
-          <span
-            className={`inline-flex size-6 items-center justify-center rounded tabular-nums ${scoreClass(r.strokes, r.yellowPar)}`}
-          >
-            {r.strokes}
-          </span>
-        )}
+        <ScoreInput
+          value={l.cells[0]?.strokes ?? null}
+          min={1}
+          max={20}
+          editable={editable}
+          cls={l.cells[0] ? scoreClass(l.cells[0].strokes ?? 0, l.cells[0].par) : ""}
+          placeholder="–"
+          onCommit={(v) => onScore(p1.id, l.holeId, v, v === null ? null : (l.cells[0]?.putts ?? null))}
+        />
       </td>
       <td className={`${TD} text-muted-foreground`}>
-        {r.putts ?? <span className="text-muted-foreground/40">–</span>}
+        <ScoreInput
+          value={l.cells[0]?.putts ?? null}
+          min={0}
+          max={10}
+          editable={editable}
+          cls=""
+          placeholder="–"
+          onCommit={(v) => onScore(p1.id, l.holeId, l.cells[0]?.strokes ?? null, v)}
+        />
       </td>
-      <td className={`${TD} bg-red-500/15`}>{r.redYards}</td>
-      <td className={`${TD} bg-red-500/15`}>{r.redPar}</td>
-      <td className={`${TD} bg-red-500/15 text-red-700 dark:text-red-300`}>{r.redStrokeIndex}</td>
+      {l.cells.slice(1).map((c, i) => (
+        <td key={players[i + 1].id} className={`${TD} border-l border-border/60`}>
+          <ScoreInput
+            value={c.strokes}
+            min={1}
+            max={20}
+            editable={editable}
+            cls={scoreClass(c.strokes ?? 0, c.par)}
+            placeholder="–"
+            onCommit={(v) => onScore(c.playerId, l.holeId, v, null)}
+          />
+        </td>
+      ))}
     </tr>
   );
+
+  const totalRow = (rows: Line[], label: string) => {
+    const parSum = sum(rows.map((r) => r.par));
+    return (
+      <tr className="border-y border-border bg-muted/40 font-semibold">
+        <td className={`${TD} text-left`}>{label}</td>
+        {solo && <td className={TD}>{sum(rows.map((r) => r.cells[0]?.yards ?? 0)) || ""}</td>}
+        <td className={TD}>{parSum}</td>
+        <td className={`${TD} border-l border-border`}>
+          {playerTotal(rows, 0)}
+        </td>
+        <td className={TD}>
+          {(() => {
+            const putts = rows.filter((r) => r.cells[0]?.putts != null);
+            return putts.length ? sum(putts.map((r) => r.cells[0]!.putts ?? 0)) : "";
+          })()}
+        </td>
+        {players.slice(1).map((p, i) => (
+          <td key={p.id} className={`${TD} border-l border-border/60`}>
+            {playerTotal(rows, i + 1)}
+          </td>
+        ))}
+      </tr>
+    );
+
+    function playerTotal(rs: Line[], idx: number) {
+      const played = rs.filter((r) => r.cells[idx]?.strokes != null);
+      return played.length ? sum(played.map((r) => r.cells[idx]!.strokes ?? 0)) : "–";
+    }
+  };
 
   return (
     <div className="surface-card overflow-hidden rounded-xl">
-      <div className={`px-3 py-2 text-center text-[12px] font-semibold tracking-[0.18em] ${banner}`}>
-        {course.name.toUpperCase()} COURSE
-      </div>
       <div className="overflow-x-auto">
-        <table className="w-full table-fixed text-center text-[11px]">
-          <colgroup>
-            <col className="w-7" />
-            <col />
-            <col className="w-7" />
-            <col />
-            <col className="w-6" />
-            <col className="w-9" />
-            <col className="w-7" />
-            <col />
-            <col className="w-6" />
-            <col className="w-6" />
-          </colgroup>
+        <table className="w-full table-fixed text-center text-[12px]">
           <thead className="text-[9px] uppercase tracking-wide text-muted-foreground">
             <tr className="border-y border-border">
-              <th className={`${TH} text-left`}>Hole</th>
-              <th className={TH}>White</th>
+              <th className={`${TH} text-left`}>#</th>
+              {solo && <th className={TH}>Yds</th>}
               <th className={TH}>Par</th>
-              <th className={`${TH} bg-amber-300/40`}>Yellow</th>
-              <th className={TH}>SI</th>
-              {/* Ruled off, as the paper card rules off the scoring block —
-                  without it "SCORE" and "PUTT" run together into one word. */}
-              <th className={`${TH} border-l border-border text-foreground`}>Score</th>
+              <th className={`${TH} border-l border-border text-foreground`}>
+                <span className="block max-w-[52px] truncate">{p1.name}</span>
+              </th>
               <th className={TH}>Putt</th>
-              <th className={`${TH} bg-red-500/25`}>Red</th>
-              <th className={`${TH} bg-red-500/25`}>Par</th>
-              <th className={`${TH} bg-red-500/25`}>SI</th>
+              {players.slice(1).map((p) => (
+                <th key={p.id} className={`${TH} border-l border-border/60 text-foreground`}>
+                  <span className="block max-w-[52px] truncate">{p.name}</span>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {rows.slice(0, 9).map(body)}
-            <TotalRow rows={rows.slice(0, 9)} label="Out" />
-            {rows.slice(9).map(body)}
-            <TotalRow rows={rows.slice(9)} label="In" />
-            <TotalRow rows={rows} label="Tot" />
+            {lines.slice(0, 9).map(bodyRow)}
+            {totalRow(lines.slice(0, 9), "Out")}
+            {lines.slice(9).map(bodyRow)}
+            {totalRow(lines.slice(9), "In")}
+            {totalRow(lines, "Tot")}
           </tbody>
         </table>
       </div>
@@ -190,114 +265,202 @@ function CardTable({ course, rows }: { course: CourseRow; rows: Row[] }) {
   );
 }
 
-function ActiveCard({ courses }: { courses: CourseRow[] }) {
-  const { round, syncState, finish, discard } = useActiveRound();
+function SummaryHeader({
+  course,
+  round,
+  editable,
+}: {
+  course: CourseRow;
+  round: ActiveRound;
+  editable: boolean;
+}) {
+  const p1 = round.players[0];
+  const lines = buildLines(course, round.players, round.scores);
+  const played = lines.filter((l) => l.cells[0]?.strokes != null);
+  const total = sum(played.map((l) => l.cells[0]!.strokes ?? 0));
+  const toPar = total - sum(played.map((l) => l.cells[0]!.par ?? 0));
+  const anyPutts = played.some((l) => l.cells[0]?.putts != null);
+  const girs = played.filter((l) =>
+    isGreenInRegulation(l.cells[0]!.strokes ?? 0, l.cells[0]?.putts ?? null, l.cells[0]!.par),
+  ).length;
 
-  if (!round) {
-    return (
-      <div className="surface-card rounded-xl px-4 py-8 text-center">
-        <Flag className="mx-auto mb-3 size-6 text-muted-foreground/50" />
-        <p className="text-[13px] text-muted-foreground">
-          No round in progress. Enter a score on the GPS page and one starts itself.
-        </p>
+  return (
+    <div className="surface-card rounded-xl px-4 py-4">
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="eyebrow">
+            {round.completedAt ? (editable ? "Finished · editing" : "Finished") : "In progress"}
+          </div>
+          <div className="font-display text-xl">{course.name}</div>
+          <div className="mt-0.5 text-[12px] text-muted-foreground">
+            {new Date(round.playedOn).toLocaleDateString("en-GB", { day: "numeric", month: "long" })} ·{" "}
+            {round.players.length === 1 ? p1.name : `${round.players.length} players`} · {played.length}/18
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="font-numeric text-4xl leading-none tabular-nums">{total || "–"}</div>
+          {played.length > 0 && (
+            <div className="text-[12px] text-muted-foreground tabular-nums">
+              {toPar === 0 ? "level" : toPar > 0 ? `+${toPar}` : toPar}
+            </div>
+          )}
+        </div>
       </div>
-    );
-  }
+      {anyPutts && (
+        <div className="mt-3 flex gap-5 border-t border-border pt-3 text-[12px] text-muted-foreground">
+          <span>
+            Putts <span className="text-foreground tabular-nums">{sum(played.map((l) => l.cells[0]?.putts ?? 0))}</span>
+          </span>
+          <span>
+            Greens in reg <span className="text-foreground tabular-nums">{girs}/{played.length}</span>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ActiveCard({ courses, round }: { courses: CourseRow[]; round: ActiveRound }) {
+  const { syncState, setScore, finish, release, discard } = useActiveRound();
+  const [unlocked, setUnlocked] = useState(false);
 
   const course = courses.find((c) => c.id === round.courseId);
-  const teeSet = course?.teeSets.find((t) => t.id === round.teeSetId);
-  if (!course || !teeSet) return null;
+  if (!course) return null;
 
-  const rows = buildRows(course, round.scores);
-  const played = rows.filter((r) => r.strokes !== null);
-  const total = sum(played, (r) => r.strokes ?? 0);
-  const toPar = total - sum(played, (r) => r.yellowPar);
-  const girs = played.filter((r) => isGreenInRegulation(r.strokes!, r.putts, r.yellowPar)).length;
-  const nextHole = rows.find((r) => r.strokes === null)?.number ?? 18;
+  const finished = round.completedAt !== null;
+  const editable = !finished || unlocked;
+  const linkHoles = course.holes.some((h) => h.greenPolygon != null);
+  const played = round.scores.filter((s) => round.players[0] && s.playerId === round.players[0].id);
 
   return (
     <div className="space-y-3">
-      <div className="surface-card rounded-xl px-4 py-4">
-        <div className="flex items-start justify-between">
-          <div>
-            <div className="eyebrow">
-              {round.completedAt ? "Finished · waiting for signal" : "In progress"}
-            </div>
-            <div className="font-display text-xl">
-              {course.name} · {teeSet.name}
-            </div>
-            <div className="mt-0.5 text-[12px] text-muted-foreground">
-              {new Date(round.playedOn).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "long",
-              })}{" "}
-              · {played.length} of 18 holes
-              {syncState === "offline" && " · saved on this phone"}
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="font-numeric text-4xl leading-none tabular-nums">{total || "–"}</div>
-            {played.length > 0 && (
-              <div className="text-[12px] text-muted-foreground tabular-nums">
-                {toPar === 0 ? "level" : toPar > 0 ? `+${toPar}` : toPar}
-              </div>
-            )}
-          </div>
+      <SummaryHeader course={course} round={round} editable={editable} />
+
+      {finished && (
+        <div className="surface-card flex items-center justify-between rounded-xl px-4 py-2.5 text-[13px]">
+          <span className="flex items-center gap-2 text-muted-foreground">
+            {unlocked ? <LockOpen className="size-4 text-primary" /> : <Lock className="size-4" />}
+            {unlocked ? "Editing a finished round" : "This round is finished and locked."}
+          </span>
+          <Button variant={unlocked ? "secondary" : "outline"} size="sm" onClick={() => setUnlocked((u) => !u)}>
+            {unlocked ? "Lock" : "Unlock to edit"}
+          </Button>
         </div>
+      )}
 
-        {played.some((r) => r.putts !== null) && (
-          <div className="mt-3 flex gap-5 border-t border-border pt-3 text-[12px] text-muted-foreground">
-            <span>
-              Putts{" "}
-              <span className="text-foreground tabular-nums">
-                {sum(played, (r) => r.putts ?? 0)}
-              </span>
-            </span>
-            <span>
-              Greens in reg{" "}
-              <span className="text-foreground tabular-nums">
-                {girs}/{played.length}
-              </span>
-            </span>
-          </div>
-        )}
+      <PlayCard
+        course={course}
+        players={round.players}
+        scores={round.scores}
+        editable={editable}
+        linkHoles={linkHoles}
+        onScore={setScore}
+      />
+
+      {syncState === "offline" && (
+        <p className="px-1 text-center text-[11px] text-muted-foreground">Saved on this phone · will sync when there's signal</p>
+      )}
+
+      {finished ? (
+        <Button className="w-full" variant="secondary" onClick={release}>
+          <Check className="mr-1.5 size-4" /> Done
+        </Button>
+      ) : (
+        <div className="flex gap-2">
+          <Button className="flex-1" onClick={finish} disabled={played.length === 0}>
+            Finish round
+          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Discard round">
+                <Trash2 className="size-4" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Discard this round?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {played.length} scored {played.length === 1 ? "hole" : "holes"} will be thrown away.
+                  This cannot be undone.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Keep playing</AlertDialogCancel>
+                <AlertDialogAction onClick={discard}>Discard</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HistoryRow({
+  round,
+  canEdit,
+  onEdit,
+}: {
+  round: RoundSummary;
+  canEdit: boolean;
+  onEdit: () => void;
+}) {
+  const qc = useQueryClient();
+  const p1 = round.players.find((p) => p.position === 1) ?? round.players[0];
+  const total = sum((p1?.scores ?? []).map((s) => s.strokes));
+
+  async function remove() {
+    await deleteRound(round.id);
+    qc.invalidateQueries({ queryKey: ["rounds"] });
+  }
+
+  return (
+    <div className="surface-card flex items-center justify-between rounded-xl px-4 py-3">
+      <div className="min-w-0">
+        <div className="truncate text-[14px] font-medium">
+          {round.course.name}
+          {round.players.length > 1 && (
+            <span className="text-muted-foreground"> · {round.players.length} players</span>
+          )}
+        </div>
+        <div className="text-[12px] text-muted-foreground">
+          {new Date(round.playedOn).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}{" "}
+          · {p1?.scores.length ?? 0} holes
+          {round.completedAt === null && " · unfinished"}
+        </div>
       </div>
-
-      <CardTable course={course} rows={rows} />
-
-      <p className="px-1 text-center text-[11px] text-muted-foreground">
-        Scores are entered on the{" "}
-        <Link to={`/gps?hole=${nextHole}`} className="text-primary underline-offset-2 hover:underline">
-          GPS page
-        </Link>
-        , hole by hole.
-      </p>
-
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
+        <span className="font-numeric text-2xl tabular-nums">{total || "–"}</span>
         <Button
-          className="flex-1"
-          onClick={finish}
-          disabled={played.length === 0 || round.completedAt !== null}
+          variant="ghost"
+          size="icon-sm"
+          aria-label="Edit round"
+          disabled={!canEdit}
+          title={canEdit ? "Edit" : "Finish your current round first"}
+          onClick={onEdit}
         >
-          {round.completedAt ? "Uploading when there's signal…" : "Finish round"}
+          <Pencil className="size-4" />
         </Button>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="Discard round">
+            <Button variant="ghost" size="icon-sm" aria-label="Delete round">
               <Trash2 className="size-4" />
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Discard this round?</AlertDialogTitle>
+              <AlertDialogTitle>Delete this round?</AlertDialogTitle>
               <AlertDialogDescription>
-                {played.length} scored {played.length === 1 ? "hole" : "holes"} will be thrown away.
-                This cannot be undone.
+                It's removed from your history but kept recoverable, not wiped.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Keep playing</AlertDialogCancel>
-              <AlertDialogAction onClick={discard}>Discard</AlertDialogAction>
+              <AlertDialogCancel>Keep</AlertDialogCancel>
+              <AlertDialogAction onClick={remove}>Delete</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
@@ -306,32 +469,10 @@ function ActiveCard({ courses }: { courses: CourseRow[] }) {
   );
 }
 
-function PastRound({ round }: { round: RoundSummary }) {
-  const strokes = round.scores.reduce((n, s) => n + s.strokes, 0);
-  return (
-    <div className="surface-card flex items-center justify-between rounded-xl px-4 py-3">
-      <div>
-        <div className="text-[14px] font-medium">
-          {round.course.name} · {round.teeSet.name}
-        </div>
-        <div className="text-[12px] text-muted-foreground">
-          {new Date(round.playedOn).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          })}{" "}
-          · {round.scores.length} holes
-        </div>
-      </div>
-      <div className="font-numeric text-2xl tabular-nums">{strokes}</div>
-    </div>
-  );
-}
-
 export function ScorecardPage() {
   const { data: courses, isLoading } = useCourses();
   const { data: rounds } = useRounds();
-  const { round: active } = useActiveRound();
+  const { round: active, start, load } = useActiveRound();
 
   if (isLoading || !courses) {
     return (
@@ -346,13 +487,17 @@ export function ScorecardPage() {
 
   return (
     <div className="mx-auto w-full max-w-lg space-y-6">
-      <ActiveCard courses={courses} />
+      {active ? (
+        <ActiveCard key={active.id} courses={courses} round={active} />
+      ) : (
+        <NewRoundDialog courses={courses} onCreate={start} />
+      )}
 
       {past.length > 0 && (
         <div className="space-y-2">
           <h2 className="eyebrow px-1">Previous rounds</h2>
           {past.map((r) => (
-            <PastRound key={r.id} round={r} />
+            <HistoryRow key={r.id} round={r} canEdit={!active} onEdit={() => load(r)} />
           ))}
         </div>
       )}

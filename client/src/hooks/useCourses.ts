@@ -37,6 +37,7 @@ export interface TeeSetRow {
 export interface CourseRow {
   id: string;
   name: string;
+  venue: string;
   sortOrder: number;
   teeSets: TeeSetRow[];
   holes: HoleRow[];

@@ -67,9 +67,35 @@ const PRINCES: HoleRow[] = [
   { number: 18, white: { yards: 291, par: 4, si: 6  }, yellow: { yards: 259, par: 4, si: 6  }, red: { yards: 246, par: 4, si: 12 } },
 ];
 
-const COURSES: { name: string; sortOrder: number; holes: HoleRow[] }[] = [
-  { name: "Duke's", sortOrder: 0, holes: DUKES },
-  { name: "Prince's", sortOrder: 1, holes: PRINCES },
+// Toot Hill Golf Club, transcribed from the printed card. Men's white and yellow
+// share a par and stroke index; red differs only at the 14th (a par 5 off red,
+// par 4 off the men's tees), which is why red totals 71 to the men's 70. Totals
+// verified below: white 6255/70, yellow 5685/70, red 5186/71.
+const TOOT_HILL: HoleRow[] = [
+  { number: 1,  white: { yards: 442, par: 4, si: 10 }, yellow: { yards: 422, par: 4, si: 10 }, red: { yards: 394, par: 4, si: 5  } },
+  { number: 2,  white: { yards: 382, par: 4, si: 4  }, yellow: { yards: 362, par: 4, si: 4  }, red: { yards: 339, par: 4, si: 3  } },
+  { number: 3,  white: { yards: 165, par: 3, si: 16 }, yellow: { yards: 143, par: 3, si: 16 }, red: { yards: 125, par: 3, si: 15 } },
+  { number: 4,  white: { yards: 430, par: 4, si: 2  }, yellow: { yards: 393, par: 4, si: 2  }, red: { yards: 371, par: 4, si: 1  } },
+  { number: 5,  white: { yards: 372, par: 4, si: 6  }, yellow: { yards: 342, par: 4, si: 6  }, red: { yards: 297, par: 4, si: 11 } },
+  { number: 6,  white: { yards: 171, par: 3, si: 12 }, yellow: { yards: 162, par: 3, si: 12 }, red: { yards: 144, par: 3, si: 13 } },
+  { number: 7,  white: { yards: 476, par: 5, si: 14 }, yellow: { yards: 436, par: 5, si: 14 }, red: { yards: 426, par: 5, si: 7  } },
+  { number: 8,  white: { yards: 258, par: 4, si: 18 }, yellow: { yards: 255, par: 4, si: 18 }, red: { yards: 218, par: 4, si: 17 } },
+  { number: 9,  white: { yards: 386, par: 4, si: 8  }, yellow: { yards: 354, par: 4, si: 8  }, red: { yards: 328, par: 4, si: 9  } },
+  { number: 10, white: { yards: 410, par: 4, si: 3  }, yellow: { yards: 398, par: 4, si: 3  }, red: { yards: 355, par: 4, si: 2  } },
+  { number: 11, white: { yards: 541, par: 5, si: 9  }, yellow: { yards: 512, par: 5, si: 9  }, red: { yards: 475, par: 5, si: 6  } },
+  { number: 12, white: { yards: 153, par: 3, si: 13 }, yellow: { yards: 125, par: 3, si: 13 }, red: { yards: 96,  par: 3, si: 12 } },
+  { number: 13, white: { yards: 418, par: 4, si: 7  }, yellow: { yards: 379, par: 4, si: 7  }, red: { yards: 349, par: 4, si: 4  } },
+  { number: 14, white: { yards: 422, par: 4, si: 1  }, yellow: { yards: 411, par: 4, si: 1  }, red: { yards: 389, par: 5, si: 10 } },
+  { number: 15, white: { yards: 173, par: 3, si: 15 }, yellow: { yards: 118, par: 3, si: 15 }, red: { yards: 95,  par: 3, si: 14 } },
+  { number: 16, white: { yards: 580, par: 5, si: 5  }, yellow: { yards: 470, par: 5, si: 5  }, red: { yards: 449, par: 5, si: 8  } },
+  { number: 17, white: { yards: 132, par: 3, si: 17 }, yellow: { yards: 127, par: 3, si: 17 }, red: { yards: 98,  par: 3, si: 16 } },
+  { number: 18, white: { yards: 344, par: 4, si: 11 }, yellow: { yards: 276, par: 4, si: 11 }, red: { yards: 238, par: 4, si: 18 } },
+];
+
+const COURSES: { name: string; venue: string; sortOrder: number; holes: HoleRow[] }[] = [
+  { name: "Duke's", venue: "Richmond Park", sortOrder: 0, holes: DUKES },
+  { name: "Prince's", venue: "Richmond Park", sortOrder: 1, holes: PRINCES },
+  { name: "Toot Hill", venue: "Toot Hill Golf Club", sortOrder: 2, holes: TOOT_HILL },
 ];
 
 const TEE_SETS: { key: "white" | "yellow" | "red"; colour: TeeColour; name: string }[] = [
@@ -82,7 +108,7 @@ async function main() {
   for (const c of COURSES) {
     const course = await db.course.upsert({
       where: { name: c.name },
-      create: { name: c.name, sortOrder: c.sortOrder },
+      create: { name: c.name, venue: c.venue, sortOrder: c.sortOrder },
       update: {},
     });
 

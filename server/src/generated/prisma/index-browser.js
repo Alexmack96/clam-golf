@@ -131,7 +131,11 @@ exports.Prisma.ClubScalarFieldEnum = {
   name: 'name',
   type: 'type',
   sortOrder: 'sortOrder',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.DistanceScalarFieldEnum = {
@@ -141,7 +145,10 @@ exports.Prisma.DistanceScalarFieldEnum = {
   yards: 'yards',
   unit: 'unit',
   measuredAt: 'measuredAt',
-  updatedAt: 'updatedAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.DistanceHistoryScalarFieldEnum = {
@@ -156,7 +163,12 @@ exports.Prisma.DistanceHistoryScalarFieldEnum = {
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  sortOrder: 'sortOrder'
+  venue: 'venue',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.HoleScalarFieldEnum = {
@@ -167,14 +179,22 @@ exports.Prisma.HoleScalarFieldEnum = {
   greenLat: 'greenLat',
   greenLng: 'greenLng',
   aimLat: 'aimLat',
-  aimLng: 'aimLng'
+  aimLng: 'aimLng',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.TeeSetScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
   colour: 'colour',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.HoleTeeScalarFieldEnum = {
@@ -185,25 +205,53 @@ exports.Prisma.HoleTeeScalarFieldEnum = {
   par: 'par',
   strokeIndex: 'strokeIndex',
   teeLat: 'teeLat',
-  teeLng: 'teeLng'
+  teeLng: 'teeLng',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.RoundScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
-  teeSetId: 'teeSetId',
   playedOn: 'playedOn',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  deletedAt: 'deletedAt',
+  deletedById: 'deletedById'
+};
+
+exports.Prisma.PlayerScalarFieldEnum = {
+  id: 'id',
+  roundId: 'roundId',
+  position: 'position',
+  name: 'name',
+  teeSetId: 'teeSetId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  deletedAt: 'deletedAt',
+  deletedById: 'deletedById'
 };
 
 exports.Prisma.HoleScoreScalarFieldEnum = {
   id: 'id',
-  roundId: 'roundId',
+  playerId: 'playerId',
   holeId: 'holeId',
   strokes: 'strokes',
-  putts: 'putts'
+  putts: 'putts',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  deletedAt: 'deletedAt',
+  deletedById: 'deletedById'
 };
 
 exports.Prisma.SwingThoughtScalarFieldEnum = {
@@ -214,7 +262,9 @@ exports.Prisma.SwingThoughtScalarFieldEnum = {
   text: 'text',
   note: 'note',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -316,6 +366,7 @@ exports.Prisma.ModelName = {
   TeeSet: 'TeeSet',
   HoleTee: 'HoleTee',
   Round: 'Round',
+  Player: 'Player',
   HoleScore: 'HoleScore',
   SwingThought: 'SwingThought',
   Session: 'Session',

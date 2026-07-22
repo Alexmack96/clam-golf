@@ -24,10 +24,16 @@ _Avoid_: Yardage (reserved for a hole's length), range
 
 ### Course
 
+**Venue**:
+A golf club or site, holding one or more Courses. Richmond Park is a Venue with two
+Courses (Duke's, Prince's); Toot Hill Golf Club is a Venue with one. Named in full,
+and used to group the course picker when starting a Round.
+_Avoid_: Club (means equipment here), course (a Venue may have several)
+
 **Course**:
-One 18-hole layout. Richmond Park has two — Duke's and Prince's — which are two
-Courses, not one.
-_Avoid_: Club (means equipment here), venue
+One 18-hole layout at a Venue. Richmond Park has two — Duke's and Prince's — which are
+two Courses at one Venue, not one Course.
+_Avoid_: Club (means equipment here)
 
 **Hole**:
 One numbered hole on a Course, identified by its green. A Hole's geometry is

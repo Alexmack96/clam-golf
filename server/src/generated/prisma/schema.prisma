@@ -81,6 +81,11 @@ model Club {
   isActive  Boolean    @default(true)
   distances Distance[]
 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
   @@map("clubs")
 }
 
@@ -88,17 +93,20 @@ model Club {
 // woods, driver) only ever have a "Full" row; wedges also get partial-swing
 // rows (Shoulder/Chest/Hip) for the gapping matrix.
 model Distance {
-  id         String       @id @default(cuid())
-  clubId     String
-  club       Club         @relation(fields: [clubId], references: [id], onDelete: Cascade)
-  swing      SwingLength  @default(Full)
-  yards      Int
-  unit       DistanceUnit @default(Yards)
+  id          String       @id @default(cuid())
+  clubId      String
+  club        Club         @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  swing       SwingLength  @default(Full)
+  yards       Int
+  unit        DistanceUnit @default(Yards)
   // The day this yardage was actually measured/verified (range session, not
   // edit time — see updatedAt for that). Backfilled to 2026-07-19 for rows
   // that predate this column.
-  measuredAt DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  measuredAt  DateTime     @default(now())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  createdById String?
+  updatedById String?
 
   @@unique([clubId, swing])
   @@map("distances")
@@ -121,11 +129,19 @@ model DistanceHistory {
 // One 18-hole layout. Richmond Park is two Courses (Duke's, Prince's), not one.
 model Course {
   id        String   @id @default(cuid())
-  name      String   @unique // "Duke's", "Prince's"
+  name      String   @unique // "Duke's", "Prince's", "Toot Hill"
+  // The club/site this course belongs to. Richmond Park holds Duke's and
+  // Prince's; Toot Hill Golf Club holds one. Groups the course picker.
+  venue     String   @default("Richmond Park")
   sortOrder Int      @default(0)
   holes     Hole[]
   teeSets   TeeSet[]
   rounds    Round[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
 
   @@map("courses")
 }
@@ -154,6 +170,11 @@ model Hole {
   tees   HoleTee[]
   scores HoleScore[]
 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
   @@unique([courseId, number])
   @@map("holes")
 }
@@ -167,7 +188,12 @@ model TeeSet {
   colour   TeeColour
   name     String // "Men's Yellow"
   holes    HoleTee[]
-  rounds   Round[]
+  players  Player[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
 
   @@unique([courseId, colour])
   @@map("tee_sets")
@@ -188,43 +214,90 @@ model HoleTee {
   teeLat      Float?
   teeLng      Float?
 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdById String?
+  updatedById String?
+
   @@unique([holeId, teeSetId])
   @@map("hole_tees")
 }
 
-// One trip round a course from one set of tees. The id is minted on the phone,
-// not here: the round is played offline in localStorage and pushed up whole, so
-// it needs an identity before the server has ever heard of it.
+// One trip round a course by a group of up to four players. The id is minted on
+// the phone, not here: the round is played offline in localStorage and pushed up
+// whole, so it needs an identity before the server has ever heard of it. The tee
+// set is per-Player, not per-Round — a mixed fourball plays off different tees on
+// the same card (see ADR 0001).
 model Round {
-  id          String      @id
+  id          String    @id
   courseId    String
-  course      Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  teeSetId    String
-  teeSet      TeeSet      @relation(fields: [teeSetId], references: [id], onDelete: Cascade)
-  playedOn    DateTime    @default(now())
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  playedOn    DateTime  @default(now())
   // Null while the round is still in play. An abandoned nine stays a round.
   completedAt DateTime?
-  scores      HoleScore[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  players     Player[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  // Rounds are soft-deleted, never removed: a mis-tap on the course is
+  // recoverable. Read paths filter deletedAt IS NULL.
+  deletedAt   DateTime?
+  deletedById String?
 
   @@index([playedOn])
   @@map("rounds")
 }
 
-// What one hole cost in one round. Strokes are gross — no handicap is applied
-// anywhere in this app. Putts are optional, and are what make green-in-regulation
-// derivable rather than another thing to tap.
-model HoleScore {
-  id      String @id @default(cuid())
-  roundId String
-  round   Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
-  holeId  String
-  hole    Hole   @relation(fields: [holeId], references: [id], onDelete: Cascade)
-  strokes Int
-  putts   Int?
+// One person on a round's card — one to four of them. Player 1 is always you,
+// permanent, and cannot be removed; guests 2–4 are removable. Carries the tee set
+// this player used and their own hole scores. userId is reserved for future
+// account-linking (ADR 0001) and is unused today.
+model Player {
+  id       String      @id
+  roundId  String
+  round    Round       @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  // 1–4. Player 1 is you.
+  position Int
+  name     String
+  teeSetId String
+  teeSet   TeeSet      @relation(fields: [teeSetId], references: [id], onDelete: Restrict)
+  userId   String?
+  scores   HoleScore[]
 
-  @@unique([roundId, holeId])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+  deletedById String?
+
+  @@unique([roundId, position])
+  @@map("players")
+}
+
+// What one hole cost one player in one round. Strokes are gross — no handicap is
+// applied anywhere in this app. Putts are optional (kept for Player 1 in
+// practice), and are what make green-in-regulation derivable rather than another
+// thing to tap.
+model HoleScore {
+  id       String @id @default(cuid())
+  playerId String
+  player   Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  holeId   String
+  hole     Hole   @relation(fields: [holeId], references: [id], onDelete: Cascade)
+  strokes  Int
+  putts    Int?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdById String?
+  updatedById String?
+  deletedAt   DateTime?
+  deletedById String?
+
+  @@unique([playerId, holeId])
   @@map("hole_scores")
 }
 
@@ -232,15 +305,17 @@ model HoleScore {
 // and one SwingPhase; rank orders it within its ShotType (highest first). The
 // same cue wanted for two shots is two rows, ranked independently.
 model SwingThought {
-  id        String     @id @default(cuid())
-  shotType  ShotType
-  phase     SwingPhase
+  id          String     @id @default(cuid())
+  shotType    ShotType
+  phase       SwingPhase
   // 0–100, how much this is worth thinking about. Sorted desc within a ShotType.
-  rank      Int
-  text      String
-  note      String?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  rank        Int
+  text        String
+  note        String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  createdById String?
+  updatedById String?
 
   @@index([shotType, rank])
   @@map("swing_thoughts")
