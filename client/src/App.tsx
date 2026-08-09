@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useReleaseStuckPointerEvents } from "./hooks/useReleaseStuckPointerEvents.js";
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
 import { Layout } from "./components/Layout.js";
 import { LoginPage } from "./pages/LoginPage.js";
@@ -11,6 +12,7 @@ import { ScorecardPage } from "./pages/ScorecardPage.js";
 import { SwingThoughtsPage } from "./pages/SwingThoughtsPage.js";
 
 export function App() {
+  useReleaseStuckPointerEvents();
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
