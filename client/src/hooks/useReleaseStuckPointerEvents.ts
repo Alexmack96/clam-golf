@@ -14,9 +14,10 @@ import { useEffect } from "react";
  * elements below exist, so we leave it alone and modality is preserved.
  */
 const OPEN_LAYER_SELECTOR = [
-  "[data-radix-popper-content-wrapper]", // Select, Dropdown, Popover, Tooltip
+  "[data-radix-popper-content-wrapper]", // popper-positioned Popover/Dropdown/Tooltip
   '[role="dialog"][data-state="open"]', // Dialog, AlertDialog
   '[role="alertdialog"][data-state="open"]',
+  '[data-slot="select-content"]', // item-aligned Select isn't popper-wrapped
 ].join(",");
 
 export function useReleaseStuckPointerEvents() {

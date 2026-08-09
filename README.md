@@ -14,9 +14,9 @@ Golf tracker to help improve your game. Play rounds with friends and analyze you
 ## Todo 18-Jul-2026
 [] radix bug - buttons not working
 [] How big a piece of work is it to have react for web, and kotlin for android? whilst keeping same look and feel? Ballache? Should i use react native?
-[] L - Fish full stack BetterAuth to WorkOS migration
+[] L - BetterAuth to WorkOS migration
 [] L - Migrate to .NET 10 backend
-[] L- Add toot hill and decouple from GPS to make ti one way click thru
+[] L - decouple from GPS to make ti one way click thru
 [] M - Add friends concept within the users table
 [] M - Maybe migrate GPS to google and pay for it if cheap
 [] L - Scorecards update live for your friends in you decided to link a scorecard

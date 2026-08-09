@@ -4,6 +4,7 @@ import { Button } from "../ui/button.js";
 import { Input } from "../ui/input.js";
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -95,18 +96,21 @@ export function NewRoundDialog({
         setOpen(o);
       }}
     >
-      <Button
-        size="lg"
-        className="h-auto w-full flex-col gap-1.5 rounded-2xl py-6"
-        disabled={disabled}
-        onClick={() => setOpen(true)}
-      >
-        <Plus className="size-7" strokeWidth={2.25} />
-        <span className="text-[15px] font-semibold">Start a round</span>
-        <span className="text-[12px] font-normal opacity-80">
-          Toot Hill · Richmond Duke's · Richmond Prince's
-        </span>
-      </Button>
+      {/* Trigger goes through Radix so onOpenChange fires and reset() runs —
+          a plain setOpen(true) opens the dialog without seeding Player 1. */}
+      <DialogTrigger asChild>
+        <Button
+          size="lg"
+          className="h-auto w-full flex-col gap-1.5 rounded-2xl py-6"
+          disabled={disabled}
+        >
+          <Plus className="size-7" strokeWidth={2.25} />
+          <span className="text-[15px] font-semibold">Start a round</span>
+          <span className="text-[12px] font-normal opacity-80">
+            Toot Hill · Richmond Duke's · Richmond Prince's
+          </span>
+        </Button>
+      </DialogTrigger>
 
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
